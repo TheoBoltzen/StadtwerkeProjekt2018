@@ -1,38 +1,22 @@
 import * as React from 'react';
+import {Members} from "./App";
+import {List, ListItem, ListItemIcon} from "@material-ui/core";
+import FaceIcon from '@material-ui/icons/Face';
 
-interface Members {
-    id: number,
-    name: string
-}
 
 interface Props {
-
-}
-
-interface State {
     members: Members[]
 }
 
-class MemberTest extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            members: []
-        }
-    }
+export const MemberTest = (props: Props) => {
+    const {members} = props
 
-    componentDidMount() {
-        fetch('/api/members')
-            .then(res => res.json())
-            .then(res => this.setState({members: res.data}, () => console.log('fetched', res.data)))
-    }
-
-    render() {
-        return <div>
-            <h2>Project Members</h2>
-            <div>{this.state.members.map(i => i.name)}</div>
-        </div>
-    }
+    return <div>
+        <h2>Project Members</h2>
+        <List>
+            {members.map((i, index) => <ListItem key={index} className={'member-row'}>
+                <ListItemIcon><FaceIcon/></ListItemIcon>{i.name}
+            </ListItem>)}
+        </List>
+    </div>
 }
-
-export default MemberTest
