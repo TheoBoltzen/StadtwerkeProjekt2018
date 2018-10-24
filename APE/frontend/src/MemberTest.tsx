@@ -24,7 +24,7 @@ class MemberTest extends React.Component<Props, State> {
     componentDidMount() {
         fetch('/api/members')
             .then(res => res.json())
-            .then(members => this.setState({members}, () => console.log('fetched', members)))
+            .then(res => this.setState({members: res.data}, () => console.log('fetched', res.data)))
     }
 
     render() {
