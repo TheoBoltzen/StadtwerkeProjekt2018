@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
+    "@types/sequelize": "^4.27.28",
     "nodemon": "^1.18.4",
     "prettier": "1.14.3"
   }

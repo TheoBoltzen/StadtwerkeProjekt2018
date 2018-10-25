@@ -1,5 +1,5 @@
 const express = require("express");
-const mysql = require('mysql');
+//const mysql = require('mysql');
 
 const app = express();
 
@@ -24,7 +24,7 @@ sequelize
     });
 
 //Create Item Table Structure
-var Item = sequelize.define('Item', {
+const Item = sequelize.define('Item', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -34,10 +34,12 @@ var Item = sequelize.define('Item', {
     qty: Sequelize.INTEGER
 });
 
-sequelize.sync();
-Item.findAll().then(function (user) {        //{ where: { id: '1' } }
+sequelize.sync().catch(error => {
+    console.log('sync failed: ', error)
+});
+Item.findAll().then((user) => {        //{ where: { id: '1' } }
     console.log("Reading data - succesfully");          //transactions have to be included because of multiple access
-    console.log(user)                                      //.dataValues.get({plain:true})
+    console.log(user.map(i => i.dataValues.name))                                      //.dataValues.get({plain:true})
 }).error(function (err) {
     console.log("Error:" + err);
 });
