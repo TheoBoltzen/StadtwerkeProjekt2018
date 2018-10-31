@@ -4,9 +4,11 @@ import './App.css';
 import logo from './logo.svg';
 import {MemberTest} from "./MemberTest";
 
-export interface Members {
+export interface Items {
     id: number,
-    name: string
+    name: string,
+    description: string,
+    qty: number
 }
 
 interface Props {
@@ -14,14 +16,14 @@ interface Props {
 }
 
 interface State {
-    members: Members[]
+    items: Items[]
 }
 
 class App extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            members: []
+            items: []
         }
     }
 
@@ -30,21 +32,21 @@ class App extends React.Component<Props, State> {
     }
 
     private getMembers() {
-        fetch('/api/members')
+        fetch('/api/items')
             .then(res => res.json())
-            .then(res => this.setState({members: res.data}, () => console.log('fetched', res.data)))
+            .then(res => this.setState({items: res}, () => console.log('fetched', res)))
     }
 
     public render() {
 
-        const {members} = this.state
+        const {items} = this.state
         return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <MemberTest members={members}/>
+                <MemberTest items={items}/>
             </div>
         );
     }
