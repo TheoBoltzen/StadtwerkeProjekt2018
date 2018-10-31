@@ -1,11 +1,29 @@
 const express = require("express");
+const logger = require('morgan')
+const bodyParser = require('body-parser')
 //const mysql = require('mysql');
 
 const app = express();
 
+app.use(logger('dev'))
+
+//Mit BodyParser werden Requests direkt geparsed
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+
 //Including dependency
 const Sequelize = require('sequelize');
 
+//Catch-All Route
+app.get('*', (req, res) => (
+    res.status(200).send({
+        message: 'Willkommen'
+    })
+))
+
+module.exports = app;
+
+/*
 //Setting up the config
 const sequelize = new Sequelize('ape', 'root', 'root', {
     host: 'localhost',
@@ -43,6 +61,14 @@ Item.findAll().then((user) => {        //{ where: { id: '1' } }
 }).error(function (err) {
     console.log("Error:" + err);
 });
+
+*/
+
+
+//const port = 5000;
+
+//app.listen(port, () => console.log(`Server started on port ${port}`));
+
 /*
 Item.findAll().then(function(insertedItem){
     console.log(insertedItem.dataValues)
@@ -111,6 +137,3 @@ app.get("/api/members", (req, res) => {
 });
 */
 
-const port = 5000;
-
-app.listen(port, () => console.log(`Server started on port ${port}`));
