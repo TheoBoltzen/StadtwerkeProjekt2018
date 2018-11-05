@@ -1,20 +1,30 @@
 const express = require("express");
+const logger = require('morgan')
+const bodyParser = require('body-parser')
+const db = require('./config/db.config')
 
 const app = express();
 
-//Just a test for the server - no db connection at that moment
-app.get("/api/members", (req, res) => {
-  const projectMembers = [
-    { id: 0, name: "Finn" },
-    { id: 1, name: "Tim" },
-    { id: 2, name: "Theo" },
-    { id: 3, name: "Glen" },
-    { id: 4, name: "Steven" }
-  ];
+app.use(logger('dev'))
 
-  res.json(projectMembers);
+//Mit BodyParser werden Requests direkt geparsed
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+
+
+//Sync Sequelize
+db.sequelize.sync().catch(error => {
+    console.log('sync failed: ', error)
 });
 
-const port = 5000;
+//Routes
+require('./routes/items.route')(app)
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+//Catch-All Route
+app.get('*', (req, res) => (
+    res.status(200).send({
+        message: 'Willkommen'
+    })
+))
+
+module.exports = app;
