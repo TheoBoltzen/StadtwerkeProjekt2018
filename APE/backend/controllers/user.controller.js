@@ -1,9 +1,9 @@
 const db = require('../config/db.config')
-const Item = db.items
+const User = db.user
 
 // FETCH all Items
 exports.findAll = (req, res) => {
-    Item.findAll().then(items => { // catch
+    User.findAll().then(user => { // catch
         res.send(items)
-    })
+})
 }
