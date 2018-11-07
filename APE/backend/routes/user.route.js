@@ -1,6 +1,8 @@
 module.exports = (app) => {
-    const User = require('../controllers/user.controller.js')
 
-    //Get all Items
-    app.get('/api/user', User.findAll)
+    const Users = require('../users/user.controller.js')
+
+    //authenticate user
+    //app.post('/authenticate', Users.authenticate)
+    app.get('/users', Users.getAll)
 }

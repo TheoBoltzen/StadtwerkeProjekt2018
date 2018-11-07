@@ -19,6 +19,8 @@ db.sequelize.sync().catch(error => {
 
 //Routes
 require('./routes/items.route')(app)
+//require('./routes/user.route')(app)
+require('./routes/user.route')(app)
 
 //Catch-All Route
 app.get('*', (req, res) => (
