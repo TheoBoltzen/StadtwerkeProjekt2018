@@ -1,8 +1,8 @@
 const config = require('./../config.json');      //have to be implemented
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const db = require('../_helpers/db');
-const User = db.User;
+const db = require('../config/db.config');
+const User = db.user;
 
 module.exports = {
     authenticate,
@@ -32,6 +32,7 @@ async function authenticate({ username, password }) {
 }
 
 async function getAll() {
+    console.log("user.service - getALL")
     return await User.find().select('-hash');
 }
 
