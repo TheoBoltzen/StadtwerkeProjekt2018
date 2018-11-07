@@ -1,3 +1,13 @@
+/*
+const config = require('config.json');
+const mongoose = require('mongoose');
+mongoose.connect(config.connectionString);
+mongoose.Promise = global.Promise;
+
+module.exports = {
+    User: require('../users/user.model')
+};
+*/
 const Sequelize = require('sequelize');
 
 const dbConfig = {
@@ -14,13 +24,13 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
     port: dbConfig.port,
     dialect: dbConfig.dialect
 });
-
+/*
 const db = {}
 
 db.Sequelize = Sequelize
 db.sequelize = sequelize
+*/
 
-//Models (Tables)
-db.items = require('../models/items.model.js')(sequelize, Sequelize)
-
-module.exports = db
+module.exports = {
+    User: require('../users/user.model')(sequelize, Sequelize)
+};
