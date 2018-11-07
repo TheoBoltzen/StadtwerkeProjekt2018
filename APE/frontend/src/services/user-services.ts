@@ -12,7 +12,7 @@ const authHeader = () => {
     }
 }
 
-export const login = (username: any, password: any) => { //TODO: Remove any
+export const loginService = (username: any, password: any) => { //TODO: Remove any
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json' },
@@ -30,11 +30,11 @@ export const login = (username: any, password: any) => { //TODO: Remove any
         })
 }
 
-export const logout = () => {
+export const logoutService = () => {
     localStorage.removeItem('user')
 }
 
-export const getAll = () => {
+export const getAllService = () => {
     const requestOptions: any = { //TODO: Remove any
         method: 'GET',
         headers: authHeader()
@@ -43,7 +43,7 @@ export const getAll = () => {
     return fetch(`${apiURL}/users`, requestOptions).then(handleResponse)
 }
 
-export const getByID = (id:  any) => { //TODO: Remove any
+export const getByIdService = (id:  any) => { //TODO: Remove any
     const requestOptions: any = { //TODO: Remove any
         method: 'GET',
         headers: authHeader()
@@ -59,7 +59,7 @@ const handleResponse = (response: any) => { //TODO: Remove any
         if (!response.ok) {
             if (response.status === 401) {
                 //auto logout
-                logout()
+                logoutService()
                 location.reload(true)
             }
 
