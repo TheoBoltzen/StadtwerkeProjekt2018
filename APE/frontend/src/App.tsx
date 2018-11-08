@@ -1,8 +1,10 @@
 import * as React from 'react';
 import './App.css';
-
-import logo from './logo.svg';
 import {MemberTest} from "./MemberTest";
+import {connect} from "react-redux";
+import {history} from "./helpers";
+import {clearAlert} from "./redux/actions";
+import {Router} from "react-router-dom"
 
 export interface Items {
     id: number,
@@ -12,7 +14,8 @@ export interface Items {
 }
 
 interface Props {
-
+    dispatch: any;
+    alert: any;
 }
 
 interface State {
@@ -22,6 +25,12 @@ interface State {
 class App extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
+
+        const {dispatch} = this.props;
+        history.listen((location, action) => {
+            dispatch(clearAlert())
+        })
+
         this.state = {
             items: []
         }
@@ -40,12 +49,20 @@ class App extends React.Component<Props, State> {
     public render() {
 
         const {items} = this.state
+        const {alert} = this.props
+
         return (
             <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
+
+                {alert && alert.message &&
+                <div className={`alert ${alert.type}`}>{alert.message}</div>}
+
+                <Router history={history}>
+                    <div>
+                        Put Routes in here
+                    </div>
+                </Router>
+
                 <MemberTest items={items}/>
             </div>
         );
@@ -53,4 +70,12 @@ class App extends React.Component<Props, State> {
 
 }
 
-export default App;
+const mapStateToProps = (state: any) => {
+    const {alert} = state
+    return {
+        alert
+    }
+}
+
+const connectedApp = connect(mapStateToProps)(App)
+export {connectedApp as App}
