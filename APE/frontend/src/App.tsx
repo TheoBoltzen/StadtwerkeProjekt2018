@@ -1,8 +1,8 @@
 import * as React from 'react';
 import './App.css';
 
-import logo from './logo.svg';
-import {MemberTest} from "./MemberTest";
+import logo from './resources/swk.svg';
+import ComposedTextField, {Form} from "./Form";
 
 export interface Items {
     id: number,
@@ -39,14 +39,12 @@ class App extends React.Component<Props, State> {
 
     public render() {
 
-        const {items} = this.state
         return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <MemberTest items={items}/>
+                <ComposedTextField />
             </div>
         );
     }
