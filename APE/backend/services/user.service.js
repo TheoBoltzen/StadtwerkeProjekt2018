@@ -28,14 +28,16 @@ async function authenticate({ username, password }) {
     console.log("password_DB: " + user.hash + "           password_login: " + password);
 
     if (user && bcrypt.compareSync(password, user.hash)) {
-        console.log("geht rein - 1");
-        const { hash, ...userWithoutHash } = user.toObject();
-        console.log(...userWithoutHash);
+        //console.log("geht rein - 1", user);
+        //const { hash, ...userWithoutHash } = user.toObject();
+        //const userParse = JSON.parse(user)
+
+        //console.log(...userWithoutHash);
         const token = jwt.sign({ sub: user.id }, config.secret);
-        console.log("geht rein - 3");
+        console.log("geht rein - 3", token);
         return {
-            ...userWithoutHash,
-            token
+            token,
+            user
         };
     }
 }
@@ -60,7 +62,7 @@ async function create(userParam) {
     }
     else {
        // const user = new User(userParam);
-        console.log("neuer User wird lokal erzeugt.");
+        console.log("neuer User wird lokal erzeugt.", userParam);
         const newUser = User.build({
             username: userParam.username,
             hash: await bcrypt.hashSync(userParam.password, 10),
