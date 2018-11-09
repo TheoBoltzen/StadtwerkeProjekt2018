@@ -33,11 +33,13 @@ async function authenticate({ username, password }) {
         //const userParse = JSON.parse(user)
 
         //console.log(...userWithoutHash);
+        console.log('user', user)
+        const {hash, ...userWithoutHash} = user.dataValues
         const token = jwt.sign({ sub: user.id }, config.secret);
         console.log("geht rein - 3", token);
         return {
-            token,
-            user
+            ...userWithoutHash,
+            token
         };
     }
 }
