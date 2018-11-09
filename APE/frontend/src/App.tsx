@@ -2,7 +2,7 @@ import * as React from 'react';
 import './App.css';
 
 import logo from './resources/swk.svg';
-import ComposedTextField, {Form} from "./Form";
+import ComposedTextField from "./ComposedTextField";
 
 export interface Items {
     id: number,
