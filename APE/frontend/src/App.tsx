@@ -4,7 +4,8 @@ import {MemberTest} from "./MemberTest";
 import {connect} from "react-redux";
 import {history} from "./helpers";
 import {clearAlert} from "./redux/actions";
-import {Router} from "react-router-dom"
+import {Route, Router} from "react-router-dom"
+import {PrivateRoute} from "./components/PrivateRoute";
 
 export interface Items {
     id: number,
@@ -59,7 +60,8 @@ class App extends React.Component<Props, State> {
 
                 <Router history={history}>
                     <div>
-                        Put Routes in here
+                        <PrivateRoute exact={true} path={'/'} component={MemberTest}/>
+                        <Route path={'/login'} component={MemberTest}/>
                     </div>
                 </Router>
 

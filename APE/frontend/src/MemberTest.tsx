@@ -14,7 +14,7 @@ export const MemberTest = (props: Props) => {
     return <div>
         <h2>Project Members</h2>
         <List>
-            {items.map((i, index) => <ListItem key={index} className={'member-row'}>
+            {items && items.map((i, index) => <ListItem key={index} className={'member-row'}>
                 <ListItemIcon><FaceIcon/></ListItemIcon>{i.name}
             </ListItem>)}
         </List>
