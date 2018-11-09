@@ -3,7 +3,8 @@ module.exports = (app) => {
 
     //authenticate user
     //app.post('/authenticate', Users.authenticate)
-    app.get('/services', Users.getAll)
+    app.get('/services/authenticate', Users.authenticate)
+    app.get('/services/register', Users.register)
 
     /*
 //router.post('/authenticate', authenticate);

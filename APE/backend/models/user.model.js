@@ -13,6 +13,10 @@ module.exports = (sequelize, Sequelize) => {
         lastname: {
             type: Sequelize.INTEGER
         }
+    },
+        {
+            timestamps: false
+
     })
     return Users
 }

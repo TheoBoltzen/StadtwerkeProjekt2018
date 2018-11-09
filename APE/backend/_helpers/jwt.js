@@ -5,12 +5,13 @@ const userService = require('../services/user.service');   //new file
 module.exports = jwt;
 
 function jwt() {
+    console.log("jwt - jwt()");
     const secret = config.secret;
     return expressJwt({ secret, isRevoked }).unless({
         path: [
             // public routes that don't require authentication
             '/services/authenticate',
-            '/services/register'
+            '/services/register'        //hier steckt noch nichts hinter, wie drüber
         ]
     });
 }
