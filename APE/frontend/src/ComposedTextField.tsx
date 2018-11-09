@@ -2,6 +2,7 @@ import * as React from 'react';
 import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
 import FormControl from "@material-ui/core/es/FormControl/FormControl";
 import FilledInput from "@material-ui/core/es/FilledInput/FilledInput";
+import './ComposedTextField.css';
 
 interface Props {
 
@@ -22,27 +23,26 @@ class ComposedTextField extends React.Component<Props, State> {
         }
     }
 
-    handleChange = event => {
-        this.setState({
-            email: event.target.value,
-            passwort: event.target.value
-        });
+    handlePasswordChange = (event: any) => {
+        this.setState({ passwort: event.target.value });
+    };
+
+    handleEmailChange = (event: any) => {
+        this.setState({ email: event.target.value });
     };
 
     render() {
-        const {classes} = this.props;
-
         return (
-            <div className={classes.container}>
+            <div className={'inputForm'}>
                 <h1>Entwicklungsbogentool</h1>
-                <FormControl className={classes.formControl} variant="filled">
+                <FormControl className={'emailForm'} variant="filled">
                     <InputLabel htmlFor="component-filled">E-Mail</InputLabel>
-                    <FilledInput id="component-filled" value={this.state.email} onChange={this.handleChange}/>
+                    <FilledInput id="component-filled" name= 'email' value={this.state.email} onChange={this.handleEmailChange}/>
                 </FormControl>
 
-                <FormControl className={classes.formControl} variant="filled">
+                <FormControl className={'passwordForm'} variant="filled">
                     <InputLabel htmlFor="component-filled">Passwort</InputLabel>
-                    <FilledInput id="component-filled" value={this.state.passwort} onChange={this.handleChange}/>
+                    <FilledInput id="component-filled" name= 'passwort' value={this.state.passwort} onChange={this.handlePasswordChange}/>
                 </FormControl>
             </div>
         );
