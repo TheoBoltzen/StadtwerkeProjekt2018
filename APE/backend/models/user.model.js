@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         lastname: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
     },
         {
