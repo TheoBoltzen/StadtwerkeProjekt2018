@@ -1,4 +1,4 @@
-import {createBrowserHistory} from 'history'
+import { createBrowserHistory } from "history";
 
 //for redirecting users
-export const history = createBrowserHistory()
+export const history = createBrowserHistory();

@@ -1,83 +1,83 @@
-import * as React from 'react';
-import './App.css';
-import {MemberTest} from "./MemberTest";
-import {connect} from "react-redux";
-import {history} from "./helpers";
-import {clearAlert} from "./redux/actions";
-import {Route, Router} from "react-router-dom"
-import {PrivateRoute} from "./components/PrivateRoute";
+import * as React from "react";
+import "./App.css";
+import { MemberTest } from "./MemberTest";
+import { connect } from "react-redux";
+import { history } from "./helpers";
+import { clearAlert } from "./redux/actions";
+import { Route, Router } from "react-router-dom";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 export interface Items {
-    id: number,
-    name: string,
-    description: string,
-    qty: number
+  id: number;
+  name: string;
+  description: string;
+  qty: number;
 }
 
 interface Props {
-    dispatch: any;
-    alert: any;
+  dispatch: any;
+  alert: any;
 }
 
 interface State {
-    items: Items[]
+  items: Items[];
 }
 
 class App extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
+  constructor(props: Props) {
+    super(props);
 
-        const {dispatch} = this.props;
-        history.listen((location, action) => {
-            dispatch(clearAlert())
-        })
+    const { dispatch } = this.props;
+    history.listen((location, action) => {
+      dispatch(clearAlert());
+    });
 
-        this.state = {
-            items: []
-        }
-    }
+    this.state = {
+      items: []
+    };
+  }
 
-    componentDidMount() {
-        this.getMembers()
-    }
+  componentDidMount() {
+    this.getMembers();
+  }
 
-    private getMembers() {
-        fetch('/api/items')
-            .then(res => res.json())
-            .then(res => this.setState({items: res}, () => console.log('fetched', res)))
-    }
+  private getMembers() {
+    fetch("/api/items")
+      .then(res => res.json())
+      .then(res =>
+        this.setState({ items: res }, () => console.log("fetched", res))
+      );
+  }
 
-    public render() {
+  public render() {
+    const { items } = this.state;
+    const { alert } = this.props;
 
-        const {items} = this.state
-        const {alert} = this.props
+    return (
+      <div className="App">
+        {alert && alert.message && (
+          <div className={`alert ${alert.type}`}>{alert.message}</div>
+        )}
 
-        return (
-            <div className="App">
+        <Router history={history}>
+          <div>
+            <PrivateRoute exact={true} path={"/"} component={MemberTest} />
+            <Route path={"/login"} component={MemberTest} />
+          </div>
+        </Router>
 
-                {alert && alert.message &&
-                <div className={`alert ${alert.type}`}>{alert.message}</div>}
-
-                <Router history={history}>
-                    <div>
-                        <PrivateRoute exact={true} path={'/'} component={MemberTest}/>
-                        <Route path={'/login'} component={MemberTest}/>
-                    </div>
-                </Router>
-
-                <MemberTest items={items}/>
-            </div>
-        );
-    }
-
+        <MemberTest items={items} />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state: any) => {
-    const {alert} = state
-    return {
-        alert
-    }
-}
+  const { alert } = state;
+  return {
+    alert
+  };
+};
 
-const connectedApp = connect(mapStateToProps)(App)
-export {connectedApp as App}
+const connectedApp = connect(mapStateToProps)(App);
+export { connectedApp as App };
