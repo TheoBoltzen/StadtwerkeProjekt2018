@@ -21,6 +21,11 @@ db.sequelize.sync().catch(error => {
 require('./routes/items.route')(app)
 //require('./routes/user.route')(app)
 require('./routes/user.route')(app)
+require('./routes/competencyCategory.route')(app)
+require('./routes/competence.route')(app)
+require('./routes/mainCategory.route')(app)
+require('./routes/subCategory.route')(app)
+require('./routes/developmentBow.route')(app)
 
 //Catch-All Route
 app.get('*', (req, res) => (
