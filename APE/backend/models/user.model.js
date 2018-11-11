@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) =>
             allowNull: false
         },
         job: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: true
         },
         education: {

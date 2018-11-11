@@ -4,6 +4,6 @@ const User = db.user
 // FETCH all Items
 exports.findAll = (req, res) => {
     User.findAll().then(user => { // catch
-        res.send(items)
+        res.send(user)
 })
 }

@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) =>
 {
     const MainCategory = sequelize.define('MainCategory', {
         name: {
-            type: Sequelize.String,
+            type: Sequelize.STRING,
             allowNull: false,
             primaryKey: true
         },

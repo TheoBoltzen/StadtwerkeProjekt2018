@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) =>
 {
     const CompetencyCategory = sequelize.define('CompetencyCategory', {
         name: {
-            type: Sequelize.String,
+            type: Sequelize.STRING,
             allowNull: false,
             primaryKey: true
         },
@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) =>
             allowNull: true
         }
     })
+
     return CompetencyCategory
 
 }
