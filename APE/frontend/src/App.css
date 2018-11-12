@@ -4,12 +4,12 @@
 
 .App-logo {
   position: absolute;
-    left: 20px;
+  left: 20px;
   height: 50px;
 }
 
 .App-header {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   height: 150px;
   padding: 20px;
   color: white;
@@ -24,6 +24,16 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.alert {
+  background-color: #d32f2e !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }

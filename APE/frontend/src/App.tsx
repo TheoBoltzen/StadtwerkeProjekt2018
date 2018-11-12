@@ -9,6 +9,7 @@ import { Route, Router } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { MemberTest } from "./MemberTest";
 import { Login } from "./Login";
+import { SnackbarContent } from "@material-ui/core";
 
 export interface Items {
   id: number;
@@ -57,12 +58,16 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        {alert && alert.message && (
-          <div className={`alert ${alert.type}`}>{alert.message}</div>
-        )}
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
+
+        {alert.message && (
+          <SnackbarContent
+            className={`alert ${alert.type}`}
+            message={alert.message}
+          />
+        )}
 
         <Router history={history}>
           <div>
@@ -76,9 +81,9 @@ class App extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { alert } = state;
+  const { alertReducer } = state;
   return {
-    alert
+    alert: alertReducer
   };
 };
 
