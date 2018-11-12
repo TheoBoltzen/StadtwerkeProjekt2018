@@ -3,12 +3,12 @@ import "./App.css";
 
 import logo from "./resources/swk.svg";
 import LoginComponent from "./LoginComponent";
-import * as React from "react";
 import { connect } from "react-redux";
 import { history } from "./helpers";
 import { clearAlert } from "./redux/actions";
 import { Route, Router } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { MemberTest } from "./MemberTest";
 
 export interface Items {
   id: number;
@@ -53,7 +53,6 @@ class App extends React.Component<Props, State> {
   }
 
   public render() {
-    const { items } = this.state;
     const { alert } = this.props;
 
     return (
@@ -64,16 +63,13 @@ class App extends React.Component<Props, State> {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <LoginComponent />
 
         <Router history={history}>
           <div>
             <PrivateRoute exact={true} path={"/"} component={MemberTest} />
-            <Route path={"/login"} component={MemberTest} />
+            <Route path={"/login"} component={LoginComponent} />
           </div>
         </Router>
-
-        <MemberTest items={items} />
       </div>
     );
   }
