@@ -8,7 +8,9 @@ exports.authenticate = (req, res, next) => {
     .then(user =>
       user
         ? res.json(user)
-        : res.status(400).json({ message: "Username or password is incorrect" })
+        : res
+            .status(400)
+            .json({ message: "E-Mail Adresse oder Password falsch" })
     )
     .catch(err => next(err));
 };
