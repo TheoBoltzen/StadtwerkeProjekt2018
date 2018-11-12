@@ -35,6 +35,7 @@ class LoginComponent extends React.Component<AllProps, State> {
       submitted: false
     };
   }
+
   render() {
     const { email, passwort } = this.state;
 
@@ -54,12 +55,29 @@ class LoginComponent extends React.Component<AllProps, State> {
       }
     };
 
+    /*
+    const handleKeyPress = (e) => {
+        if( e.key == 'Enter') {
+            handleSubmit();
+            console.log("hallo i bims 1 log")
+        }
+    }*/
+
     return (
       <div className={"inputForm"}>
         <h1 className={"header"}>Entwicklungsbogentool</h1>
         <FormControl className={"emailForm"} variant="filled">
           <InputLabel htmlFor="component-filled">E-Mail</InputLabel>
-          <FilledInput name="email" value={email} onChange={handleChange} />
+          <FilledInput
+            name="email"
+            value={email}
+            onChange={handleChange}
+            onKeyPress={e => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
+          />
         </FormControl>
 
         <FormControl className={"passwordForm"} variant="filled">
@@ -69,6 +87,11 @@ class LoginComponent extends React.Component<AllProps, State> {
             value={passwort}
             onChange={handleChange}
             type={"password"}
+            onKeyPress={e => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
           />
         </FormControl>
 
