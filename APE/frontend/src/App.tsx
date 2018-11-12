@@ -2,7 +2,7 @@ import * as React from 'react';
 import './App.css';
 
 import logo from './resources/swk.svg';
-import ComposedTextField from "./ComposedTextField";
+import LoginComponent from "./LoginComponent";
 
 export interface Items {
     id: number,
@@ -44,7 +44,7 @@ class App extends React.Component<Props, State> {
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                 </header>
-                <ComposedTextField />
+                <LoginComponent />
             </div>
         );
     }

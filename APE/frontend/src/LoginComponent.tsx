@@ -2,7 +2,9 @@ import * as React from 'react';
 import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
 import FormControl from "@material-ui/core/es/FormControl/FormControl";
 import FilledInput from "@material-ui/core/es/FilledInput/FilledInput";
-import './ComposedTextField.css';
+import './LoginComponent.css';
+import Button from "@material-ui/core/es/Button/Button";
+
 
 interface Props {
 
@@ -13,7 +15,7 @@ interface State {
     passwort: ''
 }
 
-class ComposedTextField extends React.Component<Props, State> {
+class LoginComponent extends React.Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -23,30 +25,41 @@ class ComposedTextField extends React.Component<Props, State> {
         }
     }
 
-    handlePasswordChange = (event: any) => {
-        this.setState({ passwort: event.target.value });
-    };
 
-    handleEmailChange = (event: any) => {
-        this.setState({ email: event.target.value });
-    };
 
     render() {
+        const {email , passwort } = this.state
+
+        const handleChange = (event: any) => {
+            const target = event.currentTarget
+            const value = target.value
+            const name = target.name
+            this.setState( { [name]: value} as State)
+        };
+
+        const handleSubmit = () => {
+            console.log("submit funktioniert", this.state)
+        }
+
         return (
             <div className={'inputForm'}>
                 <h1>Entwicklungsbogentool</h1>
                 <FormControl className={'emailForm'} variant="filled">
                     <InputLabel htmlFor="component-filled">E-Mail</InputLabel>
-                    <FilledInput id="component-filled" name= 'email' value={this.state.email} onChange={this.handleEmailChange}/>
+                    <FilledInput name='email' value={email} onChange={handleChange}/>
                 </FormControl>
 
                 <FormControl className={'passwordForm'} variant="filled">
                     <InputLabel htmlFor="component-filled">Passwort</InputLabel>
-                    <FilledInput id="component-filled" name= 'passwort' value={this.state.passwort} onChange={this.handlePasswordChange}/>
+                    <FilledInput name='passwort' value={passwort} onChange={handleChange} type={"password"}/>
                 </FormControl>
+
+                <Button variant={"contained"} color={"primary"} className={"submitButton"} onClick={handleSubmit}>
+                    Login
+                </Button>
             </div>
         );
     }
 }
 
-export default ComposedTextField
+export default LoginComponent
