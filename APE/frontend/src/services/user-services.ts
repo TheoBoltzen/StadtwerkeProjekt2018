@@ -19,7 +19,7 @@ export const loginService = (username: any, password: any) => {
     body: JSON.stringify({ username, password })
   };
 
-  return fetch(`${apiURL}/users/authenticate`, requestOptions)
+  return fetch(`${apiURL}/services/authenticate`, requestOptions)
     .then(handleResponse)
     .then((user: any) => {
       //TODO: Remove any
