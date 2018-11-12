@@ -13,12 +13,12 @@ module.exports = (sequelize, Sequelize) =>
     });
 
     MainCategory.associate = function (models) {
-        MainCategory.hasOne(models.competencyCategory, {
+        MainCategory.hasOne(models.CompetencyCategory, {
             foreignKey : {
                 allowNull: false
             }
         })
-    };
+    }
 
     return MainCategory
 }

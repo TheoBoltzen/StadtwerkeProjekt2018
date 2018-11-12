@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) =>
     });
 
     SubCategory.associate = function (models) {
-        SubCategory.hasOne(models.mainCategory, {
+        SubCategory.hasOne(models.MainCategory, {
             foreignKey : {
                 allowNull: false
             }

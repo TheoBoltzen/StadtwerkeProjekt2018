@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) =>
     });
 
     Competence.associate = function (models) {
-        Competence.hasOne(models.subCategory, {
+        Competence.hasOne(models.SubCategory, {
             foreignKey : {
                 allowNull: false
             }
