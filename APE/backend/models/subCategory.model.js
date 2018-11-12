@@ -12,13 +12,21 @@ module.exports = (sequelize, Sequelize) =>
         }
     });
 
+
     SubCategory.associate = function (models) {
-        SubCategory.hasOne(models.MainCategory, {
+        SubCategory.hasOne(models.mainCategory, {
             foreignKey : {
                 allowNull: false
             }
         })
+
+        SubCategory.hasMany(models.competence, {
+            foreignKey : {
+                allowNull: true
+            }
+        })
     };
+
 
     return SubCategory
 }

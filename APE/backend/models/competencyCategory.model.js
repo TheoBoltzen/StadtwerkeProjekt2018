@@ -12,6 +12,16 @@ module.exports = (sequelize, Sequelize) =>
         }
     })
 
+
+    CompetencyCategory.associate = function (models) {
+       CompetencyCategory.hasMany(models.mainCategory, {
+            foreignKey : {
+                allowNull: true
+            }
+        })
+    };
+
+
     return CompetencyCategory
 
 }

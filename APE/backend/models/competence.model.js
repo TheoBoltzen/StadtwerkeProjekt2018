@@ -17,12 +17,13 @@ module.exports = (sequelize, Sequelize) =>
     });
 
     Competence.associate = function (models) {
-        Competence.hasOne(models.SubCategory, {
+        Competence.hasOne(models.subCategory, {
             foreignKey : {
                 allowNull: false
             }
         })
     }
+
 
     return Competence
 }

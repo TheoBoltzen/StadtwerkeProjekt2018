@@ -43,6 +43,7 @@ module.exports = (sequelize, Sequelize) =>
             allowNull: false
         }
     });
+    
 
     User
         .create({id: 1001, firstname: 'Anja', name: 'Fiedler', password: '1234', role: 0,

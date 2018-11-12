@@ -30,4 +30,18 @@ db.competence = require('../models/competence.model.js')(sequelize, Sequelize)
 db.developmentBow = require('../models/developmentBow.model.js')(sequelize,Sequelize)
 
 
+// Associations
+/*
+db.competence.hasOne(db.subCategory);
+db.subCategory.hasMany(db.category);
+
+db.subCategory.hasOne(db.mainCategory);
+db.mainCategory.hasMany(db.subCategory);
+
+db.mainCategory.hasOne(db.competencyCategory);
+db.competencyCategory.hasMany(db.mainCategory);
+
+//db.developmentBow.hasMany(db.competence);
+*/
+
 module.exports = db
