@@ -4,30 +4,15 @@ import FormControl from "@material-ui/core/es/FormControl/FormControl";
 import FilledInput from "@material-ui/core/es/FilledInput/FilledInput";
 import "./LoginComponent.css";
 import Button from "@material-ui/core/es/Button/Button";
-import { connect } from "react-redux";
-import { login, logout } from "./redux/actions";
+import { AllProps, State } from "./Login";
 
-interface Props {}
-
-interface ReduxProps {
-  loggingIn: boolean;
-  dispatch: any;
-}
-
-export type AllProps = Props & ReduxProps;
-
-interface State {
-  email: string;
-  passwort: string;
-  submitted: boolean;
-}
-
-class LoginComponent extends React.Component<AllProps, State> {
+export class LoginComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
+    const { logout } = this.props;
 
     //Logout
-    this.props.dispatch(logout());
+    logout();
 
     this.state = {
       email: "",
@@ -38,6 +23,7 @@ class LoginComponent extends React.Component<AllProps, State> {
 
   render() {
     const { email, passwort } = this.state;
+    const { loggingIn } = this.props;
 
     const handleChange = (event: any) => {
       const target = event.currentTarget;
@@ -48,10 +34,10 @@ class LoginComponent extends React.Component<AllProps, State> {
 
     const handleSubmit = () => {
       const { email, passwort } = this.state;
+      const { login } = this.props;
       this.setState({ submitted: true });
       if (email && passwort) {
-        console.log("submit", this.state);
-        this.props.dispatch(login(email, passwort));
+        login(email, passwort);
       }
     };
 
@@ -95,7 +81,7 @@ class LoginComponent extends React.Component<AllProps, State> {
           />
         </FormControl>
 
-        {this.props.loggingIn && <div>Loading</div>}
+        {loggingIn && <div>Loading</div>}
 
         <Button
           variant={"contained"}
@@ -109,15 +95,3 @@ class LoginComponent extends React.Component<AllProps, State> {
     );
   }
 }
-
-const mapStateToProps = (state: any) => {
-  console.log("state", state);
-
-  const { loggingIn } = state.authenticationReducer;
-  return {
-    loggingIn
-  };
-};
-
-const connectedLogin = connect(mapStateToProps)(LoginComponent);
-export { connectedLogin as Login };

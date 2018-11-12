@@ -8,7 +8,7 @@ import { clearAlert } from "./redux/actions";
 import { Route, Router } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { MemberTest } from "./MemberTest";
-import { Login } from "./LoginComponent";
+import { Login } from "./Login";
 
 export interface Items {
   id: number;
