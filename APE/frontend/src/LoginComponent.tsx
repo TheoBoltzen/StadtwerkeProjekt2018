@@ -4,10 +4,10 @@ import {
   InputLabel,
   FormControl,
   FilledInput,
-  FormHelperText
+  FormHelperText,
+  Button
 } from "@material-ui/core";
 import "./LoginComponent.css";
-import Button from "@material-ui/core/es/Button/Button";
 import { AllProps, State } from "./Login";
 
 export class LoginComponent extends React.Component<AllProps, State> {
@@ -57,6 +57,11 @@ export class LoginComponent extends React.Component<AllProps, State> {
             value={email}
             onChange={handleChange}
             error={noEmail}
+            onKeyPress={e => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
           />
           {noEmail && (
             <FormHelperText className={"required-error"}>
@@ -73,6 +78,11 @@ export class LoginComponent extends React.Component<AllProps, State> {
             onChange={handleChange}
             type={"password"}
             error={noPassword}
+            onKeyPress={e => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
           />
           {noPassword && (
             <FormHelperText className={"required-error"}>
