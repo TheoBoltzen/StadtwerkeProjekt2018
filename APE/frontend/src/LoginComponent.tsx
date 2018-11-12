@@ -35,7 +35,6 @@ class LoginComponent extends React.Component<AllProps, State> {
       submitted: false
     };
   }
-
   render() {
     const { email, passwort } = this.state;
 
@@ -57,7 +56,7 @@ class LoginComponent extends React.Component<AllProps, State> {
 
     return (
       <div className={"inputForm"}>
-        <h1>Entwicklungsbogentool</h1>
+        <h1 className={"header"}>Entwicklungsbogentool</h1>
         <FormControl className={"emailForm"} variant="filled">
           <InputLabel htmlFor="component-filled">E-Mail</InputLabel>
           <FilledInput name="email" value={email} onChange={handleChange} />
