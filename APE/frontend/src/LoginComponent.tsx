@@ -1,7 +1,11 @@
 import * as React from "react";
-import InputLabel from "@material-ui/core/es/InputLabel/InputLabel";
-import FormControl from "@material-ui/core/es/FormControl/FormControl";
-import FilledInput from "@material-ui/core/es/FilledInput/FilledInput";
+import {
+  CircularProgress,
+  InputLabel,
+  FormControl,
+  FilledInput,
+  FormHelperText
+} from "@material-ui/core";
 import "./LoginComponent.css";
 import Button from "@material-ui/core/es/Button/Button";
 import { AllProps, State } from "./Login";
@@ -22,8 +26,10 @@ export class LoginComponent extends React.Component<AllProps, State> {
   }
 
   render() {
-    const { email, passwort } = this.state;
+    const { email, passwort, submitted } = this.state;
     const { loggingIn } = this.props;
+    const noEmail = submitted && !email;
+    const noPassword = submitted && !passwort;
 
     const handleChange = (event: any) => {
       const target = event.currentTarget;
@@ -46,7 +52,17 @@ export class LoginComponent extends React.Component<AllProps, State> {
         <h1 className={"header"}>Entwicklungsbogentool</h1>
         <FormControl className={"emailForm"} variant="filled">
           <InputLabel htmlFor="component-filled">E-Mail</InputLabel>
-          <FilledInput name="email" value={email} onChange={handleChange} />
+          <FilledInput
+            name="email"
+            value={email}
+            onChange={handleChange}
+            error={noEmail}
+          />
+          {noEmail && (
+            <FormHelperText className={"required-error"}>
+              E-Mail Adresse ist erforderlich
+            </FormHelperText>
+          )}
         </FormControl>
 
         <FormControl className={"passwordForm"} variant="filled">
@@ -56,10 +72,16 @@ export class LoginComponent extends React.Component<AllProps, State> {
             value={passwort}
             onChange={handleChange}
             type={"password"}
+            error={noPassword}
           />
+          {noPassword && (
+            <FormHelperText className={"required-error"}>
+              Passwort ist erforderlich
+            </FormHelperText>
+          )}
         </FormControl>
 
-        {loggingIn && <div>Loading</div>}
+        {loggingIn && <CircularProgress />}
 
         <Button
           variant={"contained"}

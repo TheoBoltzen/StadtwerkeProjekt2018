@@ -13,14 +13,19 @@
 
 .emailForm {
   height: 65px;
-  margin: 5px;
+  margin: 5px !important;
 }
 
 .passwordForm {
   height: 70px;
-  margin: 5px;
+  margin: 5px !important;
 }
 
 .submitButton {
   margin: 5px;
+}
+
+.required-error {
+  color: #d32f2e !important;
+  margin: 0 !important;
 }
