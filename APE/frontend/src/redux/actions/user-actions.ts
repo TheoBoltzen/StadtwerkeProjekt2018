@@ -4,6 +4,21 @@ import { history } from "../../helpers";
 import { errorAlert } from "./alert";
 
 export const login = (username: any, password: any) => {
+  const request = (user: any) => {
+    //TODO: Remove any
+    return { type: userConstants.LOGIN_REQUEST, user };
+  };
+
+  const success = (user: any) => {
+    //TODO: Remove any
+    return { type: userConstants.LOGIN_SUCCESS, user };
+  };
+
+  const failure = (error: any) => {
+    //TODO: Remove any
+    return { type: userConstants.LOGIN_FAILURE, error };
+  };
+
   //TODO: Remove any
   return (dispatch: any) => {
     //TODO: Remove any
@@ -20,21 +35,6 @@ export const login = (username: any, password: any) => {
       }
     );
   };
-
-  const request = (user: any) => {
-    //TODO: Remove any
-    return { type: userConstants.LOGIN_REQUEST, user };
-  };
-
-  const success = (user: any) => {
-    //TODO: Remove any
-    return { type: userConstants.LOGIN_SUCCESS, user };
-  };
-
-  const failure = (error: any) => {
-    //TODO: Remove any
-    return { type: userConstants.LOGIN_FAILURE, error };
-  };
 };
 
 export const logout = () => {
@@ -43,16 +43,6 @@ export const logout = () => {
 };
 
 export const getAll = () => {
-  return (dispatch: any) => {
-    //TODO: Remove any
-    dispatch(request());
-
-    getAllService().then(
-      users => dispatch(success(users)),
-      error => dispatch(failure(error))
-    );
-  };
-
   const request = () => {
     return { type: userConstants.GETALL_REQUEST };
   };
@@ -65,5 +55,15 @@ export const getAll = () => {
   const failure = (error: any) => {
     //TODO: Remove any
     return { type: userConstants.GETALL_FAILURE, error };
+  };
+
+  return (dispatch: any) => {
+    //TODO: Remove any
+    dispatch(request());
+
+    getAllService().then(
+      users => dispatch(success(users)),
+      error => dispatch(failure(error))
+    );
   };
 };
