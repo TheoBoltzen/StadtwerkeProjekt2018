@@ -1,0 +1,32 @@
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  padding: 5px;
+}
+
+.header {
+  height: 60px;
+}
+
+.emailForm {
+  height: 65px;
+  margin: 5px !important;
+}
+
+.passwordForm {
+  height: 70px;
+  margin: 5px !important;
+}
+
+.submitButton {
+  background-color: #00a8e1 !important;
+  margin: 5px;
+}
+
+.required-error {
+  color: #d32f2e !important;
+  margin: 0 !important;
+}
