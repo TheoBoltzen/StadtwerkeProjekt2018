@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./App.css";
 
-import logo from "./resources/swk.svg";
 import { connect } from "react-redux";
 import { history } from "./helpers";
 import { clearAlert } from "./redux/actions";
@@ -58,10 +57,6 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-
         {alert.message && (
           <SnackbarContent
             className={`alert ${alert.type}`}

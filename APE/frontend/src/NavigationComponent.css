@@ -1,4 +1,16 @@
 .menu {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 20px;
+  height: 60px;
+  color: white;
+}
+
+.navRight {
+  float: right;
+}
+
+.logo {
+  height: 60px;
 }
