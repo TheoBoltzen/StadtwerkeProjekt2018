@@ -21,5 +21,7 @@ db.sequelize.sync().catch(error => {
 //Routes
 require("./routes/items.route")(app);
 require("./routes/user.route")(app);
+require("./routes/category.route")(app);
+require("./routes/competence.route")(app);
 
 module.exports = app;
