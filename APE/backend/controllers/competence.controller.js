@@ -1,12 +1,16 @@
-const db = require("../config/db.config");
-const Competence = db.competence;
+const competenceService = require("../services/competence.service");
 
 // FETCH all Items
-exports.findAll = (req, res) => {
-  Competence.findAll().then(competences => {
-    res.send(competences);
-  });
+exports.findAll = (req, res, next) => {
+  competenceService
+    .findAll()
+    .then(competences => res.json(competences))
+    .catch(err => next(err));
 };
 
-//Competence.hasMany(, {foreignKey: 'countryCode', sourceKey: 'isoCode'});
-//City.belongsTo(Country, {foreignKey: 'countryCode', targetKey: 'isoCode
+exports.functionXY = (req, res, next) => {
+  competenceService
+    .firstFunction()
+    .then(competences => res.json(competences))
+    .catch(err => next(err));
+};

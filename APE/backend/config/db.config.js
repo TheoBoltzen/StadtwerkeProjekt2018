@@ -31,4 +31,9 @@ db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.category = require("../models/category.model.js")(sequelize, Sequelize);
 db.competence = require("../models/competence.model.js")(sequelize, Sequelize);
 
+//1:1 => competence get category_id
+//db.competence.belongsTo(db.category);
+//1:n => each category get competence_id
+db.competence.hasMany(db.category); //
+
 module.exports = db;
