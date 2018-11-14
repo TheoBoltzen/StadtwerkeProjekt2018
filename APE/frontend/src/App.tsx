@@ -7,9 +7,9 @@ import { history } from "./helpers";
 import { clearAlert } from "./redux/actions";
 import { Route, Router } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { MemberTest } from "./MemberTest";
 import { Login } from "./Login";
 import { SnackbarContent } from "@material-ui/core";
+import NavigationComponent from "./NavigationComponent";
 
 export interface Items {
   id: number;
@@ -71,7 +71,11 @@ class App extends React.Component<Props, State> {
 
         <Router history={history}>
           <div>
-            <PrivateRoute exact={true} path={"/"} component={MemberTest} />
+            <PrivateRoute
+              exact={true}
+              path={"/"}
+              component={NavigationComponent}
+            />
             <Route path={"/login"} component={Login} />
           </div>
         </Router>
