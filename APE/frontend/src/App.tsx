@@ -56,10 +56,6 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        {/*<header className="App-header">*/}
-        {/*<img src={logo} className="App-logo" alt="logo" />*/}
-        {/*</header>*/}
-
         {alert.message && (
           <SnackbarContent
             className={`alert ${alert.type}`}
@@ -70,6 +66,7 @@ class App extends React.Component<Props, State> {
         <Router history={history}>
           <div>
             <PrivateRoute exact={true} path={"/"} component={Home} />
+
             <Route path={"/login"} component={Login} />
           </div>
         </Router>
