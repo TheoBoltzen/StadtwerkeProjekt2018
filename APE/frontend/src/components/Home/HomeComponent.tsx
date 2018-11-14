@@ -1,7 +1,7 @@
 import * as React from "react";
 import IdleTimer from "react-idle-timer";
 import { Redirect } from "react-router";
-import NavigationComponent from "../Navigation/NavigationComponent";
+import { Navigation } from "../Navigation/NavigationComponent";
 
 interface Props {}
 
@@ -33,7 +33,7 @@ export class Home extends React.Component<Props, State> {
         timeout={15 * 60 * 100}
       >
         {redirect && <Redirect to={"/login"} />}
-        <NavigationComponent />
+        <Navigation />
         Home
       </IdleTimer>
     );
