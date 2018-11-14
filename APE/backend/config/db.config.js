@@ -41,20 +41,27 @@ db.subCategory = require("../models/subCategory.model.js")(
   Sequelize
 );
 db.competence = require("../models/competence.model.js")(sequelize, Sequelize);
-db.developmentBow = require("../models/developmentBow.model.js")(
+db.developmentSheet = require("../models/developmentSheet.model.js")(
   sequelize,
   Sequelize
 );
 
 // Associations
 
-db.competence.belongsTo(db.subCategory);
-db.competence.hasOne(db.subCategory);
-
-db.subCategory.belongsTo(db.mainCategory);
-db.subCategory.hasOne(db.mainCategory);
-
+db.competencyCategory.hasMany(db.competencyCategory);
 db.mainCategory.belongsTo(db.competencyCategory);
-db.mainCategory.hasOne(db.competencyCategory);
+
+db.mainCategory.hasMany(db.mainCategory);
+db.subCategory.belongsTo(db.mainCategory);
+
+db.subCategory.hasMany(db.subCategory);
+db.competence.belongsTo(db.subCategory);
+
+db.competence.belongsToMany(db.developmentSheet, {
+  through: "ReadyDevelopmentSheet"
+});
+db.developmentSheet.belongsToMany(db.competence, {
+  through: "ReadyDevelopmentSheet"
+});
 
 module.exports = db;
