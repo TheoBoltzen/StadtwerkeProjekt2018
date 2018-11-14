@@ -1,9 +1,59 @@
-const db = require('../config/db.config')
-const User = db.user
+const db = require("../config/db.config");
+const userService = require("../services/user.service");
+const express = require("express");
+const router = express.Router();
 
-// FETCH all Items
-exports.findAll = (req, res) => {
-    User.findAll().then(user => { // catch
-        res.send(user)
-})
+exports.authenticate = (req, res, next) => {
+  userService
+    .authenticate(req.body)
+    .then(user =>
+      user
+        ? res.json(user)
+        : res
+            .status(400)
+            .json({ message: "E-Mail Adresse oder Password falsch" })
+    )
+    .catch(err => next(err));
+};
+
+exports.register = (req, res, next) => {
+  userService
+    .create(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+};
+
+exports.getAll = (req, res, next) => {
+  userService
+    .getAll()
+    .then(users => res.json(users))
+    .catch(err => next(err));
+};
+
+function getCurrent(req, res, next) {
+  userService
+    .getById(req.user.sub)
+    .then(user => (user ? res.json(user) : res.sendStatus(404)))
+    .catch(err => next(err));
+}
+
+function getById(req, res, next) {
+  userService
+    .getById(req.params.id)
+    .then(user => (user ? res.json(user) : res.sendStatus(404)))
+    .catch(err => next(err));
+}
+
+function update(req, res, next) {
+  userService
+    .update(req.params.id, req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+}
+
+function _delete(req, res, next) {
+  userService
+    .delete(req.params.id)
+    .then(() => res.json({}))
+    .catch(err => next(err));
 }
