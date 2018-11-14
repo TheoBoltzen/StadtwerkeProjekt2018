@@ -1,15 +1,13 @@
 import * as React from "react";
 import "./App.css";
-
-import logo from "./resources/swk.svg";
 import { connect } from "react-redux";
 import { history } from "./helpers";
 import { clearAlert } from "./redux/actions";
 import { Route, Router } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { MemberTest } from "./MemberTest";
-import { Login } from "./Login";
+import { Login } from "./components/Login/Login";
 import { SnackbarContent } from "@material-ui/core";
+import { Home } from "./components/Home/HomeComponent";
 
 export interface Items {
   id: number;
@@ -58,9 +56,9 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
+        {/*<header className="App-header">*/}
+        {/*<img src={logo} className="App-logo" alt="logo" />*/}
+        {/*</header>*/}
 
         {alert.message && (
           <SnackbarContent
@@ -71,7 +69,7 @@ class App extends React.Component<Props, State> {
 
         <Router history={history}>
           <div>
-            <PrivateRoute exact={true} path={"/"} component={MemberTest} />
+            <PrivateRoute exact={true} path={"/"} component={Home} />
             <Route path={"/login"} component={Login} />
           </div>
         </Router>
