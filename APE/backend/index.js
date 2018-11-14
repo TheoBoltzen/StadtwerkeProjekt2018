@@ -14,7 +14,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Sync Sequelize
-db.sequelize.sync().catch(error => {
+db.sequelize.sync({ alter: true }).catch(error => {
+  // sync({force: alter}) is the solution!
   console.log("sync failed: ", error);
 });
 
