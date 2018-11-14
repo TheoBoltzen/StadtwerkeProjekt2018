@@ -1,7 +1,7 @@
 import * as React from "react";
 import IdleTimer from "react-idle-timer";
 import { Redirect } from "react-router";
-import { Navigation } from "../Navigation/NavigationComponent";
+import { Navigation } from "../Navigation/Navigation";
 
 interface Props {}
 

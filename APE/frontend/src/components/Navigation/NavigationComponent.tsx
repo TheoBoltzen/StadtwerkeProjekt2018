@@ -4,21 +4,9 @@ import { PowerSettingsNew } from "@material-ui/icons";
 import { Redirect } from "react-router";
 import logo from "../../resources/swk.svg";
 import "./NavigationComponent.css";
-import { connect } from "react-redux";
+import { AllProps, State } from "./Navigation";
 
-interface State {
-  redirect: boolean;
-}
-
-interface Props {}
-
-interface ReduxStateProps {
-  user: any;
-}
-
-export type AllProps = Props & ReduxStateProps;
-
-class NavigationComponent extends React.Component<AllProps, State> {
+export class NavigationComponent extends React.Component<AllProps, State> {
   constructor(props) {
     super(props);
 
@@ -83,13 +71,3 @@ class NavigationComponent extends React.Component<AllProps, State> {
     );
   }
 }
-
-const mapStateToProps = (state: any) => {
-  const { user } = state.authenticationReducer;
-  return {
-    user: user.token ? user : JSON.parse(user)
-  };
-};
-
-const connectedNavigation = connect(mapStateToProps)(NavigationComponent);
-export { connectedNavigation as Navigation };
