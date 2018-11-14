@@ -30,3 +30,32 @@
   color: #d32f2e !important;
   margin: 0 !important;
 }
+
+.logo {
+  margin: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.inputForm {
+  width: 300px;
+  padding: 20px;
+  background-color: #efeff5;
+  border-top-right-radius: 13px;
+  border-bottom-right-radius: 13px;
+}
+
+.textBox {
+  width: 300px;
+  padding: 50px;
+  background-color: #efeff5;
+  border-top-left-radius: 13px;
+  border-bottom-left-radius: 13px;
+}

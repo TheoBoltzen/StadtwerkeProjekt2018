@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import "./LoginComponent.css";
 import { AllProps, State } from "./Login";
+import logo from "../../resources/swk.svg";
 
 export class LoginComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -48,59 +49,72 @@ export class LoginComponent extends React.Component<AllProps, State> {
     };
 
     return (
-      <div className={"inputForm"}>
+      <div className={"all"}>
+        <header>
+          <img className={"logo"} src={logo} />
+        </header>
         <h1 className={"header"}>Entwicklungsbogentool</h1>
-        <FormControl className={"emailForm"} variant="filled">
-          <InputLabel htmlFor="component-filled">E-Mail</InputLabel>
-          <FilledInput
-            name="email"
-            value={email}
-            onChange={handleChange}
-            error={noEmail}
-            onKeyPress={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          {noEmail && (
-            <FormHelperText className={"required-error"}>
-              E-Mail Adresse ist erforderlich
-            </FormHelperText>
-          )}
-        </FormControl>
+        <div className={"loginContainer"}>
+          <div className={"textBox"}>
+            Am Ende deiner Ausbildung weißt du, was du willst, wer du bist und
+            was du kannst
+          </div>
+          <div className={"inputForm"}>
+            <FormControl className={"emailForm"} variant="filled">
+              <InputLabel htmlFor="component-filled">E-Mail</InputLabel>
+              <FilledInput
+                name="email"
+                value={email}
+                onChange={handleChange}
+                error={noEmail}
+                onKeyPress={e => {
+                  if (e.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+              />
+              {noEmail && (
+                <FormHelperText className={"required-error"}>
+                  E-Mail Adresse ist erforderlich
+                </FormHelperText>
+              )}
+            </FormControl>
 
-        <FormControl className={"passwordForm"} variant="filled">
-          <InputLabel htmlFor="component-filled">Passwort</InputLabel>
-          <FilledInput
-            name="passwort"
-            value={passwort}
-            onChange={handleChange}
-            type={"password"}
-            error={noPassword}
-            onKeyPress={e => {
-              if (e.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          {noPassword && (
-            <FormHelperText className={"required-error"}>
-              Passwort ist erforderlich
-            </FormHelperText>
-          )}
-        </FormControl>
+            <FormControl className={"passwordForm"} variant="filled">
+              <InputLabel htmlFor="component-filled">Passwort</InputLabel>
+              <FilledInput
+                name="passwort"
+                value={passwort}
+                onChange={handleChange}
+                type={"password"}
+                error={noPassword}
+                onKeyPress={e => {
+                  if (e.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+              />
+              {noPassword && (
+                <FormHelperText className={"required-error"}>
+                  Passwort ist erforderlich
+                </FormHelperText>
+              )}
+            </FormControl>
 
-        {loggingIn && <CircularProgress />}
+            {loggingIn && <CircularProgress />}
 
-        <Button
-          variant={"contained"}
-          color={"primary"}
-          className={"submitButton"}
-          onClick={handleSubmit}
-        >
-          Login
-        </Button>
+            {!loggingIn && (
+              <Button
+                variant={"contained"}
+                color={"primary"}
+                className={"submitButton"}
+                onClick={handleSubmit}
+              >
+                Login
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
     );
   }
