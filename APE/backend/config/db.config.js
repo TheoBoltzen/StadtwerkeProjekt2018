@@ -31,7 +31,7 @@ db.developmentBow = require('../models/developmentBow.model.js')(sequelize,Seque
 
 
 // Associations
-/*
+
 db.competence.hasOne(db.subCategory);
 db.subCategory.hasMany(db.category);
 
@@ -42,6 +42,6 @@ db.mainCategory.hasOne(db.competencyCategory);
 db.competencyCategory.hasMany(db.mainCategory);
 
 //db.developmentBow.hasMany(db.competence);
-*/
+
 
 module.exports = db

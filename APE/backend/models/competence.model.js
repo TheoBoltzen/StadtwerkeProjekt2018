@@ -16,14 +16,7 @@ module.exports = (sequelize, Sequelize) =>
         }
     });
 
-    Competence.associate = function (models) {
-        Competence.hasOne(models.subCategory, {
-            foreignKey : {
-                allowNull: false
-            }
-        })
-    }
 
 
     return Competence
-}
+};

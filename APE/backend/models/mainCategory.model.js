@@ -13,21 +13,5 @@ module.exports = (sequelize, Sequelize) =>
     });
 
 
-    MainCategory.associate = function (models) {
-        console.log("Hallo " + JSON.stringify(models, null, 4));
-        MainCategory.hasOne(models.competencyCategory, {
-            foreignKey : {
-                allowNull: false
-            }
-        })
-
-        MainCategory.hasMany(models.subCategory, {
-            foreignKey : {
-                allowNull: true
-            }
-        })
-    }
-
-
     return MainCategory
 }
