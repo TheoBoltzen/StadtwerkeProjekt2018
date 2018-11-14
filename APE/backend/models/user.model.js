@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       lastname: {
         type: Sequelize.STRING
+      },
+      role: {
+        type: Sequelize.STRING
       }
     },
     {

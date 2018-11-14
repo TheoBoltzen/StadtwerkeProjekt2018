@@ -43,7 +43,8 @@ async function create(userParam) {
       username: userParam.username,
       hash: await bcrypt.hashSync(userParam.password, 10),
       firstname: userParam.firstname,
-      lastname: userParam.lastname
+      lastname: userParam.lastname,
+      role: userParam.role
     });
     // save user in db
     newUser.save().then(() => {});
