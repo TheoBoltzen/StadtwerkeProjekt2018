@@ -14,11 +14,28 @@ module.exports = {
 };
 
 async function authenticate({ username, password }) {
+  console.log(username + "   " + password);
   const user = await User.findOne({ where: { username: username } });
 
   if (user && bcrypt.compareSync(password, user.hash)) {
+    //payload: without hash, get permission from db. add it to token
+    //payload with permission
     const { hash, ...userWithoutHash } = user.dataValues;
-    const token = jwt.sign({ sub: user.id }, config.secret);
+    console.log(user.dataValues);
+    const payload = {
+      username: user.dataValues.username,
+      firstname: user.dataValues.firstname,
+      lastname: user.dataValues.lastname,
+      permissions: [user.dataValues.permissions]
+    };
+    /* const options = {
+          expiresIn: Number(process.env.JWT_TTL),
+      };*/
+
+    //  const token = jwt.sign({ sub: user.id }, config.secret);
+    //  const token = jwt.sign(userWithoutHash, config.secret);
+    const token = jwt.sign(payload, config.secret);
+
     return {
       ...userWithoutHash,
       token
@@ -32,6 +49,7 @@ async function getAll() {
 
 async function getById(id) {
   return await User.findById(id).select("-hash");
+  //return await User.findOne({ where: { username: username } });
 }
 
 async function create(userParam) {
@@ -44,7 +62,7 @@ async function create(userParam) {
       hash: await bcrypt.hashSync(userParam.password, 10),
       firstname: userParam.firstname,
       lastname: userParam.lastname,
-      role: userParam.role
+      permissions: userParam.permissions
     });
     // save user in db
     newUser.save().then(() => {});
