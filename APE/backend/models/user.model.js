@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define("User", {
-    id: {
-      type: Sequelize.INTEGER,
+    username: {
+      type: Sequelize.STRING,
       allowNull: false,
       primaryKey: true
     },
@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false
     },
     role: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false
     },
     job: {
@@ -40,51 +40,47 @@ module.exports = (sequelize, Sequelize) => {
   });
 
   User.create({
-    id: 1001,
+    username: "",
     firstname: "Anja",
-    name: "Fiedler",
-    password: "1234",
-    role: 0,
+    lastname: "Fiedler",
+    hash: "1234",
+    role: "",
     job: null,
     education: null,
     hiredOn: null,
-    sessionID: null,
     tryLogin: 0
   });
   User.create({
-    id: 5001,
+    username: "",
     firstname: "Tom",
-    name: "Riddle",
-    password: "1234",
-    role: 2,
+    lastname: "Riddle",
+    hash: "1234",
+    role: "",
     job: "Verwaltungsfachkraft",
     education: "Büromanagement",
     hiredOn: "01.01.2019",
-    sessionID: null,
     tryLogin: 0
   });
   User.create({
-    id: 5002,
+    username: "",
     firstname: "Harry",
-    name: "Potter",
-    password: "1234",
-    role: 2,
+    lastname: "Potter",
+    hash: "1234",
+    role: "",
     job: "Systemtechniker",
     education: "IT-Assistant",
     hiredOn: "01.01.2019",
-    sessionID: null,
     tryLogin: 0
   });
   User.create({
-    id: 2001,
+    username: "",
     firstname: "Basti",
-    name: "Bohr",
-    password: "1234",
-    role: 1,
+    lastname: "Bohr",
+    hash: "1234",
+    role: "",
     job: null,
     education: null,
     hiredOn: null,
-    sessionID: null,
     tryLogin: 0
   });
 
