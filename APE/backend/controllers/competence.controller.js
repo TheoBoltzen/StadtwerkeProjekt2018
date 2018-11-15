@@ -1,9 +1,16 @@
-const db = require('../config/db.config')
-const Competence = db.competence
+const competenceService = require("../services/competence.service");
 
 // FETCH all Items
-exports.findAll = (req, res) => {
-    Competence.findAll().then(comptence => { // catch
-        res.send(competence)
-})
-}
+exports.findAll = (req, res, next) => {
+  competenceService
+    .findAll()
+    .then(competences => res.json(competences))
+    .catch(err => next(err));
+};
+
+exports.functionXY = (req, res, next) => {
+  competenceService
+    .firstFunction()
+    .then(competences => res.json(competences))
+    .catch(err => next(err));
+};
