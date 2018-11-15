@@ -45,23 +45,23 @@ db.developmentSheet = require("../models/developmentSheet.model.js")(
   sequelize,
   Sequelize
 );
+db.readyDevelopmentSheet = require("../models/readyDevelopmentSheet.model.js")(
+  sequelize,
+  Sequelize
+);
 
 // Associations
 
-db.competencyCategory.hasMany(db.competencyCategory);
+db.competencyCategory.belongsToMany(db.mainCategory);
 db.mainCategory.belongsTo(db.competencyCategory);
 
-db.mainCategory.hasMany(db.mainCategory);
+db.mainCategory.belongsToMany(db.subCategory);
 db.subCategory.belongsTo(db.mainCategory);
 
-db.subCategory.hasMany(db.subCategory);
+db.subCategory.belongsToMany(db.competence);
 db.competence.belongsTo(db.subCategory);
 
-db.competence.belongsToMany(db.developmentSheet, {
-  through: "ReadyDevelopmentSheet"
-});
-db.developmentSheet.belongsToMany(db.competence, {
-  through: "ReadyDevelopmentSheet"
-});
+db.readyDevelopmentSheet.belongsToMany(db.developmentSheet);
+db.readyDevelopmentSheet.belongsToMany(db.competence);
 
 module.exports = db;

@@ -27,6 +27,7 @@ require("./routes/competence.route")(app);
 require("./routes/mainCategory.route")(app);
 require("./routes/subCategory.route")(app);
 require("./routes/developmentSheet.route")(app);
+require("./routes/readyDevelopmentSheet.route")(app);
 
 //Catch-All Route
 app.get("*", (req, res) =>
