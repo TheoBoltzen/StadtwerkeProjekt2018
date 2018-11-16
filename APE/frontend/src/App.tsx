@@ -3,11 +3,11 @@ import "./App.css";
 import { connect } from "react-redux";
 import { history } from "./helpers";
 import { clearAlert } from "./redux/actions";
-import { Route, Router } from "react-router-dom";
-import { PrivateRoute } from "./components/PrivateRoute";
-import { Login } from "./components/Login/Login";
 import { SnackbarContent } from "@material-ui/core";
+import { Route } from "react-router";
+import { Login } from "./components/Login/Login";
 import { Home } from "./components/Home/HomeComponent";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 export interface Items {
   id: number;
@@ -62,14 +62,11 @@ class App extends React.Component<Props, State> {
             message={alert.message}
           />
         )}
+        <Route path={"/login"} exact={true} component={Login} />
 
-        <Router history={history}>
-          <div>
-            <PrivateRoute exact={true} path={"/"} component={Home} />
-
-            <Route path={"/login"} component={Login} />
-          </div>
-        </Router>
+        {history.location.pathname !== "/login" && (
+          <PrivateRoute path={"/"} component={Home} />
+        )}
       </div>
     );
   }
