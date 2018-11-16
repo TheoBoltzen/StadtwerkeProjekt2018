@@ -55,10 +55,7 @@ export class NavigationComponent extends React.Component<AllProps, State> {
             <Link to={"/benutzerverwaltung"}>
               <Button
                 aria-haspopup={true}
-                variant={
-                  pathname === pathUserAdministration ? "outlined" : "text"
-                }
-              >
+                variant={pathname === pathUserAdministration ? "outlined" : "text"}>
                 Benutzerverwaltung
               </Button>
             </Link>
@@ -68,10 +65,7 @@ export class NavigationComponent extends React.Component<AllProps, State> {
             <Link to={"/entwicklungsboegen"}>
               <Button
                 aria-haspopup={true}
-                variant={
-                  pathname === pathDevelopmentForms ? "outlined" : "text"
-                }
-              >
+                variant={pathname === pathDevelopmentForms ? "outlined" : "text"}>
                 Entwicklungsbögen
               </Button>
             </Link>
@@ -81,18 +75,13 @@ export class NavigationComponent extends React.Component<AllProps, State> {
             <Link to={"/auszubildende"}>
               <Button
                 aria-haspopup={false}
-                variant={pathname === pathTrainees ? "outlined" : "text"}
-              >
+                variant={pathname === pathTrainees ? "outlined" : "text"}>
                 Auszubildende
               </Button>
             </Link>
           )}
 
-          <Button
-            className={"logout"}
-            aria-haspopup={true}
-            onClick={this.handleLogout}
-          >
+          <Button className={"logout"} aria-haspopup={true} onClick={this.handleLogout}>
             <PowerSettingsNew nativeColor={"#ff0000"} />
           </Button>
         </div>
