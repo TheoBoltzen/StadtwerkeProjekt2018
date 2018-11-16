@@ -6,6 +6,7 @@ import logo from "../../resources/swk.svg";
 import "./NavigationComponent.css";
 import { AllProps, State } from "./Navigation";
 import { Link } from "react-router-dom";
+import { history } from "../../helpers";
 
 export class NavigationComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -30,6 +31,14 @@ export class NavigationComponent extends React.Component<AllProps, State> {
       user: { role }
     } = this.props;
 
+    const {
+      location: { pathname }
+    } = history;
+
+    const pathUserAdministration = "/benutzerverwaltung";
+    const pathDevelopmentForms = "/entwicklungsboegen";
+    const pathTrainees = "/auszubildende";
+
     const isAdmin = role === "admin";
     const isTrainer = role === "trainer";
 
@@ -44,8 +53,12 @@ export class NavigationComponent extends React.Component<AllProps, State> {
         <div className={"navRight"}>
           {isAdmin && (
             <Link to={"/benutzerverwaltung"}>
-              {" "}
-              <Button aria-haspopup={true} onClick={this.handleClick}>
+              <Button
+                aria-haspopup={true}
+                variant={
+                  pathname === pathUserAdministration ? "outlined" : "text"
+                }
+              >
                 Benutzerverwaltung
               </Button>
             </Link>
@@ -53,8 +66,12 @@ export class NavigationComponent extends React.Component<AllProps, State> {
 
           {(isAdmin || isTrainer) && (
             <Link to={"/entwicklungsboegen"}>
-              {" "}
-              <Button aria-haspopup={true} onClick={this.handleClick}>
+              <Button
+                aria-haspopup={true}
+                variant={
+                  pathname === pathDevelopmentForms ? "outlined" : "text"
+                }
+              >
                 Entwicklungsbögen
               </Button>
             </Link>
@@ -62,7 +79,10 @@ export class NavigationComponent extends React.Component<AllProps, State> {
 
           {(isAdmin || isTrainer) && (
             <Link to={"/auszubildende"}>
-              <Button aria-haspopup={true} onClick={this.handleClick}>
+              <Button
+                aria-haspopup={false}
+                variant={pathname === pathTrainees ? "outlined" : "text"}
+              >
                 Auszubildende
               </Button>
             </Link>
