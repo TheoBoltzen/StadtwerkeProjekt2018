@@ -6,7 +6,6 @@ import logo from "../../resources/swk.svg";
 import "./NavigationComponent.css";
 import { AllProps, State } from "./Navigation";
 import { Link } from "react-router-dom";
-import { history } from "../../helpers";
 
 export class NavigationComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -17,23 +16,18 @@ export class NavigationComponent extends React.Component<AllProps, State> {
     };
   }
 
-  handleClick = event => {
-    console.log("hallo i bims");
-  };
-
-  handleLogout = event => {
+  handleLogout = () => {
     this.setState({ redirect: true });
   };
 
   render() {
     const { redirect } = this.state;
     const {
-      user: { role }
+      user: { role },
+      history: {
+        location: { pathname }
+      }
     } = this.props;
-
-    const {
-      location: { pathname }
-    } = history;
 
     const pathUserAdministration = "/benutzerverwaltung";
     const pathDevelopmentForms = "/entwicklungsboegen";
