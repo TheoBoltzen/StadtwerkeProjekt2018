@@ -6,6 +6,7 @@ import { UserAdministration } from "../UserAdministration/UserAdministration";
 import { PrivateRoute } from "../PrivateRoute";
 import { DevelopmentForms } from "../DevelopmentForms/DevelopmentForms";
 import { Trainees } from "../Trainees/Trainees";
+import { RouterPathsConstants } from "../../constants";
 
 interface Props {}
 
@@ -27,6 +28,7 @@ export class Home extends React.Component<Props, State> {
   }
   render() {
     const { redirect } = this.state;
+
     return (
       <IdleTimer
         ref={ref => {
@@ -34,27 +36,22 @@ export class Home extends React.Component<Props, State> {
         }}
         element={document}
         onIdle={this._onIdle}
-        timeout={15 * 60 * 100}
-      >
+        timeout={15 * 60 * 100}>
         {redirect && <Redirect to={"/login"} />}
 
         <Navigation />
 
         <PrivateRoute
-          path={"/benutzerverwaltung"}
+          path={RouterPathsConstants.userAdministration}
           exact={true}
           component={UserAdministration}
         />
         <PrivateRoute
-          path={"/entwicklungsboegen"}
+          path={RouterPathsConstants.developmentForms}
           exact={true}
           component={DevelopmentForms}
         />
-        <PrivateRoute
-          path={"/auszubildende"}
-          exact={true}
-          component={Trainees}
-        />
+        <PrivateRoute path={RouterPathsConstants.trainees} exact={true} component={Trainees} />
       </IdleTimer>
     );
   }

@@ -6,6 +6,7 @@ import logo from "../../resources/swk.svg";
 import "./NavigationComponent.css";
 import { AllProps, State } from "./Navigation";
 import { Link } from "react-router-dom";
+import { RouterPathsConstants } from "../../constants";
 
 export class NavigationComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -29,10 +30,6 @@ export class NavigationComponent extends React.Component<AllProps, State> {
       }
     } = this.props;
 
-    const pathUserAdministration = "/benutzerverwaltung";
-    const pathDevelopmentForms = "/entwicklungsboegen";
-    const pathTrainees = "/auszubildende";
-
     const isAdmin = role === "admin";
     const isTrainer = role === "trainer";
 
@@ -46,30 +43,32 @@ export class NavigationComponent extends React.Component<AllProps, State> {
 
         <div className={"navRight"}>
           {isAdmin && (
-            <Link to={"/benutzerverwaltung"}>
+            <Link to={RouterPathsConstants.userAdministration}>
               <Button
                 aria-haspopup={true}
-                variant={pathname === pathUserAdministration ? "outlined" : "text"}>
+                variant={
+                  pathname === RouterPathsConstants.userAdministration ? "outlined" : "text"
+                }>
                 Benutzerverwaltung
               </Button>
             </Link>
           )}
 
           {(isAdmin || isTrainer) && (
-            <Link to={"/entwicklungsboegen"}>
+            <Link to={RouterPathsConstants.developmentForms}>
               <Button
                 aria-haspopup={true}
-                variant={pathname === pathDevelopmentForms ? "outlined" : "text"}>
+                variant={pathname === RouterPathsConstants.developmentForms ? "outlined" : "text"}>
                 Entwicklungsbögen
               </Button>
             </Link>
           )}
 
           {(isAdmin || isTrainer) && (
-            <Link to={"/auszubildende"}>
+            <Link to={RouterPathsConstants.trainees}>
               <Button
                 aria-haspopup={false}
-                variant={pathname === pathTrainees ? "outlined" : "text"}>
+                variant={pathname === RouterPathsConstants.trainees ? "outlined" : "text"}>
                 Auszubildende
               </Button>
             </Link>
