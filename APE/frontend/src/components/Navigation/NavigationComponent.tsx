@@ -5,6 +5,7 @@ import { Redirect } from "react-router";
 import logo from "../../resources/swk.svg";
 import "./NavigationComponent.css";
 import { AllProps, State } from "./Navigation";
+import { Link } from "react-router-dom";
 
 export class NavigationComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -42,21 +43,29 @@ export class NavigationComponent extends React.Component<AllProps, State> {
 
         <div className={"navRight"}>
           {isAdmin && (
-            <Button aria-haspopup={true} onClick={this.handleClick}>
-              Benutzerverwaltung
-            </Button>
+            <Link to={"/benutzerverwaltung"}>
+              {" "}
+              <Button aria-haspopup={true} onClick={this.handleClick}>
+                Benutzerverwaltung
+              </Button>
+            </Link>
           )}
 
           {(isAdmin || isTrainer) && (
-            <Button aria-haspopup={true} onClick={this.handleClick}>
-              Entwicklungsbögen
-            </Button>
+            <Link to={"/entwicklungsboegen"}>
+              {" "}
+              <Button aria-haspopup={true} onClick={this.handleClick}>
+                Entwicklungsbögen
+              </Button>
+            </Link>
           )}
 
           {(isAdmin || isTrainer) && (
-            <Button aria-haspopup={true} onClick={this.handleClick}>
-              Auszubildende
-            </Button>
+            <Link to={"/auszubildende"}>
+              <Button aria-haspopup={true} onClick={this.handleClick}>
+                Auszubildende
+              </Button>
+            </Link>
           )}
 
           <Button
