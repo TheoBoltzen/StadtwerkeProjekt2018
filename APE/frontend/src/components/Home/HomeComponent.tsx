@@ -2,6 +2,10 @@ import * as React from "react";
 import IdleTimer from "react-idle-timer";
 import { Redirect } from "react-router";
 import { Navigation } from "../Navigation/Navigation";
+import { UserAdministration } from "../UserAdministration/UserAdministration";
+import { PrivateRoute } from "../PrivateRoute";
+import { DevelopmentForms } from "../DevelopmentForms/DevelopmentForms";
+import { Trainees } from "../Trainees/Trainees";
 
 interface Props {}
 
@@ -33,8 +37,24 @@ export class Home extends React.Component<Props, State> {
         timeout={15 * 60 * 100}
       >
         {redirect && <Redirect to={"/login"} />}
+
         <Navigation />
-        Home
+
+        <PrivateRoute
+          path={"/benutzerverwaltung"}
+          exact={true}
+          component={UserAdministration}
+        />
+        <PrivateRoute
+          path={"/entwicklungsboegen"}
+          exact={true}
+          component={DevelopmentForms}
+        />
+        <PrivateRoute
+          path={"/auszubildende"}
+          exact={true}
+          component={Trainees}
+        />
       </IdleTimer>
     );
   }
