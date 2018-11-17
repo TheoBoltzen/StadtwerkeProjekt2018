@@ -13,10 +13,16 @@ app.use(logger("dev"));
 //Mit BodyParser werden Requests direkt geparsed
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 //guard - admin has permissions for the whole app (each route)
 app.use(
-  guard.check("admin").unless({
-    path: ["/services/authenticate", "/api/items"]
+  guard.check(["admin"]).unless({
+    path: [
+      "/services/authenticate",
+      "/api/items" /*"/api/category"*/,
+      ,
+      "/service/register"
+    ]
   })
 );
 
