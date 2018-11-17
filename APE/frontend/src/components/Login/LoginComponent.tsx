@@ -10,6 +10,7 @@ import {
 import "./LoginComponent.css";
 import { AllProps, State } from "./Login";
 import logo from "../../resources/swk.svg";
+import CustomizedInput from "../General/CustomizedInput";
 
 export class LoginComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -37,6 +38,7 @@ export class LoginComponent extends React.Component<AllProps, State> {
       const value = target.value;
       const name = target.name;
       this.setState({ [name]: value } as State);
+      console.log(this.state);
     };
 
     const handleSubmit = () => {
@@ -53,33 +55,36 @@ export class LoginComponent extends React.Component<AllProps, State> {
         <header>
           <img className={"logo"} src={logo} />
         </header>
+
         <h1 className={"header"}>Entwicklungsbogentool</h1>
+
         <div className={"loginContainer"}>
           <div className={"textBox"}>
             Am Ende deiner Ausbildung weißt du, was du willst, wer du bist und
             was du kannst
           </div>
-          <div className={"inputForm"}>
-            <FormControl className={"emailForm"} variant="filled">
-              <InputLabel htmlFor="component-filled">E-Mail</InputLabel>
-              <FilledInput
-                name="email"
-                value={email}
-                onChange={handleChange}
-                error={noEmail}
-                onKeyPress={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
-              />
+
+          <div
+            className={"inputForm"}
+            onChange={handleChange}
+            onKeyPress={e => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
+          >
+            <FormControl className={"emailForm"}>
+              <InputLabel shrink htmlFor="bootstrap-input">
+                Kennung
+              </InputLabel>
+              <CustomizedInput name="email" value={email} error={noEmail} />
+
               {noEmail && (
                 <FormHelperText className={"required-error"}>
-                  E-Mail Adresse ist erforderlich
+                  Kennung ist erforderlich
                 </FormHelperText>
               )}
             </FormControl>
-
             <FormControl className={"passwordForm"} variant="filled">
               <InputLabel htmlFor="component-filled">Passwort</InputLabel>
               <FilledInput
