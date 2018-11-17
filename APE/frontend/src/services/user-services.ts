@@ -1,17 +1,17 @@
 import { apiURL } from "../constants";
 
-const authHeader = () => {
-  //returns header with jwt token
-  let user = JSON.parse(localStorage.getItem("user") as any); //TODO: Remove any
+// const authHeader = () => {
+//   //returns header with jwt token
+//   let user = JSON.parse(localStorage.getItem("user") as any); //TODO: Remove any
+//
+//   if (user && user.token) {
+//     return { Authorization: user.token };
+//   } else {
+//     return {};
+//   }
+// };
 
-  if (user && user.token) {
-    return { Authorization: user.token };
-  } else {
-    return {};
-  }
-};
-
-export const loginService = (username: any, password: any) => {
+export const loginService = (username: string, password: string) => {
   //TODO: Remove any
   const requestOptions = {
     method: "POST",
@@ -35,26 +35,26 @@ export const logoutService = () => {
   localStorage.removeItem("user");
 };
 
-export const getAllService = () => {
-  const requestOptions: any = {
-    //TODO: Remove any
-    method: "GET",
-    headers: authHeader()
-  };
-
-  return fetch(`${apiURL}/users`, requestOptions).then(handleResponse);
-};
-
-export const getByIdService = (id: any) => {
-  //TODO: Remove any
-  const requestOptions: any = {
-    //TODO: Remove any
-    method: "GET",
-    headers: authHeader()
-  };
-
-  return fetch(`${apiURL}/users/${id}`, requestOptions).then(handleResponse);
-};
+// export const getAllService = () => {
+//   const requestOptions: any = {
+//     //TODO: Remove any
+//     method: "GET",
+//     headers: authHeader()
+//   };
+//
+//   return fetch(`${apiURL}/users`, requestOptions).then(handleResponse);
+// };
+//
+// export const getByIdService = (id: any) => {
+//   //TODO: Remove any
+//   const requestOptions: any = {
+//     //TODO: Remove any
+//     method: "GET",
+//     headers: authHeader()
+//   };
+//
+//   return fetch(`${apiURL}/users/${id}`, requestOptions).then(handleResponse);
+// };
 
 const handleResponse = (response: any) => {
   //TODO: Remove any

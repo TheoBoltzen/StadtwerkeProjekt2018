@@ -1,9 +1,10 @@
 import { userConstants } from "../../constants";
-import { getAllService, loginService, logoutService } from "../../services";
+import { loginService, logoutService } from "../../services";
 import { history } from "../../helpers";
 import { errorAlert } from "./alert";
+import { Dispatch } from "redux";
 
-export const login = (username: any, password: any) => {
+export const login = (username: string, password: string) => {
   const request = (user: any) => {
     //TODO: Remove any
     return { type: userConstants.LOGIN_REQUEST, user };
@@ -15,12 +16,13 @@ export const login = (username: any, password: any) => {
   };
 
   const failure = (error: any) => {
+    console.log("error: ", error);
     //TODO: Remove any
     return { type: userConstants.LOGIN_FAILURE, error };
   };
 
   //TODO: Remove any
-  return (dispatch: any) => {
+  return (dispatch: Dispatch) => {
     //TODO: Remove any
     dispatch(request({ username }));
 
@@ -42,28 +44,28 @@ export const logout = () => {
   return { type: userConstants.LOGOUT };
 };
 
-export const getAll = () => {
-  const request = () => {
-    return { type: userConstants.GETALL_REQUEST };
-  };
-
-  const success = (users: any) => {
-    //TODO: Remove any
-    return { type: userConstants.GETALL_SUCCESS, users };
-  };
-
-  const failure = (error: any) => {
-    //TODO: Remove any
-    return { type: userConstants.GETALL_FAILURE, error };
-  };
-
-  return (dispatch: any) => {
-    //TODO: Remove any
-    dispatch(request());
-
-    getAllService().then(
-      users => dispatch(success(users)),
-      error => dispatch(failure(error))
-    );
-  };
-};
+// export const getAll = () => {
+//   const request = () => {
+//     return { type: userConstants.GETALL_REQUEST };
+//   };
+//
+//   const success = (users: any) => {
+//     //TODO: Remove any
+//     return { type: userConstants.GETALL_SUCCESS, users };
+//   };
+//
+//   const failure = (error: any) => {
+//     //TODO: Remove any
+//     return { type: userConstants.GETALL_FAILURE, error };
+//   };
+//
+//   return (dispatch: any) => {
+//     //TODO: Remove any
+//     dispatch(request());
+//
+//     getAllService().then(
+//       users => dispatch(success(users)),
+//       error => dispatch(failure(error))
+//     );
+//   };
+// };
