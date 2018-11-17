@@ -12,7 +12,6 @@ import { apiURL } from "../constants";
 // };
 
 export const loginService = (username: string, password: string) => {
-  //TODO: Remove any
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -56,10 +55,8 @@ export const logoutService = () => {
 //   return fetch(`${apiURL}/users/${id}`, requestOptions).then(handleResponse);
 // };
 
-const handleResponse = (response: any) => {
-  //TODO: Remove any
-  return response.text().then((text: any) => {
-    //TODO: Renove any
+const handleResponse = (response: Response) => {
+  return response.text().then((text: string) => {
     const data = text && JSON.parse(text);
 
     if (!response.ok) {
