@@ -16,10 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //guard - admin has permissions for the whole app (each route)
 app.use(
   guard.check("admin").unless({
-    path: [
-      "/services/authenticate"
-      //"/api/items"
-    ]
+    path: ["/services/authenticate", "/api/items"]
   })
 );
 

@@ -4,4 +4,5 @@ module.exports = app => {
   //Get all Items
   app.get("/api/competence", Competence.findAll);
   app.get("/getCompetence", Competence.functionXY);
+  //app.get("/api/competence", Competence.checkIfRequestIsAuthenticated);
 };
