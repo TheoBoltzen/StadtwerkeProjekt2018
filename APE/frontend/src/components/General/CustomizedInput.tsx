@@ -21,19 +21,7 @@ const styles = theme =>
       fontSize: 16,
       padding: "10px 12px",
       transition: theme.transitions.create(["border-color", "box-shadow"]),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        "-apple-system",
-        "BlinkMacSystemFont",
-        '"Segoe UI"',
-        "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        "sans-serif",
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-      ].join(","),
+      fontFamily: ["Roboto"].join(","),
       "&:focus": {
         borderColor: "#00a8e1",
         boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
