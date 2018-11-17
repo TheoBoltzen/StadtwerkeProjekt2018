@@ -35,7 +35,7 @@ const styles = theme =>
         '"Segoe UI Symbol"'
       ].join(","),
       "&:focus": {
-        borderColor: "#80bdff",
+        borderColor: "#00a8e1",
         boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
       }
     },
@@ -48,17 +48,21 @@ interface Props extends WithStyles<typeof styles> {
   name: string;
   value: string;
   error: boolean;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  type?: string;
 }
 
 export const CustomizedInputs = (props: Props) => {
-  const { classes, name, error, value } = props;
+  const { classes, name, error } = props;
 
   return (
     <InputBase
+      type={props.type}
+      onChange={props.onChange}
       id="bootstrap-input"
       name={name}
       error={error}
-      value={value}
+      value={props.value}
       classes={{
         root: classes.bootstrapRoot,
         input: classes.bootstrapInput

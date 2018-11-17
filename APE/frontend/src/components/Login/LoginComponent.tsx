@@ -3,7 +3,6 @@ import {
   CircularProgress,
   InputLabel,
   FormControl,
-  FilledInput,
   FormHelperText,
   Button
 } from "@material-ui/core";
@@ -66,7 +65,6 @@ export class LoginComponent extends React.Component<AllProps, State> {
 
           <div
             className={"inputForm"}
-            onChange={handleChange}
             onKeyPress={e => {
               if (e.key === "Enter") {
                 handleSubmit();
@@ -77,27 +75,29 @@ export class LoginComponent extends React.Component<AllProps, State> {
               <InputLabel shrink htmlFor="bootstrap-input">
                 Kennung
               </InputLabel>
-              <CustomizedInput name="email" value={email} error={noEmail} />
-
+              <CustomizedInput
+                name="email"
+                value={email}
+                error={noEmail}
+                onChange={handleChange}
+              />
               {noEmail && (
                 <FormHelperText className={"required-error"}>
                   Kennung ist erforderlich
                 </FormHelperText>
               )}
             </FormControl>
-            <FormControl className={"passwordForm"} variant="filled">
-              <InputLabel htmlFor="component-filled">Passwort</InputLabel>
-              <FilledInput
+
+            <FormControl className={"passwordForm"}>
+              <InputLabel shrink htmlFor="bootstrap-input">
+                Passwort
+              </InputLabel>
+              <CustomizedInput
                 name="passwort"
                 value={passwort}
                 onChange={handleChange}
                 type={"password"}
                 error={noPassword}
-                onKeyPress={e => {
-                  if (e.key === "Enter") {
-                    handleSubmit();
-                  }
-                }}
               />
               {noPassword && (
                 <FormHelperText className={"required-error"}>
