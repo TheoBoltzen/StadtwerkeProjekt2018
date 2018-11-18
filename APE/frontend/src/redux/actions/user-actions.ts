@@ -11,7 +11,6 @@ export const login = (username: string, password: string) => {
   };
 
   const success = (user: User) => {
-    //TODO: Remove any
     return { type: userConstants.LOGIN_SUCCESS, user };
   };
 

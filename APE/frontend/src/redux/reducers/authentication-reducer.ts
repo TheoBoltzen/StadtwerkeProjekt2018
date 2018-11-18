@@ -1,9 +1,21 @@
 import { userConstants } from "../../constants";
+import { Action } from "redux";
+import { User } from "../../types";
+
+interface ActionUser extends Action {
+  user: User;
+}
+
+export interface AuthenticationReducer {
+  readonly loggingIn?: boolean;
+  readonly loggedIn?: boolean;
+  readonly user?: User | string;
+}
 
 let user = localStorage.getItem("user");
-const initialState = user ? { loggedIn: true, user } : {};
+const initialState: AuthenticationReducer = user ? { loggedIn: true, user } : { user: "" };
 
-export const authenticationReducer = (state = initialState, action: any) => {
+export const authenticationReducer = (state = initialState, action: ActionUser) => {
   switch (action.type) {
     case userConstants.LOGIN_REQUEST:
       return {

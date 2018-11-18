@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { NavigationComponent } from "./NavigationComponent";
 import { RouteComponentProps, withRouter } from "react-router";
+import { User } from "../../types";
 
 export interface State {
   redirect: boolean;
@@ -9,12 +10,12 @@ export interface State {
 interface Props {}
 
 interface ReduxStateProps {
-  user: any;
+  user: User;
 }
 
 export type AllProps = Props & ReduxStateProps & RouteComponentProps;
 
-const mapStateToProps = (state: any): ReduxStateProps => {
+const mapStateToProps = (state): ReduxStateProps => {
   const { user } = state.authenticationReducer;
   return {
     user: user.token ? user : JSON.parse(user)

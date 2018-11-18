@@ -8,6 +8,7 @@ import { Route } from "react-router";
 import { Login } from "./components/Login/Login";
 import { Home } from "./components/Home/HomeComponent";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { ApplicationState } from "./redux/reducers";
 
 export interface Items {
   id: number;
@@ -46,9 +47,7 @@ class App extends React.Component<Props, State> {
   private getMembers() {
     fetch("/api/items")
       .then(res => res.json())
-      .then(res =>
-        this.setState({ items: res }, () => console.log("fetched", res))
-      );
+      .then(res => this.setState({ items: res }, () => console.log("fetched", res)));
   }
 
   public render() {
@@ -57,22 +56,17 @@ class App extends React.Component<Props, State> {
     return (
       <div className="App">
         {alert.message && (
-          <SnackbarContent
-            className={`alert ${alert.type}`}
-            message={alert.message}
-          />
+          <SnackbarContent className={`alert ${alert.type}`} message={alert.message} />
         )}
         <Route path={"/login"} exact={true} component={Login} />
 
-        {history.location.pathname !== "/login" && (
-          <PrivateRoute path={"/"} component={Home} />
-        )}
+        {history.location.pathname !== "/login" && <PrivateRoute path={"/"} component={Home} />}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ApplicationState) => {
   const { alertReducer } = state;
   return {
     alert: alertReducer
