@@ -52,16 +52,16 @@ db.readyDevelopmentSheet = require("../models/readyDevelopmentSheet.model.js")(
 
 // Associations
 
-db.competencyCategory.belongsToMany(db.mainCategory);
+db.competencyCategory.belongsTo(db.mainCategory);
 db.mainCategory.belongsTo(db.competencyCategory);
 
-db.mainCategory.belongsToMany(db.subCategory);
+db.mainCategory.belongsTo(db.subCategory);
 db.subCategory.belongsTo(db.mainCategory);
 
-db.subCategory.belongsToMany(db.competence);
+db.subCategory.belongsTo(db.competence);
 db.competence.belongsTo(db.subCategory);
 
-db.readyDevelopmentSheet.belongsToMany(db.developmentSheet);
-db.readyDevelopmentSheet.belongsToMany(db.competence);
+db.readyDevelopmentSheet.belongsTo(db.developmentSheet);
+db.readyDevelopmentSheet.belongsTo(db.competence);
 
 module.exports = db;

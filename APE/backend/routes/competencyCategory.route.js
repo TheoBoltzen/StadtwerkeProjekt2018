@@ -1,6 +1,10 @@
-module.exports = (app) => {
-    const CompetencyCategory = require('../controllers/competencyCategory.controller.js')
+module.exports = app => {
+  const CompetencyCategory = require("../controllers/competencyCategory.controller.js");
 
-    //Get all Items
-    app.get('/api/competencyCategory', CompetencyCategory.findAll)
-}
+  //Get all Items
+  app.post(
+    "/services/createCompetencyCategory",
+    CompetencyCategory.newCompetencyCategory()
+  );
+  app.post("/services/getAllCompetencyCategories", CompetencyCategory.getAll());
+};

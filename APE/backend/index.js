@@ -20,7 +20,6 @@ db.sequelize.sync({ alter: true }).catch(error => {
 
 //Routes
 
-require("./routes/items.route")(app);
 require("./routes/user.route")(app);
 require("./routes/competencyCategory.route")(app);
 require("./routes/competence.route")(app);
