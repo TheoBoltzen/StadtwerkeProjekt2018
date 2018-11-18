@@ -1,4 +1,5 @@
 import { apiURL } from "../constants";
+import { User } from "../types";
 
 // const authHeader = () => {
 //   //returns header with jwt token
@@ -20,8 +21,7 @@ export const loginService = (username: string, password: string) => {
 
   return fetch(`${apiURL}/services/authenticate`, requestOptions)
     .then(handleResponse)
-    .then((user: any) => {
-      //TODO: Remove any
+    .then((user: User) => {
       if (user.token) {
         localStorage.setItem("user", JSON.stringify(user));
       }

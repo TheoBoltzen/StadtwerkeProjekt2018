@@ -20,21 +20,22 @@ export interface State {
 }
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any): ReduxStateProps => {
+  console.log("state: ", state);
   const { loggingIn } = state.authenticationReducer;
   return {
     loggingIn
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: any): ReduxDispatchProps => {
   return {
     logout: () => dispatch(logout()),
     login: (email, password) => dispatch(login(email, password))
   };
 };
 
-const connectedLogin = connect(
+const connectedLogin = connect<ReduxStateProps, ReduxDispatchProps, Props>(
   mapStateToProps,
   mapDispatchToProps
 )(LoginComponent);

@@ -3,27 +3,23 @@ import { loginService, logoutService } from "../../services";
 import { history } from "../../helpers";
 import { errorAlert } from "./alert";
 import { Dispatch } from "redux";
+import { User } from "../../types";
 
 export const login = (username: string, password: string) => {
-  const request = (user: any) => {
-    //TODO: Remove any
+  const request = (user: { username: string }) => {
     return { type: userConstants.LOGIN_REQUEST, user };
   };
 
-  const success = (user: any) => {
+  const success = (user: User) => {
     //TODO: Remove any
     return { type: userConstants.LOGIN_SUCCESS, user };
   };
 
-  const failure = (error: any) => {
-    console.log("error: ", error);
-    //TODO: Remove any
+  const failure = (error: string) => {
     return { type: userConstants.LOGIN_FAILURE, error };
   };
 
-  //TODO: Remove any
   return (dispatch: Dispatch) => {
-    //TODO: Remove any
     dispatch(request({ username }));
 
     loginService(username, password).then(
