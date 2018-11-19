@@ -33,9 +33,9 @@ const styles = theme =>
   });
 
 interface Props extends WithStyles<typeof styles> {
-  name: string;
-  value: string;
-  error: boolean;
+  name?: string;
+  value?: string;
+  error?: boolean;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   type?: string;
 }

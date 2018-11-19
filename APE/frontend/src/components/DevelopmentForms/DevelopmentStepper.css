@@ -1,0 +1,45 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  padding: 5px;
+}
+
+.step1 {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  padding: 5px;
+}
+
+.step1Form {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  padding: 5px;
+}
+
+.DepartmentForm {
+  margin: 5px !important;
+}
+
+.ProfessionForm {
+  margin: 5px !important;
+}
+
+.StepperButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  padding: 5px;
+}

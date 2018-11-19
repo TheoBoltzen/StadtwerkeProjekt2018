@@ -10,6 +10,7 @@ import "./LoginComponent.css";
 import { AllProps, State } from "./Login";
 import logo from "../../resources/swk.svg";
 import CustomizedInput from "../General/CustomizedInput";
+import Typography from "@material-ui/core/es/Typography/Typography";
 
 export class LoginComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -58,8 +59,9 @@ export class LoginComponent extends React.Component<AllProps, State> {
 
         <div className={"loginContainer"}>
           <div className={"textBox"}>
-            Am Ende deiner Ausbildung weißt du, was du willst, wer du bist und
-            was du kannst
+            <Typography variant={"h5"}>
+              Am Ende deiner Ausbildung weißt Du, was Du willst, wer Du bist und was Du kannst
+            </Typography>
           </div>
 
           <div
@@ -68,18 +70,12 @@ export class LoginComponent extends React.Component<AllProps, State> {
               if (e.key === "Enter") {
                 handleSubmit();
               }
-            }}
-          >
+            }}>
             <FormControl className={"emailForm"}>
               <InputLabel shrink htmlFor="bootstrap-input">
                 Kennung
               </InputLabel>
-              <CustomizedInput
-                name="email"
-                value={email}
-                error={noEmail}
-                onChange={handleChange}
-              />
+              <CustomizedInput name="email" value={email} error={noEmail} onChange={handleChange} />
               {noEmail && (
                 <FormHelperText className={"required-error"}>
                   Kennung ist erforderlich
@@ -112,8 +108,7 @@ export class LoginComponent extends React.Component<AllProps, State> {
                 variant={"contained"}
                 color={"primary"}
                 className={"submitButton"}
-                onClick={handleSubmit}
-              >
+                onClick={handleSubmit}>
                 Login
               </Button>
             )}

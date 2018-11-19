@@ -1,5 +1,11 @@
 import * as React from "react";
+import ModalButtonWrapped from "./ModalButton";
 
 export const DevelopmentForms = () => {
-  return <div>DevelopmentForms</div>;
+  return (
+    <div>
+      <div>DevelopmentForms</div>
+      <ModalButtonWrapped />
+    </div>
+  );
 };
