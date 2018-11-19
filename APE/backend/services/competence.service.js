@@ -24,8 +24,8 @@ async function create(competenceParam) {
     const newCompetence = Competence.build({
       name: competenceParam.name,
       ynAnswer: competenceParam.ynAnswer,
-      description: competenceParam.description
-      // TODO: Belongs to SubCategory
+      description: competenceParam.description,
+      SubCategoryName: competenceParam.SubCategoryName
     });
     // save user in db
     newCompetence.save().then(() => {});
@@ -37,19 +37,22 @@ async function getById(id) {
 }
 
 // TODO: Check these
-async function getAllBySubCategory(subcategory) {
+async function getAllBySubCategory(subcategoryparam) {
   return await Competence.findAll({
     where: {},
     include: [
       {
         model: db.subCategory,
-        where: { name: Sequelize.col("competence.name"), name: subcategory }
+        where: {
+          name: Sequelize.col("competence.name"),
+          name: subcategoryparam.name
+        }
       }
     ]
   });
 }
 
-async function getAllByMainCategory(maincategory) {
+async function getAllByMainCategory(maincategoryparam) {
   return await Competence.findAll({
     where: {},
     include: [
@@ -61,7 +64,7 @@ async function getAllByMainCategory(maincategory) {
             model: db.mainCategory,
             where: {
               name: Sequelize.col("subCategory.name"),
-              name: maincategory
+              name: maincategoryparam.name
             }
           }
         ]
@@ -70,7 +73,7 @@ async function getAllByMainCategory(maincategory) {
   });
 }
 
-async function getAllByCompetencyCategory(competencycategory) {
+async function getAllByCompetencyCategory(competencycategoryparam) {
   return await Competence.findAll({
     where: {},
     include: [
@@ -86,7 +89,7 @@ async function getAllByCompetencyCategory(competencycategory) {
                 model: db.competencyCategory,
                 where: {
                   name: Sequelize.col("mainCategory.name"),
-                  name: competencycategory
+                  name: competencycategoryparam.name
                 }
               }
             ]

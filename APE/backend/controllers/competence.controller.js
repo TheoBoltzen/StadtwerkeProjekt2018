@@ -18,21 +18,21 @@ exports.getAll = (req, res, next) => {
 
 exports.getAllBySubCategory = (req, res, next) => {
   competenceService
-    .getAllBySubCategory(req.params.name)
+    .getAllBySubCategory(req.body)
     .then(competences => res.json(competences))
     .catch(err => next(err));
 };
 
 exports.getAllByMainCategory = (req, res, next) => {
   competenceService
-    .getAllByMainCategory(req.params.name)
+    .getAllByMainCategory(req.body)
     .then(competences => res.json(competences))
     .catch(err => next(err));
 };
 
 exports.getAllByCompetencyCategory = (req, res, next) => {
   competenceService
-    .getAllByCompetencyCategory(req.params.name)
+    .getAllByCompetencyCategory(req.body)
     .then(competences => res.json(competences))
     .catch(err => next(err));
 };

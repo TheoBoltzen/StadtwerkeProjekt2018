@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     hash: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: false
     },
     role: {
       type: Sequelize.STRING,
@@ -35,7 +35,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     tryLogin: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: true
     }
   });
 
