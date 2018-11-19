@@ -66,7 +66,7 @@ class ModalButton extends React.Component<Props, State> {
           open={this.state.open}
           onClose={this.handleClose}>
           <div className={classes.paper} style={this.getModalStyle()}>
-            <Typography variant={"h3"} className={"ModalHeader"}>
+            <Typography variant={"h4"} className={"ModalHeader"}>
               Entwicklungsbogen erstellen
             </Typography>
             <DevelopmentStepper />
