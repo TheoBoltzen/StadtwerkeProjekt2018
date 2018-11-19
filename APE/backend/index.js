@@ -24,5 +24,6 @@ require("./routes/items.route")(app);
 require("./routes/user.route")(app);
 require("./routes/category.route")(app);
 require("./routes/competence.route")(app);
+require("./routes/role.route")(app);
 
 module.exports = app;

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const config = require("./../config.json"); //have to be implemented
+const config = require("./../config.json");
 
 module.exports = role => (req, res, next) => {
   const token = req.headers.authorization.split("Bearer ")[1];
