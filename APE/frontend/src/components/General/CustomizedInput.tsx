@@ -47,7 +47,6 @@ export const CustomizedInputs = (props: Props) => {
     <InputBase
       type={type}
       onChange={onChange}
-      id="bootstrap-input"
       name={name}
       error={error}
       value={value}
