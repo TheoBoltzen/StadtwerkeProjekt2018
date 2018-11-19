@@ -41,16 +41,16 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 export const CustomizedInputs = (props: Props) => {
-  const { classes, name, error } = props;
+  const { classes, name, error, type, onChange, value } = props;
 
   return (
     <InputBase
-      type={props.type}
-      onChange={props.onChange}
+      type={type}
+      onChange={onChange}
       id="bootstrap-input"
       name={name}
       error={error}
-      value={props.value}
+      value={value}
       classes={{
         root: classes.bootstrapRoot,
         input: classes.bootstrapInput

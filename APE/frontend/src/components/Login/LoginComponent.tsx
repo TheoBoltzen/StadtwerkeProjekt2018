@@ -37,7 +37,6 @@ export class LoginComponent extends React.Component<AllProps, State> {
       const value = target.value;
       const name = target.name;
       this.setState({ [name]: value } as State);
-      console.log(this.state);
     };
 
     const handleSubmit = () => {
