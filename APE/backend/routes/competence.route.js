@@ -3,16 +3,16 @@ module.exports = app => {
 
   //Get all Items
   app.post("/services/createCompetence", Competence.newCompetence);
-  app.post("/services/getAllCompetences", Competence.getAll);
-  app.post(
+  app.get("/services/getAllCompetences", Competence.getAll);
+  app.get(
     "/services/getCompetencesBySubCategory",
     Competence.getAllBySubCategory
   );
-  app.post(
+  app.get(
     "/services/getCompetencesByCompetencyCategory",
     Competence.getAllByCompetencyCategory
   );
-  app.post(
+  app.get(
     "/services/getCompetencesByMainCategory",
     Competence.getAllByMainCategory
   );
