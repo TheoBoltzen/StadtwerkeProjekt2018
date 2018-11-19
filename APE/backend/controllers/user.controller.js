@@ -1,17 +1,17 @@
 const userService = require("../services/user.service");
-const express = require("express");
-const router = express.Router();
 
 exports.authenticate = (req, res, next) => {
   userService
     .authenticate(req.body)
-    .then(user =>
-      user
-        ? res.json(user)
-        : res
-            .status(400)
-            .json({ message: "E-Mail Adresse oder Password falsch" })
-    )
+    .then(user => {
+      if (user) {
+        res.status(201).send(user);
+      } else {
+        res
+          .status(400)
+          .json({ message: "E-Mail Adresse oder Password falsch" });
+      }
+    })
     .catch(err => next(err));
 };
 

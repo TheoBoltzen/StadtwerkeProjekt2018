@@ -18,22 +18,14 @@ async function authenticate({ username, password }) {
   const user = await User.findOne({ where: { username: username } });
 
   if (user && bcrypt.compareSync(password, user.hash)) {
-    //payload: without hash, get permission from db. add it to token
-    //payload with permission
-    const { hash, ...userWithoutHash } = user.dataValues;
-    console.log(user.dataValues);
+    const { hash, permissions, ...userWithoutHash } = user.dataValues;
     const payload = {
       username: user.dataValues.username,
       firstname: user.dataValues.firstname,
       lastname: user.dataValues.lastname,
-      permissions: [user.dataValues.permissions]
+      permissions: user.dataValues.permissions
     };
-    /* const options = {
-          expiresIn: Number(process.env.JWT_TTL),
-      };*/
 
-    //  const token = jwt.sign({ sub: user.id }, config.secret);
-    //  const token = jwt.sign(userWithoutHash, config.secret);
     const token = jwt.sign(payload, config.secret);
 
     return {
