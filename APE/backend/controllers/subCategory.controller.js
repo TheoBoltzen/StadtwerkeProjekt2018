@@ -1,44 +1,37 @@
-const competenceService = require("../services/competence.service");
+const subCategoryService = require("../services/subCategory.service");
 const express = require("express");
 const router = express.Router();
 
-exports.newCompetence = (req, res, next) => {
-  competenceService
+exports.newSubCategory = (req, res, next) => {
+  subCategoryService
     .create(req.body)
     .then(() => res.json({}))
     .catch(err => next(err));
 };
 
 exports.getAll = (req, res, next) => {
-  competenceService
+  subCategoryService
     .findAll()
-    .then(competences => res.json(competences))
-    .catch(err => next(err));
-};
-
-exports.getAllBySubCategory = (req, res, next) => {
-  competenceService
-    .getAllBySubCategory(req.body)
-    .then(competences => res.json(competences))
+    .then(subCategories => res.json(subCategories))
     .catch(err => next(err));
 };
 
 exports.getAllByMainCategory = (req, res, next) => {
-  competenceService
+  subCategoryService
     .getAllByMainCategory(req.body)
-    .then(competences => res.json(competences))
+    .then(subCategories => res.json(subCategories))
     .catch(err => next(err));
 };
 
 exports.getAllByCompetencyCategory = (req, res, next) => {
-  competenceService
+  subCategoryService
     .getAllByCompetencyCategory(req.body)
-    .then(competences => res.json(competences))
+    .then(subCategories => res.json(subCategories))
     .catch(err => next(err));
 };
 
 function getById(req, res, next) {
-  competenceService
+  subCategoryService
     .getById(req.params.name)
     .then(competence =>
       competence ? res.json(competence) : res.sendStatus(404)
@@ -47,7 +40,7 @@ function getById(req, res, next) {
 }
 
 function _delete(req, res, next) {
-  competenceService
+  subCategoryService
     .delete(req.params.name)
     .then(() => res.json({}))
     .catch(err => next(err));

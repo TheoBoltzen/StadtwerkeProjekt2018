@@ -1,13 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
-  const Competence = sequelize.define("Competence", {
+  const MainCategory = sequelize.define("MainCategory", {
     name: {
       type: Sequelize.STRING,
       allowNull: false,
       primaryKey: true
-    },
-    ynAnswer: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false
     },
     description: {
       type: Sequelize.STRING,
@@ -15,5 +11,5 @@ module.exports = (sequelize, Sequelize) => {
     }
   });
 
-  return Competence;
+  return MainCategory;
 };
