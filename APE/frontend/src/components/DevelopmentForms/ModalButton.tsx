@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import * as React from "react";
 import "./ModalButton.css";
 import DevelopmentStepper from "./DevelopmentStepper";
+import Typography from "@material-ui/core/es/Typography/Typography";
 
 const styles = theme =>
   createStyles({
@@ -65,6 +66,9 @@ class ModalButton extends React.Component<Props, State> {
           open={this.state.open}
           onClose={this.handleClose}>
           <div className={classes.paper} style={this.getModalStyle()}>
+            <Typography variant={"h3"} className={"ModalHeader"}>
+              Entwicklungsbogen erstellen
+            </Typography>
             <DevelopmentStepper />
           </div>
         </Modal>

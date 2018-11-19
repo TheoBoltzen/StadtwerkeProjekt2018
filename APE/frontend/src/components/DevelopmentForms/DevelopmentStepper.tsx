@@ -33,44 +33,10 @@ function getSteps() {
   ];
 }
 
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return (
-        <div className={"step1"}>
-          <Typography variant={"subtitle2"} className={"TaskDescription"}>
-            Gib den Ausbildungsberuf und die Abteilung an, für den der Entwicklungsbogen benutzt
-            werden soll
-          </Typography>
-
-          <div className={"step1Form"}>
-            <FormControl className={"DepartmentForm"}>
-              <InputLabel shrink htmlFor="bootstrap-input">
-                Abteilung
-              </InputLabel>
-              <CustomizedInput />
-            </FormControl>
-
-            <FormControl className={"ProfessionForm"}>
-              <InputLabel shrink htmlFor="bootstrap-input">
-                Ausbildungsberuf
-              </InputLabel>
-              <CustomizedInput />
-            </FormControl>
-          </div>
-        </div>
-      );
-    case 1:
-      return "What is an ad group anyways?";
-    case 2:
-      return "This is the bit I really care about!";
-    default:
-      return "Uknown stepIndex";
-  }
-}
-
 interface State {
   activeStep: number;
+  department: string;
+  profession: string;
 }
 
 interface Props extends WithStyles<typeof styles> {}
@@ -80,9 +46,62 @@ class DevelopmentStepper extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      activeStep: 0
+      activeStep: 0,
+      department: "",
+      profession: ""
     };
   }
+
+  handleChange = (event: any) => {
+    const target = event.currentTarget;
+    const value = target.value;
+    const name = target.name;
+    this.setState({ [name]: value } as State);
+  };
+
+  getStepContent = stepIndex => {
+    switch (stepIndex) {
+      case 0:
+        return (
+          <div className={"step1"}>
+            <Typography variant={"subtitle2"} className={"TaskDescription"}>
+              Gib den Ausbildungsberuf und die Abteilung an, für den der Entwicklungsbogen benutzt
+              werden soll
+            </Typography>
+
+            <div className={"step1Form"}>
+              <FormControl className={"DepartmentForm"}>
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  Abteilung
+                </InputLabel>
+                <CustomizedInput
+                  name={"department"}
+                  value={this.state.department}
+                  onChange={this.handleChange}
+                />
+              </FormControl>
+
+              <FormControl className={"ProfessionForm"}>
+                <InputLabel shrink htmlFor="bootstrap-input">
+                  Ausbildungsberuf
+                </InputLabel>
+                <CustomizedInput
+                  name={"profession"}
+                  value={this.state.profession}
+                  onChange={this.handleChange}
+                />
+              </FormControl>
+            </div>
+          </div>
+        );
+      case 1:
+        return "Platzhalter";
+      case 2:
+        return "Platzhalter";
+      default:
+        return "Platzhalter";
+    }
+  };
 
   handleNext = () => {
     this.setState(state => ({
@@ -97,9 +116,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
   };
 
   handleReset = () => {
-    this.setState({
-      activeStep: 0
-    });
+    //TODO: an Modal durchgeben, dass Dialog abgeschlossen ist und Modal geschlossen werden kann. Oder in tenären Operator am Ende
   };
 
   render() {
@@ -128,17 +145,17 @@ class DevelopmentStepper extends React.Component<Props, State> {
             ) : (
               <div>
                 <Typography className={classes.instructions}>
-                  {getStepContent(activeStep)}
+                  {this.getStepContent(activeStep)}
                 </Typography>
                 <div className={"StepperButtons"}>
                   <Button
                     disabled={activeStep === 0}
                     onClick={this.handleBack}
                     className={classes.backButton}>
-                    Back
+                    Zurück
                   </Button>
                   <Button variant="contained" color="primary" onClick={this.handleNext}>
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                    {activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
                   </Button>
                 </div>
               </div>

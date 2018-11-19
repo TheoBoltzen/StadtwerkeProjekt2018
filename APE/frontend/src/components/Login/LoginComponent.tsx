@@ -55,8 +55,9 @@ export class LoginComponent extends React.Component<AllProps, State> {
           <img className={"logo"} src={logo} />
         </header>
 
-        <h1 className={"header"}>Entwicklungsbogentool</h1>
-
+        <Typography variant={"h3"} className={"header"}>
+          Entwicklungsbogentool
+        </Typography>
         <div className={"loginContainer"}>
           <div className={"textBox"}>
             <Typography variant={"h5"}>

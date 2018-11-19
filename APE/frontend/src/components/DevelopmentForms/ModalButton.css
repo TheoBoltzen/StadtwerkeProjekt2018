@@ -7,3 +7,13 @@
   position: fixed;
   top: 20%;
 }
+
+.ModalHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  padding: 5px;
+  margin-bottom: 10px;
+}
