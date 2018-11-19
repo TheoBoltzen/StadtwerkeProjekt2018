@@ -10,9 +10,14 @@ import CustomizedInput from "../General/CustomizedInput";
 import FormControl from "@material-ui/core/es/FormControl/FormControl";
 import "./DevelopmentStepper.css";
 
+//TODO: backgroundColor von Stepper ändern. (wie?!)
+
 const styles = theme => ({
   root: {
     width: "90%"
+  },
+  stepper: {
+    backgroundColor: "#f9f9f9"
   },
   backButton: {
     marginRight: theme.spacing.unit
@@ -20,6 +25,13 @@ const styles = theme => ({
   instructions: {
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit
+  },
+  primaryButton: {
+    backgroundColor: "#00a8e1",
+    color: "white"
+  },
+  step: {
+    iconColor: "#00a8e1"
   }
 });
 
@@ -127,10 +139,10 @@ class DevelopmentStepper extends React.Component<Props, State> {
     return (
       <div className={"root"}>
         <div className={classes.root}>
-          <Stepper activeStep={activeStep} alternativeLabel>
+          <Stepper activeStep={activeStep} className={classes.stepper} alternativeLabel>
             {steps.map(label => {
               return (
-                <Step key={label}>
+                <Step key={label} className={classes.step}>
                   <StepLabel>{label}</StepLabel>
                 </Step>
               );
@@ -154,7 +166,10 @@ class DevelopmentStepper extends React.Component<Props, State> {
                     className={classes.backButton}>
                     Zurück
                   </Button>
-                  <Button variant="contained" color="primary" onClick={this.handleNext}>
+                  <Button
+                    variant="contained"
+                    className={classes.primaryButton}
+                    onClick={this.handleNext}>
                     {activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
                   </Button>
                 </div>

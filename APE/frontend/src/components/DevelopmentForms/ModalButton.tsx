@@ -42,7 +42,8 @@ class ModalButton extends React.Component<Props, State> {
       top: `${top}%`,
       left: `${left}%`,
       height: `${height}%`,
-      width: `${width}%`
+      width: `${width}%`,
+      backgroundColor: "#f9f9f9"
     };
   }
 
