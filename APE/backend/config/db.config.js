@@ -26,7 +26,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //Models (Tables)
-db.items = require("../models/items.model.js")(sequelize, Sequelize);
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.competencyCategory = require("../models/competencyCategory.model.js")(
   sequelize,
@@ -52,13 +51,13 @@ db.readyDevelopmentSheet = require("../models/readyDevelopmentSheet.model.js")(
 
 // Associations
 
-db.competencyCategory.belongsTo(db.mainCategory);
+//db.competencyCategory.belongsTo(db.mainCategory);
 db.mainCategory.belongsTo(db.competencyCategory);
 
-db.mainCategory.belongsTo(db.subCategory);
+//db.mainCategory.belongsTo(db.subCategory);
 db.subCategory.belongsTo(db.mainCategory);
 
-db.subCategory.belongsTo(db.competence);
+//db.subCategory.belongsTo(db.competence);
 db.competence.belongsTo(db.subCategory);
 
 db.readyDevelopmentSheet.belongsTo(db.developmentSheet);

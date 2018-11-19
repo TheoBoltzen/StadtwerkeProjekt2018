@@ -4,7 +4,7 @@ module.exports = app => {
   //Get all Items
   app.post(
     "/services/createCompetencyCategory",
-    CompetencyCategory.newCompetencyCategory()
+    CompetencyCategory.newCompetencyCategory
   );
-  app.post("/services/getAllCompetencyCategories", CompetencyCategory.getAll());
+  app.post("/services/getAllCompetencyCategories", CompetencyCategory.getAll);
 };

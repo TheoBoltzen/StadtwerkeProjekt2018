@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     hash: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     role: {
       type: Sequelize.STRING,
@@ -39,6 +39,7 @@ module.exports = (sequelize, Sequelize) => {
     }
   });
 
+  /*
   User.create({
     username: "",
     firstname: "Anja",
@@ -83,6 +84,6 @@ module.exports = (sequelize, Sequelize) => {
     hiredOn: null,
     tryLogin: 0
   });
-
+*/
   return User;
 };

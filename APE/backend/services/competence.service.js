@@ -25,6 +25,7 @@ async function create(competenceParam) {
       name: competenceParam.name,
       ynAnswer: competenceParam.ynAnswer,
       description: competenceParam.description
+      // TODO: Belongs to SubCategory
     });
     // save user in db
     newCompetence.save().then(() => {});
@@ -39,7 +40,12 @@ async function getById(id) {
 async function getAllBySubCategory(subcategory) {
   return await Competence.findAll({
     where: {},
-    include: [{ model: db.subCategory, where: { name: subcategory } }]
+    include: [
+      {
+        model: db.subCategory,
+        where: { name: Sequelize.col("competence.name"), name: subcategory }
+      }
+    ]
   });
 }
 
@@ -49,8 +55,16 @@ async function getAllByMainCategory(maincategory) {
     include: [
       {
         model: db.subCategory,
-        where: {},
-        include: [{ model: db.mainCategory, where: { name: maincategory } }]
+        where: { name: Sequelize.col("competence.name") },
+        include: [
+          {
+            model: db.mainCategory,
+            where: {
+              name: Sequelize.col("subCategory.name"),
+              name: maincategory
+            }
+          }
+        ]
       }
     ]
   });
@@ -62,15 +76,18 @@ async function getAllByCompetencyCategory(competencycategory) {
     include: [
       {
         model: db.subCategory,
-        where: {},
+        where: { name: Sequelize.col("competence.name") },
         include: [
           {
             model: db.mainCategory,
-            where: {},
+            where: { name: Sequelize.col("subCategory.name") },
             include: [
               {
                 model: db.competencyCategory,
-                where: { name: competencycategory }
+                where: {
+                  name: Sequelize.col("mainCategory.name"),
+                  name: competencycategory
+                }
               }
             ]
           }
