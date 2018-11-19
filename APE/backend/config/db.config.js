@@ -27,6 +27,7 @@ db.sequelize = sequelize;
 
 //Models (Tables)
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
+
 db.competencyCategory = require("../models/competencyCategory.model.js")(
   sequelize,
   Sequelize

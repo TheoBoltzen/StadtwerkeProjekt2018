@@ -1,11 +1,12 @@
-import { login, logout } from "./redux/actions";
+import { login, logout } from "../../redux/actions";
 import { connect } from "react-redux";
 import { LoginComponent } from "./LoginComponent";
+import { ApplicationState } from "../../redux/reducers";
 
 interface Props {}
 
 interface ReduxStateProps {
-  loggingIn: boolean;
+  loggingIn?: boolean;
 }
 
 interface ReduxDispatchProps {
@@ -20,21 +21,21 @@ export interface State {
 }
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loggingIn } = state.authenticationReducer;
   return {
     loggingIn
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     logout: () => dispatch(logout()),
     login: (email, password) => dispatch(login(email, password))
   };
 };
 
-const connectedLogin = connect(
+const connectedLogin = connect<ReduxStateProps, ReduxDispatchProps, Props>(
   mapStateToProps,
   mapDispatchToProps
 )(LoginComponent);
