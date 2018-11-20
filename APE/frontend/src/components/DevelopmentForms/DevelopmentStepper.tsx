@@ -17,7 +17,8 @@ const styles = theme => ({
     width: "90%"
   },
   stepper: {
-    backgroundColor: "#f9f9f9"
+    backgroundColor: "#f9f9f9",
+    iconColor: "#00a8e1"
   },
   backButton: {
     marginRight: theme.spacing.unit
@@ -148,6 +149,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
               );
             })}
           </Stepper>
+
           <div>
             {this.state.activeStep === steps.length ? (
               <div>
