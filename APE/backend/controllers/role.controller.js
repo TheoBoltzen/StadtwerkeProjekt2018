@@ -6,7 +6,7 @@ exports.decodeToken = (req, res, next) => {
     if (req.body.token) {
       const token = req.body.token;
       const decodedToken = jwt.verify(token, config.secret);
-      const role = decodedToken.permissions;
+      const role = decodedToken.role;
       //return role;
       res.status(200).send(role);
     } else {

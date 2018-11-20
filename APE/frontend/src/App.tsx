@@ -1,15 +1,14 @@
 import * as React from "react";
 import "./App.css";
-
-import logo from "./resources/swk.svg";
 import { connect } from "react-redux";
 import { history } from "./helpers";
 import { clearAlert } from "./redux/actions";
-import { Route, Router } from "react-router-dom";
-import { PrivateRoute } from "./components/PrivateRoute";
-import { MemberTest } from "./MemberTest";
-import { Login } from "./Login";
 import { SnackbarContent } from "@material-ui/core";
+import { Route } from "react-router";
+import { Login } from "./components/Login/Login";
+import { Home } from "./components/Home/HomeComponent";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { ApplicationState } from "./redux/reducers";
 
 export interface Items {
   id: number;
@@ -48,9 +47,7 @@ class App extends React.Component<Props, State> {
   private getMembers() {
     fetch("/api/items")
       .then(res => res.json())
-      .then(res =>
-        this.setState({ items: res }, () => console.log("fetched", res))
-      );
+      .then(res => this.setState({ items: res }, () => console.log("fetched", res)));
   }
 
   public render() {
@@ -58,29 +55,18 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-
         {alert.message && (
-          <SnackbarContent
-            className={`alert ${alert.type}`}
-            message={alert.message}
-          />
+          <SnackbarContent className={`alert ${alert.type}`} message={alert.message} />
         )}
+        <Route path={"/login"} exact={true} component={Login} />
 
-        <Router history={history}>
-          <div>
-            <PrivateRoute exact={true} path={"/"} component={MemberTest} />
-            <Route path={"/login"} component={Login} />
-          </div>
-        </Router>
+        {history.location.pathname !== "/login" && <PrivateRoute path={"/"} component={Home} />}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ApplicationState) => {
   const { alertReducer } = state;
   return {
     alert: alertReducer

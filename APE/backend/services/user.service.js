@@ -18,12 +18,12 @@ async function authenticate({ username, password }) {
   const user = await User.findOne({ where: { username: username } });
 
   if (user && bcrypt.compareSync(password, user.hash)) {
-    const { hash, permissions, ...userWithoutHash } = user.dataValues;
+    const { hash, role, ...userWithoutHash } = user.dataValues;
     const payload = {
       username: user.dataValues.username,
       firstname: user.dataValues.firstname,
       lastname: user.dataValues.lastname,
-      permissions: user.dataValues.permissions
+      role: user.dataValues.role
     };
 
     const token = jwt.sign(payload, config.secret);
@@ -54,7 +54,7 @@ async function create(userParam) {
       hash: await bcrypt.hashSync(userParam.password, 10),
       firstname: userParam.firstname,
       lastname: userParam.lastname,
-      permissions: userParam.permissions
+      role: userParam.role
     });
     // save user in db
     newUser.save().then(() => {});

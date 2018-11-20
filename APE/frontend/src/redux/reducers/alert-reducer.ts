@@ -1,7 +1,16 @@
 import { alertConstants } from "../../constants";
+import { Action } from "redux";
 
-export const alertReducer = (state = {}, action: any) => {
-  //TODO: Remove any
+interface ActionAlert extends Action {
+  message: string;
+}
+
+export interface AlertReducer {
+  readonly type?: string;
+  readonly message?: string;
+}
+
+export const alertReducer = (state: AlertReducer = {}, action: ActionAlert) => {
   switch (action.type) {
     case alertConstants.SUCCESS:
       return {
