@@ -43,3 +43,12 @@
   justify-content: center;
   padding: 5px;
 }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 360px;
+}
