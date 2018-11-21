@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import { AlertReducer, alertReducer } from "./alert-reducer";
-import { userReducer } from "./user-reducer";
+import { UserReducer, userReducer } from "./user-reducer";
 import { AuthenticationReducer, authenticationReducer } from "./authentication-reducer";
 
 export interface ApplicationState {
   authenticationReducer: AuthenticationReducer;
   alertReducer: AlertReducer;
-  userReducer: any;
+  userReducer: UserReducer;
 }
 
 const rootReducer = combineReducers<ApplicationState>({

@@ -24,10 +24,10 @@ export class NavigationComponent extends React.Component<AllProps, State> {
   render() {
     const { redirect } = this.state;
     const {
-      user: { role },
       history: {
         location: { pathname }
-      }
+      },
+      role
     } = this.props;
 
     const isAdmin = role === "admin";

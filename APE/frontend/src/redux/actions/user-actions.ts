@@ -1,5 +1,5 @@
 import { userConstants } from "../../constants";
-import { loginService, logoutService } from "../../services";
+import { getRoleService, loginService, logoutService } from "../../services";
 import { history } from "../../helpers";
 import { errorAlert } from "./alert";
 import { Dispatch } from "redux";
@@ -18,13 +18,44 @@ export const login = (username: string, password: string) => {
     return { type: userConstants.LOGIN_FAILURE, error };
   };
 
+  const requestRole = (token: string) => {
+    return { type: userConstants.GETROLE_REQUEST, token };
+  };
+
+  const successRole = (role: string) => {
+    return { type: userConstants.GETROLE_SUCESS, role };
+  };
+
+  const failureRole = (error: string) => {
+    return { type: userConstants.GETROLE_FAILURE, error };
+  };
+
   return (dispatch: Dispatch) => {
     dispatch(request({ username }));
 
     loginService(username, password).then(
       user => {
+        console.log("user: ", user);
         dispatch(success(user));
+        dispatch(requestRole(user.token));
+
         history.push("/");
+
+        getRoleService(user.token).then(
+          role => {
+            dispatch(successRole(role));
+            if (role === "admin") {
+              history.push("/benutzerverwaltung");
+            }
+            if (role === "trainer") {
+              history.push("/entwicklungsboegen");
+            }
+          },
+          error => {
+            dispatch(failureRole(error.toString()));
+            dispatch(errorAlert(error.toString()));
+          }
+        );
       },
       error => {
         dispatch(failure(error.toString()));
