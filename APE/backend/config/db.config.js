@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const dbConfig = {
   database: "ape",
   username: "root",
-  password: "root",
+  password: "leberkaese",
   host: "localhost",
   port: 3306,
   dialect: "mysql"
@@ -32,19 +32,24 @@ db.competencyCategory = require("../models/competencyCategory.model.js")(
   sequelize,
   Sequelize
 );
+
 db.mainCategory = require("../models/mainCategory.model.js")(
   sequelize,
   Sequelize
 );
+
 db.subCategory = require("../models/subCategory.model.js")(
   sequelize,
   Sequelize
 );
+
 db.competence = require("../models/competence.model.js")(sequelize, Sequelize);
+
 db.developmentSheet = require("../models/developmentSheet.model.js")(
   sequelize,
   Sequelize
 );
+
 db.readyDevelopmentSheet = require("../models/readyDevelopmentSheet.model.js")(
   sequelize,
   Sequelize

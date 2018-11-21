@@ -12,16 +12,14 @@ exports.newDevelopmentSheet = (req, res, next) => {
 exports.getAll = (req, res, next) => {
   devSheetService
     .findAll()
-    .then(competences => res.json(competences))
+    .then(devSheets => res.json(devSheets))
     .catch(err => next(err));
 };
 
 function getById(req, res, next) {
   devSheetService
     .getById(req.params.name)
-    .then(competence =>
-      competence ? res.json(competence) : res.sendStatus(404)
-    )
+    .then(devSheets => (devSheets ? res.json(devSheets) : res.sendStatus(404)))
     .catch(err => next(err));
 }
 

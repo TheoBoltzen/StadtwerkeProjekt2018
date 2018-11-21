@@ -15,6 +15,7 @@ async function findAll() {
 
 async function create(devSheetParam) {
   // validate
+  Console.log("Service-Create");
   if (await DevSheet.findOne({ where: { id: devSheetParam.id } })) {
     throw 'DevelopmentSheet "' + devSheetParam.id + '" is already taken';
   } else {
