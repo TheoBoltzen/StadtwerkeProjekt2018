@@ -103,10 +103,10 @@ class DevelopmentStepper extends React.Component<Props, State> {
 
   handleCompetenceDelete = id => {
     console.log(id);
-    /*
+
     this.setState(prevState => ({
-        developmentForm: prevState.developmentForm.filter(el => el != id)
-    }))*/
+      developmentForm: prevState.developmentForm.filter(el => el != id)
+    }));
   };
 
   getStepContent = stepIndex => {
@@ -155,7 +155,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
                     <IconButton
                       className={this.props.classes.deleteButton}
                       aria-label={"Delete"}
-                      onClick={this.handleCompetenceDelete}>
+                      onClick={this.handleCompetenceDelete.bind(this, competence)}>
                       <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
