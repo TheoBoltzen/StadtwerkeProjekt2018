@@ -1,8 +1,7 @@
 const guard = require("../_helpers/guard.js");
+const Competence = require("../controllers/competence.controller.js");
 
 module.exports = app => {
-  const Competence = require("../controllers/competence.controller.js");
-
   app.post(
     "/services/createCompetence",
     guard(["admin", "trainer"]),

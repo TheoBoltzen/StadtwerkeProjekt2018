@@ -1,8 +1,7 @@
 const guard = require("../_helpers/guard.js");
+const CompetencyCategory = require("../controllers/competencyCategory.controller.js");
 
 module.exports = app => {
-  const CompetencyCategory = require("../controllers/competencyCategory.controller.js");
-
   //Get all Items
   app.post(
     "/services/createCompetencyCategory",

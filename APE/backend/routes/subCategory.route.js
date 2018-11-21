@@ -1,8 +1,7 @@
 const guard = require("../_helpers/guard.js");
+const SubCategory = require("../controllers/subCategory.controller.js");
 
 module.exports = app => {
-  const SubCategory = require("../controllers/subCategory.controller.js");
-
   //Get all Items
   app.post(
     "/services/createSubCategory",

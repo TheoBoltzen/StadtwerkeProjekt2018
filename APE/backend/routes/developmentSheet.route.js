@@ -1,16 +1,15 @@
 const guard = require("../_helpers/guard.js");
+const DevelopmentSheet = require("../controllers/developmentSheet.controller.js");
 
 module.exports = app => {
-  const DevelopmentSheet = require("../controllers/developmentSheet.controller.js");
-
   //Get all Items
   app.get(
-    "/api/getAllDevelopmentSheets",
+    "/services/getAllDevelopmentSheets",
     guard(["admin", "trainer"]),
     DevelopmentSheet.getAll
   );
   app.post(
-    "/api/createDevelopmentSheet",
+    "/services/createDevelopmentSheet",
     guard(["admin", "trainer"]),
     DevelopmentSheet.newDevelopmentSheet
   );

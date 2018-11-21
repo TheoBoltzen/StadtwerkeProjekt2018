@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) => {
   const DevelopmentSheet = sequelize.define("DevelopmentSheet", {
     id: {
       type: Sequelize.INTEGER,
-      //autoIncrement: true,
+      autoIncrement: true,
       primaryKey: true
     },
     name: {
