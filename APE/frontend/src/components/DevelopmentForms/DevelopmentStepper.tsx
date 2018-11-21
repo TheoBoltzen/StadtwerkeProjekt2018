@@ -10,12 +10,12 @@ import CustomizedInput from "../General/CustomizedInput";
 import FormControl from "@material-ui/core/es/FormControl/FormControl";
 import "./DevelopmentStepper.css";
 import ListItem from "@material-ui/core/es/ListItem/ListItem";
-import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
 import AddIcon from "@material-ui/icons/Add";
 import ListItemSecondaryAction from "@material-ui/core/es/ListItemSecondaryAction/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/es/IconButton/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import List from "@material-ui/core/es/List/List";
+import InputBase from "@material-ui/core/es/InputBase/InputBase";
 
 const styles = theme => ({
   root: {
@@ -24,6 +24,9 @@ const styles = theme => ({
   stepper: {
     backgroundColor: "#f9f9f9",
     iconColor: "#00a8e1"
+  },
+  margin: {
+    margin: theme.spacing.unit
   },
   backButton: {
     marginRight: theme.spacing.unit
@@ -90,6 +93,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
     const value = target.value;
     const name = target.name;
     this.setState({ [name]: value } as State);
+    console.log(this.state.developmentForm);
   };
 
   addCompetence = () => {
@@ -149,8 +153,13 @@ class DevelopmentStepper extends React.Component<Props, State> {
           <div className={"step2"}>
             <List className={"list"}>
               {this.state.developmentForm.map((competence, index) => (
-                <ListItem key={index}>
-                  <ListItemText primary={competence} />
+                <ListItem
+                  dense={true}
+                  divider={true}
+                  key={index}
+                  name={"developmentForm"}
+                  onChange={this.handleChange}>
+                  <InputBase className={this.props.classes.margin} defaultValue={competence} />
                   <ListItemSecondaryAction>
                     <IconButton
                       className={this.props.classes.deleteButton}
