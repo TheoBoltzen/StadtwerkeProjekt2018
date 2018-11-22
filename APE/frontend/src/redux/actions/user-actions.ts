@@ -1,4 +1,4 @@
-import { userConstants } from "../../constants";
+import { RoleConstants, RouterPathsConstants, userConstants } from "../../constants";
 import { getRoleService, loginService, logoutService } from "../../services";
 import { history } from "../../helpers";
 import { errorAlert } from "./alert";
@@ -44,11 +44,11 @@ export const login = (username: string, password: string) => {
         getRoleService(user.token).then(
           role => {
             dispatch(successRole(role));
-            if (role === "admin") {
-              history.push("/benutzerverwaltung");
+            if (role === RoleConstants.admin) {
+              history.push(RouterPathsConstants.userAdministration);
             }
-            if (role === "trainer") {
-              history.push("/entwicklungsboegen");
+            if (role === RoleConstants.trainer) {
+              history.push(RouterPathsConstants.trainees);
             }
           },
           error => {
