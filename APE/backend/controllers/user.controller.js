@@ -10,6 +10,11 @@ exports.authenticate = (req, res, next) => {
         res
           .status(400)
           .json({ message: "E-Mail Adresse oder Password falsch" });
+
+        userService
+          .tryLogin(req.body)
+          .then()
+          .catch(err => next(err));
       }
     })
     .catch(err => next(err));

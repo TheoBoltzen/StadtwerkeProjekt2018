@@ -35,6 +35,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     tryLogin: {
       type: Sequelize.INTEGER,
+      value: 0,
       allowNull: true
     }
   });
