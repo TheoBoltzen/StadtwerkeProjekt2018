@@ -69,6 +69,41 @@ export const logout = () => {
   return { type: userConstants.LOGOUT };
 };
 
+export const getRole = (token: string) => {
+  const request = (token: string) => {
+    return { type: userConstants.GETROLE_REQUEST, token };
+  };
+
+  const success = (role: string) => {
+    return { type: userConstants.GETROLE_SUCESS, role };
+  };
+
+  const failure = (error: string) => {
+    return { type: userConstants.GETROLE_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request(token));
+
+    getRoleService(token).then(
+      role => {
+        dispatch(success(role));
+
+        /*if (role === RoleConstants.admin) {
+                            history.push(RouterPathsConstants.userAdministration);
+                        }
+                        if (role === RoleConstants.trainer) {
+                            history.push(RouterPathsConstants.trainees);
+                        }*/
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
 // export const getAll = () => {
 //   const request = () => {
 //     return { type: userConstants.GETALL_REQUEST };

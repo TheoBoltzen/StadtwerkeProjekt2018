@@ -15,6 +15,8 @@ export class NavigationComponent extends React.Component<AllProps, State> {
     this.state = {
       redirect: false
     };
+
+    this.props.getRole(this.props.user.token);
   }
 
   handleLogout = () => {
