@@ -45,7 +45,7 @@ export const getRoleService = (token: string) => {
     body: JSON.stringify({ token })
   };
 
-  return fetch(`${apiURL}/role`, requestOptions).then(handleResponseRole);
+  return fetch(`${apiURL}/role`, requestOptions).then(handleResponse);
 };
 
 export const logoutService = () => {
@@ -72,22 +72,6 @@ export const logoutService = () => {
 //
 //   return fetch(`${apiURL}/users/${id}`, requestOptions).then(handleResponse);
 // };
-const handleResponseRole = (response: Response) => {
-  return response.text().then((text: any) => {
-    const data = text;
-    if (!response.ok) {
-      if (response.status === 401) {
-        //auto logout
-        logoutService();
-        location.reload(true);
-      }
-
-      const error = data || response.statusText;
-      return Promise.reject(error);
-    }
-    return data;
-  });
-};
 
 const handleResponse = (response: Response) => {
   return response.text().then((text: string) => {

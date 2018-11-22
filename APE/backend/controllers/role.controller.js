@@ -8,7 +8,7 @@ exports.decodeToken = (req, res, next) => {
       const decodedToken = jwt.verify(token, config.secret);
       const role = decodedToken.role;
       //return role;
-      res.status(200).send(role);
+      res.status(200).json(role);
     } else {
       res.status(400).json({ message: "req.body.token ist leer" });
     }
