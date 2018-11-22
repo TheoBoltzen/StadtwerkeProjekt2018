@@ -35,7 +35,6 @@ export const login = (username: string, password: string) => {
 
     loginService(username, password).then(
       user => {
-        console.log("user: ", user);
         dispatch(success(user));
         dispatch(requestRole(user.token));
 

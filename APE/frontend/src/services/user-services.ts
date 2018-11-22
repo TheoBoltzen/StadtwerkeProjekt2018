@@ -23,7 +23,15 @@ export const loginService = (username: string, password: string) => {
     .then(handleResponse)
     .then((user: User) => {
       if (user.token) {
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            token: user.token
+          })
+        );
       }
 
       return user;
@@ -84,6 +92,7 @@ const handleResponseRole = (response: Response) => {
 const handleResponse = (response: Response) => {
   return response.text().then((text: string) => {
     const data = text && JSON.parse(text);
+
     if (!response.ok) {
       if (response.status === 401) {
         //auto logout
