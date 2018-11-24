@@ -1,16 +1,17 @@
 import { apiURL } from "../constants";
 import { User } from "../types";
 
-// const authHeader = () => {
-//   //returns header with jwt token
-//   let user = JSON.parse(localStorage.getItem("user") as any); //TODO: Remove any
-//
-//   if (user && user.token) {
-//     return { Authorization: user.token };
-//   } else {
-//     return {};
-//   }
-// };
+const authHeader = () => {
+  //returns header with jwt token
+  let user = JSON.parse(localStorage.getItem("user") as any); //TODO: Remove any
+
+  if (user && user.token) {
+    const token = "Bearer " + user.token;
+    return { "Content-Type": "application/json", Authorization: token };
+  } else {
+    return {};
+  }
+};
 
 export const loginService = (username: string, password: string) => {
   const requestOptions = {
@@ -41,9 +42,9 @@ export const loginService = (username: string, password: string) => {
 export const getRoleService = (token: string) => {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: authHeader(),
     body: JSON.stringify({ token })
-  };
+  } as RequestInit;
 
   return fetch(`${apiURL}/role`, requestOptions).then(handleResponse);
 };
