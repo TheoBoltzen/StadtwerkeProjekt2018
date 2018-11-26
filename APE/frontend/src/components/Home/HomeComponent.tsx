@@ -36,7 +36,7 @@ export class Home extends React.Component<Props, State> {
         }}
         element={document}
         onIdle={this._onIdle}
-        timeout={15 * 60 * 100}>
+        timeout={90000000}>
         {redirect && <Redirect to={"/login"} />}
 
         <Navigation />
