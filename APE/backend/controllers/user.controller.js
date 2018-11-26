@@ -2,7 +2,7 @@ const userService = require("../services/user.service");
 
 exports.authenticate = (req, res, next) => {
   userService
-    .authenticate(req.body)
+    .authenticate(req.body, res)
     .then(user => {
       if (user) {
         res.status(201).send(user);

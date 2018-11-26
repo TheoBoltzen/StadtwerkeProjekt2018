@@ -14,26 +14,30 @@ module.exports = {
   delete: _delete
 };
 
-async function authenticate({ username, password }) {
+async function authenticate({ username, password }, res) {
   console.log(username + "   " + password);
   let user = await User.findOne({ where: { username: username } });
-  if (user.tryLogin < 3 && user && bcrypt.compareSync(password, user.hash)) {
-    user.tryLogin = 0; //in case of successfully login
-    user.save(); //write in db
+  if (user) {
+    if (user.tryLogin < 3 && user && bcrypt.compareSync(password, user.hash)) {
+      user.tryLogin = 0; //in case of successfully login
+      user.save(); //write in db
 
-    const { hash, role, ...userWithoutHash } = user.dataValues;
-    const payload = {
-      username: user.dataValues.username,
-      firstname: user.dataValues.firstname,
-      lastname: user.dataValues.lastname,
-      role: user.dataValues.role
-    };
-    const token = jwt.sign(payload, config.secret);
+      const { hash, role, ...userWithoutHash } = user.dataValues;
+      const payload = {
+        username: user.dataValues.username,
+        firstname: user.dataValues.firstname,
+        lastname: user.dataValues.lastname,
+        role: user.dataValues.role
+      };
+      const token = jwt.sign(payload, config.secret);
 
-    return {
-      ...userWithoutHash,
-      token
-    };
+      return {
+        ...userWithoutHash,
+        token
+      };
+    }
+  } else {
+    res.status(400).json({ message: "Kennung und/oder Passowrt falsch" });
   }
 }
 
@@ -49,7 +53,7 @@ async function tryLogin(userParam, res) {
   let user = await User.findOne({ where: { username: userParam.username } });
   if (user) {
     if (user.tryLogin < 3) {
-      res.status(400).json({ message: "Kennung und Passowrt falsch" });
+      res.status(400).json({ message: "Kennung und/oder Passowrt falsch" });
       user.tryLogin += 1;
       user.save();
     }
