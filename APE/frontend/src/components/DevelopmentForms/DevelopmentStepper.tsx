@@ -1,69 +1,18 @@
 import * as React from "react";
-import { InputLabel, WithStyles } from "@material-ui/core";
-import Stepper from "@material-ui/core/es/Stepper/Stepper";
-import Step from "@material-ui/core/es/Step/Step";
-import StepLabel from "@material-ui/core/es/StepLabel/StepLabel";
-import Typography from "@material-ui/core/es/Typography/Typography";
-import Button from "@material-ui/core/es/Button/Button";
-import withStyles from "@material-ui/core/es/styles/withStyles";
-import CustomizedInput from "../General/CustomizedInput";
-import FormControl from "@material-ui/core/es/FormControl/FormControl";
+import {
+  WithStyles,
+  Stepper,
+  Step,
+  StepLabel,
+  Typography,
+  Button,
+  withStyles
+} from "@material-ui/core";
 import "./DevelopmentStepper.css";
-import ListItem from "@material-ui/core/es/ListItem/ListItem";
-import AddIcon from "@material-ui/icons/Add";
-import ListItemSecondaryAction from "@material-ui/core/es/ListItemSecondaryAction/ListItemSecondaryAction";
-import IconButton from "@material-ui/core/es/IconButton/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import List from "@material-ui/core/es/List/List";
-import InputBase from "@material-ui/core/es/InputBase/InputBase";
-
-const styles = theme => ({
-  root: {
-    width: "90%"
-  },
-  stepper: {
-    backgroundColor: "#f9f9f9",
-    iconColor: "#00a8e1"
-  },
-  margin: {
-    margin: theme.spacing.unit
-  },
-  backButton: {
-    marginRight: theme.spacing.unit
-  },
-  instructions: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
-  },
-  primaryButton: {
-    backgroundColor: "#00a8e1 !important",
-    color: "white"
-  },
-  step: {
-    iconColor: "#00a8e1"
-  },
-  addButton: {
-    margin: theme.spacing.unit
-  },
-  deleteButton: {
-    button: {
-      margin: theme.spacing.unit
-    },
-    input: {
-      display: "none"
-    }
-  }
-});
-
-function getSteps() {
-  return [
-    "Abteilung und Ausbildungsberuf angeben",
-    "Kompetenzkategorien erstellen",
-    "Hauptkategorien erstellen",
-    "Unterkategorien erstellen",
-    "Bewertungskriterien angeben"
-  ];
-}
+import { styles } from "./mUIstyles";
+import { getSteps } from "../../helpers";
+import { DepartmentProfession } from "./Steps/department-profession";
+import { CompetenceCreation } from "./Steps/CompetenceCreation";
 
 interface State {
   activeStep: number;
@@ -105,82 +54,24 @@ class DevelopmentStepper extends React.Component<Props, State> {
     this.setState({ developmentForm });
   };
 
-  handleCompetenceDelete = id => {
-    console.log(id);
-
-    this.setState(prevState => ({
-      developmentForm: prevState.developmentForm.filter(el => el != id)
-    }));
-  };
-
   getStepContent = stepIndex => {
     switch (stepIndex) {
       case 0:
         return (
-          <div className={"step1"}>
-            <Typography variant={"subtitle2"} className={"TaskDescription"}>
-              Gib den Ausbildungsberuf und die Abteilung an, für den der Entwicklungsbogen benutzt
-              werden soll
-            </Typography>
-
-            <div className={"step1Form"}>
-              <FormControl className={"DepartmentForm"}>
-                <InputLabel shrink htmlFor="bootstrap-input">
-                  Abteilung
-                </InputLabel>
-                <CustomizedInput
-                  name={"department"}
-                  value={this.state.department}
-                  onChange={this.handleChange}
-                />
-              </FormControl>
-
-              <FormControl className={"ProfessionForm"}>
-                <InputLabel shrink htmlFor="bootstrap-input">
-                  Ausbildungsberuf
-                </InputLabel>
-                <CustomizedInput
-                  name={"profession"}
-                  value={this.state.profession}
-                  onChange={this.handleChange}
-                />
-              </FormControl>
-            </div>
-          </div>
+          <DepartmentProfession
+            department={this.state.department}
+            profession={this.state.profession}
+            onChange={this.handleChange}
+          />
         );
       case 1:
         return (
-          <div className={"step2"}>
-            <List className={"list"}>
-              {this.state.developmentForm.map((competence, index) => (
-                <ListItem
-                  dense={true}
-                  divider={true}
-                  key={index}
-                  name={"developmentForm"}
-                  onChange={this.handleChange}>
-                  <InputBase className={this.props.classes.margin} defaultValue={competence} />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      className={this.props.classes.deleteButton}
-                      aria-label={"Delete"}
-                      onClick={this.handleCompetenceDelete.bind(this, competence)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-            <Button
-              color={"primary"}
-              variant={"fab"}
-              mini
-              aria-label={"Add"}
-              className={this.props.classes.addButton}
-              onClick={this.addCompetence}>
-              <AddIcon />
-            </Button>
-          </div>
+          <CompetenceCreation
+            developmentForm={this.state.developmentForm}
+            onChange={this.handleChange}
+            onClickAddButton={this.addCompetence}
+            classes={this.props.classes}
+          />
         );
       case 2:
         return "Platzhalter";
@@ -201,9 +92,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
     }));
   };
 
-  handleReset = () => {
-    //TODO: an Modal durchgeben, dass Dialog abgeschlossen ist und Modal geschlossen werden kann. Oder in tenären Operator am Ende
-  };
+  handleReset = () => {};
 
   render() {
     const { classes } = this.props;
