@@ -7,13 +7,9 @@ exports.authenticate = (req, res, next) => {
       if (user) {
         res.status(201).send(user);
       } else {
-        res
-          .status(400)
-          .json({ message: "E-Mail Adresse oder Password falsch" });
-
         userService
-          .tryLogin(req.body)
-          .then()
+          .tryLogin(req.body, res)
+          .then(() => {})
           .catch(err => next(err));
       }
     })

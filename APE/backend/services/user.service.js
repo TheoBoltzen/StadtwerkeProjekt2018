@@ -44,17 +44,18 @@ async function getAll() {
 async function getById(id) {
   return await User.findById(id).select("-hash");
 }
-async function tryLogin(userParam) {
+async function tryLogin(userParam, res) {
   console.log(userParam.username + "   " + userParam.password);
   let user = await User.findOne({ where: { username: userParam.username } });
   if (user) {
     if (user.tryLogin < 3) {
+      res.status(400).json({ message: "Kennung und Passowrt falsch" });
       user.tryLogin += 1;
       user.save();
     }
     if (user.tryLogin === 3) {
       console.log("2 Minuten warten");
-      //json({message:"2 Minuten warten"});
+      res.status(400).json({ message: "Kennung für 2 Minuten gesperrt" });
       setTimeout(myTimeout1, 120000); //after 2 minutes login is available again
       function myTimeout1() {
         user.tryLogin = 0;
