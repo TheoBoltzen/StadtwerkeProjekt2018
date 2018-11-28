@@ -33,7 +33,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
       department: "",
       profession: "",
       developmentForm: [],
-      competenceCounter: 0
+      competenceCounter: 1
     };
   }
 
@@ -47,15 +47,13 @@ class DevelopmentStepper extends React.Component<Props, State> {
   addCompetence = () => {
     const developmentForm = this.state.developmentForm;
     let competenceCounter = this.state.competenceCounter;
-    console.log(this.state);
     developmentForm.push({
-      name: "Kompetenzkategorie " + competenceCounter.toString(),
+      name: "Kompetenzkategorie",
       checked: false
     });
     this.setState({ developmentForm });
     competenceCounter = competenceCounter + 1;
     this.setState({ competenceCounter });
-    console.log(this.state.developmentForm);
   };
 
   getStepContent = stepIndex => {

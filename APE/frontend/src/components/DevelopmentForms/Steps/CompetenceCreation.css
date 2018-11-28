@@ -1,0 +1,20 @@
+.taskDescription {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.AddIcon {
+  margin-top: 40px;
+  margin-bottom: 50px !important;
+}
+.step2form {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  padding: 5px;
+}

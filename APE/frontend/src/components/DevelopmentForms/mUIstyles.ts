@@ -21,10 +21,7 @@ export const styles = theme => ({
     color: "white"
   },
   step: {
-    iconColor: "#00a8e1"
-  },
-  addButton: {
-    margin: theme.spacing.unit
+    iconColor: "#1A223A"
   },
   deleteButton: {
     button: {
@@ -32,6 +29,12 @@ export const styles = theme => ({
     },
     input: {
       display: "none"
+    }
+  },
+  infoIcon: {
+    marginLeft: `${10}px`,
+    "&:hover": {
+      color: "black"
     }
   }
 });
