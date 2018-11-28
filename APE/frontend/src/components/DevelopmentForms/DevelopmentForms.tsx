@@ -32,7 +32,6 @@ export const DevelopmentForms = () => {
     <div className={"frame center"}>
       <ListItem
         isHeader={true}
-        name="Name"
         abteilung="Abteilung"
         job="Ausbildungsberuf"
         date="Erstellungsdatum"
@@ -41,7 +40,6 @@ export const DevelopmentForms = () => {
       {user.map(user => {
         return (
           <ListItem
-            name={user.firstname}
             abteilung={user.lastname}
             job={user.role}
             date={user.token}

@@ -6,7 +6,6 @@ import ShareIcon from "@material-ui/icons/Share";
 import { IconButton, Tooltip } from "@material-ui/core";
 
 interface Props {
-  name: string;
   abteilung: string;
   job: string;
   date: string;
@@ -15,14 +14,13 @@ interface Props {
 }
 
 export const ListItem = (props: Props) => {
-  const { name, abteilung, job, date, version, isHeader = false } = props;
+  const { abteilung, job, date, version, isHeader = false } = props;
 
   return (
     <div className={isHeader ? "headerRow" : "item"}>
       <table>
         <tbody>
           <tr>
-            <td>{name}</td>
             <td>{abteilung}</td>
             <td>{job}</td>
             <td>{date}</td>
