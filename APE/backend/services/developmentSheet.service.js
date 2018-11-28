@@ -17,7 +17,6 @@ async function create(devSheetParam) {
   // validate
   const newDevSheet = DevSheet.build({
     //id: devSheetParam.id,
-    name: devSheetParam.name,
     department: devSheetParam.department,
     education: devSheetParam.education
   });
