@@ -12,13 +12,13 @@ import "./DevelopmentStepper.css";
 import { styles } from "./mUIstyles";
 import { getSteps } from "../../helpers";
 import { DepartmentProfession } from "./Steps/department-profession";
-import CompetenceCreation from "./Steps/CompetenceCreation";
+import CompetenceCreation, { Competence } from "./Steps/CompetenceCreation";
 
 interface State {
   activeStep: number;
   department: string;
   profession: string;
-  developmentForm: string[];
+  developmentForm: Competence[];
   competenceCounter: number;
 }
 
@@ -42,16 +42,20 @@ class DevelopmentStepper extends React.Component<Props, State> {
     const value = target.value;
     const name = target.name;
     this.setState({ [name]: value } as State);
-    console.log(this.state.developmentForm);
   };
 
   addCompetence = () => {
     const developmentForm = this.state.developmentForm;
     let competenceCounter = this.state.competenceCounter;
-    competenceCounter = competenceCounter + 1;
-    developmentForm.push("Kompetenzkategorie " + competenceCounter);
-    this.setState({ competenceCounter });
+    console.log(this.state);
+    developmentForm.push({
+      name: "Kompetenzkategorie " + competenceCounter.toString(),
+      checked: false
+    });
     this.setState({ developmentForm });
+    competenceCounter = competenceCounter + 1;
+    this.setState({ competenceCounter });
+    console.log(this.state.developmentForm);
   };
 
   getStepContent = stepIndex => {
@@ -68,9 +72,6 @@ class DevelopmentStepper extends React.Component<Props, State> {
         return (
           <CompetenceCreation
             developmentForm={this.state.developmentForm}
-            /*
-            onChange={this.handleRename}
-*/
             onClickAddButton={this.addCompetence}
             classes={this.props.classes}
             name={"developmentForm"}
