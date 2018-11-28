@@ -1,7 +1,7 @@
 import { apiURL } from "../constants";
 import { User } from "../types";
 
-const authHeader = () => {
+export const authHeader = () => {
   //returns header with jwt token
   let user = JSON.parse(localStorage.getItem("user") as any); //TODO: Remove any
 
@@ -74,7 +74,7 @@ export const logoutService = () => {
 //   return fetch(`${apiURL}/users/${id}`, requestOptions).then(handleResponse);
 // };
 
-const handleResponse = (response: Response) => {
+export const handleResponse = (response: Response) => {
   return response.text().then((text: string) => {
     const data = text && JSON.parse(text);
 
