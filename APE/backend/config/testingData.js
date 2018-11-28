@@ -56,35 +56,35 @@ async function createData() {
 
   body = {
     name: "Verhalten gegenüber Mitarbeitern",
-    mainCategoryName: "Kunden- und Serviceorientierung"
+    MainCategoryName: "Kunden- und Serviceorientierung"
   };
   sc.create(body);
 
   body = {
     name: "Kommunikation",
-    mainCategoryName: "Personenorientierung/Interaktionskompetenz"
+    MainCategoryName: "Personenorientierung/Interaktionskompetenz"
   };
   sc.create(body);
 
   body = {
     name: "Kooperationsfähigkeit",
-    mainCategoryName: "Personenorientierung/Interaktionskompetenz"
+    MainCategoryName: "Personenorientierung/Interaktionskompetenz"
   };
   mc.create(body);
 
   body = {
     name: "Konfliktfähigkeit",
-    mainCategoryName: "Konfliktlösungskompetenz"
+    MainCategoryName: "Konfliktlösungskompetenz"
   };
   sc.create(body);
 
   body = {
     name: "Erworbene Fachkenntnisse",
-    mainCategoryName: "Fachkompetenz"
+    MainCategoryName: "Fachkompetenz"
   };
   sc.create(body);
 
-  body = { name: "Fertigkeiten", mainCategoryName: "Fachkompetenz" };
+  body = { name: "Fertigkeiten", MainCategoryName: "Fachkompetenz" };
   sc.create(body);
 
   //---------------------------------------------
@@ -146,8 +146,8 @@ async function createData() {
   user.create(body);
 
   body = {
-    username: "Azubi",
-    password: "1234",
+    username: "trainee",
+    password: "trainee",
     firstname: "Max",
     lastname: "Mustermann",
     role: "trainee"
@@ -155,8 +155,8 @@ async function createData() {
   user.create(body);
 
   body = {
-    username: "Trainer",
-    password: "1234",
+    username: "admin",
+    password: "admin",
     firstname: "Frank",
     lastname: "Hubertus",
     role: "trainer"
@@ -164,8 +164,8 @@ async function createData() {
   user.create(body);
 
   body = {
-    username: "Admin",
-    password: "1234",
+    username: "trainer",
+    password: "trainer",
     firstname: "Oliver",
     lastname: "Kahn",
     role: "admin"

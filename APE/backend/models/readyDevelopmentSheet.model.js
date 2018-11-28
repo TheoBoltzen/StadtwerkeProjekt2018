@@ -4,10 +4,6 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    ynAnswer: {
-      type: Sequelize.BOOLEAN,
-      allowNull: true
-    },
     goalcross: {
       type: Sequelize.INTEGER,
       allowNull: true
