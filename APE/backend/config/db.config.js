@@ -69,6 +69,8 @@ db.competence.belongsTo(db.subCategory);
 db.readyDevelopmentSheet.belongsTo(db.developmentSheet);
 db.readyDevelopmentSheet.belongsTo(db.competence);
 
+//testingData.createData();
+
 //1:1 => competence get category_id
 //db.competence.belongsTo(db.category);
 //1:n => each category get competence_id
