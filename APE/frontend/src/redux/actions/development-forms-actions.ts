@@ -8,8 +8,8 @@ export const getAll = () => {
     return { type: developmentFormConstants.GETALL_REQUEST };
   };
 
-  const success = (devForm: DevelopmentForm[]) => {
-    return { type: developmentFormConstants.GETALL_SUCCESS, devForm };
+  const success = (developmentForms: DevelopmentForm[]) => {
+    return { type: developmentFormConstants.GETALL_SUCCESS, developmentForms };
   };
 
   const failure = (error: any) => {

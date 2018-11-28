@@ -3,5 +3,5 @@ export interface DevelopmentForm {
   readonly department: string;
   readonly education: string;
   readonly version: string;
-  readonly date: string;
+  readonly createdAt: string;
 }

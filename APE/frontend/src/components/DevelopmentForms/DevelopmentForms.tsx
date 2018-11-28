@@ -1,52 +1,39 @@
-import * as React from "react";
-//import "../Login/LoginComponent.css";
-import "./DevelopmentForms.css";
-import { ListItem } from "./ListItem";
-import { User } from "../../types/user-types";
+import { DevelopmentFormsComponent } from "./DevelopmenFormsComponent";
+import { DevelopmentForm } from "../../types";
+import { ApplicationState } from "../../redux/reducers";
+import { getAll } from "../../redux/actions/development-forms-actions";
+import { connect } from "react-redux";
 
-/*interface Props {
-    //developmentSheets: developmentSheets[];
-    users: User[];
-}*/
+interface Props {}
 
-export const DevelopmentForms = () => {
-  //const { developmentSheets } = props;
-  const user: User[] = [
-    {
-      firstname: "Steven",
-      lastname: "Hallo",
-      role: "admin",
-      token: "jdjdhf",
-      username: "username"
-    },
-    {
-      firstname: "Franz",
-      lastname: "Müller",
-      role: "trainee",
-      token: "jdjdhf",
-      username: "username_franz"
-    }
-  ];
+interface ReduxStateProps {
+  readonly loading: boolean;
+  readonly developmentForms: DevelopmentForm[];
+}
 
-  return (
-    <div className={"frame center"}>
-      <ListItem
-        isHeader={true}
-        abteilung="Abteilung"
-        job="Ausbildungsberuf"
-        date="Erstellungsdatum"
-        version="Version"
-      />
-      {user.map(user => {
-        return (
-          <ListItem
-            abteilung={user.lastname}
-            job={user.role}
-            date={user.token}
-            version={user.username}
-          />
-        );
-      })}
-    </div>
-  );
+interface ReduxDispatchProps {
+  readonly getAllDevForms: () => void;
+}
+
+export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
+
+const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
+  const { loading, developmentForms } = state.developmentFormsReducer;
+  return {
+    loading,
+    developmentForms
+  };
 };
+
+const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
+  return {
+    getAllDevForms: () => dispatch(getAll())
+  };
+};
+
+const connectedDevelopmentForm = connect<ReduxStateProps, ReduxDispatchProps, Props>(
+  mapStateToProps,
+  mapDispatchToProps
+)(DevelopmentFormsComponent);
+
+export { connectedDevelopmentForm as DevelopmentForms };
