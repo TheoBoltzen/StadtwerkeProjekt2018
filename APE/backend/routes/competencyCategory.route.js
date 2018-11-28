@@ -8,7 +8,7 @@ module.exports = app => {
     guard(["admin", "trainer"]),
     CompetencyCategory.newCompetencyCategory
   );
-  app.post(
+  app.get(
     "/services/getAllCompetencyCategories",
     guard(["admin", "trainer"]),
     CompetencyCategory.getAll

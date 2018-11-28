@@ -3,6 +3,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const db = require("./config/db.config");
 const cors = require("cors");
+const testingData = require("./config/testingData");
 
 const app = express();
 
@@ -28,6 +29,8 @@ require("./routes/mainCategory.route")(app);
 require("./routes/subCategory.route")(app);
 require("./routes/developmentSheet.route")(app);
 require("./routes/readyDevelopmentSheet.route")(app);
+
+testingData.createData();
 
 //Catch-All Route
 /*app.get("*", (req, res) =>
