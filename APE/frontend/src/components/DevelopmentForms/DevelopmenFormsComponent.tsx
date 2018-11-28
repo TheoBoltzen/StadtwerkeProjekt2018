@@ -4,11 +4,6 @@ import { ListItem } from "./ListItem";
 import { AllProps } from "./DevelopmentForms";
 import { CircularProgress } from "@material-ui/core";
 
-/*interface Props {
-    //developmentSheets: developmentSheets[];
-    users: User[];
-}*/
-
 export class DevelopmentFormsComponent extends React.Component<AllProps, {}> {
   constructor(props: AllProps) {
     super(props);
