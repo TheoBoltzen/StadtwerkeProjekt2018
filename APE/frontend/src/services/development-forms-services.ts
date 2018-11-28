@@ -1,8 +1,8 @@
-import {authHeader, handleResponse} from "./user-services";
-import {apiURL} from "../constants";
+import { authHeader, handleResponse } from "./user-services";
+import { apiURL } from "../constants";
 
 export const getAllService = () => {
-    const requestOptions = {
+  const requestOptions = {
     method: "GET",
     headers: authHeader()
   } as RequestInit;
