@@ -15,6 +15,7 @@ module.exports = {
 };
 
 async function create(devSheetParam) {
+  let competencesForDevSheet = [];
   // validate
   const version = 1;
   // Create DevSheet
@@ -31,7 +32,7 @@ async function create(devSheetParam) {
   for (let i = 0; i < content.length; i++) {
     let x = { name: content[i].name };
     try {
-      compCategory.create(x);
+      await compCategory.create(x);
     } catch {}
 
     // Step through MainCategory
@@ -42,7 +43,7 @@ async function create(devSheetParam) {
         CompetencyCategoryName: content[i].name
       };
       try {
-        mainCategory.create(y);
+        await mainCategory.create(y);
       } catch {}
       // Step through Subcategory
       let subcategorys = maincategories[j].children;
@@ -52,7 +53,7 @@ async function create(devSheetParam) {
           MainCategoryName: maincategories[j].name
         };
         try {
-          subCategory.create(z);
+          await subCategory.create(z);
         } catch {}
         // Step through competences
         let competences = subcategorys[k].children;
@@ -63,26 +64,30 @@ async function create(devSheetParam) {
             SubCategoryName: subcategorys[k].name
           };
           try {
-            competence.create(zA);
+            await competence.create(zA);
           } catch {}
 
           // Create Relationship
 
           // TODO: ID DevSheet (max num ID)
+
           const num = 1;
 
-          const newRelation = ReadyDevSheet.build({
+          console.log(competences[l].name);
+          competencesForDevSheet.push({
             version: version,
             goalCross: competences[l].goalCross,
             CompetenceName: competences[l].name,
             DevelopmentSheetId: num
           });
-          // save Realtion in db
-          newRelation.save().then(() => {});
         }
       }
     }
   }
+  console.log(competencesForDevSheet);
+  await ReadyDevSheet.bulkCreate(competencesForDevSheet, {
+    returning: true
+  }).then(() => {});
 }
 
 async function update(devSheetParam) {}
