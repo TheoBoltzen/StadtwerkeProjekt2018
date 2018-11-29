@@ -23,7 +23,7 @@ async function create(devSheetParam) {
     education: devSheetParam.education,
     department: devSheetParam.department
   };
-  devSheet.create(body);
+  await devSheet.create(body);
 
   // Add Competences to DevSheet for ready Dev Sheet
 
@@ -73,9 +73,8 @@ async function create(devSheetParam) {
 
           const num = 1;
 
-          console.log(competences[l].name);
           competencesForDevSheet.push({
-            version: version,
+            version: 2,
             goalCross: competences[l].goalCross,
             CompetenceName: competences[l].name,
             DevelopmentSheetId: num
@@ -85,13 +84,17 @@ async function create(devSheetParam) {
     }
   }
   console.log(competencesForDevSheet);
-  await ReadyDevSheet.bulkCreate(competencesForDevSheet, {
+  ReadyDevSheet.bulkCreate(competencesForDevSheet, {
     returning: true
-  }).then(() => {});
+  })
+    .then(() => {})
+    .catch(function(err) {
+      console.log(err);
+    });
 }
 
 async function update(devSheetParam) {}
 
 async function getById(id) {
-  return await Competence.findOne({ where: { id: id } });
+  return await ReadyDevSheet.findOne({ where: { id: id } });
 }
