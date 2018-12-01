@@ -2,13 +2,14 @@ import * as React from "react";
 import "./App.css";
 import { connect } from "react-redux";
 import { history } from "./helpers";
-import { clearAlert } from "./redux/actions";
-import { SnackbarContent } from "@material-ui/core";
+import { Snackbar, SnackbarContent } from "@material-ui/core";
 import { Route } from "react-router";
 import { Login } from "./components/Login/Login";
 import { Home } from "./components/Home/HomeComponent";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { ApplicationState } from "./redux/reducers";
+import { clearAlert, saveAlert } from "./redux/actions";
+import InfoIcon from "@material-ui/icons/Info";
 
 export interface Items {
   id: number;
@@ -24,6 +25,7 @@ interface Props {
 
 interface State {
   items: Items[];
+  snackbarIsOpen: boolean;
 }
 
 class App extends React.Component<Props, State> {
@@ -32,16 +34,27 @@ class App extends React.Component<Props, State> {
 
     const { dispatch } = this.props;
     history.listen((location, action) => {
-      dispatch(clearAlert());
+      dispatch(saveAlert());
     });
 
     this.state = {
-      items: []
+      items: [],
+      snackbarIsOpen: false
     };
   }
 
   componentDidMount() {
     this.getMembers();
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.alert.message) {
+      this.setState({ snackbarIsOpen: true });
+
+      setTimeout(() => {
+        this.props.dispatch(clearAlert());
+      }, 6000);
+    }
   }
 
   private getMembers() {
@@ -50,14 +63,36 @@ class App extends React.Component<Props, State> {
       .then(res => this.setState({ items: res }, () => console.log("fetched", res)));
   }
 
+  private handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({ snackbarIsOpen: false });
+  };
+
   public render() {
     const { alert } = this.props;
+    const { snackbarIsOpen } = this.state;
+
+    const message = (
+      <span className={"alert-message"}>
+        <InfoIcon className={"alert-icon"} />
+        {alert.message}
+      </span>
+    );
 
     return (
       <div className="App">
-        {alert.message && (
-          <SnackbarContent className={`alert ${alert.type}`} message={alert.message} />
-        )}
+        <Snackbar
+          className={"snackbar"}
+          open={snackbarIsOpen}
+          anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+          autoHideDuration={5000}
+          onClose={this.handleCloseSnackbar}>
+          <SnackbarContent className={`alert ${alert.type}`} message={message} />
+        </Snackbar>
+
         <Route path={"/login"} exact={true} component={Login} />
 
         {history.location.pathname !== "/login" && <PrivateRoute path={"/"} component={Home} />}

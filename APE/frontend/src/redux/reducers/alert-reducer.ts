@@ -24,6 +24,8 @@ export const alertReducer = (state: AlertReducer = {}, action: ActionAlert) => {
       };
     case alertConstants.CLEAR:
       return {};
+    case alertConstants.SAVE:
+      return { ...state };
     default:
       return state;
   }

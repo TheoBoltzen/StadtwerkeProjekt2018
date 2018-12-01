@@ -20,8 +20,25 @@
   }
 }
 
-.alert {
+.snackbar {
+  right: auto !important;
+  bottom: 0 !important;
+  margin: 20px !important;
+}
+
+.alert-message {
+  display: flex;
+  align-items: center;
+}
+
+.alert-icon {
+  margin-right: 5px !important;
+}
+
+.alert-success {
+  background-color: #43a047 !important;
+}
+
+.alert-danger {
   background-color: #d32f2e !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
 }

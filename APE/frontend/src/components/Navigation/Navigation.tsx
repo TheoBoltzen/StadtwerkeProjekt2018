@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { NavigationComponent } from "./NavigationComponent";
 import { RouteComponentProps, withRouter } from "react-router";
 import { User } from "../../types";
-import { getRole } from "../../redux/actions";
+import { getRole, successAlert } from "../../redux/actions";
 
 export interface State {
   redirect: boolean;
@@ -17,13 +17,15 @@ interface ReduxStateProps {
 
 interface ReduxDispatchProps {
   getRole: (token: string) => void;
+  successAlert: (msg: string) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps & RouteComponentProps;
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
-    getRole: token => dispatch(getRole(token))
+    getRole: token => dispatch(getRole(token)),
+    successAlert: msg => dispatch(successAlert(msg))
   };
 };
 
