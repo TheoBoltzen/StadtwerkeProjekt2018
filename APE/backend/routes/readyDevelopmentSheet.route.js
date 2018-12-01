@@ -4,7 +4,12 @@ const ReadyDevelopmentSheet = require("../controllers/readyDevelopmentSheet.cont
 module.exports = app => {
   app.post(
     "/services/createReadyDevelopmentSheet",
-    guard(["admin", "trainer"]),
+    guard(["admin"]),
     ReadyDevelopmentSheet.newReadyDevSheet
+  );
+  app.post(
+    "/services/updateReadyDevelopmentSheet",
+    guard(["admin"]),
+    ReadyDevelopmentSheet.updateReadyDevSheet
   );
 };

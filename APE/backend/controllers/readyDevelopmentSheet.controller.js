@@ -9,6 +9,13 @@ exports.newReadyDevSheet = (req, res, next) => {
     .catch(err => next(err));
 };
 
+exports.updateReadyDevSheet = (req, res, next) => {
+  readyDevSheetService
+    .update(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+};
+
 exports.getAllSimple = (req, res, next) => {
   readyDevSheetService
     .findAll()
