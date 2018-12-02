@@ -1,0 +1,10 @@
+.frame {
+  display: inline-block;
+  flex-direction: column;
+  border-radius: 13px;
+  background-color: #efeff5;
+}
+
+.center {
+  margin: 50px 50px;
+}
