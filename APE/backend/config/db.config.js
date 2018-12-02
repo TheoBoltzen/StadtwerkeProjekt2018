@@ -66,9 +66,17 @@ db.subCategory.belongsTo(db.mainCategory);
 //db.subCategory.belongsTo(db.competence);
 db.competence.belongsTo(db.subCategory);
 
-db.readyDevelopmentSheet.belongsTo(db.developmentSheet);
 db.readyDevelopmentSheet.belongsTo(db.competence);
+db.readyDevelopmentSheet.belongsTo(db.developmentSheet);
 
+/*
+db.competence.belongsToMany(db.developmentSheet, {
+  through: db.readyDevelopmentSheet
+});
+db.developmentSheet.belongsToMany(db.competence, {
+  through: db.readyDevelopmentSheet
+});
+*/
 //testingData.createData();
 
 //1:1 => competence get category_id

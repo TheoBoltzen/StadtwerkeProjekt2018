@@ -6,6 +6,7 @@ module.exports = {
   findAll,
   create,
   getById,
+  update,
   delete: _delete
 };
 
@@ -33,8 +34,28 @@ async function create(competencyCategoryParam) {
   }
 }
 
+async function update(competencycategoryparam) {
+  const cc = await CompetencyCategory.findOne({
+    where: { name: competencycategoryparam.name }
+  });
+
+  if (!cc) {
+    throw "CompetencyCategory not found";
+  }
+  cc.name = competencycategoryparam.newname;
+  cc.description = competencycategoryparam.description;
+
+  await cc.update(
+    {
+      name: competencycategoryparam.newname,
+      description: competencycategoryparam.description
+    },
+    { where: { name: competencycategoryparam.name } }
+  );
+}
+
 async function getById(id) {
-  return await CompetencyCategory.findOne({ where: { name: id } });
+  return await CompetencyCategory.findById(id);
 }
 
 async function _delete(id) {

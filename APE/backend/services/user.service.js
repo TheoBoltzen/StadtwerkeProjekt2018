@@ -42,7 +42,7 @@ async function authenticate({ username, password }, res) {
 }
 
 async function getAll() {
-  return await User.find().select("-hash");
+  return await User.findAll();
 }
 
 async function getById(id) {

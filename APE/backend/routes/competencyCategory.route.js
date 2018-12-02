@@ -13,4 +13,9 @@ module.exports = app => {
     guard(["admin", "trainer"]),
     CompetencyCategory.getAll
   );
+  app.post(
+    "/services/updateCompetencyCategory",
+    guard(["admin", "trainer"]),
+    CompetencyCategory.update
+  );
 };

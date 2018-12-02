@@ -40,51 +40,5 @@ module.exports = (sequelize, Sequelize) => {
     }
   });
 
-  /*
-  User.create({
-    username: "",
-    firstname: "Anja",
-    lastname: "Fiedler",
-    hash: "1234",
-    role: "",
-    job: null,
-    education: null,
-    hiredOn: null,
-    tryLogin: 0
-  });
-  User.create({
-    username: "",
-    firstname: "Tom",
-    lastname: "Riddle",
-    hash: "1234",
-    role: "",
-    job: "Verwaltungsfachkraft",
-    education: "Büromanagement",
-    hiredOn: "01.01.2019",
-    tryLogin: 0
-  });
-  User.create({
-    username: "",
-    firstname: "Harry",
-    lastname: "Potter",
-    hash: "1234",
-    role: "",
-    job: "Systemtechniker",
-    education: "IT-Assistant",
-    hiredOn: "01.01.2019",
-    tryLogin: 0
-  });
-  User.create({
-    username: "",
-    firstname: "Basti",
-    lastname: "Bohr",
-    hash: "1234",
-    role: "",
-    job: null,
-    education: null,
-    hiredOn: null,
-    tryLogin: 0
-  });
-*/
   return User;
 };
