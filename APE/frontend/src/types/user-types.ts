@@ -4,4 +4,9 @@ export interface User {
   readonly role: string;
   readonly token: string;
   readonly username: string;
+  readonly job: string;
+  readonly education: string;
+  readonly hiredOn: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
 }

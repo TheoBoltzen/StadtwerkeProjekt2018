@@ -1,5 +1,5 @@
 import { RoleConstants, RouterPathsConstants, userConstants } from "../../constants";
-import { getRoleService, loginService, logoutService } from "../../services";
+import { getAllService, getRoleService, loginService, logoutService } from "../../services";
 import { history } from "../../helpers";
 import { errorAlert } from "./alert";
 import { Dispatch } from "redux";
@@ -88,13 +88,6 @@ export const getRole = (token: string) => {
     getRoleService(token).then(
       role => {
         dispatch(success(role));
-
-        /*if (role === RoleConstants.admin) {
-                            history.push(RouterPathsConstants.userAdministration);
-                        }
-                        if (role === RoleConstants.trainer) {
-                            history.push(RouterPathsConstants.trainees);
-                        }*/
       },
       error => {
         dispatch(failure(error.toString()));
@@ -104,28 +97,28 @@ export const getRole = (token: string) => {
   };
 };
 
-// export const getAll = () => {
-//   const request = () => {
-//     return { type: userConstants.GETALL_REQUEST };
-//   };
-//
-//   const success = (users: any) => {
-//     //TODO: Remove any
-//     return { type: userConstants.GETALL_SUCCESS, users };
-//   };
-//
-//   const failure = (error: any) => {
-//     //TODO: Remove any
-//     return { type: userConstants.GETALL_FAILURE, error };
-//   };
-//
-//   return (dispatch: any) => {
-//     //TODO: Remove any
-//     dispatch(request());
-//
-//     getAllService().then(
-//       users => dispatch(success(users)),
-//       error => dispatch(failure(error))
-//     );
-//   };
-// };
+export const getAll = () => {
+  const request = () => {
+    return { type: userConstants.GETALL_REQUEST };
+  };
+
+  const success = (users: User[]) => {
+    return { type: userConstants.GETALL_SUCCESS, users };
+  };
+
+  const failure = (error: string) => {
+    return { type: userConstants.GETALL_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request());
+
+    getAllService().then(
+      users => dispatch(success(users)),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};

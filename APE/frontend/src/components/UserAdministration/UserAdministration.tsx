@@ -1,12 +1,14 @@
 import { ApplicationState } from "../../redux/reducers";
 import { connect } from "react-redux";
 import { UserAdministrationComponent } from "./UserAdministrationComponent";
+import { User } from "../../types";
+import { getAll } from "../../redux/actions";
 
 interface Props {}
 
 interface ReduxStateProps {
   readonly loading: boolean;
-  readonly users: Users[];
+  readonly users: User[];
 }
 
 interface ReduxDispatchProps {
@@ -16,7 +18,7 @@ interface ReduxDispatchProps {
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
-  const { loading, users } = state.usersReducer;
+  const { loading, users } = state.userReducer;
   return {
     loading,
     users

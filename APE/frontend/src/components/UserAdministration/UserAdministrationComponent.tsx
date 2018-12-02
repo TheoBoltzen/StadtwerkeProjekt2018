@@ -9,7 +9,7 @@ export class UserAdministrationComponent extends React.Component<AllProps, {}> {
   }
 
   componentDidMount() {
-    //this.props.getAllDevForms();
+    this.props.getAllUsers();
   }
 
   render() {
@@ -22,7 +22,7 @@ export class UserAdministrationComponent extends React.Component<AllProps, {}> {
         <ListItem isHeader={true} name={"Name"} firstname={"Vorname"} job={"Tätigkeit"} />
         {users.map((user, index) => {
           return (
-            <ListItem key={index} name={user.name} firstname={user.firstname} job={user.job} />
+            <ListItem key={index} name={user.lastname} firstname={user.firstname} job={user.job} />
           );
         })}
       </div>
