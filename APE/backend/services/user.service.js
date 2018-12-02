@@ -42,7 +42,7 @@ async function authenticate({ username, password }, res) {
 }
 
 async function getAll() {
-  return await User.findAll();
+  return await User.findAll({ attributes: { exclude: ["hash"] } });
 }
 
 async function getById(id) {
