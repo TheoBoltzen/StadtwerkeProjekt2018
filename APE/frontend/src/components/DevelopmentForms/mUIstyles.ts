@@ -35,9 +35,9 @@ export const styles = theme => ({
     marginLeft: `${10}px`,
     "&:hover": {
       color: "black"
-    },
-    nested: {
-      paddingLeft: theme.spacing.unit * 4
     }
+  },
+  nested: {
+    paddingLeft: theme.spacing.unit * 8
   }
 });

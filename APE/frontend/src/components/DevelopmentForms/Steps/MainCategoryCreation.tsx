@@ -5,21 +5,20 @@ import {
   List,
   ListItem,
   Typography,
-  WithStyles,
-  withStyles
+  WithStyles
 } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
 import * as React from "react";
 import Tooltip from "@material-ui/core/es/Tooltip/Tooltip";
 import { styles } from "../mUIstyles";
-import "./CompetenceCreation.css";
 import { Competence } from "./CompetenceCreation";
-import ListItemText from "@material-ui/core/es/ListItemText/ListItemText";
 import AddIcon from "@material-ui/icons/Add";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import Collapse from "@material-ui/core/es/Collapse/Collapse";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
+import withStyles from "@material-ui/core/es/styles/withStyles";
+import "./MainCategoryCreation.css";
 
 interface Props extends WithStyles<typeof styles> {
   developmentForm: Competence[];
@@ -115,50 +114,59 @@ class MainCategoryCreation extends React.Component<Props, State> {
                   onClick={e => {
                     this.handleClick(e, index);
                   }}>
-                  <ListItemText inset primary={developmentForm[index].name} />
+                  <InputBase
+                    disabled={true}
+                    className={classes.disabledInputBase}
+                    value={developmentForm[index].name}
+                    name={name}
+                    style={{ color: "black" }}
+                  />
                   {developmentForm[index].open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={developmentForm[index].open} timeout={"auto"} unmountOnExit>
                   {developmentForm[index].MainCategories.map((mainCategories, index2) => {
                     return (
-                      <ListItem
-                        dense={true}
-                        divider={true}
-                        key={index2}
-                        name={"developmentForm"}
-                        className={classes.nested}>
-                        <MuiThemeProvider theme={theme}>
-                          <Checkbox
-                            className={classes.checkBox}
-                            checked={
-                              this.props.developmentForm[index].MainCategories[index2].checked
-                            }
-                            onClick={e => {
-                              this.handleToggle(e, index, index2);
+                      <List key={index2}>
+                        <ListItem
+                          dense={true}
+                          divider={true}
+                          name={"developmentForm"}
+                          className={classes.nested}>
+                          <MuiThemeProvider theme={theme}>
+                            <Checkbox
+                              checked={
+                                this.props.developmentForm[index].MainCategories[index2].checked
+                              }
+                              onClick={e => {
+                                this.handleToggle(e, index, index2);
+                              }}
+                            />
+                          </MuiThemeProvider>
+                          <InputBase
+                            className={classes.margin}
+                            value={developmentForm[index].MainCategories[index2].name}
+                            onChange={e => {
+                              this.handleRename(e, index, index2);
                             }}
+                            name={name}
                           />
-                        </MuiThemeProvider>
-                        <InputBase
-                          className={this.props.classes.margin}
-                          value={developmentForm[index].MainCategories[index2].name}
-                          onChange={e => {
-                            this.handleRename(e, index, index2);
-                          }}
-                          name={name}
-                        />
-                      </ListItem>
+                        </ListItem>
+                      </List>
                     );
                   })}
+                  <div className={"buttonFlex"}>
+                    <div />
+                    <Button
+                      color={"primary"}
+                      variant={"fab"}
+                      aria-label={"Add"}
+                      mini
+                      className={"AddIcon"}
+                      onClick={() => onClickAddButton(index)}>
+                      <AddIcon />
+                    </Button>
+                  </div>
                 </Collapse>
-                <Button
-                  color={"primary"}
-                  variant={"fab"}
-                  aria-label={"Add"}
-                  mini
-                  className={"AddIcon"}
-                  onClick={() => onClickAddButton(index)}>
-                  <AddIcon />
-                </Button>
               </div>
             ))}
           </List>
