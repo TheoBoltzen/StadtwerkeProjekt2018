@@ -12,12 +12,12 @@
 }
 
 .emailForm {
-  height: 65px;
+  height: 80px;
   margin: 5px !important;
 }
 
 .passwordForm {
-  height: 70px;
+  height: 80px;
   margin: 5px !important;
 }
 
@@ -26,9 +26,15 @@
   margin: 5px;
 }
 
+/*Overwrites MaterialUI class*/
+label + .CustomizedInputs-bootstrapRoot-2 {
+  margin-top: 20px !important;
+}
+
 .required-error {
   color: #d32f2e !important;
   margin: 0 !important;
+  margin-top: 2px !important;
 }
 
 .logo {
