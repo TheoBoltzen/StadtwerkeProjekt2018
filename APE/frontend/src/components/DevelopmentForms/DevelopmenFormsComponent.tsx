@@ -13,6 +13,11 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, {}> {
     this.props.getAllDevForms();
   }
 
+  doFormatDate = date => {
+    //date format from db: 	2018-12-03T12:12:26.000Z
+    return new Date(date).toLocaleDateString("de");
+  };
+
   render() {
     const { developmentForms, loading } = this.props;
 
@@ -33,7 +38,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, {}> {
               key={index}
               abteilung={devForm.department}
               job={devForm.education}
-              date={devForm.createdAt}
+              date={this.doFormatDate(devForm.createdAt)}
               version={devForm.version}
             />
           );
