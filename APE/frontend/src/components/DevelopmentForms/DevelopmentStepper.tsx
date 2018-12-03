@@ -13,6 +13,7 @@ import { styles } from "./mUIstyles";
 import { getSteps } from "../../helpers";
 import { DepartmentProfession } from "./Steps/department-profession";
 import CompetenceCreation, { Competence } from "./Steps/CompetenceCreation";
+import MainCategoryCreation from "./Steps/MainCategoryCreation";
 
 interface State {
   activeStep: number;
@@ -49,11 +50,22 @@ class DevelopmentStepper extends React.Component<Props, State> {
     let competenceCounter = this.state.competenceCounter;
     developmentForm.push({
       name: "Kompetenzkategorie",
-      checked: false
+      checked: false,
+      open: true,
+      MainCategories: []
     });
     this.setState({ developmentForm });
     competenceCounter = competenceCounter + 1;
     this.setState({ competenceCounter });
+  };
+
+  addMainCategory = index => {
+    const developmentForm = this.state.developmentForm;
+    developmentForm[index].MainCategories.push({
+      name: "Hauptkategorie",
+      checked: false
+    });
+    this.setState({ developmentForm });
   };
 
   getStepContent = stepIndex => {
@@ -76,7 +88,14 @@ class DevelopmentStepper extends React.Component<Props, State> {
           />
         );
       case 2:
-        return "Platzhalter";
+        return (
+          <MainCategoryCreation
+            classes={this.props.classes}
+            onClickAddButton={this.addMainCategory}
+            developmentForm={this.state.developmentForm}
+            name={"developmentForm"}
+          />
+        );
       default:
         return "Platzhalter";
     }
@@ -122,9 +141,8 @@ class DevelopmentStepper extends React.Component<Props, State> {
               </div>
             ) : (
               <div>
-                <Typography className={classes.instructions}>
-                  {this.getStepContent(activeStep)}
-                </Typography>
+                <Typography className={classes.instructions} />
+                {this.getStepContent(activeStep)}
                 <div className={"StepperButtons"}>
                   <Button
                     disabled={activeStep === 0}

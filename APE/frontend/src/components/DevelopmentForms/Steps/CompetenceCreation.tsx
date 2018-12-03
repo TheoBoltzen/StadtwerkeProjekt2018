@@ -16,6 +16,7 @@ import { styles } from "../mUIstyles";
 import "./CompetenceCreation.css";
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
+import { MainCategory } from "./MainCategoryCreation";
 
 interface Props extends WithStyles<typeof styles> {
   developmentForm: Competence[];
@@ -25,13 +26,11 @@ interface Props extends WithStyles<typeof styles> {
   name: string;
 }
 
-interface State {
-  checked: number[];
-}
-
 export interface Competence {
   name: string;
   checked: boolean;
+  MainCategories: MainCategory[];
+  open: boolean;
 }
 
 const theme = createMuiTheme({
@@ -48,13 +47,9 @@ const theme = createMuiTheme({
   }
 });
 
-class CompetenceCreation extends React.Component<Props, State> {
+class CompetenceCreation extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-
-    this.state = {
-      checked: [0]
-    };
   }
 
   handleRename = (event: any, id) => {
@@ -72,6 +67,7 @@ class CompetenceCreation extends React.Component<Props, State> {
       this.props.developmentForm[index].checked = true;
     }
     this.forceUpdate();
+    console.log("Props: ", this.props);
   };
 
   description =
