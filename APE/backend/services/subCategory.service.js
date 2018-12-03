@@ -23,7 +23,7 @@ async function create(subCategoryParam) {
     const newSubcategory = SubCategory.build({
       name: subCategoryParam.name,
       description: subCategoryParam.description,
-      SubCategoryName: subCategoryParam.SubCategoryName
+      MainCategoryName: subCategoryParam.MainCategoryName
     });
     // save user in db
     newSubcategory.save().then(() => {});

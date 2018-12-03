@@ -53,16 +53,15 @@ export const logoutService = () => {
   localStorage.removeItem("user");
 };
 
-// export const getAllService = () => {
-//   const requestOptions: any = {
-//     //TODO: Remove any
-//     method: "GET",
-//     headers: authHeader()
-//   };
-//
-//   return fetch(`${apiURL}/users`, requestOptions).then(handleResponse);
-// };
-//
+export const getAllService = () => {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getAllUser`, requestOptions).then(handleResponse);
+};
+
 // export const getByIdService = (id: any) => {
 //   //TODO: Remove any
 //   const requestOptions: any = {

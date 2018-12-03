@@ -36,7 +36,6 @@ async function getById(id) {
   return await Competence.findOne({ where: { name: id } });
 }
 
-// TODO: Check these
 async function getAllBySubCategory(subcategoryparam) {
   return await Competence.findAll({
     where: {},
@@ -52,6 +51,7 @@ async function getAllBySubCategory(subcategoryparam) {
   });
 }
 
+// TODO: Check these
 async function getAllByMainCategory(maincategoryparam) {
   return await Competence.findAll({
     where: {},

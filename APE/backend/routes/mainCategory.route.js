@@ -1,8 +1,7 @@
 const guard = require("../_helpers/guard.js");
+const MainCategory = require("../controllers/mainCategory.controller.js");
 
 module.exports = app => {
-  const MainCategory = require("../controllers/mainCategory.controller.js");
-
   //Get all Items
   app.post(
     "/services/createMainCategory",

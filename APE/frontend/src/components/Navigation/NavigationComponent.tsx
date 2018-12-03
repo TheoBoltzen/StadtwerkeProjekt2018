@@ -20,6 +20,7 @@ export class NavigationComponent extends React.Component<AllProps, State> {
   }
 
   handleLogout = () => {
+    this.props.successAlert("Erfolgreich abgemeldet");
     this.setState({ redirect: true });
   };
 

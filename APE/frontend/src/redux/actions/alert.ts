@@ -11,3 +11,7 @@ export const errorAlert = (msg: string) => {
 export const clearAlert = () => {
   return { type: alertConstants.CLEAR };
 };
+
+export const saveAlert = () => {
+  return { type: alertConstants.SAVE };
+};

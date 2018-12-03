@@ -1,12 +1,15 @@
 const guard = require("../_helpers/guard.js");
+const ReadyDevelopmentSheet = require("../controllers/readyDevelopmentSheet.controller.js");
 
 module.exports = app => {
-  const ReadyDevelopmentSheet = require("../controllers/readyDevelopmentSheet.controller.js");
-
-  //Get all Items
-  app.get(
-    "/api/readyDevelopmentSheet",
-    guard(["admin", "trainer"]),
-    ReadyDevelopmentSheet.findAll
+  app.post(
+    "/services/createReadyDevelopmentSheet",
+    guard(["admin"]),
+    ReadyDevelopmentSheet.newReadyDevSheet
+  );
+  app.post(
+    "/services/updateReadyDevelopmentSheet",
+    guard(["admin"]),
+    ReadyDevelopmentSheet.updateReadyDevSheet
   );
 };

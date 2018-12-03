@@ -16,6 +16,13 @@ exports.getAll = (req, res, next) => {
     .catch(err => next(err));
 };
 
+exports.update = (req, res, next) => {
+  competencyCategoryService
+    .update(req.body)
+    .then(competences => res.json(competences))
+    .catch(err => next(err));
+};
+
 function getById(req, res, next) {
   competencyCategoryService
     .getById(req.params.name)
