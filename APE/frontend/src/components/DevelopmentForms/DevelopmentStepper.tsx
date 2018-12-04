@@ -88,7 +88,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
     developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria.push({
       name: "Kriterium",
       checked: false,
-      value: 3
+      value: "3"
     });
     this.setState({ developmentForm });
   };
@@ -180,7 +180,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
             {this.state.activeStep === steps.length ? (
               <div>
                 <Typography className={classes.instructions}>Bewertungsbogen erstellt!</Typography>
-                <Button onClick={this.handleReset}>Reset</Button>
+                <Button onClick={this.handleReset}>Abschließen</Button>
               </div>
             ) : (
               <div>

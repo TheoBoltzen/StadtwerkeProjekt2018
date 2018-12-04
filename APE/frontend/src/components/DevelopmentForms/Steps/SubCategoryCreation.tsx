@@ -105,6 +105,7 @@ class SubCategoryCreation extends React.Component<Props> {
   render() {
     const { developmentForm, classes, onClickAddButton } = this.props;
 
+    //TODO für jeden erstellten Kompetenzblock einen farbigen Hintergrund erstellen, um Zugehörigkeit der Unterkategorien zu erkennen
     return (
       <div className={"step3"}>
         <div className={"taskDescription"}>

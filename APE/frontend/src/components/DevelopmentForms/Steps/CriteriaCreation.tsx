@@ -19,10 +19,15 @@ import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import "./MainCategoryCreation.css";
+import ListItemSecondaryAction from "@material-ui/core/es/ListItemSecondaryAction/ListItemSecondaryAction";
+import FormControl from "@material-ui/core/es/FormControl/FormControl";
+import FormControlLabel from "@material-ui/core/es/FormControlLabel/FormControlLabel";
+import Radio from "@material-ui/core/es/Radio/Radio";
+import RadioGroup from "@material-ui/core/es/RadioGroup/RadioGroup";
 
 interface Props extends WithStyles<typeof styles> {
   developmentForm: Competence[];
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  onChange?: (index, index2, index3, index4) => void;
   onClickAddButton: (index, index2, index3) => void;
   classes: any;
   name: string;
@@ -31,7 +36,7 @@ interface Props extends WithStyles<typeof styles> {
 export interface Criteria {
   name: string;
   checked: boolean;
-  value: number;
+  value: string;
 }
 
 const theme = createMuiTheme({
@@ -109,6 +114,19 @@ class CriteriaCreation extends React.Component<Props> {
       this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open = true;
     }
     this.forceUpdate();
+  };
+
+  handleRadioClick = (event: any, index, index2, index3, index4, value) => {
+    this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+      index4
+    ].value = value;
+    this.forceUpdate();
+    console.log(
+      "Value: ",
+      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+        index4
+      ].value
+    );
   };
 
   //TODO Tooltip anpassen
@@ -262,6 +280,94 @@ class CriteriaCreation extends React.Component<Props> {
                                               style={{ width: 800 }}
                                               name={name}
                                             />
+                                            <ListItemSecondaryAction>
+                                              <FormControl component={"fielsdset"}>
+                                                <RadioGroup
+                                                  aria-label={"value"}
+                                                  name={"value"}
+                                                  value={
+                                                    developmentForm[index].MainCategories[index2]
+                                                      .SubCategories[index3].Criteria[index4].value
+                                                  }
+                                                  row>
+                                                  <FormControlLabel
+                                                    value={"1"}
+                                                    control={<Radio color={"primary"} />}
+                                                    label={"1"}
+                                                    onClick={e => {
+                                                      this.handleRadioClick(
+                                                        e,
+                                                        index,
+                                                        index2,
+                                                        index3,
+                                                        index4,
+                                                        "1"
+                                                      );
+                                                    }}
+                                                  />
+                                                  <FormControlLabel
+                                                    value={"2"}
+                                                    control={<Radio color={"primary"} />}
+                                                    label={"2"}
+                                                    onClick={e => {
+                                                      this.handleRadioClick(
+                                                        e,
+                                                        index,
+                                                        index2,
+                                                        index3,
+                                                        index4,
+                                                        "2"
+                                                      );
+                                                    }}
+                                                  />
+                                                  <FormControlLabel
+                                                    value={"3"}
+                                                    control={<Radio color={"primary"} />}
+                                                    label={"3"}
+                                                    onClick={e => {
+                                                      this.handleRadioClick(
+                                                        e,
+                                                        index,
+                                                        index2,
+                                                        index3,
+                                                        index4,
+                                                        "3"
+                                                      );
+                                                    }}
+                                                  />
+                                                  <FormControlLabel
+                                                    value={"4"}
+                                                    control={<Radio color={"primary"} />}
+                                                    label={"4"}
+                                                    onClick={e => {
+                                                      this.handleRadioClick(
+                                                        e,
+                                                        index,
+                                                        index2,
+                                                        index3,
+                                                        index4,
+                                                        "4"
+                                                      );
+                                                    }}
+                                                  />
+                                                  <FormControlLabel
+                                                    value={"5"}
+                                                    control={<Radio color={"primary"} />}
+                                                    label={"5"}
+                                                    onClick={e => {
+                                                      this.handleRadioClick(
+                                                        e,
+                                                        index,
+                                                        index2,
+                                                        index3,
+                                                        index4,
+                                                        "5"
+                                                      );
+                                                    }}
+                                                  />
+                                                </RadioGroup>
+                                              </FormControl>
+                                            </ListItemSecondaryAction>
                                           </ListItem>
                                         </div>
                                       );
