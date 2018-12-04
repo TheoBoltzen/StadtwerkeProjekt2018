@@ -89,7 +89,6 @@ class MainCategoryCreation extends React.Component<Props, State> {
     this.forceUpdate();
   };
 
-  // TODO Tooltip nach Fertigstellung der Komponente updaten
   description =
     "Durch einen Klick auf ein Plus-Symbol, wird zu der darüber liegenden Kompetenzkategorie " +
     "eine Hauptkategorie erstellt. Doppelklick auf den Namen der Hauptkategorie ermöglicht " +

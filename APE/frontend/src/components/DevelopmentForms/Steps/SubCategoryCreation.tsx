@@ -98,7 +98,6 @@ class SubCategoryCreation extends React.Component<Props, State> {
     this.forceUpdate();
   };
 
-  // TODO Tooltip nach Fertigstellung der Komponente updaten
   description =
     "Durch einen Klick auf ein Plus-Symbol, wird zu der darüber liegenden Hauptkategorie " +
     "eine Unterkategorie erstellt. Doppelklick auf den Namen der Unterkategorie ermöglicht " +
