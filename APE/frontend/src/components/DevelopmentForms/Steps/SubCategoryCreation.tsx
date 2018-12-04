@@ -157,6 +157,11 @@ class SubCategoryCreation extends React.Component<Props, State> {
                             name={name}
                             style={{ color: "black", width: 800 }}
                           />
+                          {developmentForm[index].MainCategories[index2].open ? (
+                            <ExpandLess />
+                          ) : (
+                            <ExpandMore />
+                          )}
                         </ListItem>
                         <Collapse
                           in={developmentForm[index].MainCategories[index2].open}
