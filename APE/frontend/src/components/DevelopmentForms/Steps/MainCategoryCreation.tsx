@@ -19,6 +19,7 @@ import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import "./MainCategoryCreation.css";
+import { SubCategory } from "./SubCategoryCreation";
 
 interface Props extends WithStyles<typeof styles> {
   developmentForm: Competence[];
@@ -35,6 +36,8 @@ interface State {
 export interface MainCategory {
   name: string;
   checked: boolean;
+  open: boolean;
+  SubCategories: SubCategory[];
 }
 
 const theme = createMuiTheme({
@@ -87,7 +90,10 @@ class MainCategoryCreation extends React.Component<Props, State> {
   };
 
   // TODO Tooltip nach Fertigstellung der Komponente updaten
-  description = "Tooltip Implementation für diesen Schritt nicht vergessen!";
+  description =
+    "Durch einen Klick auf ein Plus-Symbol, wird zu der darüber liegenden Kompetenzkategorie " +
+    "eine Hauptkategorie erstellt. Doppelklick auf den Namen der Hauptkategorie ermöglicht " +
+    "es diese umzubennen.";
 
   render() {
     const { developmentForm, classes, onClickAddButton } = this.props;
@@ -148,6 +154,7 @@ class MainCategoryCreation extends React.Component<Props, State> {
                             onChange={e => {
                               this.handleRename(e, index, index2);
                             }}
+                            style={{ width: 800 }}
                             name={name}
                           />
                         </ListItem>

@@ -14,6 +14,7 @@ import { getSteps } from "../../helpers";
 import { DepartmentProfession } from "./Steps/department-profession";
 import CompetenceCreation, { Competence } from "./Steps/CompetenceCreation";
 import MainCategoryCreation from "./Steps/MainCategoryCreation";
+import SubCategoryCreation from "./Steps/SubCategoryCreation";
 
 interface State {
   activeStep: number;
@@ -63,6 +64,17 @@ class DevelopmentStepper extends React.Component<Props, State> {
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories.push({
       name: "Hauptkategorie",
+      checked: false,
+      SubCategories: [],
+      open: true
+    });
+    this.setState({ developmentForm });
+  };
+
+  addSubCategory = (index, index2) => {
+    const developmentForm = this.state.developmentForm;
+    developmentForm[index].MainCategories[index2].SubCategories.push({
+      name: "Unterkategorie",
       checked: false
     });
     this.setState({ developmentForm });
@@ -92,6 +104,15 @@ class DevelopmentStepper extends React.Component<Props, State> {
           <MainCategoryCreation
             classes={this.props.classes}
             onClickAddButton={this.addMainCategory}
+            developmentForm={this.state.developmentForm}
+            name={"developmentForm"}
+          />
+        );
+      case 3:
+        return (
+          <SubCategoryCreation
+            classes={this.props.classes}
+            onClickAddButton={this.addSubCategory}
             developmentForm={this.state.developmentForm}
             name={"developmentForm"}
           />
