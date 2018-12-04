@@ -9,3 +9,14 @@ export const getAllService = () => {
 
   return fetch(`${apiURL}/services/getAllDevelopmentSheets`, requestOptions).then(handleResponse);
 };
+
+export const getAllCompetencesService = () => {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getAllCompetencyCategories`, requestOptions).then(
+    handleResponse
+  );
+};
