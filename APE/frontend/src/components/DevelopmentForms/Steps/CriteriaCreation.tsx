@@ -19,21 +19,19 @@ import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import "./MainCategoryCreation.css";
-import { Criteria } from "./CriteriaCreation";
 
 interface Props extends WithStyles<typeof styles> {
   developmentForm: Competence[];
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
-  onClickAddButton: (index, index2) => void;
+  onClickAddButton: (index, index2, index3) => void;
   classes: any;
   name: string;
 }
 
-export interface SubCategory {
+export interface Criteria {
   name: string;
   checked: boolean;
-  open: boolean;
-  Criteria: Criteria[];
+  value: number;
 }
 
 const theme = createMuiTheme({
@@ -50,7 +48,7 @@ const theme = createMuiTheme({
   }
 });
 
-class SubCategoryCreation extends React.Component<Props> {
+class CriteriaCreation extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
 
@@ -59,22 +57,29 @@ class SubCategoryCreation extends React.Component<Props> {
     };
   }
 
-  handleRename = (event: any, index, index2, index3) => {
+  handleRename = (event: any, index, index2, index3, index4) => {
     const target = event.currentTarget;
-    this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].name =
-      target.value;
+    this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+      index4
+    ].name = target.value;
 
     // forceUpdate() eher hacky, aber Ansatz über this.setState(this.state) zum rerendern funktioniert nicht.
     this.forceUpdate();
   };
 
-  handleToggle = (event: any, index, index2, index3) => {
-    if (this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].checked) {
-      this.props.developmentForm[index].MainCategories[index2].SubCategories[
-        index3
+  handleToggle = (event: any, index, index2, index3, index4) => {
+    if (
+      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+        index4
+      ].checked
+    ) {
+      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+        index4
       ].checked = false;
     } else {
-      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].checked = true;
+      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+        index4
+      ].checked = true;
     }
     this.forceUpdate();
   };
@@ -97,6 +102,16 @@ class SubCategoryCreation extends React.Component<Props> {
     this.forceUpdate();
   };
 
+  handleSubCategoryClick = (event: any, index, index2, index3) => {
+    if (this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open) {
+      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open = false;
+    } else {
+      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open = true;
+    }
+    this.forceUpdate();
+  };
+
+  //TODO Tooltip anpassen
   description =
     "Durch einen Klick auf ein Plus-Symbol, wird zu der darüber liegenden Hauptkategorie " +
     "eine Unterkategorie erstellt. Doppelklick auf den Namen der Unterkategorie ermöglicht " +
@@ -142,7 +157,7 @@ class SubCategoryCreation extends React.Component<Props> {
                       <List key={index2}>
                         <ListItem
                           button
-                          dense={true}
+                          dense={false}
                           divider={true}
                           name={"developmentForm"}
                           className={classes.nested}
@@ -171,51 +186,103 @@ class SubCategoryCreation extends React.Component<Props> {
                               return (
                                 <div key={index3}>
                                   <ListItem
+                                    button
                                     dense={true}
                                     divider={true}
                                     name={"developmentForm"}
-                                    className={classes.nested}>
-                                    <MuiThemeProvider theme={theme}>
-                                      <Checkbox
-                                        checked={
-                                          this.props.developmentForm[index].MainCategories[index2]
-                                            .SubCategories[index3].checked
-                                        }
-                                        onClick={e => {
-                                          this.handleToggle(e, index, index2, index3);
-                                        }}
-                                      />
-                                    </MuiThemeProvider>
+                                    className={classes.nested}
+                                    onClick={e => {
+                                      this.handleSubCategoryClick(e, index, index2, index3);
+                                    }}>
                                     <InputBase
+                                      disabled={true}
                                       className={classes.margin}
                                       value={
                                         developmentForm[index].MainCategories[index2].SubCategories[
                                           index3
                                         ].name
                                       }
-                                      onChange={e => {
-                                        this.handleRename(e, index, index2, index3);
-                                      }}
-                                      style={{ width: 800 }}
+                                      style={{ color: "black", width: 800 }}
                                       name={name}
                                     />
+                                    {developmentForm[index].MainCategories[index2].SubCategories[
+                                      index3
+                                    ].open ? (
+                                      <ExpandLess />
+                                    ) : (
+                                      <ExpandMore />
+                                    )}
                                   </ListItem>
+
+                                  <Collapse
+                                    in={
+                                      developmentForm[index].MainCategories[index2].SubCategories[
+                                        index3
+                                      ].open
+                                    }
+                                    timeout={"auto"}
+                                    unmountOnExit>
+                                    {developmentForm[index].MainCategories[index2].SubCategories[
+                                      index3
+                                    ].Criteria.map((criteria, index4) => {
+                                      return (
+                                        <div key={index4}>
+                                          <ListItem
+                                            dense={true}
+                                            divider={true}
+                                            name={"developmentForm"}
+                                            className={classes.nested}>
+                                            <MuiThemeProvider theme={theme}>
+                                              <Checkbox
+                                                checked={
+                                                  this.props.developmentForm[index].MainCategories[
+                                                    index2
+                                                  ].SubCategories[index3].Criteria[index4].checked
+                                                }
+                                                onClick={e => {
+                                                  this.handleToggle(
+                                                    e,
+                                                    index,
+                                                    index2,
+                                                    index3,
+                                                    index4
+                                                  );
+                                                }}
+                                              />
+                                            </MuiThemeProvider>
+                                            <InputBase
+                                              className={classes.margin}
+                                              value={
+                                                developmentForm[index].MainCategories[index2]
+                                                  .SubCategories[index3].Criteria[index4].name
+                                              }
+                                              onChange={e => {
+                                                this.handleRename(e, index, index2, index3, index4);
+                                              }}
+                                              style={{ width: 800 }}
+                                              name={name}
+                                            />
+                                          </ListItem>
+                                        </div>
+                                      );
+                                    })}
+                                    <div className={"buttonFlex"}>
+                                      <div />
+                                      <Button
+                                        color={"primary"}
+                                        variant={"fab"}
+                                        aria-label={"Add"}
+                                        mini
+                                        className={"AddIcon"}
+                                        onClick={() => onClickAddButton(index, index2, index3)}>
+                                        <AddIcon />
+                                      </Button>
+                                    </div>
+                                  </Collapse>
                                 </div>
                               );
                             }
                           )}
-                          <div className={"buttonFlex"}>
-                            <div />
-                            <Button
-                              color={"primary"}
-                              variant={"fab"}
-                              aria-label={"Add"}
-                              mini
-                              className={"AddIcon"}
-                              onClick={() => onClickAddButton(index, index2)}>
-                              <AddIcon />
-                            </Button>
-                          </div>
                         </Collapse>
                       </List>
                     );
@@ -230,4 +297,4 @@ class SubCategoryCreation extends React.Component<Props> {
   }
 }
 
-export default withStyles(styles)(SubCategoryCreation);
+export default withStyles(styles)(CriteriaCreation);

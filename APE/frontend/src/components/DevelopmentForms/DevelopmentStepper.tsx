@@ -15,6 +15,7 @@ import { DepartmentProfession } from "./Steps/department-profession";
 import CompetenceCreation, { Competence } from "./Steps/CompetenceCreation";
 import MainCategoryCreation from "./Steps/MainCategoryCreation";
 import SubCategoryCreation from "./Steps/SubCategoryCreation";
+import CriteriaCreation from "./Steps/CriteriaCreation";
 
 interface State {
   activeStep: number;
@@ -75,7 +76,19 @@ class DevelopmentStepper extends React.Component<Props, State> {
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories[index2].SubCategories.push({
       name: "Unterkategorie",
-      checked: false
+      checked: false,
+      open: true,
+      Criteria: []
+    });
+    this.setState({ developmentForm });
+  };
+
+  addCriteria = (index, index2, index3) => {
+    const developmentForm = this.state.developmentForm;
+    developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria.push({
+      name: "Kriterium",
+      checked: false,
+      value: 3
     });
     this.setState({ developmentForm });
   };
@@ -117,8 +130,17 @@ class DevelopmentStepper extends React.Component<Props, State> {
             name={"developmentForm"}
           />
         );
+      case 4:
+        return (
+          <CriteriaCreation
+            classes={this.props.classes}
+            onClickAddButton={this.addCriteria}
+            developmentForm={this.state.developmentForm}
+            name={"developmentForm"}
+          />
+        );
       default:
-        return "Platzhalter";
+        return "Ups, hier lief etwas schief!";
     }
   };
 

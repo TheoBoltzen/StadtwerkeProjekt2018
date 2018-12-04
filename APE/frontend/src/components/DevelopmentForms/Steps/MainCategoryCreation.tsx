@@ -29,10 +29,6 @@ interface Props extends WithStyles<typeof styles> {
   name: string;
 }
 
-interface State {
-  checked: number[];
-}
-
 export interface MainCategory {
   name: string;
   checked: boolean;
@@ -54,7 +50,7 @@ const theme = createMuiTheme({
   }
 });
 
-class MainCategoryCreation extends React.Component<Props, State> {
+class MainCategoryCreation extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
 
