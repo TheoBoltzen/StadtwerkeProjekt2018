@@ -22,7 +22,6 @@ interface State {
   department: string;
   profession: string;
   developmentForm: Competence[];
-  competenceCounter: number;
 }
 
 interface Props extends WithStyles<typeof styles> {}
@@ -35,8 +34,7 @@ class DevelopmentStepper extends React.Component<Props, State> {
       activeStep: 0,
       department: "",
       profession: "",
-      developmentForm: [],
-      competenceCounter: 1
+      developmentForm: []
     };
   }
 
@@ -49,7 +47,6 @@ class DevelopmentStepper extends React.Component<Props, State> {
 
   addCompetence = () => {
     const developmentForm = this.state.developmentForm;
-    let competenceCounter = this.state.competenceCounter;
     developmentForm.push({
       name: "Kompetenzkategorie",
       checked: false,
@@ -57,8 +54,6 @@ class DevelopmentStepper extends React.Component<Props, State> {
       MainCategories: []
     });
     this.setState({ developmentForm });
-    competenceCounter = competenceCounter + 1;
-    this.setState({ competenceCounter });
   };
 
   addMainCategory = index => {
