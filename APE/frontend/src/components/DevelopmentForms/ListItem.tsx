@@ -11,10 +11,11 @@ interface Props {
   date: string;
   version: string;
   isHeader?: boolean;
+  onClick?: any;
 }
 
 export const ListItem = (props: Props) => {
-  const { abteilung, job, date, version, isHeader = false } = props;
+  const { abteilung, job, date, version, isHeader = false, onClick } = props;
 
   return (
     <div className={isHeader ? "headerRow" : "item"}>
@@ -30,9 +31,10 @@ export const ListItem = (props: Props) => {
                 <div>
                   <Tooltip title={"Detailansicht"}>
                     <IconButton>
-                      <SearchIcon fontSize="small" />
+                      <SearchIcon fontSize="small" onClick={onClick} />
                     </IconButton>
                   </Tooltip>
+
                   <Tooltip title={"Freigeben"}>
                     <IconButton>
                       <ShareIcon fontSize="small" />

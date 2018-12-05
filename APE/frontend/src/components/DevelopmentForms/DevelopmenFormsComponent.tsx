@@ -5,14 +5,22 @@ import DevelopmentStepper from "./DevelopmentStepper";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./DevelopmentForms";
 import { CircularProgress } from "@material-ui/core";
+import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 
 export class DevelopmentFormsComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
 
     this.state = {
-      visibilityIndex: false
+      visibilityIndex: false,
+      isHidden: true
     };
+  }
+
+  handleChildClick() {
+    this.setState({
+      isHidden: !this.state.isHidden
+    });
   }
 
   componentDidMount() {
@@ -30,6 +38,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
 
   getContent = () => {
     const { developmentForms, loading } = this.props;
+    const { isHidden } = this.state;
 
     return this.state.visibilityIndex ? (
       <div className={"switchRoot"}>
@@ -41,7 +50,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
         <Button onClick={this.changeVisibilityIndex}>Entwicklungsbogen erstellen</Button>
         {loading ? (
           <CircularProgress />
-        ) : (
+        ) : isHidden ? ( //--------
           <div className={"frame center"}>
             <ListItem
               isHeader={true}
@@ -58,9 +67,15 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                   job={devForm.education}
                   date={this.doFormatDate(devForm.createdAt)}
                   version={devForm.version}
+                  onClick={this.handleChildClick.bind(this)}
                 />
               );
             })}
+            ;
+          </div>
+        ) : (
+          <div>
+            <DetailviewDevelopmentSheetComponent onClick={this.handleChildClick.bind(this)} />
           </div>
         )}
         ;
