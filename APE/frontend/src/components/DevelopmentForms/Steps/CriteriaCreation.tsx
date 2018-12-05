@@ -131,9 +131,9 @@ class CriteriaCreation extends React.Component<Props> {
 
   //TODO Tooltip anpassen
   description =
-    "Durch einen Klick auf ein Plus-Symbol, wird zu der darüber liegenden Hauptkategorie " +
-    "eine Unterkategorie erstellt. Doppelklick auf den Namen der Unterkategorie ermöglicht " +
-    "es diese umzubennen.";
+    "Durch einen Klick auf ein Plus-Symbol, wird zu der darüber liegenden Unterkategorie " +
+    "ein Kriterium erstellt. Durch die rechts davon liegenden Auswahlfelder kann  " +
+    "der Wert des Soll-Zustandes festgelegt werden.";
 
   render() {
     const { developmentForm, classes, onClickAddButton } = this.props;
@@ -142,7 +142,7 @@ class CriteriaCreation extends React.Component<Props> {
       <div className={"step3"}>
         <div className={"taskDescription"}>
           <Typography variant={"subtitle2"}>
-            Erstellung, Benennung und Auswahl von Unterkategorien für zugehörige Hauptkategorien
+            Erstellung und Benennung von Kriteren, sowie die Festlegung des Soll-Zustandes.
           </Typography>
           <Tooltip title={this.description}>
             <InfoIcon className={classes.infoIcon} color={"disabled"} />

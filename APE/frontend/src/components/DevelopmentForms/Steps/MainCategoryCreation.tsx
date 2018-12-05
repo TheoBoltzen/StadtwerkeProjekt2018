@@ -120,7 +120,7 @@ class MainCategoryCreation extends React.Component<Props> {
                     className={classes.disabledInputBase}
                     value={developmentForm[index].name}
                     name={name}
-                    style={{ color: "black" }}
+                    style={{ color: "black", width: 800 }}
                   />
                   {developmentForm[index].open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
