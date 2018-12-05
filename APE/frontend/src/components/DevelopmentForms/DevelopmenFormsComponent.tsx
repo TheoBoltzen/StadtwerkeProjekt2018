@@ -82,7 +82,6 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
             })}
           </div>
         )}
-        ;
       </div>
     );
   };
