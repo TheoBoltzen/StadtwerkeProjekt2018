@@ -6,7 +6,8 @@ import {
   StepLabel,
   Typography,
   Button,
-  withStyles
+  withStyles,
+  CircularProgress
 } from "@material-ui/core";
 import "./DevelopmentStepper.css";
 import { styles } from "./mUIstyles";
@@ -143,6 +144,7 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
   };
 
   getStepContent = stepIndex => {
+    const { loading } = this.props;
     switch (stepIndex) {
       case 0:
         return (
@@ -153,7 +155,9 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
           />
         );
       case 1:
-        return (
+        return loading ? (
+          <CircularProgress />
+        ) : (
           <CompetenceCreation
             developmentForm={this.state.developmentForm}
             onClickAddButton={this.addCompetence}

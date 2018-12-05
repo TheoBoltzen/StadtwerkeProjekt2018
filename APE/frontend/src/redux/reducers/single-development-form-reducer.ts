@@ -32,12 +32,14 @@ export const singleDevelopmentFormReducer = (
     case developmentFormConstants.GETALLCOMPETENCES_SUCCESS:
       return {
         ...state,
-        competences: action.competences
+        competences: action.competences,
+        loading: false
       };
     case developmentFormConstants.GETALLCOMPETENCES_FAILURE:
       return {
         ...state,
-        error: action.error
+        error: action.error,
+        loading: false
       };
     default:
       return state;
