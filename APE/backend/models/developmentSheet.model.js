@@ -2,13 +2,12 @@ module.exports = (sequelize, Sequelize) => {
   const DevelopmentSheet = sequelize.define("DevelopmentSheet", {
     id: {
       type: Sequelize.INTEGER,
-      allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
     name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     department: {
       type: Sequelize.STRING,

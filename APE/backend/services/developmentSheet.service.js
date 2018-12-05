@@ -15,18 +15,13 @@ async function findAll() {
 
 async function create(devSheetParam) {
   // validate
-  if (await DevSheet.findOne({ where: { id: devSheetParam.id } })) {
-    throw 'DevelopmentSheet "' + devSheetParam.id + '" is already taken';
-  } else {
-    const newDevSheet = DevSheet.build({
-      id: devSheetParam.id,
-      name: devSheetParam.name,
-      department: devSheetParam.department,
-      education: devSheetParam.education
-    });
-    // save user in db
-    newDevSheet.save().then(() => {});
-  }
+  const newDevSheet = DevSheet.build({
+    //id: devSheetParam.id,
+    department: devSheetParam.department,
+    education: devSheetParam.education
+  });
+  // save user in db
+  newDevSheet.save().then(() => {});
 }
 
 async function getById(id) {

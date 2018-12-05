@@ -6,7 +6,7 @@ import logo from "../../resources/swk.svg";
 import "./NavigationComponent.css";
 import { AllProps, State } from "./Navigation";
 import { Link } from "react-router-dom";
-import { RouterPathsConstants } from "../../constants";
+import { RoleConstants, RouterPathsConstants } from "../../constants";
 
 export class NavigationComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -15,23 +15,26 @@ export class NavigationComponent extends React.Component<AllProps, State> {
     this.state = {
       redirect: false
     };
+
+    this.props.getRole(this.props.user.token);
   }
 
   handleLogout = () => {
+    this.props.successAlert("Erfolgreich abgemeldet");
     this.setState({ redirect: true });
   };
 
   render() {
     const { redirect } = this.state;
     const {
-      user: { role },
       history: {
         location: { pathname }
-      }
+      },
+      role
     } = this.props;
 
-    const isAdmin = role === "admin";
-    const isTrainer = role === "trainer";
+    const isAdmin = role === RoleConstants.admin;
+    const isTrainer = role === RoleConstants.trainer;
 
     if (redirect) {
       return <Redirect to={"/login"} />;

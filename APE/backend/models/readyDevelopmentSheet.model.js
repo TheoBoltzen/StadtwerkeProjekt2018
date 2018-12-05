@@ -1,9 +1,18 @@
 module.exports = (sequelize, Sequelize) => {
   const ReadyDevelopmentSheet = sequelize.define("ReadyDevelopmentSheet", {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     version: {
       type: Sequelize.INTEGER,
-      allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      allowNull: false
+    },
+    goalcross: {
+      type: Sequelize.INTEGER,
+      allowNull: true
     }
   });
 
