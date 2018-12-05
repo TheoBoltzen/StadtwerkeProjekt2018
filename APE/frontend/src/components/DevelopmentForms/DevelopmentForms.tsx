@@ -4,6 +4,10 @@ import { ApplicationState } from "../../redux/reducers";
 import { getAll } from "../../redux/actions/development-forms-actions";
 import { connect } from "react-redux";
 
+export interface State {
+  visibilityIndex: boolean;
+}
+
 interface Props {}
 
 interface ReduxStateProps {

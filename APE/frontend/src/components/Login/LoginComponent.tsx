@@ -10,6 +10,7 @@ import "./LoginComponent.css";
 import { AllProps, State } from "./Login";
 import logo from "../../resources/swk.svg";
 import CustomizedInput from "../General/CustomizedInput";
+import Typography from "@material-ui/core/es/Typography/Typography";
 
 export class LoginComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -54,11 +55,14 @@ export class LoginComponent extends React.Component<AllProps, State> {
           <img className={"logo"} src={logo} />
         </header>
 
-        <h1 className={"header"}>Entwicklungsbogentool</h1>
-
+        <Typography variant={"h3"} className={"header"}>
+          Entwicklungsbogentool
+        </Typography>
         <div className={"loginContainer"}>
           <div className={"textBox"}>
-            Am Ende deiner Ausbildung weißt du, was du willst, wer du bist und was du kannst
+            <Typography variant={"h5"}>
+              Am Ende deiner Ausbildung weißt Du, was Du willst, wer Du bist und was Du kannst
+            </Typography>
           </div>
 
           <div

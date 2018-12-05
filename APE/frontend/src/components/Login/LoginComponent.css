@@ -65,3 +65,7 @@ label + .CustomizedInputs-bootstrapRoot-2 {
   border-top-left-radius: 13px;
   border-bottom-left-radius: 13px;
 }
+
+.all {
+  background-color: #f9f9f9;
+}
