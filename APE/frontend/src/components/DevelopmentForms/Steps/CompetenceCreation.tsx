@@ -120,7 +120,7 @@ class CompetenceCreation extends React.Component<Props> {
               aria-label={"Add"}
               mini
               className={"AddIcon"}
-              onClick={() => onClickAddButton}>
+              onClick={onClickAddButton}>
               <AddIcon />
             </Button>
           </div>
