@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { Graph } from "./graph";
 //import "./DetailviewDevelopmentSheetComponent.css";
 import { List, ListItem } from "@material-ui/core";
 import Button from "@material-ui/core/es/Button/Button";
@@ -30,8 +30,7 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
       </div>
       <div>
         <div>
-          {" "}
-          //diagram
+          <Graph />
           <List>{array && array.map((i, index) => <ListItem key={index}>{i.y}</ListItem>)}</List>
         </div>
       </div>
