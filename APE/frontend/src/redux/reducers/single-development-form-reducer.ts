@@ -1,15 +1,15 @@
 import { Action } from "redux";
-import { Competence } from "../../types";
+import { CompetenceFetch } from "../../types";
 import { developmentFormConstants } from "../../constants";
 
 interface ActionSingleDevelopmentForm extends Action {
-  competences: Competence[];
+  competences: CompetenceFetch[];
   error: string;
 }
 
 export interface SingleDevelopmentFormReducer {
   readonly loading: boolean;
-  readonly competences: Competence[];
+  readonly competences: CompetenceFetch[];
   readonly error: string;
 }
 

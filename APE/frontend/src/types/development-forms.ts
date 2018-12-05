@@ -6,7 +6,7 @@ export interface DevelopmentForm {
   readonly createdAt: string;
 }
 
-export interface Competence {
+export interface CompetenceFetch {
   readonly name: string;
   readonly description: string;
   readonly createdAt: string;

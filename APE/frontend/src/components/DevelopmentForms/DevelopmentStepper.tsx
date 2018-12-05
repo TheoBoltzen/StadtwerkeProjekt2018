@@ -16,6 +16,10 @@ import CompetenceCreation, { Competence } from "./Steps/CompetenceCreation";
 import MainCategoryCreation from "./Steps/MainCategoryCreation";
 import SubCategoryCreation from "./Steps/SubCategoryCreation";
 import CriteriaCreation from "./Steps/CriteriaCreation";
+import { ApplicationState } from "../../redux/reducers";
+import { connect } from "react-redux";
+import { CompetenceFetch } from "../../types";
+import { getAllCompetences } from "../../redux/actions/development-forms-actions";
 
 interface State {
   activeStep: number;
@@ -25,10 +29,35 @@ interface State {
   competenceCounter: number;
 }
 
+interface ReduxStateProps {
+  readonly loading: boolean;
+  readonly competences: CompetenceFetch[];
+}
+
+interface ReduxDispatchProps {
+  readonly getAllCompetences: () => void;
+}
+
 interface Props extends WithStyles<typeof styles> {}
 
-class DevelopmentStepper extends React.Component<Props, State> {
-  constructor(props: Props) {
+export type AllProps = ReduxStateProps & ReduxDispatchProps & Props;
+
+const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
+  const { loading, competences } = state.singleDevelopmentFormReducer;
+  return {
+    loading,
+    competences
+  };
+};
+
+const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
+  return {
+    getAllCompetences: () => dispatch(getAllCompetences())
+  };
+};
+
+class DevelopmentStepper extends React.Component<AllProps, State> {
+  constructor(props: AllProps) {
     super(props);
 
     this.state = {
@@ -38,6 +67,26 @@ class DevelopmentStepper extends React.Component<Props, State> {
       developmentForm: [],
       competenceCounter: 1
     };
+  }
+
+  componentWillReceiveProps(nextProps: AllProps) {
+    const { developmentForm } = this.state;
+    const { competences } = this.props;
+    if (nextProps.competences !== competences) {
+      const developmentFormState = developmentForm;
+      nextProps.competences.map(competence => {
+        if (!developmentFormState.find(c => c.name === competence.name)) {
+          developmentFormState.push({
+            name: competence.name,
+            checked: false,
+            open: false,
+            MainCategories: []
+          });
+        }
+      });
+
+      this.setState({ developmentForm: developmentFormState });
+    }
   }
 
   handleChange = (event: any) => {
@@ -145,6 +194,11 @@ class DevelopmentStepper extends React.Component<Props, State> {
   };
 
   handleNext = () => {
+    const { activeStep } = this.state;
+    if (activeStep === 0) {
+      this.props.getAllCompetences();
+    }
+
     this.setState(state => ({
       activeStep: state.activeStep + 1
     }));
@@ -209,4 +263,11 @@ class DevelopmentStepper extends React.Component<Props, State> {
   }
 }
 
-export default withStyles(styles)(DevelopmentStepper);
+const connectedDevelopmentStepper = withStyles(styles)(
+  connect<ReduxStateProps, ReduxDispatchProps, Props>(
+    mapStateToProps,
+    mapDispatchToProps
+  )(DevelopmentStepper)
+);
+
+export { connectedDevelopmentStepper as DevelopmentStepper };

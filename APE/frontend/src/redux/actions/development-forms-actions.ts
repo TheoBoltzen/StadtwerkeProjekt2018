@@ -1,5 +1,5 @@
 import { developmentFormConstants } from "../../constants";
-import { Competence, DevelopmentForm } from "../../types";
+import { CompetenceFetch, DevelopmentForm } from "../../types";
 import { Dispatch } from "redux";
 import { getAllCompetencesService, getAllService } from "../../services/development-forms-services";
 import { errorAlert } from "./alert";
@@ -31,7 +31,7 @@ export const getAllCompetences = () => {
   const request = () => {
     return { type: developmentFormConstants.GETALLCOMPETENCES_REQUEST };
   };
-  const success = (competences: Competence[]) => {
+  const success = (competences: CompetenceFetch[]) => {
     return { type: developmentFormConstants.GETALLCOMPETENCES_SUCCESS, competences };
   };
 
