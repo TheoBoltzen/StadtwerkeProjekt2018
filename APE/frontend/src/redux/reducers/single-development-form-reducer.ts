@@ -1,21 +1,24 @@
 import { Action } from "redux";
-import { CompetenceFetch } from "../../types";
+import { CompetenceFetch, MainCategoryFetch } from "../../types";
 import { developmentFormConstants } from "../../constants";
 
 interface ActionSingleDevelopmentForm extends Action {
   competences: CompetenceFetch[];
+  mainCategories: MainCategoryFetch[];
   error: string;
 }
 
 export interface SingleDevelopmentFormReducer {
   readonly loading: boolean;
   readonly competences: CompetenceFetch[];
+  readonly mainCategories: MainCategoryFetch[];
   readonly error: string;
 }
 
 const initialState: SingleDevelopmentFormReducer = {
   loading: false,
   competences: [],
+  mainCategories: [],
   error: ""
 };
 
@@ -41,6 +44,25 @@ export const singleDevelopmentFormReducer = (
         error: action.error,
         loading: false
       };
+
+    case developmentFormConstants.GETALLMAINCATEGORIES_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case developmentFormConstants.GETALLMAINCATEGORIES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        mainCategories: action.mainCategories
+      };
+    case developmentFormConstants.GETALLMAINCATEGORIES_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        loading: false
+      };
+
     default:
       return state;
   }
