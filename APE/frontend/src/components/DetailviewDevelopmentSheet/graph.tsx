@@ -14,6 +14,12 @@ export const Graph = () => {
 
   var bewertung = ["in vollem Maße", "weitgehend", "teilweise", "unzureichend", "nicht"];
 
+  /*  return (
+      <div>
+
+      </div>
+  );*/
+
   return (
     <div>
       <LineChart
@@ -31,10 +37,18 @@ export const Graph = () => {
         data={[
           [
             { x: "teilweise", y: "freundliches und aufgeschlossenes Auftreten" },
-            { x: "teilweise", y: "gepflegtes Erscheinungsbild" },
+            { x: "weitgehend", y: "gepflegtes Erscheinungsbild" },
             { x: "teilweise", y: "geht auf Kundenwünsche ein" },
             { x: "teilweise", y: "zeigt sich kooperativ" },
-            { x: "teilweise", y: "reagiert freundlich" },
+            { x: "weitgehend", y: "reagiert freundlich" },
+            { x: "teilweise", y: "zeigt Hilfsbereitschaft" }
+          ],
+          [
+            { x: "teilweise", y: "freundliches und aufgeschlossenes Auftreten" },
+            { x: "teilweise", y: "gepflegtes Erscheinungsbild" },
+            { x: "unzureichend", y: "geht auf Kundenwünsche ein" },
+            { x: "teilweise", y: "zeigt sich kooperativ" },
+            { x: "in vollem Maße", y: "reagiert freundlich" },
             { x: "teilweise", y: "zeigt Hilfsbereitschaft" }
           ]
         ]}
