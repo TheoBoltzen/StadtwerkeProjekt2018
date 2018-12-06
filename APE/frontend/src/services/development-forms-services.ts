@@ -32,3 +32,15 @@ export const getAllMainCategoriesService = (competenceName: string) => {
     handleResponse
   );
 };
+
+export const getAllSubCategoriesService = (mainCategoryName: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ mainCategoryName })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getSubCategoriesByMainCategory`, requestOptions).then(
+    handleResponse
+  );
+};

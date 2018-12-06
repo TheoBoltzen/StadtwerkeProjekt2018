@@ -1,5 +1,5 @@
 import { developmentFormConstants } from "../../constants";
-import { CompetenceFetch, DevelopmentForm, MainCategoryFetch } from "../../types";
+import { CompetenceFetch, DevelopmentForm, MainCategoryFetch, SubCategoryFetch } from "../../types";
 import { Dispatch } from "redux";
 import {
   getAllCompetencesService,
@@ -74,6 +74,32 @@ export const getAllMainCategories = (competenceName: string) => {
 
     getAllMainCategoriesService(competenceName).then(
       mainCategories => dispatch(success(mainCategories)),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const getAllSubCategories = (mainCategoryName: string) => {
+  const request = mainCategoryName => {
+    return { type: developmentFormConstants.GETALLSUBCATEGORIES_REQUEST, mainCategoryName };
+  };
+
+  const success = (subCategories: SubCategoryFetch[]) => {
+    return { type: developmentFormConstants.GETALLSUBCATEGORIES_SUCCESS, subCategories };
+  };
+
+  const failure = (error: string) => {
+    return { type: developmentFormConstants.GETALLSUBCATEGORIES_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request(mainCategoryName));
+
+    getAllMainCategoriesService(mainCategoryName).then(
+      subCategories => dispatch(success(subCategories)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));
