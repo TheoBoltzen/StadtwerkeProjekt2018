@@ -13,7 +13,7 @@ module.exports = app => {
     guard(["admin", "trainer"]),
     MainCategory.getAll
   );
-  app.get(
+  app.post(
     "/services/getMainCategoriesByCompetencyCategory",
     guard(["admin", "trainer"]),
     MainCategory.getAllByCompetencyCategory
