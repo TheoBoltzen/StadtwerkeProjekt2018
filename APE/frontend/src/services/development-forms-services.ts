@@ -20,3 +20,15 @@ export const getAllCompetencesService = () => {
     handleResponse
   );
 };
+
+export const getAllMainCategoriesService = (competenceName: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ competenceName })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getMainCategoriesByCompetencyCategory`, requestOptions).then(
+    handleResponse
+  );
+};

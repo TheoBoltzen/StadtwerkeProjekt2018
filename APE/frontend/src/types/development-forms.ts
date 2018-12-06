@@ -12,3 +12,11 @@ export interface CompetenceFetch {
   readonly createdAt: string;
   readonly updatedAt: string;
 }
+
+export interface MainCategoryFetch {
+  readonly name: string;
+  readonly description: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly CompetencyCategoryName: string;
+}
