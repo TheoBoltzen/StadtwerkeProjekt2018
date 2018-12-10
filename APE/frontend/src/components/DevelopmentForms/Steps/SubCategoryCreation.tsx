@@ -189,7 +189,7 @@ class SubCategoryCreation extends React.Component<Props> {
                                       />
                                     </MuiThemeProvider>
                                     <InputBase
-                                      className={classes.margin}
+                                      className={classes.nested}
                                       value={
                                         developmentForm[index].MainCategories[index2].SubCategories[
                                           index3
