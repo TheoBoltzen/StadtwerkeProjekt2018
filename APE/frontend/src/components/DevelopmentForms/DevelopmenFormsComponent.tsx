@@ -40,6 +40,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     const { developmentForms, loading } = this.props;
     const { isHidden } = this.state;
 
+    //DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
     return this.state.visibilityIndex ? (
       <div className={"switchRoot"}>
         <Button onClick={this.changeVisibilityIndex}>Zurück</Button>
@@ -50,7 +51,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
         <Button onClick={this.changeVisibilityIndex}>Entwicklungsbogen erstellen</Button>
         {loading ? (
           <CircularProgress />
-        ) : isHidden ? ( //--------
+        ) : isHidden ? (
           <div className={"frame center"}>
             <ListItem
               isHeader={true}

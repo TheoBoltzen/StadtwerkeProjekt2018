@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Graph } from "./graph";
-//import "./DetailviewDevelopmentSheetComponent.css";
-import { List, ListItem } from "@material-ui/core";
+import { LabelWithTextfield } from "./LabelWithTextfield";
+import "./DetailviewDevelopmentSheetComponent.css";
+//import { List, ListItem } from "@material-ui/core";
 import Button from "@material-ui/core/es/Button/Button";
 
 interface Props {
@@ -13,27 +14,69 @@ interface Props {
 export const DetailviewDevelopmentSheetComponent = (props: Props) => {
   const { onClick } = props;
 
-  const array = [
-    { x: 1, y: "freundliches Erscheinungsbild" },
-    { x: 1, y: "gepflegtes Aussehen" },
-    { x: 1, y: "geht auf Kundenwünsche ein" },
-    { x: 1, y: "zeigt sicht kooperativ in der Zusammenarbeit" },
-    { x: 1, y: "reagiert flexibel und schnell auf Anforderungen" },
-    { x: 1, y: "zeigt Hilfsbereitschaft" }
+  var kriterien = [
+    "freundliches und aufgeschlossenes Auftreten",
+    "gepflegtes Erscheinungsbild",
+    "geht auf Kundenwünsche ein",
+    "zeigt sich kooperativ",
+    "reagiert freundlich",
+    "zeigt Hilfsbereitschaft"
+    //  "Kritrium X",
+    //  "Kritrium Y",
+  ];
+
+  var ist_werte = [
+    "teilweise",
+    "teilweise",
+    "weitgehend",
+    "unzureichend",
+    "teilweise",
+    "teilweise"
+  ];
+  var soll_werte = [
+    "weitgehend",
+    "weitgehend",
+    "weitgehend",
+    "weitgehend",
+    "weitgehend",
+    "weitgehend"
   ];
 
   return (
     <div>
       <Button onClick={onClick}>Zurück</Button>
       <div>
-        <h6>Kunden- und Serviceorientierung</h6>
+        <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
       </div>
-      <div>
-        <div>
-          <Graph />
-          <List>{array && array.map((i, index) => <ListItem key={index}>{i.y}</ListItem>)}</List>
+      <div className="div-header">
+        <div className="div-left">
+          <LabelWithTextfield name={"Abteilung"} content={"KFME"} />
+          <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={"Max Mustermann"} />
+          <LabelWithTextfield name={"Auszubildener"} content={"Azu Bi"} />
+          <LabelWithTextfield name={"Ausbildungsberuf"} content={"Elektroniker"} />
         </div>
+        <div className="div-right">
+          <LabelWithTextfield name={"Datum"} content={"10.12.2018"} />
+          <LabelWithTextfield name={"Ausbildungszeitraum"} content={"06.2018 - 09.2018"} />
+          <LabelWithTextfield name={"Ausbildungsjahr"} content={"2018"} />
+          <LabelWithTextfield name={"Abwesenheitstage"} content={"4"} />
+        </div>
+      </div>
+
+      <div>
+        <h3>Soziale Kompetenzen</h3>
+        <table>
+          <tr>
+            <td>
+              <Graph ist_werte={ist_werte} soll_werte={soll_werte} kriterien={kriterien} />
+            </td>
+            <td>
+              <Graph ist_werte={ist_werte} soll_werte={soll_werte} kriterien={kriterien} />
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   );
 };
+//<List>{array && array.map((i, index) => <ListItem key={index}>{i.y}</ListItem>)}</List>

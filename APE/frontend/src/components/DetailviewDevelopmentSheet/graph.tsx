@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./graph.css";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 
 /*
 const data = [
@@ -12,37 +12,36 @@ const data = [
 */
 
 //http://recharts.org/en-US/api/XAxis#minTickGap
-export const Graph = () => {
-  var kriterien = [
-    "freundliches und aufgeschlossenes Auftreten",
-    "gepflegtes Erscheinungsbild",
-    "geht auf Kundenwünsche ein",
-    "zeigt sich kooperativ",
-    "reagiert freundlich",
-    "zeigt Hilfsbereitschaft"
-    //  "Kritrium X",
-    //  "Kritrium Y",
-  ];
+interface Props {
+  ist_werte: string[];
+  soll_werte: string[];
+  kriterien: string[];
+}
 
-  var werte = ["teilweise", "teilweise", "weitgehend", "unzureichend", "teilweise", "teilweise"];
+export const Graph = (props: Props) => {
+  const { ist_werte, soll_werte, kriterien } = props;
 
   const SimpleLineChart = () => {
-    //<Tooltip/>, <Text width={1000}/>
+    //<Tooltip/>, <Text width={1000}/>  window.innerWidth
+    //          margin={{ top: 20, right: window.innerWidth / 3, left: 10, bottom: 5 }}>
+    //margin={{ right: window.innerWidth / 3}}
+    //                payload={[{ value: 'Istwerte', type: 'line', id: 'ID01' }, { value: 'Sollwerte', type: 'line', id: 'ID01' }]}
+    var x_width = window.innerWidth / 2;
     return (
       <div id="div-graph-font">
         <LineChart
           layout="vertical"
-          width={window.innerWidth}
+          width={x_width}
           height={300}
-          data={createData(kriterien, werte)}
-          margin={{ top: 20, right: window.innerWidth / 3, left: 10, bottom: 5 }}>
+          data={createData(kriterien, ist_werte, soll_werte)}>
+          <Legend verticalAlign="top" height={36} />
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
             datakey="x"
             ticks={["in vollem Maße", "weitgehend", "teilweise", "unzureichend", "nicht"]}
             type="category"
           />
-          <YAxis dataKey="name" type="category" width={window.innerWidth / 3} />
+          <YAxis dataKey="name" type="category" width={x_width / 3} />
 
           <Line
             dataKey="a"
@@ -52,6 +51,7 @@ export const Graph = () => {
             isAnimationActive={false}
             stroke="#FFFFFF"
             opacity="0"
+            legendType="none"
           />
           <Line
             dataKey="b"
@@ -61,6 +61,7 @@ export const Graph = () => {
             isAnimationActive={false}
             stroke="#FFFFFF"
             opacity="0"
+            legendType="none"
           />
           <Line
             dataKey="c"
@@ -70,6 +71,7 @@ export const Graph = () => {
             isAnimationActive={false}
             stroke="#FFFFFF"
             opacity="0"
+            legendType="none"
           />
           <Line
             dataKey="d"
@@ -79,6 +81,7 @@ export const Graph = () => {
             isAnimationActive={false}
             stroke="#FFFFFF"
             opacity="0"
+            legendType="none"
           />
           <Line
             dataKey="e"
@@ -88,17 +91,19 @@ export const Graph = () => {
             isAnimationActive={false}
             stroke="#FFFFFF"
             opacity="0"
+            legendType="none"
           />
-          <Line dataKey="wert" stroke="#8884d8" />
+          <Line dataKey="Ist" stroke="yellow" strokeWidth={2} dot={{ strokeWidth: 2, r: 4 }} />
+          <Line dataKey="Soll" stroke="#8884d8" strokeWidth={2} dot={{ strokeWidth: 2, r: 4 }} />
         </LineChart>
       </div>
     );
   };
 
-  function createData(kriterien, werte) {
+  function createData(kriterien, ist_werte, soll_werte) {
     var data = [{}];
     for (var i = 0; i < kriterien.length; i++) {
-      data.push({ name: kriterien[i], wert: werte[i] });
+      data.push({ name: kriterien[i], Ist: ist_werte[i], Soll: soll_werte[i] });
     }
     data.push({
       name: "",

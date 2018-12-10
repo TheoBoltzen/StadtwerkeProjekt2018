@@ -1,0 +1,52 @@
+.div-header {
+  background-color: yellow;
+  width: auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.div-left {
+  width: 50%;
+  background-color: lightsalmon;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.div-right {
+  width: 50%;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*
+----------------
+ */
+
+#div-graph-header {
+  background-color: yellow;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#div-graph-left {
+  width: 50%;
+  background-color: lightsalmon;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#div-graph-right {
+  width: 50%;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
