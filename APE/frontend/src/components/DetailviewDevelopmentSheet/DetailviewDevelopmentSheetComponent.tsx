@@ -5,6 +5,72 @@ import "./DetailviewDevelopmentSheetComponent.css";
 //import { List, ListItem } from "@material-ui/core";
 import Button from "@material-ui/core/es/Button/Button";
 
+//------------------
+
+var jsonObj = {
+  department: "PPCa",
+  education: "IKB",
+  content: [
+    {
+      name: "Soziale Kompetenz",
+      children: [
+        {
+          name: "Konfliktlösungskompetenz",
+          children: [
+            {
+              name: "Konfliktfähigkeit",
+              children: [
+                {
+                  name: "spricht Konflikte an",
+                  goalCross: "4",
+                  ynAnswer: "false"
+                },
+                {
+                  name: "bleibt stets sachlich",
+                  goalCross: "4",
+                  ynAnswer: "false"
+                },
+                {
+                  name: "respektiert andere Meinungen",
+                  goalCross: "4",
+                  ynAnswer: "false"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Neue Kompetenz NEU",
+      children: [
+        {
+          name: "Neue Hauptkategorie 1",
+          children: [
+            {
+              name: "Neue Subkategorie 1",
+              children: [
+                {
+                  name: "Neue Kompetenz 1",
+                  goalCross: "1",
+                  ynAnswer: "false"
+                },
+                {
+                  name: "Neue Kompetenz 2",
+                  goalCross: "3",
+                  ynAnswer: "false"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+//------------------
+
 interface Props {
   /*x: String;
     y: String;  */
@@ -21,8 +87,6 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
     "zeigt sich kooperativ",
     "reagiert freundlich",
     "zeigt Hilfsbereitschaft"
-    //  "Kritrium X",
-    //  "Kritrium Y",
   ];
 
   var ist_werte = [
@@ -41,6 +105,9 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
     "weitgehend",
     "weitgehend"
   ];
+
+  let kriteria: string[] = [];
+  let sollWerte: string[] = [];
 
   return (
     <div>
@@ -64,19 +131,76 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
       </div>
 
       <div>
+        {jsonObj.content &&
+          jsonObj.content.map((kompetenzen, index_1) => (
+            <div>
+              <h3 key={index_1}>{kompetenzen.name}</h3>
+              {kompetenzen.children &&
+                kompetenzen.children.map((hauptkategorie, index_2) => (
+                  <div>
+                    <h4 key={index_2}>{hauptkategorie.name}</h4>
+                    {hauptkategorie.children &&
+                      hauptkategorie.children.map((subkategorie, index_3) => (
+                        <div>
+                          <h5 key={index_3}>{subkategorie.name}</h5>
+                          {subkategorie.children &&
+                            subkategorie.children.map((kriterium, index_4) => {
+                              kriteria.push(kriterium.name);
+                              sollWerte.push(mapIntegerToString(kriterium.goalCross));
+                            })}
+
+                          <Graph
+                            ist_werte={ist_werte}
+                            soll_werte={sollWerte}
+                            kriterien={kriteria}
+                          />
+                          {console.log(sollWerte)}
+                          {console.log(kriteria)}
+                          {clearArrays()}
+                        </div>
+                      ))}
+                  </div>
+                ))}
+            </div>
+          ))}
+      </div>
+
+      <div>
         <h3>Soziale Kompetenzen</h3>
-        <table>
-          <tr>
-            <td>
-              <Graph ist_werte={ist_werte} soll_werte={soll_werte} kriterien={kriterien} />
-            </td>
-            <td>
-              <Graph ist_werte={ist_werte} soll_werte={soll_werte} kriterien={kriterien} />
-            </td>
-          </tr>
-        </table>
+        <div>
+          <Graph ist_werte={ist_werte} soll_werte={soll_werte} kriterien={kriterien} />
+        </div>
       </div>
     </div>
   );
+
+  function mapIntegerToString(intValue) {
+    var result = "";
+    switch (intValue) {
+      case "1":
+        result = "in vollem Maße";
+        break;
+      case "2":
+        result = "weitgehend";
+        break;
+      case "3":
+        result = "teilweise";
+        break;
+      case "4":
+        result = "unzureichend";
+        break;
+      case "5":
+        result = "nicht";
+        break;
+      default:
+        result = "";
+    }
+    return result;
+  }
+
+  function clearArrays() {
+    kriteria = [];
+    sollWerte = [];
+  }
 };
 //<List>{array && array.map((i, index) => <ListItem key={index}>{i.y}</ListItem>)}</List>

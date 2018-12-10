@@ -50,3 +50,10 @@
   flex-direction: column;
   justify-content: center;
 }
+
+/*
+-----------------
+ */
+table > tr > td {
+  width: 100px;
+}
