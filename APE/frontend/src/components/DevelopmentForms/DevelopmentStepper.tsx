@@ -142,7 +142,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
                   name: subCategory.name,
                   checked: false,
                   open: false,
-                  Criteria: []
+                  Criteria: [],
+                  imported: true
                 });
               }
             }
