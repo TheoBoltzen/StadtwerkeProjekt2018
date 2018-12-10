@@ -98,7 +98,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
             name: competence.name,
             checked: false,
             open: false,
-            MainCategories: []
+            MainCategories: [],
+            imported: true
           });
         }
       });
@@ -116,7 +117,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
                 name: mainCategory.name,
                 checked: false,
                 open: false,
-                SubCategories: []
+                SubCategories: [],
+                imported: true
               });
             }
           }
@@ -164,7 +166,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
       name: "Kompetenzkategorie",
       checked: false,
       open: true,
-      MainCategories: []
+      MainCategories: [],
+      imported: false
     });
     this.setState({ developmentForm });
   };
@@ -175,7 +178,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
       name: "Hauptkategorie",
       checked: false,
       SubCategories: [],
-      open: true
+      open: true,
+      imported: false
     });
     this.setState({ developmentForm });
   };
@@ -186,7 +190,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
       name: "Unterkategorie",
       checked: false,
       open: true,
-      Criteria: []
+      Criteria: [],
+      imported: false
     });
     this.setState({ developmentForm });
   };
@@ -196,7 +201,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
     developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria.push({
       name: "Kriterium",
       checked: false,
-      value: "3"
+      value: "3",
+      imported: false
     });
     this.setState({ developmentForm });
   };

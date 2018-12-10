@@ -31,6 +31,7 @@ export interface Competence {
   checked: boolean;
   MainCategories: MainCategory[];
   open: boolean;
+  imported: boolean;
 }
 
 const theme = createMuiTheme({
@@ -106,8 +107,9 @@ class CompetenceCreation extends React.Component<Props> {
                   onChange={e => {
                     this.handleRename(e, index);
                   }}
-                  style={{ width: 800 }}
+                  style={{ width: 800, color: "black" }}
                   name={name}
+                  disabled={developmentForm[index].imported}
                 />
               </ListItem>
             ))}
