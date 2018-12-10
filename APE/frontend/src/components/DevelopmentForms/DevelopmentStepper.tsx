@@ -19,10 +19,11 @@ import SubCategoryCreation from "./Steps/SubCategoryCreation";
 import CriteriaCreation from "./Steps/CriteriaCreation";
 import { ApplicationState } from "../../redux/reducers";
 import { connect } from "react-redux";
-import { CompetenceFetch, MainCategoryFetch } from "../../types";
+import { CompetenceFetch, MainCategoryFetch, SubCategoryFetch } from "../../types";
 import {
   getAllCompetences,
-  getAllMainCategories
+  getAllMainCategories,
+  getAllSubCategories
 } from "../../redux/actions/development-forms-actions";
 
 interface State {
@@ -36,11 +37,13 @@ interface ReduxStateProps {
   readonly loading: boolean;
   readonly competences: CompetenceFetch[];
   readonly mainCategories: MainCategoryFetch[];
+  readonly subCategories: SubCategoryFetch[];
 }
 
 interface ReduxDispatchProps {
   readonly getAllCompetences: () => void;
   readonly getAllMainCategories: (competenceName: string) => void;
+  readonly getAllSubCategories: (mainCategoryName: string) => void;
 }
 
 interface Props extends WithStyles<typeof styles> {}
@@ -48,18 +51,27 @@ interface Props extends WithStyles<typeof styles> {}
 export type AllProps = ReduxStateProps & ReduxDispatchProps & Props;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
-  const { loading, competences, mainCategories } = state.singleDevelopmentFormReducer;
+  const {
+    loading,
+    competences,
+    mainCategories,
+    subCategories
+  } = state.singleDevelopmentFormReducer;
   return {
     loading,
     competences,
-    mainCategories
+    mainCategories,
+    subCategories
   };
 };
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     getAllCompetences: () => dispatch(getAllCompetences()),
-    getAllMainCategories: (competenceName: string) => dispatch(getAllMainCategories(competenceName))
+    getAllMainCategories: (competenceName: string) =>
+      dispatch(getAllMainCategories(competenceName)),
+    getAllSubCategories: (mainCategoryName: string) =>
+      dispatch(getAllSubCategories(mainCategoryName))
   };
 };
 
@@ -112,6 +124,31 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
           }
         });
         this.setState({ developmentForm: developmentFormState });
+      });
+    }
+
+    if (nextProps.subCategories != this.props.subCategories) {
+      const developmentFormState = developmentForm;
+      this.state.developmentForm.map((competence, index) => {
+        this.state.developmentForm[index].MainCategories.map((mainCategory, index2) => {
+          nextProps.subCategories.map(subCategory => {
+            if (
+              !developmentForm[index].MainCategories[index2].SubCategories.find(
+                s => s.name === subCategory.name
+              )
+            ) {
+              if (mainCategory.name === subCategory.MainCategoryName) {
+                developmentFormState[index].MainCategories[index2].SubCategories.push({
+                  name: subCategory.name,
+                  checked: false,
+                  open: false,
+                  Criteria: []
+                });
+              }
+            }
+          });
+          this.setState({ developmentForm: developmentFormState });
+        });
       });
     }
   }
@@ -204,7 +241,9 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
           />
         );
       case 3:
-        return (
+        return loading ? (
+          <CircularProgress />
+        ) : (
           <SubCategoryCreation
             classes={this.props.classes}
             onClickAddButton={this.addSubCategory}
@@ -228,7 +267,7 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
 
   handleNext = () => {
     const { activeStep, developmentForm } = this.state;
-    const { getAllCompetences, getAllMainCategories } = this.props;
+    const { getAllCompetences, getAllMainCategories, getAllSubCategories } = this.props;
     if (activeStep === 0) {
       getAllCompetences();
     }
@@ -236,6 +275,14 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
     if (activeStep === 1) {
       developmentForm.map((competence, index) => {
         getAllMainCategories(competence.name);
+      });
+    }
+
+    if (activeStep === 2) {
+      developmentForm.map((competence, index) => {
+        developmentForm[index].MainCategories.map((mainCategory, index) => {
+          getAllSubCategories(mainCategory.name);
+        });
       });
     }
 
