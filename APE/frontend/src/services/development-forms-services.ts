@@ -25,7 +25,7 @@ export const getAllMainCategoriesService = (competenceName: string) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
-    body: JSON.stringify({ competenceName })
+    body: JSON.stringify({ name: competenceName })
   } as RequestInit;
 
   return fetch(`${apiURL}/services/getMainCategoriesByCompetencyCategory`, requestOptions).then(
