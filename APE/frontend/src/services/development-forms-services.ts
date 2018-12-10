@@ -37,7 +37,7 @@ export const getAllSubCategoriesService = (mainCategoryName: string) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
-    body: JSON.stringify({ mainCategoryName })
+    body: JSON.stringify({ name: mainCategoryName })
   } as RequestInit;
 
   return fetch(`${apiURL}/services/getSubCategoriesByMainCategory`, requestOptions).then(

@@ -4,7 +4,8 @@ import { Dispatch } from "redux";
 import {
   getAllCompetencesService,
   getAllMainCategoriesService,
-  getAllService
+  getAllService,
+  getAllSubCategoriesService
 } from "../../services/development-forms-services";
 import { errorAlert } from "./alert";
 
@@ -98,7 +99,7 @@ export const getAllSubCategories = (mainCategoryName: string) => {
   return (dispatch: Dispatch) => {
     dispatch(request(mainCategoryName));
 
-    getAllMainCategoriesService(mainCategoryName).then(
+    getAllSubCategoriesService(mainCategoryName).then(
       subCategories => dispatch(success(subCategories)),
       error => {
         dispatch(failure(error.toString()));
