@@ -129,8 +129,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
             }
           }
         });
-        this.setState({ developmentForm: developmentFormState });
       });
+      this.setState({ developmentForm: developmentFormState });
     }
 
     if (nextProps.subCategories != this.props.subCategories) {
@@ -154,9 +154,9 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
               }
             }
           });
-          this.setState({ developmentForm: developmentFormState });
         });
       });
+      this.setState({ developmentForm: developmentFormState });
     }
 
     if (nextProps.criteria !== this.props.criteria) {
@@ -184,11 +184,11 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
                   }
                 }
               });
-              this.setState({ developmentForm: developmentFormState });
             }
           );
         });
       });
+      this.setState({ developmentForm: developmentFormState });
     }
   }
 
@@ -359,8 +359,6 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
     const { classes } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
-
-    console.log("criteria: ", this.props.criteria);
 
     return (
       <div className={"root"}>
