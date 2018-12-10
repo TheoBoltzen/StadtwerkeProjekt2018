@@ -1,11 +1,12 @@
 import { Action } from "redux";
-import { CompetenceFetch, MainCategoryFetch, SubCategoryFetch } from "../../types";
+import { CompetenceFetch, CriteriaFetch, MainCategoryFetch, SubCategoryFetch } from "../../types";
 import { developmentFormConstants } from "../../constants";
 
 interface ActionSingleDevelopmentForm extends Action {
   competences: CompetenceFetch[];
   mainCategories: MainCategoryFetch[];
   subCategories: SubCategoryFetch[];
+  criteria: CriteriaFetch[];
   error: string;
 }
 
@@ -14,6 +15,7 @@ export interface SingleDevelopmentFormReducer {
   readonly competences: CompetenceFetch[];
   readonly mainCategories: MainCategoryFetch[];
   readonly subCategories: SubCategoryFetch[];
+  readonly criteria: CriteriaFetch[];
   readonly error: string;
 }
 
@@ -22,6 +24,7 @@ const initialState: SingleDevelopmentFormReducer = {
   competences: [],
   mainCategories: [],
   subCategories: [],
+  criteria: [],
   error: ""
 };
 
@@ -78,6 +81,24 @@ export const singleDevelopmentFormReducer = (
         subCategories: action.subCategories
       };
     case developmentFormConstants.GETALLSUBCATEGORIES_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        loading: false
+      };
+
+    case developmentFormConstants.GETALLCRITERIA_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case developmentFormConstants.GETALLCRITERIA_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        criteria: action.criteria
+      };
+    case developmentFormConstants.GETALLCRITERIA_FAILURE:
       return {
         ...state,
         error: action.error,

@@ -44,3 +44,15 @@ export const getAllSubCategoriesService = (mainCategoryName: string) => {
     handleResponse
   );
 };
+
+export const getAllCriteriaService = (subCategoryName: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ name: subCategoryName })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getCompetencesBySubCategory`, requestOptions).then(
+    handleResponse
+  );
+};

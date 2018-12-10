@@ -28,3 +28,12 @@ export interface SubCategoryFetch {
   readonly updatedAt: string;
   readonly MainCategoryName: string;
 }
+
+export interface CriteriaFetch {
+  readonly name: string;
+  readonly ynAnswer: boolean;
+  readonly description: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly SubCategoryName: string;
+}
