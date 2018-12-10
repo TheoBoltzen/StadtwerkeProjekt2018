@@ -19,9 +19,10 @@ import SubCategoryCreation from "./Steps/SubCategoryCreation";
 import CriteriaCreation from "./Steps/CriteriaCreation";
 import { ApplicationState } from "../../redux/reducers";
 import { connect } from "react-redux";
-import { CompetenceFetch, MainCategoryFetch, SubCategoryFetch } from "../../types";
+import { CompetenceFetch, CriteriaFetch, MainCategoryFetch, SubCategoryFetch } from "../../types";
 import {
   getAllCompetences,
+  getAllCriteria,
   getAllMainCategories,
   getAllSubCategories
 } from "../../redux/actions/development-forms-actions";
@@ -38,12 +39,14 @@ interface ReduxStateProps {
   readonly competences: CompetenceFetch[];
   readonly mainCategories: MainCategoryFetch[];
   readonly subCategories: SubCategoryFetch[];
+  readonly criteria: CriteriaFetch[];
 }
 
 interface ReduxDispatchProps {
   readonly getAllCompetences: () => void;
   readonly getAllMainCategories: (competenceName: string) => void;
   readonly getAllSubCategories: (mainCategoryName: string) => void;
+  readonly getAllCriteria: (subCategoryName: string) => void;
 }
 
 interface Props extends WithStyles<typeof styles> {}
@@ -55,13 +58,15 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
     loading,
     competences,
     mainCategories,
-    subCategories
+    subCategories,
+    criteria
   } = state.singleDevelopmentFormReducer;
   return {
     loading,
     competences,
     mainCategories,
-    subCategories
+    subCategories,
+    criteria
   };
 };
 
@@ -71,7 +76,8 @@ const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
     getAllMainCategories: (competenceName: string) =>
       dispatch(getAllMainCategories(competenceName)),
     getAllSubCategories: (mainCategoryName: string) =>
-      dispatch(getAllSubCategories(mainCategoryName))
+      dispatch(getAllSubCategories(mainCategoryName)),
+    getAllCriteria: (subCategoryName: string) => dispatch(getAllCriteria(subCategoryName))
   };
 };
 
@@ -149,6 +155,38 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
             }
           });
           this.setState({ developmentForm: developmentFormState });
+        });
+      });
+    }
+
+    if (nextProps.criteria !== this.props.criteria) {
+      const developmentFormState = developmentForm;
+
+      this.state.developmentForm.map((competence, index) => {
+        this.state.developmentForm[index].MainCategories.map((mainCategory, index2) => {
+          this.state.developmentForm[index].MainCategories[index2].SubCategories.map(
+            (subCategory, index3) => {
+              nextProps.criteria.map(critera => {
+                if (
+                  !developmentForm[index].MainCategories[index2].SubCategories[
+                    index3
+                  ].Criteria.find(c => c.name === critera.name)
+                ) {
+                  if (subCategory.name === critera.SubCategoryName) {
+                    developmentFormState[index].MainCategories[index2].SubCategories[
+                      index3
+                    ].Criteria.push({
+                      name: critera.name,
+                      checked: false,
+                      value: "3",
+                      imported: true
+                    });
+                  }
+                }
+              });
+              this.setState({ developmentForm: developmentFormState });
+            }
+          );
         });
       });
     }
@@ -253,7 +291,9 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
           />
         );
       case 4:
-        return (
+        return loading ? (
+          <CircularProgress />
+        ) : (
           <CriteriaCreation
             classes={this.props.classes}
             onClickAddButton={this.addCriteria}
@@ -268,7 +308,12 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
 
   handleNext = () => {
     const { activeStep, developmentForm } = this.state;
-    const { getAllCompetences, getAllMainCategories, getAllSubCategories } = this.props;
+    const {
+      getAllCompetences,
+      getAllMainCategories,
+      getAllSubCategories,
+      getAllCriteria
+    } = this.props;
     if (activeStep === 0) {
       getAllCompetences();
     }
@@ -283,6 +328,16 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
       developmentForm.map((competence, index) => {
         developmentForm[index].MainCategories.map((mainCategory, index) => {
           getAllSubCategories(mainCategory.name);
+        });
+      });
+    }
+
+    if (activeStep === 3) {
+      developmentForm.map((competence, index) => {
+        developmentForm[index].MainCategories.map((mainCategory, index2) => {
+          developmentForm[index].MainCategories[index2].SubCategories.map((subCategory, index3) => {
+            getAllCriteria(subCategory.name);
+          });
         });
       });
     }
@@ -304,6 +359,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
     const { classes } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
+
+    console.log("criteria: ", this.props.criteria);
 
     return (
       <div className={"root"}>
