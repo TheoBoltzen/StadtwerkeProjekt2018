@@ -1,7 +1,29 @@
 import * as React from "react";
 import "./LabelWithTextfield.css";
 import { TextField } from "@material-ui/core";
-//import {Label} from '@material-ui/icons';
+
+/*const styles = theme =>
+    createStyles({
+        container: {
+            display: 'flex',
+            flexWrap: 'wrap',
+        },
+        textField: {
+            marginLeft: theme.spacing.unit,
+            marginRight: theme.spacing.unit,
+        },
+        dense: {
+            marginTop: 16,
+        },
+        menu: {
+            width: 200,
+        },
+    });
+
+interface Props extends WithStyles<typeof styles>{
+  name?: string;
+  content?: string;
+}*/
 
 interface Props {
   name?: string;

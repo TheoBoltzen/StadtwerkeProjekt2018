@@ -34,6 +34,63 @@ var jsonObj = {
                   name: "respektiert andere Meinungen",
                   goalCross: "4",
                   ynAnswer: "false"
+                },
+                {
+                  name: "nimmt Kritik an und setzt sich mit ihr konstruktiv auseinander",
+                  goalCross: "4",
+                  ynAnswer: "false"
+                }
+              ]
+            },
+
+            {
+              name: "Kooperationsfähigkeit",
+              children: [
+                {
+                  name: "kann sich schnell in ein Team einfügen",
+                  goalCross: "4",
+                  ynAnswer: "false"
+                },
+                {
+                  name: "bringt sich mit Lösungsideen in die Gruppe ein",
+                  goalCross: "4",
+                  ynAnswer: "false"
+                },
+                {
+                  name: "hört seinem Gegenüber aktiv zu",
+                  goalCross: "4",
+                  ynAnswer: "false"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          name: "Kunden- und Serviceorientierung",
+          children: [
+            {
+              name: "Verhalten gegenüber Kunden und Mitarbeitern",
+              children: [
+                {
+                  name: "freundliches und aufgeschlossenes Auftreten",
+                  goalCross: "2",
+                  ynAnswer: "false"
+                },
+                {
+                  name: "gepflegtes Erscheinungsbild",
+                  goalCross: "2",
+                  ynAnswer: "false"
+                },
+                {
+                  name: "geht auf Kundenwünsche ein",
+                  goalCross: "1",
+                  ynAnswer: "false"
+                },
+                {
+                  name: "zeigt Hilfsbereitschaft",
+                  goalCross: "1",
+                  ynAnswer: "false"
                 }
               ]
             }
@@ -80,14 +137,14 @@ interface Props {
 export const DetailviewDevelopmentSheetComponent = (props: Props) => {
   const { onClick } = props;
 
-  var kriterien = [
+  /*  var kriterien = [
     "freundliches und aufgeschlossenes Auftreten",
     "gepflegtes Erscheinungsbild",
     "geht auf Kundenwünsche ein",
     "zeigt sich kooperativ",
     "reagiert freundlich",
     "zeigt Hilfsbereitschaft"
-  ];
+  ];*/
 
   var ist_werte = [
     "teilweise",
@@ -97,14 +154,14 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
     "teilweise",
     "teilweise"
   ];
-  var soll_werte = [
+  /*  var soll_werte = [
     "weitgehend",
     "weitgehend",
     "weitgehend",
     "weitgehend",
     "weitgehend",
     "weitgehend"
-  ];
+  ];*/
 
   let kriteria: string[] = [];
   let sollWerte: string[] = [];
@@ -115,7 +172,7 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
       <div>
         <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
       </div>
-      <div className="div-header">
+      <div className="div-header" id="frame">
         <div className="div-left">
           <LabelWithTextfield name={"Abteilung"} content={"KFME"} />
           <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={"Max Mustermann"} />
@@ -133,7 +190,7 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
       <div>
         {jsonObj.content &&
           jsonObj.content.map((kompetenzen, index_1) => (
-            <div>
+            <div id="frame">
               <h3 key={index_1}>{kompetenzen.name}</h3>
               {kompetenzen.children &&
                 kompetenzen.children.map((hauptkategorie, index_2) => (
@@ -163,13 +220,6 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
                 ))}
             </div>
           ))}
-      </div>
-
-      <div>
-        <h3>Soziale Kompetenzen</h3>
-        <div>
-          <Graph ist_werte={ist_werte} soll_werte={soll_werte} kriterien={kriterien} />
-        </div>
       </div>
     </div>
   );
