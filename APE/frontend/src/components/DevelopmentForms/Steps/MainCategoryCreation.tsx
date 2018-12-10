@@ -34,6 +34,7 @@ export interface MainCategory {
   checked: boolean;
   open: boolean;
   SubCategories: SubCategory[];
+  imported: boolean;
 }
 
 const theme = createMuiTheme({
@@ -149,8 +150,9 @@ class MainCategoryCreation extends React.Component<Props> {
                             onChange={e => {
                               this.handleRename(e, index, index2);
                             }}
-                            style={{ width: 800 }}
+                            style={{ width: 800, color: "black" }}
                             name={name}
+                            disabled={developmentForm[index].MainCategories[index2].imported}
                           />
                         </ListItem>
                       </List>

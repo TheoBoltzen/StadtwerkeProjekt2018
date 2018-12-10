@@ -37,6 +37,7 @@ export interface Criteria {
   name: string;
   checked: boolean;
   value: string;
+  imported: boolean;
 }
 
 const theme = createMuiTheme({
@@ -279,6 +280,10 @@ class CriteriaCreation extends React.Component<Props> {
                                               }}
                                               style={{ width: 800 }}
                                               name={name}
+                                              disabled={
+                                                developmentForm[index].MainCategories[index2]
+                                                  .SubCategories[index3].Criteria[index4].imported
+                                              }
                                             />
                                             <ListItemSecondaryAction>
                                               <FormControl component={"fielsdset"}>
