@@ -5,7 +5,7 @@ module.exports = app => {
   //Get all Items
   app.get(
     "/services/getAllDevelopmentSheets",
-    guard(["admin", "trainer"]),
+    guard(["admin", "trainer", "trainee"]),
     DevelopmentSheet.getAll
   );
   app.post(

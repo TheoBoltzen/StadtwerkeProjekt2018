@@ -4,18 +4,20 @@ import EditIcon from "@material-ui/icons/Edit";
 import SearchIcon from "@material-ui/icons/Search";
 import ShareIcon from "@material-ui/icons/Share";
 import { IconButton, Tooltip } from "@material-ui/core";
+import { Favorite } from "@material-ui/icons";
 
 interface Props {
   abteilung: string;
   job: string;
   date: string;
   version: string;
+  isTrainee?: boolean;
   isHeader?: boolean;
   onClick?: any;
 }
 
 export const ListItem = (props: Props) => {
-  const { abteilung, job, date, version, isHeader = false, onClick } = props;
+  const { abteilung, job, date, version, isTrainee = false, isHeader, onClick } = props;
 
   return (
     <div className={isHeader ? "headerRow" : "item"}>
@@ -27,7 +29,23 @@ export const ListItem = (props: Props) => {
             <td>{date}</td>
             <td>{version}</td>
             <td>
-              {!isHeader && (
+              {isHeader ? (
+                <div />
+              ) : isTrainee ? (
+                <div>
+                  <Tooltip title={"Detailansicht"}>
+                    <IconButton>
+                      <SearchIcon fontSize="small" onClick={onClick} />
+                    </IconButton>
+                  </Tooltip>
+
+                  <Tooltip title={"Mir zuweisen"}>
+                    <IconButton>
+                      <Favorite fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                </div>
+              ) : (
                 <div>
                   <Tooltip title={"Detailansicht"}>
                     <IconButton>
