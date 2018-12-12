@@ -106,71 +106,75 @@ class MainCategoryCreation extends React.Component<Props> {
         </div>
         <div className={"step3form"}>
           <List className={"list"}>
-            {developmentForm.map((competence, index) => (
-              <div key={index}>
-                <ListItem
-                  button
-                  dense={true}
-                  divider={true}
-                  name={"developmentForm"}
-                  onClick={e => {
-                    this.handleClick(e, index);
-                  }}>
-                  <InputBase
-                    disabled={true}
-                    className={classes.disabledInputBase}
-                    value={competence.name}
-                    name={name}
-                    style={{ color: "black", width: 800 }}
-                  />
-                  {competence.open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={competence.open} timeout={"auto"} unmountOnExit>
-                  {competence.MainCategories.map((mainCategories, index2) => {
-                    return (
-                      <List key={index2}>
-                        <ListItem
-                          dense={true}
-                          divider={true}
-                          name={"developmentForm"}
-                          className={classes.nested}>
-                          <MuiThemeProvider theme={theme}>
-                            <Checkbox
-                              checked={mainCategories.checked}
-                              onClick={e => {
-                                this.handleToggle(e, index, index2);
-                              }}
-                            />
-                          </MuiThemeProvider>
-                          <InputBase
-                            className={classes.margin}
-                            value={mainCategories.name}
-                            onChange={e => {
-                              this.handleRename(e, index, index2);
-                            }}
-                            style={{ width: 800, color: "black" }}
-                            name={name}
-                            disabled={mainCategories.imported}
-                          />
-                        </ListItem>
-                      </List>
-                    );
-                  })}
-                  <div className={"buttonFlex"}>
-                    <div />
-                    <Button
-                      color={"primary"}
-                      variant={"fab"}
-                      aria-label={"Add"}
-                      mini
-                      className={"AddIcon"}
-                      onClick={() => onClickAddButton(index)}>
-                      <AddIcon />
-                    </Button>
+            {developmentForm.map(
+              (competence, index) =>
+                competence.checked && (
+                  <div key={index}>
+                    <ListItem
+                      button
+                      dense={true}
+                      divider={true}
+                      name={"developmentForm"}
+                      onClick={e => {
+                        this.handleClick(e, index);
+                      }}>
+                      <InputBase
+                        disabled={true}
+                        className={classes.disabledInputBase}
+                        value={competence.name}
+                        name={name}
+                        style={{ color: "black", width: 800 }}
+                      />
+                      {competence.open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+
+                    <Collapse in={competence.open} timeout={"auto"} unmountOnExit>
+                      {competence.MainCategories.map((mainCategories, index2) => {
+                        return (
+                          <List key={index2}>
+                            <ListItem
+                              dense={true}
+                              divider={true}
+                              name={"developmentForm"}
+                              className={classes.nested}>
+                              <MuiThemeProvider theme={theme}>
+                                <Checkbox
+                                  checked={mainCategories.checked}
+                                  onClick={e => {
+                                    this.handleToggle(e, index, index2);
+                                  }}
+                                />
+                              </MuiThemeProvider>
+                              <InputBase
+                                className={classes.margin}
+                                value={mainCategories.name}
+                                onChange={e => {
+                                  this.handleRename(e, index, index2);
+                                }}
+                                style={{ width: 800, color: "black" }}
+                                name={name}
+                                disabled={mainCategories.imported}
+                              />
+                            </ListItem>
+                          </List>
+                        );
+                      })}
+                      <div className={"buttonFlex"}>
+                        <div />
+                        <Button
+                          color={"primary"}
+                          variant={"fab"}
+                          aria-label={"Add"}
+                          mini
+                          className={"AddIcon"}
+                          onClick={() => onClickAddButton(index)}>
+                          <AddIcon />
+                        </Button>
+                      </div>
+                    </Collapse>
                   </div>
-                </Collapse>
-              </div>
-            ))}
+                )
+            )}
           </List>
         </div>
       </div>

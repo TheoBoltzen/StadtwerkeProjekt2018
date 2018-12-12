@@ -151,209 +151,231 @@ class CriteriaCreation extends React.Component<Props> {
         </div>
         <div className={"step3form"}>
           <List className={"list"}>
-            {developmentForm.map((competence, index) => (
-              <div key={index}>
-                <ListItem
-                  button
-                  dense={true}
-                  divider={true}
-                  name={"developmentForm"}
-                  onClick={e => {
-                    this.handleCompetenceClick(e, index);
-                  }}>
-                  <InputBase
-                    disabled={true}
-                    className={classes.disabledInputBase}
-                    value={competence.name}
-                    name={name}
-                    style={{ color: "black", width: 800 }}
-                  />
-                  {competence.open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={competence.open} timeout={"auto"} unmountOnExit>
-                  {competence.MainCategories.map((mainCategories, index2) => {
-                    return (
-                      <List key={index2}>
-                        <ListItem
-                          button
-                          dense={false}
-                          divider={true}
-                          name={"developmentForm"}
-                          className={classes.nested}
-                          onClick={e => {
-                            this.handleMainCategoryClick(e, index, index2);
-                          }}>
-                          <InputBase
-                            disabled={true}
-                            className={classes.disabledInputBase}
-                            value={mainCategories.name}
-                            name={name}
-                            style={{ color: "black", width: 800 }}
-                          />
-                          {mainCategories.open ? <ExpandLess /> : <ExpandMore />}
-                        </ListItem>
-                        <Collapse in={mainCategories.open} timeout={"auto"} unmountOnExit>
-                          {mainCategories.SubCategories.map((subCategories, index3) => {
-                            return (
-                              <div key={index3}>
-                                <ListItem
-                                  button
-                                  dense={true}
-                                  divider={true}
-                                  name={"developmentForm"}
-                                  className={classes.nested}
-                                  onClick={e => {
-                                    this.handleSubCategoryClick(e, index, index2, index3);
-                                  }}>
-                                  <InputBase
-                                    disabled={true}
-                                    className={classes.margin}
-                                    value={subCategories.name}
-                                    style={{ color: "black", width: 800 }}
-                                    name={name}
-                                  />
-                                  {subCategories.open ? <ExpandLess /> : <ExpandMore />}
-                                </ListItem>
-
-                                <Collapse in={subCategories.open} timeout={"auto"} unmountOnExit>
-                                  {subCategories.Criteria.map((criteria, index4) => {
-                                    return (
-                                      <div key={index4}>
+            {developmentForm.map(
+              (competence, index) =>
+                competence.checked && (
+                  <div key={index}>
+                    <ListItem
+                      button
+                      dense={true}
+                      divider={true}
+                      name={"developmentForm"}
+                      onClick={e => {
+                        this.handleCompetenceClick(e, index);
+                      }}>
+                      <InputBase
+                        disabled={true}
+                        className={classes.disabledInputBase}
+                        value={competence.name}
+                        name={name}
+                        style={{ color: "black", width: 800 }}
+                      />
+                      {competence.open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={competence.open} timeout={"auto"} unmountOnExit>
+                      {competence.MainCategories.map(
+                        (mainCategories, index2) =>
+                          mainCategories.checked && (
+                            <List key={index2}>
+                              <ListItem
+                                button
+                                dense={false}
+                                divider={true}
+                                name={"developmentForm"}
+                                className={classes.nested}
+                                onClick={e => {
+                                  this.handleMainCategoryClick(e, index, index2);
+                                }}>
+                                <InputBase
+                                  disabled={true}
+                                  className={classes.disabledInputBase}
+                                  value={mainCategories.name}
+                                  name={name}
+                                  style={{ color: "black", width: 800 }}
+                                />
+                                {mainCategories.open ? <ExpandLess /> : <ExpandMore />}
+                              </ListItem>
+                              <Collapse in={mainCategories.open} timeout={"auto"} unmountOnExit>
+                                {mainCategories.SubCategories.map(
+                                  (subCategories, index3) =>
+                                    subCategories.checked && (
+                                      <div key={index3}>
                                         <ListItem
+                                          button
                                           dense={true}
                                           divider={true}
                                           name={"developmentForm"}
-                                          className={classes.nested}>
-                                          <MuiThemeProvider theme={theme}>
-                                            <Checkbox
-                                              checked={criteria.checked}
-                                              onClick={e => {
-                                                this.handleToggle(e, index, index2, index3, index4);
-                                              }}
-                                            />
-                                          </MuiThemeProvider>
+                                          className={classes.nested}
+                                          onClick={e => {
+                                            this.handleSubCategoryClick(e, index, index2, index3);
+                                          }}>
                                           <InputBase
-                                            className={classes.margin}
-                                            value={criteria.name}
-                                            onChange={e => {
-                                              this.handleRename(e, index, index2, index3, index4);
-                                            }}
-                                            style={{ width: 800 }}
+                                            disabled={true}
+                                            className={classes.nested}
+                                            value={subCategories.name}
+                                            style={{ color: "black", width: 800 }}
                                             name={name}
-                                            disabled={criteria.imported}
                                           />
-                                          <ListItemSecondaryAction>
-                                            <FormControl component={"fielsdset"}>
-                                              <RadioGroup
-                                                aria-label={"value"}
-                                                name={"value"}
-                                                value={criteria.value}
-                                                row>
-                                                <FormControlLabel
-                                                  value={"1"}
-                                                  control={<Radio color={"primary"} />}
-                                                  label={"1"}
-                                                  onClick={e => {
-                                                    this.handleRadioClick(
-                                                      e,
-                                                      index,
-                                                      index2,
-                                                      index3,
-                                                      index4,
-                                                      "1"
-                                                    );
-                                                  }}
-                                                />
-                                                <FormControlLabel
-                                                  value={"2"}
-                                                  control={<Radio color={"primary"} />}
-                                                  label={"2"}
-                                                  onClick={e => {
-                                                    this.handleRadioClick(
-                                                      e,
-                                                      index,
-                                                      index2,
-                                                      index3,
-                                                      index4,
-                                                      "2"
-                                                    );
-                                                  }}
-                                                />
-                                                <FormControlLabel
-                                                  value={"3"}
-                                                  control={<Radio color={"primary"} />}
-                                                  label={"3"}
-                                                  onClick={e => {
-                                                    this.handleRadioClick(
-                                                      e,
-                                                      index,
-                                                      index2,
-                                                      index3,
-                                                      index4,
-                                                      "3"
-                                                    );
-                                                  }}
-                                                />
-                                                <FormControlLabel
-                                                  value={"4"}
-                                                  control={<Radio color={"primary"} />}
-                                                  label={"4"}
-                                                  onClick={e => {
-                                                    this.handleRadioClick(
-                                                      e,
-                                                      index,
-                                                      index2,
-                                                      index3,
-                                                      index4,
-                                                      "4"
-                                                    );
-                                                  }}
-                                                />
-                                                <FormControlLabel
-                                                  value={"5"}
-                                                  control={<Radio color={"primary"} />}
-                                                  label={"5"}
-                                                  onClick={e => {
-                                                    this.handleRadioClick(
-                                                      e,
-                                                      index,
-                                                      index2,
-                                                      index3,
-                                                      index4,
-                                                      "5"
-                                                    );
-                                                  }}
-                                                />
-                                              </RadioGroup>
-                                            </FormControl>
-                                          </ListItemSecondaryAction>
+                                          {subCategories.open ? <ExpandLess /> : <ExpandMore />}
                                         </ListItem>
+
+                                        <Collapse
+                                          in={subCategories.open}
+                                          timeout={"auto"}
+                                          unmountOnExit>
+                                          {subCategories.Criteria.map((criteria, index4) => {
+                                            return (
+                                              <div key={index4}>
+                                                <ListItem
+                                                  dense={true}
+                                                  divider={true}
+                                                  name={"developmentForm"}
+                                                  className={classes.nested}>
+                                                  <MuiThemeProvider theme={theme}>
+                                                    <Checkbox
+                                                      checked={criteria.checked}
+                                                      onClick={e => {
+                                                        this.handleToggle(
+                                                          e,
+                                                          index,
+                                                          index2,
+                                                          index3,
+                                                          index4
+                                                        );
+                                                      }}
+                                                    />
+                                                  </MuiThemeProvider>
+                                                  <InputBase
+                                                    className={classes.nested}
+                                                    value={criteria.name}
+                                                    onChange={e => {
+                                                      this.handleRename(
+                                                        e,
+                                                        index,
+                                                        index2,
+                                                        index3,
+                                                        index4
+                                                      );
+                                                    }}
+                                                    style={{ width: 800, color: "black" }}
+                                                    name={name}
+                                                    disabled={criteria.imported}
+                                                  />
+                                                  <ListItemSecondaryAction>
+                                                    <FormControl component={"fielsdset"}>
+                                                      <RadioGroup
+                                                        aria-label={"value"}
+                                                        name={"value"}
+                                                        value={criteria.value}
+                                                        row>
+                                                        <FormControlLabel
+                                                          value={"1"}
+                                                          control={<Radio color={"primary"} />}
+                                                          label={"1"}
+                                                          onClick={e => {
+                                                            this.handleRadioClick(
+                                                              e,
+                                                              index,
+                                                              index2,
+                                                              index3,
+                                                              index4,
+                                                              "1"
+                                                            );
+                                                          }}
+                                                        />
+                                                        <FormControlLabel
+                                                          value={"2"}
+                                                          control={<Radio color={"primary"} />}
+                                                          label={"2"}
+                                                          onClick={e => {
+                                                            this.handleRadioClick(
+                                                              e,
+                                                              index,
+                                                              index2,
+                                                              index3,
+                                                              index4,
+                                                              "2"
+                                                            );
+                                                          }}
+                                                        />
+                                                        <FormControlLabel
+                                                          value={"3"}
+                                                          control={<Radio color={"primary"} />}
+                                                          label={"3"}
+                                                          onClick={e => {
+                                                            this.handleRadioClick(
+                                                              e,
+                                                              index,
+                                                              index2,
+                                                              index3,
+                                                              index4,
+                                                              "3"
+                                                            );
+                                                          }}
+                                                        />
+                                                        <FormControlLabel
+                                                          value={"4"}
+                                                          control={<Radio color={"primary"} />}
+                                                          label={"4"}
+                                                          onClick={e => {
+                                                            this.handleRadioClick(
+                                                              e,
+                                                              index,
+                                                              index2,
+                                                              index3,
+                                                              index4,
+                                                              "4"
+                                                            );
+                                                          }}
+                                                        />
+                                                        <FormControlLabel
+                                                          value={"5"}
+                                                          control={<Radio color={"primary"} />}
+                                                          label={"5"}
+                                                          onClick={e => {
+                                                            this.handleRadioClick(
+                                                              e,
+                                                              index,
+                                                              index2,
+                                                              index3,
+                                                              index4,
+                                                              "5"
+                                                            );
+                                                          }}
+                                                        />
+                                                      </RadioGroup>
+                                                    </FormControl>
+                                                  </ListItemSecondaryAction>
+                                                </ListItem>
+                                              </div>
+                                            );
+                                          })}
+                                          <div className={"buttonFlex"}>
+                                            <div />
+                                            <Button
+                                              color={"primary"}
+                                              variant={"fab"}
+                                              aria-label={"Add"}
+                                              mini
+                                              className={"AddIcon"}
+                                              onClick={() =>
+                                                onClickAddButton(index, index2, index3)
+                                              }>
+                                              <AddIcon />
+                                            </Button>
+                                          </div>
+                                        </Collapse>
                                       </div>
-                                    );
-                                  })}
-                                  <div className={"buttonFlex"}>
-                                    <div />
-                                    <Button
-                                      color={"primary"}
-                                      variant={"fab"}
-                                      aria-label={"Add"}
-                                      mini
-                                      className={"AddIcon"}
-                                      onClick={() => onClickAddButton(index, index2, index3)}>
-                                      <AddIcon />
-                                    </Button>
-                                  </div>
-                                </Collapse>
-                              </div>
-                            );
-                          })}
-                        </Collapse>
-                      </List>
-                    );
-                  })}
-                </Collapse>
-              </div>
-            ))}
+                                    )
+                                )}
+                              </Collapse>
+                            </List>
+                          )
+                      )}
+                    </Collapse>
+                  </div>
+                )
+            )}
           </List>
         </div>
       </div>
