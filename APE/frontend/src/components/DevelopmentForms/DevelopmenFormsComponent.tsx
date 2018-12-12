@@ -56,16 +56,18 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
       <div className={"switchRoot"}>
         <div className={"flexDiv"}>
           <div />
-          <Button
-            variant={"contained"}
-            color={"primary"}
-            className={"entwicklungsBogenButton"}
-            onClick={this.changeVisibilityIndex}>
-            Entwicklungsbogen erstellen
-          </Button>
+          {!loading && (
+            <Button
+              variant={"contained"}
+              color={"primary"}
+              className={"entwicklungsBogenButton"}
+              onClick={this.changeVisibilityIndex}>
+              Entwicklungsbogen erstellen
+            </Button>
+          )}
         </div>
         {loading ? (
-          <CircularProgress />
+          <CircularProgress className={"loading-spinner"} />
         ) : (
           <div className={"frame center"}>
             <ListItem
