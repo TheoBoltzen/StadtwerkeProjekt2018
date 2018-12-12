@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 export interface State {
   visibilityIndex: boolean;
+  isHidden: boolean;
 }
 
 interface Props {}
