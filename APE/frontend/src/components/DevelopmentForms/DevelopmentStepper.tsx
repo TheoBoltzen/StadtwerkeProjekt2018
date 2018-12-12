@@ -316,7 +316,7 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
 
     if (activeStep === 2) {
       developmentForm.map((competence, index) => {
-        developmentForm[index].MainCategories.map((mainCategory, index) => {
+        competence.MainCategories.map((mainCategory, index) => {
           getAllSubCategories(mainCategory.name);
         });
       });
@@ -324,8 +324,8 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
 
     if (activeStep === 3) {
       developmentForm.map((competence, index) => {
-        developmentForm[index].MainCategories.map((mainCategory, index2) => {
-          developmentForm[index].MainCategories[index2].SubCategories.map((subCategory, index3) => {
+        competence.MainCategories.map((mainCategory, index2) => {
+          mainCategory.SubCategories.map((subCategory, index3) => {
             getAllCriteria(subCategory.name);
           });
         });

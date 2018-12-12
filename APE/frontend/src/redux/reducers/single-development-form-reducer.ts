@@ -105,6 +105,23 @@ export const singleDevelopmentFormReducer = (
         loading: false
       };
 
+    case developmentFormConstants.CREATEDEVELOPMENTSHEET_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case developmentFormConstants.CREATEDEVELOPMENTSHEET_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+    case developmentFormConstants.CREATEDEVELOPMENTSHEET_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        loading: false
+      };
+
     default:
       return state;
   }
