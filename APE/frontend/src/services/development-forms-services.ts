@@ -1,5 +1,6 @@
 import { authHeader, handleResponse } from "./user-services";
 import { apiURL } from "../constants";
+import { DevelopmentFormCreate } from "../types";
 
 export const getAllService = () => {
   const requestOptions = {
@@ -53,6 +54,18 @@ export const getAllCriteriaService = (subCategoryName: string) => {
   } as RequestInit;
 
   return fetch(`${apiURL}/services/getCompetencesBySubCategory`, requestOptions).then(
+    handleResponse
+  );
+};
+
+export const createDevelopmentSheetService = (developmenSheet: DevelopmentFormCreate) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ developmenSheet })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/createReadyDevelopmentSheet`, requestOptions).then(
     handleResponse
   );
 };

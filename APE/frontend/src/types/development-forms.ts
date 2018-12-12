@@ -37,3 +37,16 @@ export interface CriteriaFetch {
   readonly updatedAt: string;
   readonly SubCategoryName: string;
 }
+
+export interface DevelopmentFormCreate {
+  readonly department: string;
+  readonly education: string;
+  readonly content: ContentDevelopmentFormCreate[];
+}
+
+export interface ContentDevelopmentFormCreate {
+  readonly name: string;
+  readonly children?: ContentDevelopmentFormCreate[];
+  readonly goalCross?: number;
+  readonly ynAnswer?: boolean;
+}

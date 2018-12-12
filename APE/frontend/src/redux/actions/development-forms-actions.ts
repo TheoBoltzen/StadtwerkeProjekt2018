@@ -3,11 +3,13 @@ import {
   CompetenceFetch,
   CriteriaFetch,
   DevelopmentForm,
+  DevelopmentFormCreate,
   MainCategoryFetch,
   SubCategoryFetch
 } from "../../types";
 import { Dispatch } from "redux";
 import {
+  createDevelopmentSheetService,
   getAllCompetencesService,
   getAllCriteriaService,
   getAllMainCategoriesService,
@@ -134,6 +136,32 @@ export const getAllCriteria = (subCategoryName: string) => {
 
     getAllCriteriaService(subCategoryName).then(
       criteria => dispatch(success(criteria)),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const createDevelopmenSheet = (developmenSheet: DevelopmentFormCreate) => {
+  const request = developmenSheet => {
+    return { type: developmentFormConstants.CREATEDEVELOPMENTSHEET_REQUEST, developmenSheet };
+  };
+
+  const success = () => {
+    return { type: developmentFormConstants.CREATEDEVELOPMENTSHEET_SUCCESS };
+  };
+
+  const failure = (error: string) => {
+    return { type: developmentFormConstants.CREATEDEVELOPMENTSHEET_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request(developmenSheet));
+
+    createDevelopmentSheetService(developmenSheet).then(
+      () => dispatch(success()),
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));
