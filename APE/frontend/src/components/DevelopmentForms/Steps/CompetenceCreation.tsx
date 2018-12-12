@@ -106,20 +106,24 @@ class CompetenceCreation extends React.Component<Props> {
                   onChange={e => {
                     this.handleRename(e, index);
                   }}
+                  style={{ width: 800 }}
                   name={name}
                 />
               </ListItem>
             ))}
           </List>
-          <Button
-            color={"primary"}
-            variant={"fab"}
-            mini
-            aria-label={"Add"}
-            className={"AddIcon"}
-            onClick={onClickAddButton}>
-            <AddIcon />
-          </Button>
+          <div className={"buttonFlex"}>
+            <div />
+            <Button
+              color={"primary"}
+              variant={"fab"}
+              aria-label={"Add"}
+              mini
+              className={"AddIcon"}
+              onClick={onClickAddButton}>
+              <AddIcon />
+            </Button>
+          </div>
         </div>
       </div>
     );

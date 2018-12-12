@@ -10,5 +10,21 @@
 }
 
 .center {
-  margin: 50px 50px;
+  margin: 15px 50px;
+}
+
+.flexDiv {
+  margin-top: 50px;
+  width: 96%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.entwicklungsBogenButton {
+  background-color: #00a8e1 !important;
+}
+
+.crossButton {
+  color: #d32f2e !important;
 }

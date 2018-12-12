@@ -5,3 +5,10 @@ export interface DevelopmentForm {
   readonly version: string;
   readonly createdAt: string;
 }
+
+export interface CompetenceFetch {
+  readonly name: string;
+  readonly description: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+}

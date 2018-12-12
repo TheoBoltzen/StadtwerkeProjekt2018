@@ -1,7 +1,8 @@
 import { developmentFormConstants } from "../../constants";
-import { DevelopmentForm } from "../../types";
+import { CompetenceFetch, DevelopmentForm } from "../../types";
 import { Dispatch } from "redux";
-import { getAllService } from "../../services/development-forms-services";
+import { getAllCompetencesService, getAllService } from "../../services/development-forms-services";
+import { errorAlert } from "./alert";
 
 export const getAll = () => {
   const request = () => {
@@ -22,6 +23,31 @@ export const getAll = () => {
     getAllService().then(
       devForms => dispatch(success(devForms)),
       error => dispatch(failure(error))
+    );
+  };
+};
+
+export const getAllCompetences = () => {
+  const request = () => {
+    return { type: developmentFormConstants.GETALLCOMPETENCES_REQUEST };
+  };
+  const success = (competences: CompetenceFetch[]) => {
+    return { type: developmentFormConstants.GETALLCOMPETENCES_SUCCESS, competences };
+  };
+
+  const failure = (error: string) => {
+    return { type: developmentFormConstants.GETALLCOMPETENCES_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request());
+
+    getAllCompetencesService().then(
+      competences => dispatch(success(competences)),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
     );
   };
 };

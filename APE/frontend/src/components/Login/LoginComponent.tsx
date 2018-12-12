@@ -61,7 +61,7 @@ export class LoginComponent extends React.Component<AllProps, State> {
         <div className={"loginContainer"}>
           <div className={"textBox"}>
             <Typography variant={"h5"}>
-              Am Ende deiner Ausbildung weißt Du, was Du willst, wer Du bist und was Du kannst
+              Am Ende deiner Ausbildung weißt Du, wer Du bist, was Du willst und was Du kannst
             </Typography>
           </div>
 
