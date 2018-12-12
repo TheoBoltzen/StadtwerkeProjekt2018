@@ -38,7 +38,8 @@ label + .CustomizedInputs-bootstrapRoot-2 {
 }
 
 .logo {
-  margin: 12px;
+  height: 60px;
+  padding: 20px;
   display: flex;
   flex-direction: row;
   justify-content: start;
