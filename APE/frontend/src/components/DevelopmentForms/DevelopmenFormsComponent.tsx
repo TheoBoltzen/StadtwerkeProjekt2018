@@ -44,7 +44,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
             <ClearIcon />
           </IconButton>
         </div>
-        <DevelopmentStepper />
+        <DevelopmentStepper close={this.changeVisibilityIndex} />
       </div>
     ) : (
       <div className={"switchRoot"}>

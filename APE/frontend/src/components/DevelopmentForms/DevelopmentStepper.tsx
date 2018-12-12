@@ -19,8 +19,15 @@ import SubCategoryCreation from "./Steps/SubCategoryCreation";
 import CriteriaCreation from "./Steps/CriteriaCreation";
 import { ApplicationState } from "../../redux/reducers";
 import { connect } from "react-redux";
-import { CompetenceFetch, CriteriaFetch, MainCategoryFetch, SubCategoryFetch } from "../../types";
 import {
+  CompetenceFetch,
+  CriteriaFetch,
+  DevelopmentFormCreate,
+  MainCategoryFetch,
+  SubCategoryFetch
+} from "../../types";
+import {
+  createDevelopmenSheet,
   getAllCompetences,
   getAllCriteria,
   getAllMainCategories,
@@ -47,11 +54,14 @@ interface ReduxDispatchProps {
   readonly getAllMainCategories: (competenceName: string) => void;
   readonly getAllSubCategories: (mainCategoryName: string) => void;
   readonly getAllCriteria: (subCategoryName: string) => void;
+  readonly createDevelopmentSheet: (developmentSheet: DevelopmentFormCreate) => void;
 }
 
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  close: () => void;
+}
 
-export type AllProps = ReduxStateProps & ReduxDispatchProps & Props;
+export type AllProps = Props & ReduxStateProps & ReduxDispatchProps & Props;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const {
@@ -77,7 +87,9 @@ const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
       dispatch(getAllMainCategories(competenceName)),
     getAllSubCategories: (mainCategoryName: string) =>
       dispatch(getAllSubCategories(mainCategoryName)),
-    getAllCriteria: (subCategoryName: string) => dispatch(getAllCriteria(subCategoryName))
+    getAllCriteria: (subCategoryName: string) => dispatch(getAllCriteria(subCategoryName)),
+    createDevelopmentSheet: (developmentSheet: DevelopmentFormCreate) =>
+      dispatch(createDevelopmenSheet(developmentSheet))
   };
 };
 
@@ -335,6 +347,41 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
     this.setState(state => ({
       activeStep: state.activeStep + 1
     }));
+
+    if (activeStep === 4) {
+      const { close, createDevelopmentSheet } = this.props;
+      const { department, developmentForm, profession } = this.state;
+
+      const devSheet: DevelopmentFormCreate = {
+        department: department,
+        education: profession,
+        content: developmentForm
+          .filter(competence => competence.checked)
+          .map(competence => ({
+            name: competence.name,
+            children: competence.MainCategories.filter(mainCategory => mainCategory.checked).map(
+              mainCategory => ({
+                name: mainCategory.name,
+                children: mainCategory.SubCategories.filter(subCategory => subCategory.checked).map(
+                  subCategory => ({
+                    name: subCategory.name,
+                    children: subCategory.Criteria.filter(criteria => criteria.checked).map(
+                      criteria => ({
+                        name: criteria.name,
+                        goalCross: criteria.value,
+                        ynAnswer: false
+                      })
+                    )
+                  })
+                )
+              })
+            )
+          }))
+      };
+
+      createDevelopmentSheet(devSheet);
+      close();
+    }
   };
 
   handleBack = () => {
@@ -364,31 +411,24 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
           </Stepper>
 
           <div>
-            {this.state.activeStep === steps.length ? (
-              <div>
-                <Typography className={classes.instructions}>Bewertungsbogen erstellt!</Typography>
-                <Button onClick={this.handleReset}>Abschließen</Button>
+            <div>
+              <Typography className={classes.instructions} />
+              {this.getStepContent(activeStep)}
+              <div className={"StepperButtons"}>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={this.handleBack}
+                  className={classes.backButton}>
+                  Zurück
+                </Button>
+                <Button
+                  variant="contained"
+                  className={classes.primaryButton}
+                  onClick={this.handleNext}>
+                  {activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
+                </Button>
               </div>
-            ) : (
-              <div>
-                <Typography className={classes.instructions} />
-                {this.getStepContent(activeStep)}
-                <div className={"StepperButtons"}>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={this.handleBack}
-                    className={classes.backButton}>
-                    Zurück
-                  </Button>
-                  <Button
-                    variant="contained"
-                    className={classes.primaryButton}
-                    onClick={this.handleNext}>
-                    {activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
-                  </Button>
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

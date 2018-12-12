@@ -122,12 +122,6 @@ class CriteriaCreation extends React.Component<Props> {
       index4
     ].value = value;
     this.forceUpdate();
-    console.log(
-      "Value: ",
-      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
-        index4
-      ].value
-    );
   };
 
   //TODO Tooltip anpassen
