@@ -21,6 +21,12 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     this.props.getAllDevForms();
   }
 
+  componentDidUpdate(nextProps: AllProps, nextState: State) {
+    if (this.state.visibilityIndex !== nextState.visibilityIndex) {
+      this.props.getAllDevForms();
+    }
+  }
+
   changeVisibilityIndex = () => {
     this.setState({ visibilityIndex: !this.state.visibilityIndex });
   };

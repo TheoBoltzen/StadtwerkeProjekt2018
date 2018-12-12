@@ -192,6 +192,10 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
       });
       this.setState({ developmentForm: developmentFormState });
     }
+
+    if (this.state.developmentForm.length && !nextProps.loading && this.state.activeStep === 5) {
+      this.props.close();
+    }
   }
 
   handleChange = (event: any) => {
@@ -304,7 +308,7 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
           />
         );
       default:
-        return "Ups, hier lief etwas schief!";
+        return <CircularProgress />;
     }
   };
 
@@ -349,7 +353,7 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
     }));
 
     if (activeStep === 4) {
-      const { close, createDevelopmentSheet } = this.props;
+      const { createDevelopmentSheet } = this.props;
       const { department, developmentForm, profession } = this.state;
 
       const devSheet: DevelopmentFormCreate = {
@@ -378,9 +382,7 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
             )
           }))
       };
-
       createDevelopmentSheet(devSheet);
-      close();
     }
   };
 
@@ -389,8 +391,6 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
       activeStep: state.activeStep - 1
     }));
   };
-
-  handleReset = () => {};
 
   render() {
     const { classes } = this.props;
