@@ -132,14 +132,14 @@ class SubCategoryCreation extends React.Component<Props> {
                   <InputBase
                     disabled={true}
                     className={classes.disabledInputBase}
-                    value={developmentForm[index].name}
+                    value={competence.name}
                     name={name}
                     style={{ color: "black", width: 800 }}
                   />
-                  {developmentForm[index].open ? <ExpandLess /> : <ExpandMore />}
+                  {competence.open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
-                <Collapse in={developmentForm[index].open} timeout={"auto"} unmountOnExit>
-                  {developmentForm[index].MainCategories.map((mainCategories, index2) => {
+                <Collapse in={competence.open} timeout={"auto"} unmountOnExit>
+                  {competence.MainCategories.map((mainCategories, index2) => {
                     return (
                       <List key={index2}>
                         <ListItem
@@ -154,63 +154,43 @@ class SubCategoryCreation extends React.Component<Props> {
                           <InputBase
                             disabled={true}
                             className={classes.disabledInputBase}
-                            value={developmentForm[index].MainCategories[index2].name}
+                            value={mainCategories.name}
                             name={name}
                             style={{ color: "black", width: 800 }}
                           />
-                          {developmentForm[index].MainCategories[index2].open ? (
-                            <ExpandLess />
-                          ) : (
-                            <ExpandMore />
-                          )}
+                          {mainCategories.open ? <ExpandLess /> : <ExpandMore />}
                         </ListItem>
-                        <Collapse
-                          in={developmentForm[index].MainCategories[index2].open}
-                          timeout={"auto"}
-                          unmountOnExit>
-                          {developmentForm[index].MainCategories[index2].SubCategories.map(
-                            (subcategories, index3) => {
-                              return (
-                                <div key={index3}>
-                                  <ListItem
-                                    dense={true}
-                                    divider={true}
-                                    name={"developmentForm"}
-                                    className={classes.nested}>
-                                    <MuiThemeProvider theme={theme}>
-                                      <Checkbox
-                                        checked={
-                                          this.props.developmentForm[index].MainCategories[index2]
-                                            .SubCategories[index3].checked
-                                        }
-                                        onClick={e => {
-                                          this.handleToggle(e, index, index2, index3);
-                                        }}
-                                      />
-                                    </MuiThemeProvider>
-                                    <InputBase
-                                      className={classes.nested}
-                                      value={
-                                        developmentForm[index].MainCategories[index2].SubCategories[
-                                          index3
-                                        ].name
-                                      }
-                                      onChange={e => {
-                                        this.handleRename(e, index, index2, index3);
+                        <Collapse in={mainCategories.open} timeout={"auto"} unmountOnExit>
+                          {mainCategories.SubCategories.map((subCategories, index3) => {
+                            return (
+                              <div key={index3}>
+                                <ListItem
+                                  dense={true}
+                                  divider={true}
+                                  name={"developmentForm"}
+                                  className={classes.nested}>
+                                  <MuiThemeProvider theme={theme}>
+                                    <Checkbox
+                                      checked={subCategories.checked}
+                                      onClick={e => {
+                                        this.handleToggle(e, index, index2, index3);
                                       }}
-                                      style={{ width: 800, color: "black" }}
-                                      name={name}
-                                      disabled={
-                                        developmentForm[index].MainCategories[index2].SubCategories[
-                                          index3
-                                        ].imported
-                                      }
                                     />
-                                  </ListItem>
-                                </div>
-                              );
-                            }
-                          )}
+                                  </MuiThemeProvider>
+                                  <InputBase
+                                    className={classes.nested}
+                                    value={subCategories.name}
+                                    onChange={e => {
+                                      this.handleRename(e, index, index2, index3);
+                                    }}
+                                    style={{ width: 800, color: "black" }}
+                                    name={name}
+                                    disabled={subCategories.imported}
+                                  />
+                                </ListItem>
+                              </div>
+                            );
+                          })}
                           <div className={"buttonFlex"}>
                             <div />
                             <Button

@@ -95,7 +95,7 @@ class CompetenceCreation extends React.Component<Props> {
                 <MuiThemeProvider theme={theme}>
                   <Checkbox
                     className={classes.checkBox}
-                    checked={this.props.developmentForm[index].checked}
+                    checked={competence.checked}
                     onClick={e => {
                       this.handleToggle(e, index);
                     }}
@@ -103,13 +103,13 @@ class CompetenceCreation extends React.Component<Props> {
                 </MuiThemeProvider>
                 <InputBase
                   className={this.props.classes.margin}
-                  value={developmentForm[index].name}
+                  value={competence.name}
                   onChange={e => {
                     this.handleRename(e, index);
                   }}
                   style={{ width: 800, color: "black" }}
                   name={name}
-                  disabled={developmentForm[index].imported}
+                  disabled={competence.imported}
                 />
               </ListItem>
             ))}
