@@ -117,7 +117,7 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
       const developmentFormState = developmentForm;
       this.state.developmentForm.map((competence, index) => {
         nextProps.mainCategories.map(mainCategory => {
-          if (!developmentForm[index].MainCategories.find(m => m.name === mainCategory.name)) {
+          if (!competence.MainCategories.find(m => m.name === mainCategory.name)) {
             if (competence.name === mainCategory.CompetencyCategoryName) {
               developmentFormState[index].MainCategories.push({
                 name: mainCategory.name,
@@ -136,13 +136,9 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
     if (nextProps.subCategories != this.props.subCategories) {
       const developmentFormState = developmentForm;
       this.state.developmentForm.map((competence, index) => {
-        this.state.developmentForm[index].MainCategories.map((mainCategory, index2) => {
+        competence.MainCategories.map((mainCategory, index2) => {
           nextProps.subCategories.map(subCategory => {
-            if (
-              !developmentForm[index].MainCategories[index2].SubCategories.find(
-                s => s.name === subCategory.name
-              )
-            ) {
+            if (!mainCategory.SubCategories.find(s => s.name === subCategory.name)) {
               if (mainCategory.name === subCategory.MainCategoryName) {
                 developmentFormState[index].MainCategories[index2].SubCategories.push({
                   name: subCategory.name,
@@ -163,29 +159,23 @@ class DevelopmentStepper extends React.Component<AllProps, State> {
       const developmentFormState = developmentForm;
 
       this.state.developmentForm.map((competence, index) => {
-        this.state.developmentForm[index].MainCategories.map((mainCategory, index2) => {
-          this.state.developmentForm[index].MainCategories[index2].SubCategories.map(
-            (subCategory, index3) => {
-              nextProps.criteria.map(critera => {
-                if (
-                  !developmentForm[index].MainCategories[index2].SubCategories[
+        competence.MainCategories.map((mainCategory, index2) => {
+          mainCategory.SubCategories.map((subCategory, index3) => {
+            nextProps.criteria.map(critera => {
+              if (!subCategory.Criteria.find(c => c.name === critera.name)) {
+                if (subCategory.name === critera.SubCategoryName) {
+                  developmentFormState[index].MainCategories[index2].SubCategories[
                     index3
-                  ].Criteria.find(c => c.name === critera.name)
-                ) {
-                  if (subCategory.name === critera.SubCategoryName) {
-                    developmentFormState[index].MainCategories[index2].SubCategories[
-                      index3
-                    ].Criteria.push({
-                      name: critera.name,
-                      checked: false,
-                      value: "3",
-                      imported: true
-                    });
-                  }
+                  ].Criteria.push({
+                    name: critera.name,
+                    checked: false,
+                    value: "3",
+                    imported: true
+                  });
                 }
-              });
-            }
-          );
+              }
+            });
+          });
         });
       });
       this.setState({ developmentForm: developmentFormState });
