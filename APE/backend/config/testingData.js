@@ -4,6 +4,7 @@ const mc = require("../services/mainCategory.service");
 const sc = require("../services/subCategory.service");
 const c = require("../services/competence.service");
 const user = require("../services/user.service");
+const rdevsheet = require("../services/readyDevelopmentSheet.service");
 
 module.exports = {
   createData
@@ -159,7 +160,7 @@ async function createData() {
     password: "admin",
     firstname: "Frank",
     lastname: "Hubertus",
-    role: "trainer"
+    role: "admin"
   };
   user.create(body);
 
@@ -168,7 +169,60 @@ async function createData() {
     password: "trainer",
     firstname: "Oliver",
     lastname: "Kahn",
-    role: "admin"
+    role: "trainer"
   };
   user.create(body);
+
+  body = {
+    department: "PPCa",
+    education: "IKB",
+    content: [
+      {
+        name: "Soziale Kompetenz",
+        children: [
+          {
+            name: "Konfliktlösungskompetenz",
+            children: [
+              {
+                name: "Konfliktfähigkeit",
+                children: [
+                  {
+                    name: "Neue Kompetenz zu Konfliktfähigkeit",
+                    goalCross: "4",
+                    ynAnswer: "false"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Neue Kompetenzkategorie",
+        children: [
+          {
+            name: "Neue Hauptkategorie 1",
+            children: [
+              {
+                name: "Neue Subkategorie 1",
+                children: [
+                  {
+                    name: "Neue Kompetenz 1",
+                    goalCross: "1",
+                    ynAnswer: "false"
+                  },
+                  {
+                    name: "Neue Kompetenz 2",
+                    goalCross: "3",
+                    ynAnswer: "false"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  //rdevsheet.create(body);
 }

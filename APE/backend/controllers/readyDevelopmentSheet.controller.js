@@ -23,6 +23,13 @@ exports.getAllSimple = (req, res, next) => {
     .catch(err => next(err));
 };
 
+exports.getAllDevSheets = (req, res, next) => {
+  readyDevSheetService
+    .getAllDevSheets(req.body)
+    .then(devSheet => res.json(devSheet))
+    .catch(err => next(err));
+};
+
 function getById(req, res, next) {
   readyDevSheetService
     .getById(req.params.id)
