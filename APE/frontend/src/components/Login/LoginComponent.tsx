@@ -11,6 +11,7 @@ import { AllProps, State } from "./Login";
 import logo from "../../resources/swk.svg";
 import CustomizedInput from "../General/CustomizedInput";
 import Typography from "@material-ui/core/es/Typography/Typography";
+import TextLoop from "react-text-loop";
 
 export class LoginComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -55,14 +56,23 @@ export class LoginComponent extends React.Component<AllProps, State> {
           <img className={"logo"} src={logo} />
         </header>
 
-        <Typography variant={"h3"} className={"header"}>
-          Entwicklungsbogentool
+        <Typography variant={"h4"} className={"header"}>
+          Entwicklungsbogenportal
         </Typography>
+
         <div className={"loginContainer"}>
           <div className={"textBox"}>
-            <Typography variant={"h5"}>
-              Am Ende deiner Ausbildung weißt Du, wer Du bist, was Du willst und was Du kannst
-            </Typography>
+            <div className={"helpDiv"}>
+              <Typography variant={"h5"}>Am Ende deiner Ausbildung</Typography>
+              <div className={"flexDivAnimation"}>
+                <Typography variant={"h5"}>weißt du</Typography>
+                <TextLoop style={{ textAlign: "center" }}>
+                  <Typography variant={"h5"}>wer du bist</Typography>
+                  <Typography variant={"h5"}>was du willst</Typography>
+                  <Typography variant={"h5"}>was du kannst</Typography>
+                </TextLoop>
+              </div>
+            </div>
           </div>
 
           <div
@@ -74,7 +84,7 @@ export class LoginComponent extends React.Component<AllProps, State> {
             }}>
             <FormControl className={"emailForm"}>
               <InputLabel shrink htmlFor="bootstrap-input">
-                Kennung
+                <Typography variant={"subtitle1"}>Kennung</Typography>
               </InputLabel>
               <CustomizedInput name="email" value={email} error={noEmail} onChange={handleChange} />
               {noEmail && (
@@ -86,7 +96,7 @@ export class LoginComponent extends React.Component<AllProps, State> {
 
             <FormControl className={"passwordForm"}>
               <InputLabel shrink htmlFor="bootstrap-input">
-                Passwort
+                <Typography variant={"subtitle1"}>Passwort</Typography>
               </InputLabel>
               <CustomizedInput
                 name="passwort"
