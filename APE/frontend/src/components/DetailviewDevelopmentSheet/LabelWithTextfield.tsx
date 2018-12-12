@@ -35,7 +35,14 @@ export const LabelWithTextfield = (props: Props) => {
 
   return (
     <div>
-      <TextField margin="normal" label={name} variant={"outlined"} value={content} />
+      <TextField
+        className="textfield-color"
+        color="white"
+        margin="normal"
+        label={name}
+        variant={"outlined"}
+        value={content}
+      />
     </div>
   );
 };

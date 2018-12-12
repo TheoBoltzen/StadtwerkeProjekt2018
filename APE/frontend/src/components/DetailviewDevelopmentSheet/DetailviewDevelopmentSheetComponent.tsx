@@ -10,6 +10,7 @@ import Button from "@material-ui/core/es/Button/Button";
 var jsonObj = {
   department: "PPCa",
   education: "IKB",
+  version: "1",
   content: [
     {
       name: "Soziale Kompetenz",
@@ -22,22 +23,22 @@ var jsonObj = {
               children: [
                 {
                   name: "spricht Konflikte an",
-                  goalCross: "4",
+                  goalCross: "3",
                   ynAnswer: "false"
                 },
                 {
                   name: "bleibt stets sachlich",
-                  goalCross: "4",
+                  goalCross: "3",
                   ynAnswer: "false"
                 },
                 {
                   name: "respektiert andere Meinungen",
-                  goalCross: "4",
+                  goalCross: "3",
                   ynAnswer: "false"
                 },
                 {
                   name: "nimmt Kritik an und setzt sich mit ihr konstruktiv auseinander",
-                  goalCross: "4",
+                  goalCross: "3",
                   ynAnswer: "false"
                 }
               ]
@@ -146,14 +147,7 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
     "zeigt Hilfsbereitschaft"
   ];*/
 
-  var ist_werte = [
-    "teilweise",
-    "teilweise",
-    "weitgehend",
-    "unzureichend",
-    "teilweise",
-    "teilweise"
-  ];
+  var ist_werte = ["teilweise", "teilweise", "teilweise", "teilweise", "teilweise", "teilweise"];
   /*  var soll_werte = [
     "weitgehend",
     "weitgehend",
@@ -171,19 +165,20 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
       <Button onClick={onClick}>Zurück</Button>
       <div>
         <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
+        <h4>Version {jsonObj.version}</h4>
       </div>
       <div className="div-header" id="frame">
         <div className="div-left">
-          <LabelWithTextfield name={"Abteilung"} content={"KFME"} />
-          <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={"Max Mustermann"} />
-          <LabelWithTextfield name={"Auszubildener"} content={"Azu Bi"} />
-          <LabelWithTextfield name={"Ausbildungsberuf"} content={"Elektroniker"} />
+          <LabelWithTextfield name={"Abteilung"} content={jsonObj.department} />
+          <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={""} />
+          <LabelWithTextfield name={"Auszubildener"} content={""} />
+          <LabelWithTextfield name={"Ausbildungsberuf"} content={""} />
         </div>
         <div className="div-right">
-          <LabelWithTextfield name={"Datum"} content={"10.12.2018"} />
-          <LabelWithTextfield name={"Ausbildungszeitraum"} content={"06.2018 - 09.2018"} />
-          <LabelWithTextfield name={"Ausbildungsjahr"} content={"2018"} />
-          <LabelWithTextfield name={"Abwesenheitstage"} content={"4"} />
+          <LabelWithTextfield name={"Datum"} content={""} />
+          <LabelWithTextfield name={"Ausbildungszeitraum"} content={""} />
+          <LabelWithTextfield name={"Ausbildungsjahr"} content={""} />
+          <LabelWithTextfield name={"Abwesenheitstage"} content={""} />
         </div>
       </div>
 
@@ -194,11 +189,11 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
               <h3 key={index_1}>{kompetenzen.name}</h3>
               {kompetenzen.children &&
                 kompetenzen.children.map((hauptkategorie, index_2) => (
-                  <div>
+                  <div className="gravity-left">
                     <h4 key={index_2}>{hauptkategorie.name}</h4>
                     {hauptkategorie.children &&
                       hauptkategorie.children.map((subkategorie, index_3) => (
-                        <div>
+                        <div className="gravity-left">
                           <h5 key={index_3}>{subkategorie.name}</h5>
                           {subkategorie.children &&
                             subkategorie.children.map((kriterium, index_4) => {
