@@ -137,7 +137,7 @@ async function update(devSheetParam) {
       let subcategories = maincategories[j].children;
       for (let k = 0; k < subcategories.length; k++) {
         let z = {
-          name: subcategorys[k].name,
+          name: subcategories[k].name,
           MainCategoryName: maincategories[j].name
         };
         try {
@@ -167,7 +167,7 @@ async function update(devSheetParam) {
       }
     }
   }
-  ReadyDevSheet.bulkCreate(competencesForDevSheet, {
+  await ReadyDevSheet.bulkCreate(competencesForDevSheet, {
     returning: true
   })
     .then(() => {})

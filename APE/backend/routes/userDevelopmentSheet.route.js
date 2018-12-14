@@ -28,4 +28,9 @@ module.exports = app => {
     guard(["admin", "trainer", "trainee"]),
     UserDevelopmentSheet.associateTraineeDevSheet
   );
+  app.post(
+    "/services/deleteUserDevSheet",
+    guard(["admin"]),
+    UserDevelopmentSheet.deleteUserDevelopmentSheet
+  );
 };

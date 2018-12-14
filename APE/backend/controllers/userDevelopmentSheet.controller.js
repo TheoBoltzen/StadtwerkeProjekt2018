@@ -36,3 +36,10 @@ exports.getUserDevelopmentSheet = (req, res, next) => {
     .then(devSheet => res.json(devSheet))
     .catch(err => next(err));
 };
+
+exports.deleteUserDevelopmentSheet = (req, res, next) => {
+  userdevSheetService
+    .delete(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+};

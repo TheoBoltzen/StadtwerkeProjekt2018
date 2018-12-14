@@ -1,8 +1,7 @@
 const db = require("../config/db.config");
 const Sequelize = require("sequelize");
 const UserDevSheet = db.userDevelopmentSheet;
-const ReadyDevSheet = require("./readyDevelopmentSheet.service");
-const strings = require("../config/strings.js");
+const ReadyDevSheet = db.readyDevelopmentSheet;
 
 module.exports = {
   associate,
@@ -10,117 +9,81 @@ module.exports = {
   getAllUserDevelopmentSheets,
   getAllUserDevelopmentSheetsByUserId,
   getUserDevelopmentSheet,
+  setDigitalAgreement,
   setTrainerAssessment,
-  setTraineeAssessment
+  setTraineeAssessment,
+  delete: _delete
 };
 
 async function associate(devSheetParam) {
   // IN: developmentSheetId + Username
-  // Ändere Satus
 
-  x;
-  let associations = [
-    {
-      id: 5,
-      goalcross: 4,
-      version: 3,
-      DevelopmentSheetId: 1,
-      Competence: {
-        name: "arbeitet sicher und geschickt",
-        ynAnswer: false,
-        SubCategory: {
-          name: "Fertigkeiten",
-          MainCategory: {
-            name: "Fachkompetenz",
-            CompetencyCategory: {
-              name: "Fach- und Methodenkompetenz",
-              DevelopmentSheet: {
-                education: "sdfs",
-                department: "fgdf"
-              }
-            }
-          }
-        }
-      }
-    },
-    {
-      id: 4,
-      goalcross: 3,
-      version: 3,
-      DevelopmentSheetId: 1,
-      Competence: {
-        name: "äußert Inhalte kurz und präzise",
-        ynAnswer: false,
-        SubCategory: {
-          name: "Kommunikation",
-          MainCategory: {
-            name: "Personenorientierung/Interaktionskompetenz",
-            CompetencyCategory: {
-              name: "Soziale Kompetenz",
-              DevelopmentSheet: {
-                education: "sdfs",
-                department: "fgdf"
-              }
-            }
-          }
-        }
-      }
+  let ver = null;
+  await ReadyDevSheet.findOne({
+    where: { DevelopmentSheetId: devSheetParam.DevelopmentSheetId },
+    attributes: [[Sequelize.fn("max", Sequelize.col("version")), "version"]]
+  }).then(function(result) {
+    if (result != null) {
+      ver = result.version;
     }
-  ];
+  });
 
-  let userToDevSheet = [];
-  for (var i = 0; i < associations.length; i++) {
-    let dataobject = {
-      assessmentTRAINEE: devSheetParam.assessmentTRAINEE,
-      //status: , //!!!!!
-      ReadyDevelopmentSheetId: devSheetParam.ReadyDevelopmentSheetId,
-      TraineeUsername: devSheetParam.username
-    };
-    userToDevSheet.push(dataobject);
+  let associations = null;
+
+  if (ver != null) {
+    await ReadyDevSheet.findAll({
+      where: {
+        DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
+        version: ver
+      }
+    }).then(function(result) {
+      associations = result;
+    });
+
+    if (associations != null && associations != {}) {
+      let userToDevSheet = [];
+      for (var i = 0; i < associations.length; i++) {
+        let dataobject = {
+          status: "Zugewiesen",
+          DevelopmentSheetId: associations[i].DevelopmentSheetId,
+          ReadyDevelopmentSheetId: associations[i].id,
+          TraineeUsername: devSheetParam.username
+        };
+        userToDevSheet.push(dataobject);
+      }
+
+      await UserDevSheet.bulkCreate(userToDevSheet, {
+        returning: true
+      })
+        .then(() => {})
+        .catch(function(err) {
+          console.log(err);
+        });
+    }
+    // else:
   }
+  // else: no version detected; maybe missing devsheet
 }
 
-async function setTrainerAssessment(devSheetParam) {
-  // validate
-  const newDevSheet = DevSheet.build({
-    //id: devSheetParam.id,
-    department: devSheetParam.department,
-    education: devSheetParam.education
+async function setTrainerAssessment(devSheetParam) {}
+
+async function setTraineeAssessment(devSheetParam) {}
+
+async function setTrainer(devSheetParam) {}
+
+async function getAllUserDevelopmentSheets(devSheetParam) {}
+
+async function getAllUserDevelopmentSheetsByUserId(devSheetParam) {}
+
+async function getUserDevelopmentSheet(devSheetParam) {}
+
+async function setDigitalAgreement(devSheetParam) {}
+
+async function _delete(devSheetParam) {
+  await UserDevSheet.destroy({
+    where: {
+      DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
+      TraineeUsername: devSheetParam.username
+    }
   });
-  // save user in db
-  newDevSheet.save().then(() => {});
-}
-
-async function setTraineeAssessment(devSheetParam) {
-  // validate
-  const newDevSheet = DevSheet.build({
-    //id: devSheetParam.id,
-    department: devSheetParam.department,
-    education: devSheetParam.education
-  });
-  // save user in db
-  newDevSheet.save().then(() => {});
-}
-
-async function setTrainer(devSheetParam) {
-  // validate
-  const newDevSheet = DevSheet.build({
-    //id: devSheetParam.id,
-    department: devSheetParam.department,
-    education: devSheetParam.education
-  });
-  // save user in db
-  newDevSheet.save().then(() => {});
-}
-
-async function getAllUserDevelopmentSheets(devSheetParam) {
-  return await DevSheet.findOne({ where: { id: id } });
-}
-
-async function getAllUserDevelopmentSheetsByUserId(devSheetParam) {
-  await DevSheet.findByIdAndRemove(id);
-}
-
-async function getUserDevelopmentSheet(devSheetParam) {
-  await DevSheet.findByIdAndRemove(id);
 }
