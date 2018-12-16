@@ -7,11 +7,15 @@ module.exports = {
   associate,
   setTrainer,
   getAllUserDevelopmentSheets,
-  getAllUserDevelopmentSheetsByUserId,
+  getAllUserDevelopmentSheetsByUserTrainer,
+  getAllUserDevelopmentSheetsByUserTrainee,
   getUserDevelopmentSheet,
   setDigitalAgreement,
   setTrainerAssessment,
   setTraineeAssessment,
+  setDigitalDisagreement,
+  setStatusEstimated,
+  setStatusRated,
   delete: _delete
 };
 
@@ -42,7 +46,7 @@ async function associate(devSheetParam) {
 
     if (associations != null && associations != {}) {
       let userToDevSheet = [];
-      for (var i = 0; i < associations.length; i++) {
+      for (let i = 0; i < associations.length; i++) {
         let dataobject = {
           status: "Zugewiesen",
           DevelopmentSheetId: associations[i].DevelopmentSheetId,
@@ -65,19 +69,125 @@ async function associate(devSheetParam) {
   // else: no version detected; maybe missing devsheet
 }
 
-async function setTrainerAssessment(devSheetParam) {}
+async function setTrainerAssessment(devSheetParam) {
+  for (let i = 0; i < devSheetParam.length; i++) {
+    await UserDevSheet.update(
+      {
+        assessmentTRAINER: devSheetParam[i].assessmentTRAINER
+      },
+      {
+        where: {
+          ReadyDevelopmentSheetId: devSheetParam[i].ReadyDevelopmentSheetId,
+          TraineeUsername: devSheetParam.TraineeUsername
+        }
+      }
+    ).then(() => {});
+  }
+}
 
-async function setTraineeAssessment(devSheetParam) {}
+async function setTraineeAssessment(devSheetParam) {
+  for (let i = 0; i < devSheetParam.length; i++) {
+    await UserDevSheet.update(
+      {
+        assessmentTRAINEE: devSheetParam[i].assessmentTRAINEE
+      },
+      {
+        where: {
+          ReadyDevelopmentSheetId: devSheetParam[i].ReadyDevelopmentSheetId,
+          TraineeUsername: devSheetParam.TraineeUsername
+        }
+      }
+    ).then(() => {});
+  }
+}
 
-async function setTrainer(devSheetParam) {}
+async function setTrainer(devSheetParam) {
+  await UserDevSheet.update(
+    {
+      TrainerUsername: devSheetParam.TrainerUsername
+    },
+    {
+      where: {
+        DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
+        TraineeUsername: devSheetParam.TraineeUsername
+      }
+    }
+  ).then(() => {});
+}
 
-async function getAllUserDevelopmentSheets(devSheetParam) {}
+async function getAllUserDevelopmentSheets(devSheetParam) {
+  return await UserDevSheet.findAll({
+    where: {},
+    Attributes: {
+      TraineeUsername,
+      DevelopmentSheetId,
+      status,
+      createdAt
+    }
+  });
+}
 
-async function getAllUserDevelopmentSheetsByUserId(devSheetParam) {}
+async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam) {}
+
+async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam) {}
 
 async function getUserDevelopmentSheet(devSheetParam) {}
 
-async function setDigitalAgreement(devSheetParam) {}
+async function setStatusRated() {
+  await UserDevSheet.update(
+    {
+      status: "Überarbeitet"
+    },
+    {
+      where: {
+        DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
+        TraineeUsername: devSheetParam.TraineeUsername
+      }
+    }
+  ).then(() => {});
+}
+
+async function setStatusEstimated(devSheetParam) {
+  await UserDevSheet.update(
+    {
+      status: "Eingeschätzt"
+    },
+    {
+      where: {
+        DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
+        TraineeUsername: devSheetParam.TraineeUsername
+      }
+    }
+  ).then(() => {});
+}
+
+async function setDigitalAgreement(devSheetParam) {
+  await UserDevSheet.update(
+    {
+      status: "Abgeschlossen"
+    },
+    {
+      where: {
+        DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
+        TraineeUsername: devSheetParam.TraineeUsername
+      }
+    }
+  ).then(() => {});
+}
+
+async function setDigitalDisagreement(devSheetParam) {
+  await UserDevSheet.update(
+    {
+      status: "Gesprächsbedarf"
+    },
+    {
+      where: {
+        DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
+        TraineeUsername: devSheetParam.TraineeUsername
+      }
+    }
+  ).then(() => {});
+}
 
 async function _delete(devSheetParam) {
   await UserDevSheet.destroy({

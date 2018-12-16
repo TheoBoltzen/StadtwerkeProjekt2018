@@ -16,6 +16,20 @@ exports.associateTrainerDevSheet = (req, res, next) => {
     .catch(err => next(err));
 };
 
+exports.setStatusEstimated = (req, res, next) => {
+  userdevSheetService
+    .setStatusEstimated(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+};
+
+exports.setStatusRated = (req, res, next) => {
+  userdevSheetService
+    .setStatusRated(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+};
+
 exports.getAllUserDevelopmentSheets = (req, res, next) => {
   userdevSheetService
     .getAllUserDevelopmentSheets(req.body)
@@ -23,9 +37,16 @@ exports.getAllUserDevelopmentSheets = (req, res, next) => {
     .catch(err => next(err));
 };
 
-exports.getAllUserDevelopmentSheetsByUserId = (req, res, next) => {
+exports.getAllUserDevelopmentSheetsByUserTrainee = (req, res, next) => {
   userdevSheetService
-    .getAllUserDevelopmentSheetsByUserId(req.body)
+    .getAllUserDevelopmentSheetsByUserTrainee(req.body)
+    .then(devSheets => res.json(devSheets))
+    .catch(err => next(err));
+};
+
+exports.getAllUserDevelopmentSheetsByUserTrainer = (req, res, next) => {
+  userdevSheetService
+    .getAllUserDevelopmentSheetsByUserTrainer(req.body)
     .then(devSheets => res.json(devSheets))
     .catch(err => next(err));
 };
@@ -40,6 +61,27 @@ exports.getUserDevelopmentSheet = (req, res, next) => {
 exports.deleteUserDevelopmentSheet = (req, res, next) => {
   userdevSheetService
     .delete(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+};
+
+exports.setDigitalAgreement = (req, res, next) => {
+  userdevSheetService
+    .setDigitalAgreement(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+};
+
+exports.setTrainerAssessment = (req, res, next) => {
+  userdevSheetService
+    .setTrainerAssessment(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+};
+
+exports.setTraineeAssessment = (req, res, next) => {
+  userdevSheetService
+    .setTraineeAssessment(req.body)
     .then(() => res.json({}))
     .catch(err => next(err));
 };
