@@ -4,6 +4,7 @@ import Button from "@material-ui/core/es/Button/Button";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./DevelopmentForms";
 import { CircularProgress } from "@material-ui/core";
+import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import IconButton from "@material-ui/core/es/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 import { DevelopmentStepper } from "./DevelopmentStepper";
@@ -13,12 +14,25 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     super(props);
 
     this.state = {
-      visibilityIndex: false
+      visibilityIndex: false,
+      isHidden: true
     };
+  }
+
+  handleChildClick() {
+    this.setState({
+      isHidden: !this.state.isHidden
+    });
   }
 
   componentDidMount() {
     this.props.getAllDevForms();
+  }
+
+  componentDidUpdate(nextProps: AllProps, nextState: State) {
+    if (this.state.visibilityIndex !== nextState.visibilityIndex) {
+      this.props.getAllDevForms();
+    }
   }
 
   changeVisibilityIndex = () => {
@@ -32,7 +46,9 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
 
   getContent = () => {
     const { developmentForms, loading } = this.props;
+    const { isHidden } = this.state;
 
+    //DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
     return this.state.visibilityIndex ? (
       <div className={"switchRoot"}>
         <div className={"flexDiv"}>
@@ -44,23 +60,25 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
             <ClearIcon />
           </IconButton>
         </div>
-        <DevelopmentStepper />
+        <DevelopmentStepper close={this.changeVisibilityIndex} />
       </div>
     ) : (
       <div className={"switchRoot"}>
         <div className={"flexDiv"}>
           <div />
-          <Button
-            variant={"contained"}
-            color={"primary"}
-            className={"entwicklungsBogenButton"}
-            onClick={this.changeVisibilityIndex}>
-            Entwicklungsbogen erstellen
-          </Button>
+          {!loading && (
+            <Button
+              variant={"contained"}
+              color={"primary"}
+              className={"entwicklungsBogenButton"}
+              onClick={this.changeVisibilityIndex}>
+              Entwicklungsbogen erstellen
+            </Button>
+          )}
         </div>
         {loading ? (
-          <CircularProgress />
-        ) : (
+          <CircularProgress className={"loading-spinner"} />
+        ) : isHidden ? (
           <div className={"frame center"}>
             <ListItem
               isHeader={true}
@@ -77,9 +95,14 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                   job={devForm.education}
                   date={this.doFormatDate(devForm.createdAt)}
                   version={devForm.version}
+                  onClick={this.handleChildClick.bind(this)}
                 />
               );
             })}
+          </div>
+        ) : (
+          <div>
+            <DetailviewDevelopmentSheetComponent onClick={this.handleChildClick.bind(this)} />
           </div>
         )}
       </div>

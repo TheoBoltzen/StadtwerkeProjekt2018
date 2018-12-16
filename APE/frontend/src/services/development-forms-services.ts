@@ -62,7 +62,7 @@ export const createDevelopmentSheetService = (developmenSheet: DevelopmentFormCr
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
-    body: JSON.stringify({ developmenSheet })
+    body: JSON.stringify(developmenSheet)
   } as RequestInit;
 
   return fetch(`${apiURL}/services/createReadyDevelopmentSheet`, requestOptions).then(
