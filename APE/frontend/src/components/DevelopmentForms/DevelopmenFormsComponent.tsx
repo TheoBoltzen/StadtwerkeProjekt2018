@@ -83,9 +83,8 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
               />
               {developmentForms.map((devForm, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <ListItem
-                      key={index}
                       abteilung={devForm.department}
                       job={devForm.education}
                       date={this.doFormatDate(devForm.createdAt)}
