@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./LabelWithTextfield.css";
 import { TextField } from "@material-ui/core";
-import { createStyles } from "@material-ui/core/es";
+import { createStyles, WithStyles } from "@material-ui/core/es";
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
 import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
@@ -11,24 +11,7 @@ const styles = theme =>
     margin: {
       margin: theme.spacing.unit,
       backgroundColor: "white"
-    },
-    cssLabel: {
-      "&$cssFocused": {
-        color: "#00a8e1"
-      }
-    },
-    cssFocused: {},
-    cssUnderline: {
-      "&:after": {
-        borderBottomColor: "#00a8e1"
-      }
-    },
-    cssOutlinedInput: {
-      "&$cssFocused $notchedOutline": {
-        borderColor: "#00a8e1"
-      }
-    },
-    notchedOutline: {}
+    }
   });
 
 const theme = createMuiTheme({
@@ -40,36 +23,17 @@ const theme = createMuiTheme({
   typography: { useNextVariants: true }
 });
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   name?: string;
   content?: string;
 }
 
 export const LabelWithTextfield = (props: Props) => {
-  const { name, content } = props;
+  const { name, content, classes } = props;
 
   return (
     <MuiThemeProvider theme={theme}>
-      <TextField
-        /*InputLabelProps={{
-              classes: {
-                  root: classes.cssLabel
-
-              },
-          }}
-          InputProps={{
-              classes: {
-                  root: classes.cssOutlinedInput,
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-              },
-          }}*/
-        color="white"
-        margin="normal"
-        label={name}
-        variant={"outlined"}
-        value={content}
-      />
+      <TextField className={classes.margin} label={name} variant={"outlined"} value={content} />
     </MuiThemeProvider>
   );
 };
