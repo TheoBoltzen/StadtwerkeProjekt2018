@@ -4,7 +4,8 @@ import Button from "@material-ui/core/es/Button/Button";
 import { ListItem } from "../DevelopmentForms/ListItem";
 import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
-import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent"; //später
+import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
+import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet"; //später
 //import IconButton from "@material-ui/core/es/IconButton/IconButton";
 //import ClearIcon from "@material-ui/icons/Clear";
 
@@ -14,13 +15,22 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
     this.state = {
       visibilityIndex: true,
-      isHidden: true
+      isHidden: true,
+      showFillOutDialog: false
     };
   }
 
+  openFillOutDialog = () => {
+    this.setState({
+      showFillOutDialog: !this.state.showFillOutDialog,
+      isHidden: true
+    });
+  };
+
   handleChildClick() {
     this.setState({
-      isHidden: !this.state.isHidden
+      isHidden: !this.state.isHidden,
+      showFillOutDialog: false
     });
   }
 
@@ -39,10 +49,12 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
   getContent = () => {
     const { developmentForms, loading } = this.props;
-    const { isHidden } = this.state;
+    const { isHidden, showFillOutDialog } = this.state;
 
     //DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
-    return this.state.visibilityIndex ? (
+    return showFillOutDialog ? (
+      <FillOutDevelopmentSheet />
+    ) : this.state.visibilityIndex ? (
       <div className={"switchRoot"}>
         Hallo hier ist Content!
         <div className={"flexDiv"}>
@@ -54,6 +66,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
             onClick={this.changeVisibilityIndex}>
             Finde Entwicklungsbögen
           </Button>
+          <Button onClick={this.openFillOutDialog}>FillOut</Button>
         </div>
       </div>
     ) : (
