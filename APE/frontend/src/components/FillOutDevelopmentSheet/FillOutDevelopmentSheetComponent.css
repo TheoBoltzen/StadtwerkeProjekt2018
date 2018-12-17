@@ -1,0 +1,10 @@
+.criteria-text {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.criteria-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
