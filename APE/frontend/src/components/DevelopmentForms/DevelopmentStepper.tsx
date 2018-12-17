@@ -43,7 +43,7 @@ interface ReduxDispatchProps {
 }
 
 export interface Props extends WithStyles<typeof styles> {
-  close: () => void;
+  close: any;
   id?: number;
 }
 

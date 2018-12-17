@@ -3,26 +3,26 @@ import "./DevelopmentForms.css";
 import Button from "@material-ui/core/es/Button/Button";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./DevelopmentForms";
-import { CircularProgress } from "@material-ui/core";
+//import { CircularProgress } from "@material-ui/core";
 import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import IconButton from "@material-ui/core/es/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 import { DevelopmentStepper } from "./DevelopmentStepper";
+import Typography from "@material-ui/core/es/Typography/Typography";
 
 export class DevelopmentFormsComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
 
     this.state = {
-      visibilityIndex: false,
-      isHidden: true,
+      visibilityIndex: 0,
       developmenFormId: ""
     };
   }
 
-  handleChildClick = id => {
+  handleSearchClick = (event: any, id) => {
+    this.setState({ visibilityIndex: 1 });
     this.setState({
-      isHidden: !this.state.isHidden,
       developmenFormId: id
     });
   };
@@ -37,8 +37,8 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     }
   }
 
-  changeVisibilityIndex = () => {
-    this.setState({ visibilityIndex: !this.state.visibilityIndex });
+  changeVisibilityIndex = (event: any, value) => {
+    this.setState({ visibilityIndex: value });
   };
 
   doFormatDate = date => {
@@ -50,11 +50,94 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     console.log("EditClick ", index);
   };
 
-  getContent = () => {
+  getContent = visibilityIndex => {
     const { developmentForms, loading } = this.props;
-    const { isHidden, developmenFormId } = this.state;
+    const { developmenFormId } = this.state;
 
-    //DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
+    switch (visibilityIndex) {
+      case 0:
+        // Übersicht Bögen
+        return (
+          <div>
+            {!loading && (
+              <Button
+                variant={"contained"}
+                color={"primary"}
+                className={"entwicklungsBogenButton"}
+                onClick={e => {
+                  this.changeVisibilityIndex(e, 2);
+                }}>
+                Entwicklungsbogen erstellen
+              </Button>
+            )}
+            <div className={"frame center"}>
+              <ListItem
+                isHeader={true}
+                abteilung="Abteilung"
+                job="Ausbildungsberuf"
+                date="Erstellungsdatum"
+              />
+              {developmentForms.map((devForm, index) => {
+                return (
+                  <div>
+                    <ListItem
+                      key={index}
+                      abteilung={devForm.department}
+                      job={devForm.education}
+                      date={this.doFormatDate(devForm.createdAt)}
+                      onEditClick={e => {
+                        this.onEditClick(e, devForm.id);
+                      }}
+                      onSearchClick={e => {
+                        this.handleSearchClick(e, devForm.id);
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      case 1:
+        // Detailansicht
+        return (
+          <div>
+            <DetailviewDevelopmentSheetComponent
+              onClick={this.handleSearchClick}
+              id={developmenFormId}
+            />
+          </div>
+        );
+      case 2:
+        // Entwicklungsbogen Erstellung
+        return (
+          <div className={"switchRoot"}>
+            <div className={"flexDiv"}>
+              <IconButton
+                color={"primary"}
+                className={"crossButton"}
+                onClick={e => {
+                  this.changeVisibilityIndex(e, 0);
+                }}>
+                <ClearIcon />
+              </IconButton>
+              <DevelopmentStepper
+                close={e => {
+                  this.changeVisibilityIndex(e, 0);
+                }}
+              />
+            </div>
+          </div>
+        );
+      default:
+        return (
+          <div>
+            <Typography variant={"h2"}>Upps hier lief was schief</Typography>
+          </div>
+        );
+    }
+
+    /*//DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
     return this.state.visibilityIndex ? (
       <div className={"switchRoot"}>
         <div className={"flexDiv"}>
@@ -102,7 +185,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                   onEditClick={e => {
                     this.onEditClick(e, devForm.id);
                   }}
-                  onSearchClick={() => this.handleChildClick(devForm.id)}
+                  onSearchClick={() => this.handleSearchClick(devForm.id)}
                 />
               );
             })}
@@ -110,16 +193,16 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
         ) : (
           <div>
             <DetailviewDevelopmentSheetComponent
-              onClick={this.handleChildClick}
-              id={developmenFormId}
+            onClick={this.handleSearchClick}
+            id={developmenFormId}
             />
-          </div>
+            </div>
         )}
       </div>
-    );
+    );*/
   };
 
   render() {
-    return <div className={"root"}>{this.getContent()}</div>;
+    return <div className={"root"}>{this.getContent(this.state.visibilityIndex)}</div>;
   }
 }

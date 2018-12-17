@@ -27,7 +27,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     });
   };
 
-  handleChildClick() {
+  handleSearchClick() {
     this.setState({
       isHidden: !this.state.isHidden,
       showFillOutDialog: false
@@ -88,7 +88,6 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                 abteilung="Abteilung"
                 job="Ausbildungsberuf"
                 date="Erstellungsdatum"
-                version="Version"
               />
               {developmentForms.map((devForm, index) => {
                 return (
@@ -97,8 +96,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     abteilung={devForm.department}
                     job={devForm.education}
                     date={this.doFormatDate(devForm.createdAt)}
-                    version={devForm.version}
-                    onSearchClick={this.handleChildClick.bind(this)}
+                    onSearchClick={this.handleSearchClick.bind(this)}
                     isTrainee={true}
                   />
                 );
@@ -108,7 +106,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           </div>
         ) : (
           <div>
-            <DetailviewDevelopmentSheetComponent onClick={this.handleChildClick.bind(this)} />
+            <DetailviewDevelopmentSheetComponent onClick={this.handleSearchClick.bind(this)} />
           </div>
         )}
       </div>

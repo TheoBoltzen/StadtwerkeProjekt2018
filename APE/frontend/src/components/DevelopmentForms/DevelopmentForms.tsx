@@ -5,8 +5,7 @@ import { getAll } from "../../redux/actions/development-forms-actions";
 import { connect } from "react-redux";
 
 export interface State {
-  visibilityIndex: boolean;
-  isHidden: boolean;
+  visibilityIndex: number;
   developmenFormId: string;
 }
 
