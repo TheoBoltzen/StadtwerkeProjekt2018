@@ -5,17 +5,9 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true
     },
-    assessmentTRAINER: {
-      type: Sequelize.INTEGER,
-      allowNull: true
-    },
-    assessmentTRAINEE: {
-      type: Sequelize.INTEGER,
-      allowNull: true
-    },
     status: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     }
   });
 

@@ -2,102 +2,42 @@ const db = require("../config/db.config");
 const Sequelize = require("sequelize");
 const UserDevSheet = db.userDevelopmentSheet;
 const ReadyDevSheet = db.readyDevelopmentSheet;
+const UserDevSheetAss = db.userDevelopmentSheetAssociation;
 
 module.exports = {
-  associate,
+  _create,
   setTrainer,
   getAllUserDevelopmentSheets,
   getAllUserDevelopmentSheetsByUserTrainer,
   getAllUserDevelopmentSheetsByUserTrainee,
   getUserDevelopmentSheet,
   setDigitalAgreement,
-  setTrainerAssessment,
-  setTraineeAssessment,
   setDigitalDisagreement,
   setStatusEstimated,
   setStatusRated,
   delete: _delete
 };
 
-async function associate(devSheetParam) {
+async function _create(devSheetParam) {
   // IN: developmentSheetId + Username
 
-  let ver = null;
-  await ReadyDevSheet.findOne({
-    where: { DevelopmentSheetId: devSheetParam.DevelopmentSheetId },
-    attributes: [[Sequelize.fn("max", Sequelize.col("version")), "version"]]
-  }).then(function(result) {
-    if (result != null) {
-      ver = result.version;
-    }
-  });
-
-  let associations = null;
-
-  if (ver != null) {
-    await ReadyDevSheet.findAll({
+  if (
+    await UserDevSheet.findOne({
       where: {
         DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
-        version: ver
+        TraineeUsername: devSheetParam.username
       }
-    }).then(function(result) {
-      associations = result;
+    })
+  ) {
+    throw "UserDevSheet is already taken";
+  } else {
+    const _userDevSheet = UserDevSheet.build({
+      status: "Zugewiesen",
+      TraineeUsername: devSheetParam.username,
+      DevelopmentSheetId: devSheetParam.DevelopmentSheetId
     });
-
-    if (associations != null && associations != {}) {
-      let userToDevSheet = [];
-      for (let i = 0; i < associations.length; i++) {
-        let dataobject = {
-          status: "Zugewiesen",
-          DevelopmentSheetId: associations[i].DevelopmentSheetId,
-          ReadyDevelopmentSheetId: associations[i].id,
-          TraineeUsername: devSheetParam.username
-        };
-        userToDevSheet.push(dataobject);
-      }
-
-      await UserDevSheet.bulkCreate(userToDevSheet, {
-        returning: true
-      })
-        .then(() => {})
-        .catch(function(err) {
-          console.log(err);
-        });
-    }
-    // else:
-  }
-  // else: no version detected; maybe missing devsheet
-}
-
-async function setTrainerAssessment(devSheetParam) {
-  for (let i = 0; i < devSheetParam.length; i++) {
-    await UserDevSheet.update(
-      {
-        assessmentTRAINER: devSheetParam[i].assessmentTRAINER
-      },
-      {
-        where: {
-          ReadyDevelopmentSheetId: devSheetParam[i].ReadyDevelopmentSheetId,
-          TraineeUsername: devSheetParam.TraineeUsername
-        }
-      }
-    ).then(() => {});
-  }
-}
-
-async function setTraineeAssessment(devSheetParam) {
-  for (let i = 0; i < devSheetParam.length; i++) {
-    await UserDevSheet.update(
-      {
-        assessmentTRAINEE: devSheetParam[i].assessmentTRAINEE
-      },
-      {
-        where: {
-          ReadyDevelopmentSheetId: devSheetParam[i].ReadyDevelopmentSheetId,
-          TraineeUsername: devSheetParam.TraineeUsername
-        }
-      }
-    ).then(() => {});
+    // save user in db
+    _userDevSheet.save().then(() => {});
   }
 }
 
@@ -115,17 +55,7 @@ async function setTrainer(devSheetParam) {
   ).then(() => {});
 }
 
-async function getAllUserDevelopmentSheets(devSheetParam) {
-  return await UserDevSheet.findAll({
-    where: {},
-    Attributes: {
-      TraineeUsername,
-      DevelopmentSheetId,
-      status,
-      createdAt
-    }
-  });
-}
+async function getAllUserDevelopmentSheets(devSheetParam) {}
 
 async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam) {}
 
@@ -190,6 +120,19 @@ async function setDigitalDisagreement(devSheetParam) {
 }
 
 async function _delete(devSheetParam) {
+  let x = await UserDevSheet.findOne({
+    where: {
+      DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
+      TraineeUsername: devSheetParam.username
+    }
+  });
+
+  await UserDevSheetAss.destroy({
+    where: {
+      UserDevelopmentSheetId: x.id
+    }
+  });
+
   await UserDevSheet.destroy({
     where: {
       DevelopmentSheetId: devSheetParam.DevelopmentSheetId,

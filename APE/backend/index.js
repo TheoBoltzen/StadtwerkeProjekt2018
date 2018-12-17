@@ -30,6 +30,7 @@ require("./routes/subCategory.route")(app);
 require("./routes/developmentSheet.route")(app);
 require("./routes/readyDevelopmentSheet.route")(app);
 require("./routes/userDevelopmentSheet.route")(app);
+require("./routes/userDevelopmentSheetAssociation.route")(app);
 
 testingData.createData();
 

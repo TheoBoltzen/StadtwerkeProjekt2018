@@ -2,13 +2,6 @@ const userdevSheetService = require("../services/userDevelopmentSheet.service");
 const express = require("express");
 const router = express.Router();
 
-exports.associateTraineeDevSheet = (req, res, next) => {
-  userdevSheetService
-    .associate(req.body)
-    .then(() => res.json({}))
-    .catch(err => next(err));
-};
-
 exports.associateTrainerDevSheet = (req, res, next) => {
   userdevSheetService
     .setTrainer(req.body)
@@ -68,20 +61,6 @@ exports.deleteUserDevelopmentSheet = (req, res, next) => {
 exports.setDigitalAgreement = (req, res, next) => {
   userdevSheetService
     .setDigitalAgreement(req.body)
-    .then(() => res.json({}))
-    .catch(err => next(err));
-};
-
-exports.setTrainerAssessment = (req, res, next) => {
-  userdevSheetService
-    .setTrainerAssessment(req.body)
-    .then(() => res.json({}))
-    .catch(err => next(err));
-};
-
-exports.setTraineeAssessment = (req, res, next) => {
-  userdevSheetService
-    .setTraineeAssessment(req.body)
     .then(() => res.json({}))
     .catch(err => next(err));
 };

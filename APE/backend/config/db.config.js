@@ -60,6 +60,11 @@ db.userDevelopmentSheet = require("../models/userDevelopmentSheet.model.js")(
   Sequelize
 );
 
+db.userDevelopmentSheetAssociation = require("../models/userDevelopmentSheetAssociation.model.js")(
+  sequelize,
+  Sequelize
+);
+
 db.protocol = require("../models/protocol.model.js")(sequelize, Sequelize);
 
 // Associations
@@ -76,7 +81,9 @@ db.competence.belongsTo(db.subCategory);
 db.readyDevelopmentSheet.belongsTo(db.competence);
 db.readyDevelopmentSheet.belongsTo(db.developmentSheet);
 
-db.userDevelopmentSheet.belongsTo(db.readyDevelopmentSheet);
+db.userDevelopmentSheetAssociation.belongsTo(db.readyDevelopmentSheet);
+db.userDevelopmentSheetAssociation.belongsTo(db.userDevelopmentSheet);
+
 db.userDevelopmentSheet.belongsTo(db.developmentSheet);
 db.userDevelopmentSheet.belongsTo(db.user, { as: "Trainee" });
 db.userDevelopmentSheet.belongsTo(db.user, { as: "Trainer" });
