@@ -1,7 +1,7 @@
 import { FillDevelopmentSheetComponent } from "./FillOutDevelopmentSheetComponent";
 
 export interface State {
-  radioValue: string;
+  radioValue: { name: string; value: string }[];
 }
 
 export interface Props {}

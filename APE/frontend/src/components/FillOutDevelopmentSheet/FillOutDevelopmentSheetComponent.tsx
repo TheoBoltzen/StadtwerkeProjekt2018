@@ -8,14 +8,25 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
   constructor(props) {
     super(props);
     this.state = {
-      radioValue: "3"
+      radioValue: []
     };
   }
 
   private handleChange = event => {
-    console.log("event: ", event.target.value);
+    let radioValueArray = this.state.radioValue;
+
+    if (radioValueArray.find(r => r.name === event.target.name)) {
+      radioValueArray[radioValueArray.findIndex(r => r.name === event.target.name)].value =
+        event.target.value;
+    } else {
+      radioValueArray = [
+        ...radioValueArray,
+        { name: event.target.name, value: event.target.value }
+      ];
+    }
+
     this.setState({
-      radioValue: event.target.value
+      radioValue: radioValueArray
     });
   };
 
@@ -159,23 +170,28 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
           </div>
         </div>
 
-        {TestObject.content.map((competence, index) => (
-          <div key={index} id={"frame"}>
+        {TestObject.content.map(competence => (
+          <div key={competence.name} id={"frame"}>
             <h3>{competence.name}</h3>
             {competence.children.map(mainCategory => (
-              <div className={"gravity-left"}>
+              <div className={"gravity-left"} key={mainCategory.name}>
                 <h4>{mainCategory.name}</h4>
                 {mainCategory.children.map(subCategory => (
-                  <div className={"gravity-left"}>
+                  <div className={"gravity-left"} key={subCategory.name}>
                     <h5>{subCategory.name}</h5>
                     {subCategory.children.map(criteria => (
-                      <div className={"criteria-container"}>
+                      <div className={"criteria-container"} key={criteria.name}>
                         <legend className={"criteria-text"}>{criteria.name}</legend>
                         <FormControl component={"fieldset"}>
                           <RadioGroup
                             name={criteria.name}
                             onChange={this.handleChange}
-                            value={radioValue}
+                            value={
+                              radioValue.find(r => r.name === criteria.name)
+                                ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
+                                    .value
+                                : "3"
+                            }
                             row={true}>
                             <FormControlLabel
                               value={"1"}
@@ -221,7 +237,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
           <div className={"criteria-container"}>
             <legend className={"criteria-text"}>Test</legend>
             <FormControl component={"fieldset"}>
-              <RadioGroup name={"test"} onChange={this.handleChange} value={radioValue} row={true}>
+              <RadioGroup name={"test"} onChange={this.handleChange} value={""} row={true}>
                 <FormControlLabel value={"1"} control={<Radio color={"primary"} />} label={""} />
                 <FormControlLabel value={"2"} control={<Radio color={"primary"} />} label={""} />
                 <FormControlLabel value={"3"} control={<Radio color={"primary"} />} label={""} />
