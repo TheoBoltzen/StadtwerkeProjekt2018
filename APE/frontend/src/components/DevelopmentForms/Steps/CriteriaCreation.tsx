@@ -162,7 +162,7 @@ class CriteriaCreation extends React.Component<Props> {
                         className={classes.disabledInputBase}
                         value={competence.name}
                         name={name}
-                        style={{ color: "black", width: 800 }}
+                        style={{ color: "black", width: 1200 }}
                       />
                       {competence.open ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
@@ -185,7 +185,7 @@ class CriteriaCreation extends React.Component<Props> {
                                   className={classes.disabledInputBase}
                                   value={mainCategories.name}
                                   name={name}
-                                  style={{ color: "black", width: 800 }}
+                                  style={{ color: "black", width: 1200 }}
                                 />
                                 {mainCategories.open ? <ExpandLess /> : <ExpandMore />}
                               </ListItem>
@@ -207,7 +207,7 @@ class CriteriaCreation extends React.Component<Props> {
                                             disabled={true}
                                             className={classes.nested}
                                             value={subCategories.name}
-                                            style={{ color: "black", width: 800 }}
+                                            style={{ color: "black", width: 1200 }}
                                             name={name}
                                           />
                                           {subCategories.open ? <ExpandLess /> : <ExpandMore />}

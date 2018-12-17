@@ -107,7 +107,7 @@ class CompetenceCreation extends React.Component<Props> {
                   onChange={e => {
                     this.handleRename(e, index);
                   }}
-                  style={{ width: 800, color: "black" }}
+                  style={{ width: 1200, color: "black" }}
                   name={name}
                   disabled={competence.imported}
                 />

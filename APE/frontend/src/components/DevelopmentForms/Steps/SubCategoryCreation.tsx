@@ -136,7 +136,7 @@ class SubCategoryCreation extends React.Component<Props> {
                         className={classes.disabledInputBase}
                         value={competence.name}
                         name={name}
-                        style={{ color: "black", width: 800 }}
+                        style={{ color: "black", width: 1200 }}
                       />
                       {competence.open ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
@@ -159,7 +159,7 @@ class SubCategoryCreation extends React.Component<Props> {
                                   className={classes.disabledInputBase}
                                   value={mainCategories.name}
                                   name={name}
-                                  style={{ color: "black", width: 800 }}
+                                  style={{ color: "black", width: 1200 }}
                                 />
                                 {mainCategories.open ? <ExpandLess /> : <ExpandMore />}
                               </ListItem>
@@ -186,7 +186,7 @@ class SubCategoryCreation extends React.Component<Props> {
                                           onChange={e => {
                                             this.handleRename(e, index, index2, index3);
                                           }}
-                                          style={{ width: 800, color: "black" }}
+                                          style={{ width: 1200, color: "black" }}
                                           name={name}
                                           disabled={subCategories.imported}
                                         />
