@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/es/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 import { DevelopmentStepper } from "./DevelopmentStepper";
 import Typography from "@material-ui/core/es/Typography/Typography";
+import "./DevelopmentFormsComponent.css";
 
 export class DevelopmentFormsComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -60,15 +61,18 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
         return (
           <div>
             {!loading && (
-              <Button
-                variant={"contained"}
-                color={"primary"}
-                className={"entwicklungsBogenButton"}
-                onClick={e => {
-                  this.changeVisibilityIndex(e, 2);
-                }}>
-                Entwicklungsbogen erstellen
-              </Button>
+              <div className={"buttonDiv"}>
+                <div />
+                <Button
+                  variant={"contained"}
+                  color={"primary"}
+                  className={"entwicklungsBogenButton"}
+                  onClick={e => {
+                    this.changeVisibilityIndex(e, 2);
+                  }}>
+                  Entwicklungsbogen erstellen
+                </Button>
+              </div>
             )}
             <div className={"frame center"}>
               <ListItem
@@ -103,7 +107,9 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
         return (
           <div>
             <DetailviewDevelopmentSheetComponent
-              onClick={this.handleSearchClick}
+              onClick={e => {
+                this.changeVisibilityIndex(e, 0);
+              }}
               id={developmenFormId}
             />
           </div>
@@ -111,8 +117,9 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
       case 2:
         // Entwicklungsbogen Erstellung
         return (
-          <div className={"switchRoot"}>
-            <div className={"flexDiv"}>
+          <div>
+            <div className={"buttonDiv"}>
+              <div />
               <IconButton
                 color={"primary"}
                 className={"crossButton"}
@@ -121,12 +128,13 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                 }}>
                 <ClearIcon />
               </IconButton>
-              <DevelopmentStepper
-                close={e => {
-                  this.changeVisibilityIndex(e, 0);
-                }}
-              />
             </div>
+
+            <DevelopmentStepper
+              close={e => {
+                this.changeVisibilityIndex(e, 0);
+              }}
+            />
           </div>
         );
       default:

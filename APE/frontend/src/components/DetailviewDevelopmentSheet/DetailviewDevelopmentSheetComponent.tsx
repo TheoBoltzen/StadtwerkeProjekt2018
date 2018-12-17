@@ -134,6 +134,7 @@ interface Props {
     y: String;  */
   onClick?: any;
   id?: string;
+  close?: any;
 }
 
 export const DetailviewDevelopmentSheetComponent = (props: Props) => {
