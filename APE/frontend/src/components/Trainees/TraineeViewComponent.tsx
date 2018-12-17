@@ -98,7 +98,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     job={devForm.education}
                     date={this.doFormatDate(devForm.createdAt)}
                     version={devForm.version}
-                    onClick={this.handleChildClick.bind(this)}
+                    onSearchClick={this.handleChildClick.bind(this)}
                     isTrainee={true}
                   />
                 );

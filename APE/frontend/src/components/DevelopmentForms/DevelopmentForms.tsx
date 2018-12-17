@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 export interface State {
   visibilityIndex: boolean;
   isHidden: boolean;
+  developmenFormId: string;
 }
 
 interface Props {}
