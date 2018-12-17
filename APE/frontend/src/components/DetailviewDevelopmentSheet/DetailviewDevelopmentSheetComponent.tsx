@@ -133,10 +133,13 @@ interface Props {
   /*x: String;
     y: String;  */
   onClick?: any;
+  id?: string;
 }
 
 export const DetailviewDevelopmentSheetComponent = (props: Props) => {
-  const { onClick } = props;
+  const { onClick, id } = props;
+
+  console.log("id: ", id);
 
   /*  var kriterien = [
     "freundliches und aufgeschlossenes Auftreten",

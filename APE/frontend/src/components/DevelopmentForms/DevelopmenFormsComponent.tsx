@@ -15,15 +15,17 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
 
     this.state = {
       visibilityIndex: false,
-      isHidden: true
+      isHidden: true,
+      developmenFormId: ""
     };
   }
 
-  handleChildClick() {
+  handleChildClick = id => {
     this.setState({
-      isHidden: !this.state.isHidden
+      isHidden: !this.state.isHidden,
+      developmenFormId: id
     });
-  }
+  };
 
   componentDidMount() {
     this.props.getAllDevForms();
@@ -50,7 +52,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
 
   getContent = () => {
     const { developmentForms, loading } = this.props;
-    const { isHidden } = this.state;
+    const { isHidden, developmenFormId } = this.state;
 
     //DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
     return this.state.visibilityIndex ? (
@@ -97,17 +99,20 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                   abteilung={devForm.department}
                   job={devForm.education}
                   date={this.doFormatDate(devForm.createdAt)}
-                  onSearchClick={this.handleChildClick.bind(this)}
                   onEditClick={e => {
                     this.onEditClick(e, devForm.id);
                   }}
+                  onSearchClick={() => this.handleChildClick(devForm.id)}
                 />
               );
             })}
           </div>
         ) : (
           <div>
-            <DetailviewDevelopmentSheetComponent onClick={this.handleChildClick.bind(this)} />
+            <DetailviewDevelopmentSheetComponent
+              onClick={this.handleChildClick}
+              id={developmenFormId}
+            />
           </div>
         )}
       </div>

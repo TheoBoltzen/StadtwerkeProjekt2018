@@ -4,18 +4,30 @@ import EditIcon from "@material-ui/icons/Edit";
 import SearchIcon from "@material-ui/icons/Search";
 import ShareIcon from "@material-ui/icons/Share";
 import { IconButton, Tooltip } from "@material-ui/core";
+import { Favorite } from "@material-ui/icons";
 
 interface Props {
   abteilung: string;
   job: string;
   date: string;
+  isTrainee?: boolean;
   isHeader?: boolean;
   onSearchClick?: any;
   onEditClick?: any;
+  onAssignMeClick?: any;
 }
 
 export const ListItem = (props: Props) => {
-  const { abteilung, job, date, isHeader = false, onSearchClick, onEditClick } = props;
+  const {
+    abteilung,
+    job,
+    date,
+    isTrainee = false,
+    isHeader,
+    onSearchClick,
+    onEditClick,
+    onAssignMeClick
+  } = props;
 
   return (
     <div className={isHeader ? "headerRow" : "item"}>
@@ -26,10 +38,26 @@ export const ListItem = (props: Props) => {
             <td>{job}</td>
             <td>{date}</td>
             <td>
-              {!isHeader && (
+              {isHeader ? (
+                <div />
+              ) : isTrainee ? (
                 <div>
-                  <Tooltip title={"Detailansicht"}>
-                    <IconButton onClick={onSearchClick}>
+                  <Tooltip title={"Detailansicht"} onClick={onSearchClick}>
+                    <IconButton>
+                      <SearchIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+
+                  <Tooltip title={"Mir zuweisen"} onClick={onAssignMeClick}>
+                    <IconButton>
+                      <Favorite fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                </div>
+              ) : (
+                <div>
+                  <Tooltip title={"Detailansicht"} onClick={onSearchClick}>
+                    <IconButton>
                       <SearchIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
@@ -39,8 +67,8 @@ export const ListItem = (props: Props) => {
                       <ShareIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
-                  <Tooltip title={"Bearbeiten"}>
-                    <IconButton onClick={onEditClick}>
+                  <Tooltip title={"Bearbeiten"} onClick={onEditClick}>
+                    <IconButton>
                       <EditIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>

@@ -1,4 +1,4 @@
-import { DevelopmentFormsComponent } from "./DevelopmenFormsComponent";
+import { TraineeViewComponent } from "./TraineeViewComponent";
 import { DevelopmentForm } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
 import { getAll } from "../../redux/actions/development-forms-actions";
@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 export interface State {
   visibilityIndex: boolean;
   isHidden: boolean;
-  developmenFormId: string;
+  showFillOutDialog: boolean;
 }
 
 interface Props {}
@@ -40,6 +40,6 @@ const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
 const connectedDevelopmentForm = connect<ReduxStateProps, ReduxDispatchProps, Props>(
   mapStateToProps,
   mapDispatchToProps
-)(DevelopmentFormsComponent);
+)(TraineeViewComponent);
 
-export { connectedDevelopmentForm as DevelopmentForms };
+export { connectedDevelopmentForm as TraineeView };

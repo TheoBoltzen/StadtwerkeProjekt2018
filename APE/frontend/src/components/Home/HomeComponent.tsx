@@ -6,6 +6,7 @@ import { UserAdministration } from "../UserAdministration/UserAdministration";
 import { PrivateRoute } from "../PrivateRoute";
 import { DevelopmentForms } from "../DevelopmentForms/DevelopmentForms";
 import { Trainees } from "../Trainees/Trainees";
+import { TraineeView } from "../Trainees/TraineeView";
 import { RoleConstants, RouterPathsConstants } from "../../constants";
 import { connect } from "react-redux";
 import { getRole } from "../../redux/actions";
@@ -56,6 +57,7 @@ class Home extends React.Component<AllProps, State> {
 
     const isAdmin = role === RoleConstants.admin;
     const isTrainer = role === RoleConstants.trainer;
+    const isTrainee = role === RoleConstants.trainee;
 
     return (
       <IdleTimer
@@ -87,6 +89,14 @@ class Home extends React.Component<AllProps, State> {
 
         {rerender && (isAdmin || isTrainer) && (
           <PrivateRoute path={RouterPathsConstants.trainees} exact={true} component={Trainees} />
+        )}
+
+        {rerender && isTrainee && (
+          <PrivateRoute
+            path={RouterPathsConstants.traineeDevelopmentForms}
+            exact={true}
+            component={TraineeView}
+          />
         )}
       </IdleTimer>
     );
