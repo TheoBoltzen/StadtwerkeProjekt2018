@@ -55,11 +55,26 @@ async function setTrainer(devSheetParam) {
   ).then(() => {});
 }
 
-async function getAllUserDevelopmentSheets(devSheetParam) {}
+async function getAllUserDevelopmentSheets(devSheetParam) {
+  return await ReadyDevSheet.findAll();
+  // TODO Join With DevelopmentSheet (Values Add)
+}
 
-async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam) {}
+async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam) {
+  return await ReadyDevSheet.findAll({
+    where: {
+      TrainerUsername: devSheetParam.TrainerUsername
+    }
+  });
+}
 
-async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam) {}
+async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam) {
+  return await ReadyDevSheet.findAll({
+    where: {
+      TraineeUsername: devSheetParam.TraineeUsername
+    }
+  });
+}
 
 async function getUserDevelopmentSheet(devSheetParam) {}
 
