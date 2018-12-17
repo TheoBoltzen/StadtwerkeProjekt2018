@@ -3,7 +3,7 @@ import "./DevelopmentForms.css";
 import Button from "@material-ui/core/es/Button/Button";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./DevelopmentForms";
-//import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import IconButton from "@material-ui/core/es/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -60,80 +60,94 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
         // Übersicht Bögen
         return (
           <div>
-            {!loading && (
-              <div className={"buttonDiv"}>
-                <div />
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
-                  onClick={e => {
-                    this.changeVisibilityIndex(e, 2);
-                  }}>
-                  Entwicklungsbogen erstellen
-                </Button>
+            {!loading ? (
+              <div>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <Button
+                    variant={"contained"}
+                    color={"primary"}
+                    className={"entwicklungsBogenButton"}
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, 2);
+                    }}>
+                    Entwicklungsbogen erstellen
+                  </Button>
+                </div>
+                <div className={"frame center"}>
+                  <ListItem
+                    isHeader={true}
+                    abteilung="Abteilung"
+                    job="Ausbildungsberuf"
+                    date="Erstellungsdatum"
+                  />
+                  {developmentForms.map((devForm, index) => {
+                    return (
+                      <div key={index}>
+                        <ListItem
+                          abteilung={devForm.department}
+                          job={devForm.education}
+                          date={this.doFormatDate(devForm.createdAt)}
+                          onEditClick={e => {
+                            this.onEditClick(e, devForm.id);
+                          }}
+                          onSearchClick={e => {
+                            this.handleSearchClick(e, devForm.id);
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
+            ) : (
+              <CircularProgress className={"loading-spinner"} />
             )}
-            <div className={"frame center"}>
-              <ListItem
-                isHeader={true}
-                abteilung="Abteilung"
-                job="Ausbildungsberuf"
-                date="Erstellungsdatum"
-              />
-              {developmentForms.map((devForm, index) => {
-                return (
-                  <div key={index}>
-                    <ListItem
-                      abteilung={devForm.department}
-                      job={devForm.education}
-                      date={this.doFormatDate(devForm.createdAt)}
-                      onEditClick={e => {
-                        this.onEditClick(e, devForm.id);
-                      }}
-                      onSearchClick={e => {
-                        this.handleSearchClick(e, devForm.id);
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
           </div>
         );
       case 1:
         // Detailansicht
         return (
           <div>
-            <DetailviewDevelopmentSheetComponent
-              onClick={e => {
-                this.changeVisibilityIndex(e, 0);
-              }}
-              id={developmenFormId}
-            />
+            {!loading ? (
+              <DetailviewDevelopmentSheetComponent
+                onClick={e => {
+                  this.changeVisibilityIndex(e, 0);
+                }}
+                id={developmenFormId}
+              />
+            ) : (
+              <CircularProgress className={"loading-spinner"} />
+            )}
           </div>
         );
       case 2:
         // Entwicklungsbogen Erstellung
         return (
           <div>
-            <div className={"buttonDiv"}>
-              <div />
-              <IconButton
-                color={"primary"}
-                className={"crossButton"}
-                onClick={e => {
-                  this.changeVisibilityIndex(e, 0);
-                }}>
-                <ClearIcon />
-              </IconButton>
-            </div>
+            {!loading ? (
+              <div>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <IconButton
+                    color={"primary"}
+                    className={"crossButton"}
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, 0);
+                    }}>
+                    <ClearIcon />
+                  </IconButton>
+                </div>
 
-            <DevelopmentStepper
-              close={e => {
-                this.changeVisibilityIndex(e, 0);
-              }}
-            />
+                <DevelopmentStepper
+                  close={e => {
+                    this.changeVisibilityIndex(e, 0);
+                  }}
+                />
+              </div>
+            ) : (
+              <CircularProgress className={"loading-spinner"} />
+            )}
           </div>
         );
       default:
