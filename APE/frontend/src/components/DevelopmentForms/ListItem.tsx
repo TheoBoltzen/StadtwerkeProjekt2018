@@ -9,13 +9,13 @@ interface Props {
   abteilung: string;
   job: string;
   date: string;
-  version: string;
   isHeader?: boolean;
-  onClick?: any;
+  onSearchClick?: any;
+  onEditClick?: any;
 }
 
 export const ListItem = (props: Props) => {
-  const { abteilung, job, date, version, isHeader = false, onClick } = props;
+  const { abteilung, job, date, isHeader = false, onSearchClick, onEditClick } = props;
 
   return (
     <div className={isHeader ? "headerRow" : "item"}>
@@ -25,13 +25,12 @@ export const ListItem = (props: Props) => {
             <td>{abteilung}</td>
             <td>{job}</td>
             <td>{date}</td>
-            <td>{version}</td>
             <td>
               {!isHeader && (
                 <div>
                   <Tooltip title={"Detailansicht"}>
-                    <IconButton>
-                      <SearchIcon fontSize="small" onClick={onClick} />
+                    <IconButton onClick={onSearchClick}>
+                      <SearchIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
 
@@ -41,7 +40,7 @@ export const ListItem = (props: Props) => {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title={"Bearbeiten"}>
-                    <IconButton>
+                    <IconButton onClick={onEditClick}>
                       <EditIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>

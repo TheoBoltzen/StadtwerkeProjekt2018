@@ -44,6 +44,10 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     return new Date(date).toLocaleDateString("de");
   };
 
+  onEditClick = (event: any, index) => {
+    console.log("EditClick ", index);
+  };
+
   getContent = () => {
     const { developmentForms, loading } = this.props;
     const { isHidden } = this.state;
@@ -85,7 +89,6 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
               abteilung="Abteilung"
               job="Ausbildungsberuf"
               date="Erstellungsdatum"
-              version="Version"
             />
             {developmentForms.map((devForm, index) => {
               return (
@@ -94,8 +97,10 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                   abteilung={devForm.department}
                   job={devForm.education}
                   date={this.doFormatDate(devForm.createdAt)}
-                  version={devForm.version}
-                  onClick={this.handleChildClick.bind(this)}
+                  onSearchClick={this.handleChildClick.bind(this)}
+                  onEditClick={e => {
+                    this.onEditClick(e, devForm.id);
+                  }}
                 />
               );
             })}
