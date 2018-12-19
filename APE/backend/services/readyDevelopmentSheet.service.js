@@ -10,8 +10,7 @@ const competence = require("./competence.service");
 
 module.exports = {
   update,
-  create,
-  getById
+  create
 };
 
 async function create(devSheetParam) {
@@ -174,8 +173,4 @@ async function update(devSheetParam) {
     .catch(function(err) {
       console.log(err);
     });
-}
-
-async function getById(id) {
-  return await ReadyDevSheet.findOne({ where: { id: id } });
 }
