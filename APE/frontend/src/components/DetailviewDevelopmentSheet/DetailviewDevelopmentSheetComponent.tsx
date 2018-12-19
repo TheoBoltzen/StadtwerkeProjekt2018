@@ -168,7 +168,7 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
         <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
         <h4>Version {jsonObj.version}</h4>
       </div>
-      <div className="div-header" id="frame">
+      <div className="div-header">
         <div className="div-left">
           <LabelWithTextfield name={"Abteilung"} content={jsonObj.department} />
           <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={""} />
@@ -186,7 +186,7 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
       <div>
         {jsonObj.content &&
           jsonObj.content.map((kompetenzen, index_1) => (
-            <div id="frame" key={index_1}>
+            <div className={"frameDetail"} key={index_1}>
               <h3 key={index_1}>{kompetenzen.name}</h3>
               {kompetenzen.children &&
                 kompetenzen.children.map((hauptkategorie, index_2) => (

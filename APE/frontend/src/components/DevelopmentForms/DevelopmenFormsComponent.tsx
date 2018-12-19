@@ -74,7 +74,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                     Entwicklungsbogen erstellen
                   </Button>
                 </div>
-                <div className={"frame center"}>
+                <div className={"frameCenter"}>
                   <ListItem
                     isHeader={true}
                     abteilung="Abteilung"

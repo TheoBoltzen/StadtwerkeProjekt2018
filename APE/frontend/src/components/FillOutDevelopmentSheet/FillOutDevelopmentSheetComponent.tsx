@@ -156,96 +156,98 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
 
     return (
       <React.Fragment>
-        <div className="div-header" id="frame">
-          <div className="div-left">
-            <LabelWithTextfield name={"Abteilung"} content={TestObject.department} />
-            <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={""} />
-            <LabelWithTextfield name={"Auszubildener"} content={""} />
-            <LabelWithTextfield name={"Ausbildungsberuf"} content={""} />
+        <div className={"fillOutRoot"}>
+          <div className="div-headerFill" id="frameFill">
+            <div className="div-leftFill">
+              <LabelWithTextfield name={"Abteilung"} content={TestObject.department} />
+              <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={""} />
+              <LabelWithTextfield name={"Auszubildener"} content={""} />
+              <LabelWithTextfield name={"Ausbildungsberuf"} content={""} />
+            </div>
+            <div className="div-rightFill">
+              <LabelWithTextfield name={"Datum"} content={""} />
+              <LabelWithTextfield name={"Ausbildungszeitraum"} content={""} />
+              <LabelWithTextfield name={"Ausbildungsjahr"} content={""} />
+              <LabelWithTextfield name={"Abwesenheitstage"} content={""} />
+            </div>
           </div>
-          <div className="div-right">
-            <LabelWithTextfield name={"Datum"} content={""} />
-            <LabelWithTextfield name={"Ausbildungszeitraum"} content={""} />
-            <LabelWithTextfield name={"Ausbildungsjahr"} content={""} />
-            <LabelWithTextfield name={"Abwesenheitstage"} content={""} />
-          </div>
-        </div>
 
-        {TestObject.content.map(competence => (
-          <div key={competence.name} id={"frame"}>
-            <h3>{competence.name}</h3>
-            {competence.children.map(mainCategory => (
-              <div className={"gravity-left"} key={mainCategory.name}>
-                <h4>{mainCategory.name}</h4>
-                {mainCategory.children.map(subCategory => (
-                  <div className={"gravity-left"} key={subCategory.name}>
-                    <h5>{subCategory.name}</h5>
-                    {subCategory.children.map(criteria => (
-                      <div className={"criteria-container"} key={criteria.name}>
-                        <legend className={"criteria-text"}>{criteria.name}</legend>
-                        <FormControl component={"fieldset"}>
-                          <RadioGroup
-                            name={criteria.name}
-                            onChange={this.handleChange}
-                            value={
-                              radioValue.find(r => r.name === criteria.name)
-                                ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
-                                    .value
-                                : "3"
-                            }
-                            row={true}>
-                            <FormControlLabel
-                              value={"1"}
-                              control={<CustomizedRadio />}
-                              label={""}
-                            />
-                            <FormControlLabel
-                              value={"2"}
-                              control={<CustomizedRadio />}
-                              label={""}
-                            />
-                            <FormControlLabel
-                              value={"3"}
-                              control={<CustomizedRadio />}
-                              label={""}
-                            />
-                            <FormControlLabel
-                              value={"4"}
-                              control={<CustomizedRadio />}
-                              label={""}
-                            />
-                            <FormControlLabel
-                              value={"5"}
-                              control={<CustomizedRadio />}
-                              label={""}
-                            />
-                          </RadioGroup>
-                        </FormControl>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        ))}
+          {TestObject.content.map(competence => (
+            <div key={competence.name} id={"frameFill"}>
+              <h3>{competence.name}</h3>
+              {competence.children.map(mainCategory => (
+                <div className={"gravity-leftFill"} key={mainCategory.name}>
+                  <h4>{mainCategory.name}</h4>
+                  {mainCategory.children.map(subCategory => (
+                    <div className={"gravity-leftFill"} key={subCategory.name}>
+                      <h5>{subCategory.name}</h5>
+                      {subCategory.children.map(criteria => (
+                        <div className={"criteria-container"} key={criteria.name}>
+                          <legend className={"criteria-text"}>{criteria.name}</legend>
+                          <FormControl component={"fieldset"}>
+                            <RadioGroup
+                              name={criteria.name}
+                              onChange={this.handleChange}
+                              value={
+                                radioValue.find(r => r.name === criteria.name)
+                                  ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
+                                      .value
+                                  : "3"
+                              }
+                              row={true}>
+                              <FormControlLabel
+                                value={"1"}
+                                control={<CustomizedRadio />}
+                                label={""}
+                              />
+                              <FormControlLabel
+                                value={"2"}
+                                control={<CustomizedRadio />}
+                                label={""}
+                              />
+                              <FormControlLabel
+                                value={"3"}
+                                control={<CustomizedRadio />}
+                                label={""}
+                              />
+                              <FormControlLabel
+                                value={"4"}
+                                control={<CustomizedRadio />}
+                                label={""}
+                              />
+                              <FormControlLabel
+                                value={"5"}
+                                control={<CustomizedRadio />}
+                                label={""}
+                              />
+                            </RadioGroup>
+                          </FormControl>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
 
-        <div id={"frame"}>
-          <h3>Soziale Kompetenz</h3>
-          <h4>Hauptkategorie</h4>
-          <h5>Unterkategorie</h5>
+          <div id={"frameFill"}>
+            <h3>Soziale Kompetenz</h3>
+            <h4>Hauptkategorie</h4>
+            <h5>Unterkategorie</h5>
 
-          <div className={"criteria-container"}>
-            <legend className={"criteria-text"}>Test</legend>
-            <FormControl component={"fieldset"}>
-              <RadioGroup name={"test"} onChange={this.handleChange} value={""} row={true}>
-                <FormControlLabel value={"1"} control={<CustomizedRadio />} label={""} />
-                <FormControlLabel value={"2"} control={<CustomizedRadio />} label={""} />
-                <FormControlLabel value={"3"} control={<CustomizedRadio />} label={""} />
-                <FormControlLabel value={"4"} control={<CustomizedRadio />} label={""} />
-                <FormControlLabel value={"5"} control={<CustomizedRadio />} label={""} />
-              </RadioGroup>
-            </FormControl>
+            <div className={"criteria-container"}>
+              <legend className={"criteria-text"}>Test</legend>
+              <FormControl component={"fieldset"}>
+                <RadioGroup name={"test"} onChange={this.handleChange} value={""} row={true}>
+                  <FormControlLabel value={"1"} control={<CustomizedRadio />} label={""} />
+                  <FormControlLabel value={"2"} control={<CustomizedRadio />} label={""} />
+                  <FormControlLabel value={"3"} control={<CustomizedRadio />} label={""} />
+                  <FormControlLabel value={"4"} control={<CustomizedRadio />} label={""} />
+                  <FormControlLabel value={"5"} control={<CustomizedRadio />} label={""} />
+                </RadioGroup>
+              </FormControl>
+            </div>
           </div>
         </div>
       </React.Fragment>

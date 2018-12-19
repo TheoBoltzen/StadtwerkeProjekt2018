@@ -1,10 +1,9 @@
-.frame {
+.frameCenter {
   display: inline-block;
   flex-direction: column;
   border-radius: 13px;
   background-color: #efeff5;
-}
-
-.center {
-  margin: 50px 50px;
+  margin-top: 10px;
+  margin-right: 50px;
+  margin-left: 50px;
 }
