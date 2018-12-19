@@ -173,7 +173,9 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const { loading } = this.props;
     switch (stepIndex) {
       case 0:
-        return (
+        return loading ? (
+          <CircularProgress />
+        ) : (
           <DepartmentProfession
             department={this.state.department}
             profession={this.state.profession}
@@ -315,7 +317,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const { activeStep } = this.state;
 
     return (
-      <div className={"root"}>
+      <div className={"stepperRoot"}>
         <div className={classes.root}>
           <Stepper activeStep={activeStep} className={classes.stepper} alternativeLabel>
             {steps.map(label => {
