@@ -10,8 +10,7 @@ const competence = require("./competence.service");
 
 module.exports = {
   update,
-  create,
-  getById
+  create
 };
 
 async function create(devSheetParam) {
@@ -25,12 +24,12 @@ async function create(devSheetParam) {
   };
   await devSheet.create(body);
 
-  let identifier;
+  let identifier = 1;
   await DevelopmentSheet.findOne({
     where: {},
     attributes: [[Sequelize.fn("max", Sequelize.col("id")), "id"]]
   }).then(function(result) {
-    if (result == {}) {
+    if (result == null || result == {}) {
       identifier = 1;
     } else {
       identifier = result.id + 1;
@@ -90,7 +89,7 @@ async function create(devSheetParam) {
     }
   }
   console.log("LOG: " + competencesForDevSheet);
-  ReadyDevSheet.bulkCreate(competencesForDevSheet, {
+  await ReadyDevSheet.bulkCreate(competencesForDevSheet, {
     returning: true
   })
     .then(() => {})
@@ -134,22 +133,22 @@ async function update(devSheetParam) {
         await mainCategory.create(y);
       } catch {}
       // Step through Subcategory
-      let subcategorys = maincategories[j].children;
-      for (let k = 0; k < subcategorys.length; k++) {
+      let subcategories = maincategories[j].children;
+      for (let k = 0; k < subcategories.length; k++) {
         let z = {
-          name: subcategorys[k].name,
+          name: subcategories[k].name,
           MainCategoryName: maincategories[j].name
         };
         try {
           await subCategory.create(z);
         } catch {}
         // Step through competences
-        let competences = subcategorys[k].children;
+        let competences = subcategories[k].children;
         for (let l = 0; l < competences.length; l++) {
           let zA = {
             name: competences[l].name,
             ynAnswer: competences[l].ynAnswer,
-            SubCategoryName: subcategorys[k].name
+            SubCategoryName: subcategories[k].name
           };
           try {
             await competence.create(zA);
@@ -167,15 +166,11 @@ async function update(devSheetParam) {
       }
     }
   }
-  ReadyDevSheet.bulkCreate(competencesForDevSheet, {
+  await ReadyDevSheet.bulkCreate(competencesForDevSheet, {
     returning: true
   })
     .then(() => {})
     .catch(function(err) {
       console.log(err);
     });
-}
-
-async function getById(id) {
-  return await ReadyDevSheet.findOne({ where: { id: id } });
 }
