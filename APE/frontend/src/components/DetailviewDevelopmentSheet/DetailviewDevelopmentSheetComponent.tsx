@@ -163,7 +163,7 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
   let sollWerte: string[] = [];
 
   return (
-    <div>
+    <div className={"detailRoot"}>
       <div>
         <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
         <h4>Version {jsonObj.version}</h4>

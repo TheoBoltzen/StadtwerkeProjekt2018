@@ -10,7 +10,8 @@ const styles = theme =>
   createStyles({
     margin: {
       margin: theme.spacing.unit,
-      backgroundColor: "white"
+      backgroundColor: "white",
+      width: "370px"
     }
   });
 
