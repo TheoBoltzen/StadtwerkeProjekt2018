@@ -2,7 +2,7 @@ import * as React from "react";
 import { FormControl, FormControlLabel, RadioGroup } from "@material-ui/core";
 import { AllProps, State } from "./FillOutDevelopmentSheet";
 import "./FillOutDevelopmentSheetComponent.css";
-import { LabelWithTextfield } from "../DetailviewDevelopmentSheet/LabelWithTextfield";
+import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 import CustomizedRadio from "../General/CustomizedRadio";
 
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
