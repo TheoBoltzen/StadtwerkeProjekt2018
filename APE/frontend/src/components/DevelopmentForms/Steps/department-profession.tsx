@@ -20,14 +20,14 @@ export const DepartmentProfession = (props: Props) => {
       <div className={"step1Form"}>
         <FormControl className={"DepartmentForm"}>
           <InputLabel shrink htmlFor="bootstrap-input">
-            Abteilung
+            <Typography variant={"subtitle1"}>Abteilung</Typography>
           </InputLabel>
           <CustomizedInput name={"department"} value={department} onChange={onChange} />
         </FormControl>
 
         <FormControl className={"ProfessionForm"}>
           <InputLabel shrink htmlFor="bootstrap-input">
-            Ausbildungsberuf
+            <Typography variant={"subtitle1"}>Ausbildungsberuf</Typography>
           </InputLabel>
           <CustomizedInput name={"profession"} value={profession} onChange={onChange} />
         </FormControl>
