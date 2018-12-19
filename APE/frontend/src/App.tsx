@@ -11,20 +11,12 @@ import { ApplicationState } from "./redux/reducers";
 import { clearAlert, saveAlert } from "./redux/actions";
 import InfoIcon from "@material-ui/icons/Info";
 
-export interface Items {
-  id: number;
-  name: string;
-  description: string;
-  qty: number;
-}
-
 interface Props {
   dispatch: any;
   alert: any;
 }
 
 interface State {
-  items: Items[];
   snackbarIsOpen: boolean;
 }
 
@@ -38,13 +30,8 @@ class App extends React.Component<Props, State> {
     });
 
     this.state = {
-      items: [],
       snackbarIsOpen: false
     };
-  }
-
-  componentDidMount() {
-    this.getMembers();
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -55,12 +42,6 @@ class App extends React.Component<Props, State> {
         this.props.dispatch(clearAlert());
       }, 6000);
     }
-  }
-
-  private getMembers() {
-    fetch("/api/items")
-      .then(res => res.json())
-      .then(res => this.setState({ items: res }, () => console.log("fetched", res)));
   }
 
   private handleCloseSnackbar = (event, reason) => {
