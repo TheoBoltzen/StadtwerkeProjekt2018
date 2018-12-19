@@ -42,7 +42,7 @@ export class NavigationComponent extends React.Component<AllProps, State> {
 
     return (
       <div className={"menu"}>
-        <img className={"logo"} src={logo} />
+        <img className={"navLogo"} src={logo} />
 
         <div className={"navRight"}>
           {isAdmin && (

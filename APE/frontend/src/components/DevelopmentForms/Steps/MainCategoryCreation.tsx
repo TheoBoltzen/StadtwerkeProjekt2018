@@ -34,6 +34,7 @@ export interface MainCategory {
   checked: boolean;
   open: boolean;
   SubCategories: SubCategory[];
+  imported: boolean;
 }
 
 const theme = createMuiTheme({
@@ -105,72 +106,75 @@ class MainCategoryCreation extends React.Component<Props> {
         </div>
         <div className={"step3form"}>
           <List className={"list"}>
-            {developmentForm.map((competence, index) => (
-              <div key={index}>
-                <ListItem
-                  button
-                  dense={true}
-                  divider={true}
-                  name={"developmentForm"}
-                  onClick={e => {
-                    this.handleClick(e, index);
-                  }}>
-                  <InputBase
-                    disabled={true}
-                    className={classes.disabledInputBase}
-                    value={developmentForm[index].name}
-                    name={name}
-                    style={{ color: "black", width: 800 }}
-                  />
-                  {developmentForm[index].open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={developmentForm[index].open} timeout={"auto"} unmountOnExit>
-                  {developmentForm[index].MainCategories.map((mainCategories, index2) => {
-                    return (
-                      <List key={index2}>
-                        <ListItem
-                          dense={true}
-                          divider={true}
-                          name={"developmentForm"}
-                          className={classes.nested}>
-                          <MuiThemeProvider theme={theme}>
-                            <Checkbox
-                              checked={
-                                this.props.developmentForm[index].MainCategories[index2].checked
-                              }
-                              onClick={e => {
-                                this.handleToggle(e, index, index2);
-                              }}
-                            />
-                          </MuiThemeProvider>
-                          <InputBase
-                            className={classes.margin}
-                            value={developmentForm[index].MainCategories[index2].name}
-                            onChange={e => {
-                              this.handleRename(e, index, index2);
-                            }}
-                            style={{ width: 800 }}
-                            name={name}
-                          />
-                        </ListItem>
-                      </List>
-                    );
-                  })}
-                  <div className={"buttonFlex"}>
-                    <div />
-                    <Button
-                      color={"primary"}
-                      variant={"fab"}
-                      aria-label={"Add"}
-                      mini
-                      className={"AddIcon"}
-                      onClick={() => onClickAddButton(index)}>
-                      <AddIcon />
-                    </Button>
+            {developmentForm.map(
+              (competence, index) =>
+                competence.checked && (
+                  <div key={index}>
+                    <ListItem
+                      button
+                      dense={true}
+                      divider={true}
+                      name={"developmentForm"}
+                      onClick={e => {
+                        this.handleClick(e, index);
+                      }}>
+                      <InputBase
+                        disabled={true}
+                        className={classes.disabledInputBase}
+                        value={competence.name}
+                        name={name}
+                        style={{ color: "black", width: 1200 }}
+                      />
+                      {competence.open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+
+                    <Collapse in={competence.open} timeout={"auto"} unmountOnExit>
+                      {competence.MainCategories.map((mainCategories, index2) => {
+                        return (
+                          <List key={index2}>
+                            <ListItem
+                              dense={true}
+                              divider={true}
+                              name={"developmentForm"}
+                              className={classes.nested}>
+                              <MuiThemeProvider theme={theme}>
+                                <Checkbox
+                                  checked={mainCategories.checked}
+                                  onClick={e => {
+                                    this.handleToggle(e, index, index2);
+                                  }}
+                                />
+                              </MuiThemeProvider>
+                              <InputBase
+                                className={classes.margin}
+                                value={mainCategories.name}
+                                onChange={e => {
+                                  this.handleRename(e, index, index2);
+                                }}
+                                style={{ width: 1200, color: "black" }}
+                                name={name}
+                                disabled={mainCategories.imported}
+                              />
+                            </ListItem>
+                          </List>
+                        );
+                      })}
+                      <div className={"buttonFlex"}>
+                        <div />
+                        <Button
+                          color={"primary"}
+                          variant={"fab"}
+                          aria-label={"Add"}
+                          mini
+                          className={"AddIcon"}
+                          onClick={() => onClickAddButton(index)}>
+                          <AddIcon />
+                        </Button>
+                      </div>
+                    </Collapse>
                   </div>
-                </Collapse>
-              </div>
-            ))}
+                )
+            )}
           </List>
         </div>
       </div>

@@ -12,6 +12,8 @@
     "react-redux": "^5.1.0",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
+    "react-text-loop": "^1.1.0",
+    "recharts": "^1.4.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",

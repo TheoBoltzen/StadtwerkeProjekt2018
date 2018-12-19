@@ -13,6 +13,18 @@
   margin: 15px 50px;
 }
 
+.switchRoot {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  width: 100%;
+}
+
+.loading-spinner {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .flexDiv {
   margin-top: 50px;
   width: 96%;

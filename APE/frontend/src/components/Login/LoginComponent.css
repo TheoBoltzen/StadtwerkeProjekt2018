@@ -5,6 +5,7 @@
   align-content: space-around;
   justify-content: center;
   padding: 5px;
+  margin-top: 25px;
 }
 
 .header {
@@ -38,7 +39,8 @@ label + .CustomizedInputs-bootstrapRoot-2 {
 }
 
 .logo {
-  margin: 12px;
+  height: 60px;
+  padding: 20px;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -59,11 +61,28 @@ label + .CustomizedInputs-bootstrapRoot-2 {
 }
 
 .textBox {
+  margin-top: 25px;
+
   width: 300px;
-  padding: 50px;
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   background-color: #efeff5;
   border-top-left-radius: 13px;
   border-bottom-left-radius: 13px;
+}
+
+.flexDivAnimation {
+  margin-left: 0px;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.helpDiv {
+  margin-bottom: 40px;
 }
 
 .all {

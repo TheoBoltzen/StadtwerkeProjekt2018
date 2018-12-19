@@ -18,7 +18,7 @@ module.exports = app => {
     guard(["admin", "trainer"]),
     SubCategory.getAllByCompetencyCategory
   );
-  app.get(
+  app.post(
     "/services/getSubCategoriesByMainCategory",
     guard(["admin", "trainer"]),
     SubCategory.getAllByMainCategory

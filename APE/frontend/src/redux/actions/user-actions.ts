@@ -49,6 +49,9 @@ export const login = (username: string, password: string) => {
             if (role === RoleConstants.trainer) {
               history.push(RouterPathsConstants.trainees);
             }
+            if (role === RoleConstants.trainee) {
+              history.push(RouterPathsConstants.traineeDevelopmentForms);
+            }
           },
           error => {
             dispatch(failureRole(error.toString()));

@@ -31,6 +31,7 @@ export interface Competence {
   checked: boolean;
   MainCategories: MainCategory[];
   open: boolean;
+  imported: boolean;
 }
 
 const theme = createMuiTheme({
@@ -94,7 +95,7 @@ class CompetenceCreation extends React.Component<Props> {
                 <MuiThemeProvider theme={theme}>
                   <Checkbox
                     className={classes.checkBox}
-                    checked={this.props.developmentForm[index].checked}
+                    checked={competence.checked}
                     onClick={e => {
                       this.handleToggle(e, index);
                     }}
@@ -102,12 +103,13 @@ class CompetenceCreation extends React.Component<Props> {
                 </MuiThemeProvider>
                 <InputBase
                   className={this.props.classes.margin}
-                  value={developmentForm[index].name}
+                  value={competence.name}
                   onChange={e => {
                     this.handleRename(e, index);
                   }}
-                  style={{ width: 800 }}
+                  style={{ width: 1200, color: "black" }}
                   name={name}
+                  disabled={competence.imported}
                 />
               </ListItem>
             ))}
@@ -120,7 +122,7 @@ class CompetenceCreation extends React.Component<Props> {
               aria-label={"Add"}
               mini
               className={"AddIcon"}
-              onClick={() => onClickAddButton}>
+              onClick={onClickAddButton}>
               <AddIcon />
             </Button>
           </div>
