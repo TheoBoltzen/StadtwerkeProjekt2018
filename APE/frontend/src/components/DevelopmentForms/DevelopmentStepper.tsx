@@ -43,7 +43,8 @@ interface ReduxDispatchProps {
 }
 
 export interface Props extends WithStyles<typeof styles> {
-  close: () => void;
+  close: any;
+  id?: number;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps & Props;

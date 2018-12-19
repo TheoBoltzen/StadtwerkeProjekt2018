@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Graph } from "./graph";
-import { LabelWithTextfield } from "./LabelWithTextfield";
+import LabelWithTextfield from "./LabelWithTextfield";
 import "./DetailviewDevelopmentSheetComponent.css";
 //import { List, ListItem } from "@material-ui/core";
 import Button from "@material-ui/core/es/Button/Button";
@@ -133,10 +133,14 @@ interface Props {
   /*x: String;
     y: String;  */
   onClick?: any;
+  id?: string;
+  close?: any;
 }
 
 export const DetailviewDevelopmentSheetComponent = (props: Props) => {
-  const { onClick } = props;
+  const { onClick, id } = props;
+
+  console.log("id: ", id);
 
   /*  var kriterien = [
     "freundliches und aufgeschlossenes Auftreten",

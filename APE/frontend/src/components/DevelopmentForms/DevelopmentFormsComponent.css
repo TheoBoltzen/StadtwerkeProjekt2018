@@ -1,0 +1,9 @@
+.buttonDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 96.75%;
+}
+
+.entwicklungsBogenButton {
+}
