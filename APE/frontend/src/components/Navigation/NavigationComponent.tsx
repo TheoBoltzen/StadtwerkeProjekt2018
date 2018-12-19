@@ -78,7 +78,7 @@ export class NavigationComponent extends React.Component<AllProps, State> {
           )}
 
           <Button className={"logout"} aria-haspopup={true} onClick={this.handleLogout}>
-            <PowerSettingsNew nativeColor={"#ff0000"} />
+            <PowerSettingsNew nativeColor={"#d32f2e"} />
           </Button>
         </div>
       </div>
