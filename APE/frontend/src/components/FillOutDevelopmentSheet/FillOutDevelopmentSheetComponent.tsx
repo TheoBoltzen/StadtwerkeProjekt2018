@@ -1,8 +1,9 @@
 import * as React from "react";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import { FormControl, FormControlLabel, RadioGroup } from "@material-ui/core";
 import { AllProps, State } from "./FillOutDevelopmentSheet";
 import "./FillOutDevelopmentSheetComponent.css";
 import { LabelWithTextfield } from "../DetailviewDevelopmentSheet/LabelWithTextfield";
+import CustomizedRadio from "../General/CustomizedRadio";
 
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -195,27 +196,27 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                             row={true}>
                             <FormControlLabel
                               value={"1"}
-                              control={<Radio color={"primary"} />}
+                              control={<CustomizedRadio />}
                               label={""}
                             />
                             <FormControlLabel
                               value={"2"}
-                              control={<Radio color={"primary"} />}
+                              control={<CustomizedRadio />}
                               label={""}
                             />
                             <FormControlLabel
                               value={"3"}
-                              control={<Radio color={"primary"} />}
+                              control={<CustomizedRadio />}
                               label={""}
                             />
                             <FormControlLabel
                               value={"4"}
-                              control={<Radio color={"primary"} />}
+                              control={<CustomizedRadio />}
                               label={""}
                             />
                             <FormControlLabel
                               value={"5"}
-                              control={<Radio color={"primary"} />}
+                              control={<CustomizedRadio />}
                               label={""}
                             />
                           </RadioGroup>
@@ -238,11 +239,11 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
             <legend className={"criteria-text"}>Test</legend>
             <FormControl component={"fieldset"}>
               <RadioGroup name={"test"} onChange={this.handleChange} value={""} row={true}>
-                <FormControlLabel value={"1"} control={<Radio color={"primary"} />} label={""} />
-                <FormControlLabel value={"2"} control={<Radio color={"primary"} />} label={""} />
-                <FormControlLabel value={"3"} control={<Radio color={"primary"} />} label={""} />
-                <FormControlLabel value={"4"} control={<Radio color={"primary"} />} label={""} />
-                <FormControlLabel value={"5"} control={<Radio color={"primary"} />} label={""} />
+                <FormControlLabel value={"1"} control={<CustomizedRadio />} label={""} />
+                <FormControlLabel value={"2"} control={<CustomizedRadio />} label={""} />
+                <FormControlLabel value={"3"} control={<CustomizedRadio />} label={""} />
+                <FormControlLabel value={"4"} control={<CustomizedRadio />} label={""} />
+                <FormControlLabel value={"5"} control={<CustomizedRadio />} label={""} />
               </RadioGroup>
             </FormControl>
           </div>
