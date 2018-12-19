@@ -22,8 +22,8 @@ import "./MainCategoryCreation.css";
 import ListItemSecondaryAction from "@material-ui/core/es/ListItemSecondaryAction/ListItemSecondaryAction";
 import FormControl from "@material-ui/core/es/FormControl/FormControl";
 import FormControlLabel from "@material-ui/core/es/FormControlLabel/FormControlLabel";
-import Radio from "@material-ui/core/es/Radio/Radio";
 import RadioGroup from "@material-ui/core/es/RadioGroup/RadioGroup";
+import CustomizedRadio from "../../General/CustomizedRadio";
 
 interface Props extends WithStyles<typeof styles> {
   developmentForm: Competence[];
@@ -264,7 +264,7 @@ class CriteriaCreation extends React.Component<Props> {
                                                         row>
                                                         <FormControlLabel
                                                           value={"1"}
-                                                          control={<Radio color={"primary"} />}
+                                                          control={<CustomizedRadio />}
                                                           label={"1"}
                                                           onClick={e => {
                                                             this.handleRadioClick(
@@ -279,7 +279,7 @@ class CriteriaCreation extends React.Component<Props> {
                                                         />
                                                         <FormControlLabel
                                                           value={"2"}
-                                                          control={<Radio color={"primary"} />}
+                                                          control={<CustomizedRadio />}
                                                           label={"2"}
                                                           onClick={e => {
                                                             this.handleRadioClick(
@@ -294,7 +294,7 @@ class CriteriaCreation extends React.Component<Props> {
                                                         />
                                                         <FormControlLabel
                                                           value={"3"}
-                                                          control={<Radio color={"primary"} />}
+                                                          control={<CustomizedRadio />}
                                                           label={"3"}
                                                           onClick={e => {
                                                             this.handleRadioClick(
@@ -309,7 +309,7 @@ class CriteriaCreation extends React.Component<Props> {
                                                         />
                                                         <FormControlLabel
                                                           value={"4"}
-                                                          control={<Radio color={"primary"} />}
+                                                          control={<CustomizedRadio />}
                                                           label={"4"}
                                                           onClick={e => {
                                                             this.handleRadioClick(
@@ -324,7 +324,7 @@ class CriteriaCreation extends React.Component<Props> {
                                                         />
                                                         <FormControlLabel
                                                           value={"5"}
-                                                          control={<Radio color={"primary"} />}
+                                                          control={<CustomizedRadio />}
                                                           label={"5"}
                                                           onClick={e => {
                                                             this.handleRadioClick(

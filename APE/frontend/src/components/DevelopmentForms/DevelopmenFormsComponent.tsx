@@ -110,12 +110,20 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
         return (
           <div>
             {!loading ? (
-              <DetailviewDevelopmentSheetComponent
-                onClick={e => {
-                  this.changeVisibilityIndex(e, 0);
-                }}
-                id={developmenFormId}
-              />
+              <div>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <IconButton
+                    color={"primary"}
+                    className={"crossButton"}
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, 0);
+                    }}>
+                    <ClearIcon />
+                  </IconButton>
+                </div>
+                <DetailviewDevelopmentSheetComponent id={developmenFormId} />
+              </div>
             ) : (
               <CircularProgress className={"loading-spinner"} />
             )}

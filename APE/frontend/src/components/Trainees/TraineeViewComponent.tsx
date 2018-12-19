@@ -106,7 +106,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           </div>
         ) : (
           <div>
-            <DetailviewDevelopmentSheetComponent onClick={this.handleSearchClick.bind(this)} />
+            <DetailviewDevelopmentSheetComponent />
           </div>
         )}
       </div>

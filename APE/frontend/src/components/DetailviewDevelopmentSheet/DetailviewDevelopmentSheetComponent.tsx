@@ -3,7 +3,6 @@ import { Graph } from "./graph";
 import LabelWithTextfield from "./LabelWithTextfield";
 import "./DetailviewDevelopmentSheetComponent.css";
 //import { List, ListItem } from "@material-ui/core";
-import Button from "@material-ui/core/es/Button/Button";
 
 //------------------
 
@@ -132,13 +131,12 @@ var jsonObj = {
 interface Props {
   /*x: String;
     y: String;  */
-  onClick?: any;
   id?: string;
   close?: any;
 }
 
 export const DetailviewDevelopmentSheetComponent = (props: Props) => {
-  const { onClick, id } = props;
+  const { id } = props;
 
   console.log("id: ", id);
 
@@ -166,7 +164,6 @@ export const DetailviewDevelopmentSheetComponent = (props: Props) => {
 
   return (
     <div>
-      <Button onClick={onClick}>Zurück</Button>
       <div>
         <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
         <h4>Version {jsonObj.version}</h4>
