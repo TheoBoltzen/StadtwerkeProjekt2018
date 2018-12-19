@@ -7,6 +7,10 @@ import {
   singleDevelopmentFormReducer,
   SingleDevelopmentFormReducer
 } from "./single-development-form-reducer";
+import {
+  traineeDevelopmentFormsReducer,
+  TraineeDevelopmentFormsReducer
+} from "./trainee-developmentForm-reducer";
 
 export interface ApplicationState {
   authenticationReducer: AuthenticationReducer;
@@ -14,6 +18,7 @@ export interface ApplicationState {
   userReducer: UserReducer;
   developmentFormsReducer: DevelopmentFormsReducer;
   singleDevelopmentFormReducer: SingleDevelopmentFormReducer;
+  traineeDevelopmentFormsReducer: TraineeDevelopmentFormsReducer;
 }
 
 const rootReducer = combineReducers<ApplicationState>({
@@ -21,7 +26,8 @@ const rootReducer = combineReducers<ApplicationState>({
   userReducer,
   authenticationReducer,
   developmentFormsReducer,
-  singleDevelopmentFormReducer
+  singleDevelopmentFormReducer,
+  traineeDevelopmentFormsReducer
 });
 
 export default rootReducer;

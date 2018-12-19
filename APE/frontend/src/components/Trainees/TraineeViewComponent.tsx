@@ -27,12 +27,16 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     });
   };
 
-  handleSearchClick() {
+  handleSearchClick = () => {
     this.setState({
       isHidden: !this.state.isHidden,
       showFillOutDialog: false
     });
-  }
+  };
+
+  setAssignmentDevSheet = id => {
+    this.props.setAssignment(this.props.user.username, id);
+  };
 
   componentDidMount() {
     this.props.getAllDevForms();
@@ -96,12 +100,12 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     abteilung={devForm.department}
                     job={devForm.education}
                     date={this.doFormatDate(devForm.createdAt)}
-                    onSearchClick={this.handleSearchClick.bind(this)}
+                    onSearchClick={this.handleSearchClick}
+                    onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
                     isTrainee={true}
                   />
                 );
               })}
-              ;
             </div>
           </div>
         ) : (
