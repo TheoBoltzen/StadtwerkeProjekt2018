@@ -104,7 +104,7 @@ async function setTrainerAssessment(devSheetParam) {
 }
 
 async function setTraineeAssessment(devSheetParam) {
-  let x = ReadyDevSheet.findOne({
+  let x = await ReadyDevSheet.findOne({
     where: {
       DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
       TraineeUsername: devSheetParam.TraineeUsername
