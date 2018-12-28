@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const dbConfig = {
   database: "ape",
   username: "root",
-  password: "",
+  password: "leberkaese",
   host: "localhost",
   port: 3306,
   dialect: "mysql"
