@@ -69,7 +69,7 @@ db.protocol = require("../models/protocol.model.js")(sequelize, Sequelize);
 
 // Associations
 
-//db.competencyCategory.belongsTo(db.mainCategory);
+db.competencyCategory.belongsTo(db.developmentSheet);
 db.mainCategory.belongsTo(db.competencyCategory);
 
 //db.mainCategory.belongsTo(db.subCategory);
