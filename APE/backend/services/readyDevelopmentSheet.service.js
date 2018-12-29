@@ -187,11 +187,21 @@ async function getById(devsheetparam) {
     identifier = result.version;
     console.log("LOG: " + identifier);
   });
+  let devresult = await db.readyDevelopmentSheet.findAll({
+    where: { version: identifier, DevelopmentSheetId: devsheetparam.id },
+    include: [
+      {
+        model: db.developmentSheet,
+        attributes: ["department", "education"],
+        required: true
+      }
+    ]
+  });
   let result = await db.readyDevelopmentSheet.findAll({
     attributes: ["id", "goalcross", "version", "DevelopmentSheetId"],
     required: true,
     /*order:  Sequelize.col("id"),*/
-    where: { version: identifier },
+    where: { version: identifier, DevelopmentSheetId: devsheetparam.id },
     include: [
       {
         model: db.competence,
@@ -211,18 +221,7 @@ async function getById(devsheetparam) {
                   {
                     model: db.competencyCategory,
                     attributes: ["name"],
-                    required: true,
-                    include: [
-                      {
-                        model: db.developmentSheet,
-                        attributes: ["education", "department"],
-                        required: true,
-
-                        where: {
-                          id: devsheetparam.id
-                        }
-                      }
-                    ]
+                    required: true
                   }
                 ]
               }
@@ -237,12 +236,8 @@ async function getById(devsheetparam) {
   let info = {
     devSheetid: result[0].DevelopmentSheetId,
     version: result[0].version,
-    department:
-      result[0].Competence.SubCategory.MainCategory.CompetencyCategory
-        .DevelopmentSheet.department,
-    education:
-      result[0].Competence.SubCategory.MainCategory.CompetencyCategory
-        .DevelopmentSheet.education,
+    department: devresult[0].DevelopmentSheet.department,
+    education: devresult[0].DevelopmentSheet.education,
     content: []
   };
 
