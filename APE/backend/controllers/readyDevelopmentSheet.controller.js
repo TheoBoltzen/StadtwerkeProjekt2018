@@ -15,3 +15,9 @@ exports.updateReadyDevSheet = (req, res, next) => {
     .then(() => res.json({}))
     .catch(err => next(err));
 };
+exports.getById = (req, res, next) => {
+  readyDevSheetService
+    .getById(req.body)
+    .then(result => res.json({ result }))
+    .catch(err => next(err));
+};

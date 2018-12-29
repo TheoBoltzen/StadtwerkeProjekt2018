@@ -12,4 +12,9 @@ module.exports = app => {
     guard(["admin"]),
     ReadyDevelopmentSheet.updateReadyDevSheet
   );
+  app.post(
+    "/services/getEmptyDevSheet",
+    guard(["admin", "trainer"]),
+    ReadyDevelopmentSheet.getById
+  );
 };

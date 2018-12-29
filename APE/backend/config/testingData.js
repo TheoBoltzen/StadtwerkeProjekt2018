@@ -71,7 +71,7 @@ async function createData() {
     name: "Kooperationsfähigkeit",
     MainCategoryName: "Personenorientierung/Interaktionskompetenz"
   };
-  mc.create(body);
+  sc.create(body);
 
   body = {
     name: "Konfliktfähigkeit",
