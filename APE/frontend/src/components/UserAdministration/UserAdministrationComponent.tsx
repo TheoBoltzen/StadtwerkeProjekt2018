@@ -1,12 +1,16 @@
 import * as React from "react";
 import "./UserAdministrationComponent.css";
-import { Button, CircularProgress } from "@material-ui/core";
+import { Button, CircularProgress, Modal } from "@material-ui/core";
 import { ListItem } from "./ListItem";
-import { AllProps } from "./UserAdministration";
+import { AllProps, State } from "./UserAdministration";
 
-export class UserAdministrationComponent extends React.Component<AllProps, {}> {
+export class UserAdministrationComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
+
+    this.state = {
+      isAddUserModalOpen: false
+    };
   }
 
   componentDidMount() {
@@ -14,16 +18,23 @@ export class UserAdministrationComponent extends React.Component<AllProps, {}> {
   }
 
   private openAddUserModal = () => {
-    console.log("test");
+    this.setState({
+      isAddUserModalOpen: !this.state.isAddUserModalOpen
+    });
   };
 
   render() {
+    const { isAddUserModalOpen } = this.state;
     const { users, loading } = this.props;
 
     return loading ? (
       <CircularProgress />
     ) : (
       <div className={"root-user-administration"}>
+        <Modal open={isAddUserModalOpen} onClose={this.openAddUserModal}>
+          <div className={"root-modal-dialog"}>Test</div>
+        </Modal>
+
         <div className={"add-user-button-container"}>
           <div />
           <Button
