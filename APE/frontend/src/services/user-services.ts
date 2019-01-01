@@ -73,7 +73,13 @@ export const getAllService = () => {
 //   return fetch(`${apiURL}/users/${id}`, requestOptions).then(handleResponse);
 // };
 
-export const createUserService = (username, password, firstname, lastname, role) => {
+export const createUserService = (
+  username: string,
+  password: string,
+  firstname: string,
+  lastname: string,
+  role: string
+) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),

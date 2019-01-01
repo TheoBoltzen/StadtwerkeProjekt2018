@@ -1,5 +1,11 @@
 import { RoleConstants, RouterPathsConstants, userConstants } from "../../constants";
-import { getAllService, getRoleService, loginService, logoutService } from "../../services";
+import {
+  createUserService,
+  getAllService,
+  getRoleService,
+  loginService,
+  logoutService
+} from "../../services";
 import { history } from "../../helpers";
 import { errorAlert } from "./alert";
 import { Dispatch } from "redux";
@@ -118,6 +124,38 @@ export const getAll = () => {
 
     getAllService().then(
       users => dispatch(success(users)),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const createUser = (
+  username: string,
+  password: string,
+  firstname: string,
+  lastname: string,
+  role: string
+) => {
+  const request = () => {
+    return { type: userConstants.CREATE_REQUEST };
+  };
+
+  const success = () => {
+    return { type: userConstants.CREATE_SUCCESS };
+  };
+
+  const failure = (error: string) => {
+    return { type: userConstants.CREATE_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request());
+
+    createUserService(username, password, firstname, lastname, role).then(
+      () => dispatch(success()),
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));
