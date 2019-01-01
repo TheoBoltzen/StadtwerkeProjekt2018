@@ -27,7 +27,12 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
   }
 
   private handleSubmit = () => {
-    console.log("testSubmit");
+    const { createUser, closeDialog } = this.props;
+    const { firstname, username, password, lastname, role } = this.state;
+    if (firstname && username && password && lastname && role) {
+      createUser(username, password, firstname, lastname, role);
+      closeDialog();
+    }
   };
 
   private handleInputChange = event => {

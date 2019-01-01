@@ -7,7 +7,7 @@ import {
   logoutService
 } from "../../services";
 import { history } from "../../helpers";
-import { errorAlert } from "./alert";
+import { errorAlert, successAlert } from "./alert";
 import { Dispatch } from "redux";
 import { User } from "../../types";
 
@@ -155,7 +155,10 @@ export const createUser = (
     dispatch(request());
 
     createUserService(username, password, firstname, lastname, role).then(
-      () => dispatch(success()),
+      () => {
+        dispatch(success());
+        dispatch(successAlert("Benutzer erfolgreich erstellt"));
+      },
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));
