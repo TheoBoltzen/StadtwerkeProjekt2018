@@ -18,6 +18,15 @@ export class UserAdministrationComponent extends React.Component<AllProps, State
     this.props.getAllUsers();
   }
 
+  componentDidUpdate(nextProps: AllProps, nextState: State) {
+    if (
+      nextState.isAddUserModalOpen &&
+      nextState.isAddUserModalOpen !== this.state.isAddUserModalOpen
+    ) {
+      this.props.getAllUsers();
+    }
+  }
+
   private openAddUserModal = () => {
     this.setState({
       isAddUserModalOpen: !this.state.isAddUserModalOpen
