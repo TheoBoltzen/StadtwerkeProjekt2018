@@ -1,8 +1,9 @@
 import * as React from "react";
 import "./UserAdministrationComponent.css";
-import { Button, CircularProgress, Modal } from "@material-ui/core";
+import { Button, CircularProgress, Dialog } from "@material-ui/core";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./UserAdministration";
+import { AddUserModal } from "./AddUserModalComponent";
 
 export class UserAdministrationComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -31,9 +32,9 @@ export class UserAdministrationComponent extends React.Component<AllProps, State
       <CircularProgress />
     ) : (
       <div className={"root-user-administration"}>
-        <Modal open={isAddUserModalOpen} onClose={this.openAddUserModal}>
-          <div className={"root-modal-dialog"}>Test</div>
-        </Modal>
+        <Dialog open={isAddUserModalOpen} onClose={this.openAddUserModal}>
+          <AddUserModal closeDialog={this.openAddUserModal} />
+        </Dialog>
 
         <div className={"add-user-button-container"}>
           <div />
