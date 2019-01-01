@@ -151,10 +151,10 @@ export const createUser = (
     return { type: userConstants.CREATE_FAILURE, error };
   };
 
-  return (dispatch: Dispatch) => {
-    dispatch(request());
+  return async (dispatch: Dispatch) => {
+    await dispatch(request());
 
-    createUserService(username, password, firstname, lastname, role).then(
+    await createUserService(username, password, firstname, lastname, role).then(
       () => {
         dispatch(success());
         dispatch(successAlert("Benutzer erfolgreich erstellt"));

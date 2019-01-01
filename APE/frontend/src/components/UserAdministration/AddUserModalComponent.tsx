@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Button,
+  CircularProgress,
   DialogActions,
   DialogContent,
   DialogTitle,
@@ -26,12 +27,16 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
     };
   }
 
-  private handleSubmit = () => {
-    const { createUser, closeDialog } = this.props;
-    const { firstname, username, password, lastname, role } = this.state;
-    if (firstname && username && password && lastname && role) {
-      createUser(username, password, firstname, lastname, role);
-      closeDialog();
+  private handleSubmit = async () => {
+    try {
+      const { firstname, username, password, lastname, role } = this.state;
+      const { createUser, closeDialog } = this.props;
+      if (firstname && username && password && lastname && role) {
+        await createUser(username, password, firstname, lastname, role);
+        closeDialog();
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -44,6 +49,7 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
 
   render() {
     const { firstname, username, password, lastname, role } = this.state;
+    const { loading, closeDialog } = this.props;
     return (
       <div className={"root-modal-dialog"}>
         <DialogTitle>Benutzer anlegen</DialogTitle>
@@ -75,8 +81,12 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.props.closeDialog}>Abbrechen</Button>
-          <Button onClick={this.handleSubmit}>Bestätigen</Button>
+          <Button onClick={closeDialog}>Abbrechen</Button>
+          {!loading ? (
+            <Button onClick={this.handleSubmit}>Bestätigen</Button>
+          ) : (
+            <CircularProgress />
+          )}
         </DialogActions>
       </div>
     );
