@@ -3,6 +3,14 @@ import { createUser } from "../../redux/actions";
 import { connect } from "react-redux";
 import { AddUserModalComponent } from "./AddUserModalComponent";
 
+export interface State {
+  readonly username: string;
+  readonly role: string;
+  readonly password: string;
+  readonly firstname: string;
+  readonly lastname: string;
+}
+
 interface Props {
   readonly closeDialog: () => void;
 }
