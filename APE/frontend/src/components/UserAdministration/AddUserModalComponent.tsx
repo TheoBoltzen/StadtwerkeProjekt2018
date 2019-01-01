@@ -10,12 +10,9 @@ import {
   RadioGroup
 } from "@material-ui/core";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
+import { AllProps } from "./AddUserModal";
 
-interface Props {
-  readonly closeDialog: () => void;
-}
-
-export const AddUserModalComponent = (props: Props) => {
+export const AddUserModalComponent = (props: AllProps) => {
   return (
     <div className={"root-modal-dialog"}>
       <DialogTitle>Benutzer anlegen</DialogTitle>
@@ -41,5 +38,3 @@ export const AddUserModalComponent = (props: Props) => {
     </div>
   );
 };
-
-export { AddUserModalComponent as AddUserModal };

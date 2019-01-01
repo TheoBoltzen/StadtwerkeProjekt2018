@@ -3,7 +3,7 @@ import "./UserAdministrationComponent.css";
 import { Button, CircularProgress, Dialog } from "@material-ui/core";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./UserAdministration";
-import { AddUserModal } from "./AddUserModalComponent";
+import { AddUserModal } from "./AddUserModal";
 
 export class UserAdministrationComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
