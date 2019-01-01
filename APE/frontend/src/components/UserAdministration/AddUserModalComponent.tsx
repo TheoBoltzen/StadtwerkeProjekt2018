@@ -3,8 +3,11 @@ import {
   Button,
   DialogActions,
   DialogContent,
-  DialogContentText,
-  DialogTitle
+  DialogTitle,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup
 } from "@material-ui/core";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 
@@ -17,13 +20,17 @@ export const AddUserModalComponent = (props: Props) => {
     <div className={"root-modal-dialog"}>
       <DialogTitle>Benutzer anlegen</DialogTitle>
       <DialogContent>
-        <DialogContentText>Test</DialogContentText>
         <form>
+          <FormLabel component="legend">Art des Benutzers</FormLabel>
+          <RadioGroup>
+            <FormControlLabel value="admin" control={<Radio />} label="Admin" />
+            <FormControlLabel value="trainer" control={<Radio />} label="Ausbilder" />
+            <FormControlLabel value="trainee" control={<Radio />} label="Auszubildender" />
+          </RadioGroup>
+
           <LabelWithTextfield name={"Name"} />
           <LabelWithTextfield name={"Vorname"} />
           <LabelWithTextfield name={"Kennung"} />
-          <LabelWithTextfield name={"Tätigkeit"} />
-          <LabelWithTextfield name={"Einstellungsdatum"} />
           <LabelWithTextfield name={"Passwort"} />
         </form>
       </DialogContent>
