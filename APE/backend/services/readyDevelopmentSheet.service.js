@@ -82,7 +82,7 @@ async function create(devSheetParam) {
 
           competencesForDevSheet.push({
             version: version,
-            goalCross: competences[l].goalCross,
+            goalcross: competences[l].goalCross,
             CompetenceName: competences[l].name,
             DevelopmentSheetId: identifier
           });

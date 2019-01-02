@@ -82,7 +82,7 @@ async function associate(devSheetParam) {
 }
 
 async function setTrainerAssessment(devSheetParam) {
-  let x = await ReadyDevSheet.findOne({
+  let x = await UserDevSheet.findOne({
     where: {
       DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
       TraineeUsername: devSheetParam.TraineeUsername
@@ -105,7 +105,7 @@ async function setTrainerAssessment(devSheetParam) {
 }
 
 async function setTraineeAssessment(devSheetParam) {
-  let x = await ReadyDevSheet.findOne({
+  let x = await UserDevSheet.findOne({
     where: {
       DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
       TraineeUsername: devSheetParam.TraineeUsername

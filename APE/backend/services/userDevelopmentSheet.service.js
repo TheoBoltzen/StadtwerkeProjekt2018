@@ -56,12 +56,12 @@ async function setTrainer(devSheetParam) {
 }
 
 async function getAllUserDevelopmentSheets(devSheetParam) {
-  return await ReadyDevSheet.findAll();
+  return await UserDevSheet.findAll();
   // TODO Join With DevelopmentSheet (Values Add)
 }
 
 async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam) {
-  return await ReadyDevSheet.findAll({
+  return await UserDevSheet.findAll({
     where: {
       TrainerUsername: devSheetParam.TrainerUsername
     }
@@ -69,7 +69,7 @@ async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam) {
 }
 
 async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam) {
-  return await ReadyDevSheet.findAll({
+  return await UserDevSheet.findAll({
     where: {
       TraineeUsername: devSheetParam.TraineeUsername
     }
