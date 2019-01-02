@@ -40,11 +40,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
   componentDidMount() {
     this.props.getAllDevForms();
-
     this.props.getDevFormsListTrainee(this.props.user.username);
-    //console.log("-----------------------" + this.props.user.username);
-    // this.props.user.TraineeUsername = this.props.user.username;
-    // console.log("-----------------------" + this.props.user.TraineeUsername);
   }
 
   changeVisibilityIndex = () => {
@@ -62,12 +58,9 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
       loading,
       loadingTraineeDevSheets,
       traineeDevelopmentFormsList
-    } = this.props; //taineeDevelopmentFormsList
-    console.log("++++++++++++++++++++++", traineeDevelopmentFormsList);
-    console.log("++++++++++++++++++++++", loadingTraineeDevSheets);
+    } = this.props;
     const { isHidden, showFillOutDialog } = this.state;
 
-    //DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
     return showFillOutDialog ? (
       <FillOutDevelopmentSheet />
     ) : this.state.visibilityIndex ? (
@@ -157,7 +150,6 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
   };
 
   render() {
-    console.log("testLoad: ", this.props);
     return <div className={"root"}>{this.getContent()}</div>;
   }
 }

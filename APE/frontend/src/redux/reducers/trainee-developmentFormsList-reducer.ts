@@ -22,13 +22,11 @@ export const traineeDevelopmentFormsListReducer = (
 ) => {
   switch (action.type) {
     case traineeDevFormListConstants.GETALL_REQUEST:
-      console.log("getall_request: ", state.loading);
       return {
         ...state,
         loading: true
       };
     case traineeDevFormListConstants.GETALL_SUCCESS:
-      console.log("getall_success: ", state.loading);
       return {
         ...state,
         loading: false,

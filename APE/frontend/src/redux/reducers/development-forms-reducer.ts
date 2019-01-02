@@ -17,7 +17,6 @@ const initialState: DevelopmentFormsReducer = {
 };
 
 export const developmentFormsReducer = (state = initialState, action: ActionDevelopmentForm) => {
-  console.log("Ergebnis_Reducer: ", action.developmentForms);
   switch (action.type) {
     case developmentFormConstants.GETALL_REQUEST:
       return {
