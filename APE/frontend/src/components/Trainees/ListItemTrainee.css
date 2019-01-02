@@ -1,0 +1,22 @@
+.trainee-item {
+  background-color: white;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.trainee-headerRow {
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+td {
+  width: 15%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -15,9 +15,15 @@ exports.updateReadyDevSheet = (req, res, next) => {
     .then(() => res.json({}))
     .catch(err => next(err));
 };
-exports.getById = (req, res, next) => {
+exports.getemptyById = (req, res, next) => {
   readyDevSheetService
-    .getById(req.body)
+    .getemptyById(req.body)
+    .then(result => res.json({ result }))
+    .catch(err => next(err));
+};
+exports.getfullById = (req, res, next) => {
+  readyDevSheetService
+    .getfullById(req.body)
     .then(result => res.json({ result }))
     .catch(err => next(err));
 };

@@ -11,7 +11,8 @@ module.exports = {
   create,
   tryLogin,
   update,
-  delete: _delete
+  delete: _delete,
+  getAllTrainees
 };
 
 async function authenticate({ username, password }, res) {
@@ -112,4 +113,12 @@ async function update(username, userParam) {
 
 async function _delete(id) {
   await User.findByIdAndRemove(id);
+}
+async function getAllTrainees() {
+  console.log("hallo");
+  let result = await db.user.findAll({
+    where: { role: "trainee" },
+    attributes: { exclude: ["hash"] }
+  });
+  return result;
 }

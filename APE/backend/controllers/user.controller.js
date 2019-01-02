@@ -29,6 +29,12 @@ exports.getAll = (req, res, next) => {
     .then(users => res.json(users))
     .catch(err => next(err));
 };
+exports.getAllTrainees = (req, res, next) => {
+  userService
+    .getAllTrainees()
+    .then(users => res.json(users))
+    .catch(err => next(err));
+};
 
 function getCurrent(req, res, next) {
   userService

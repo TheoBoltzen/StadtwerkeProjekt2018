@@ -20,4 +20,9 @@ module.exports = app => {
     guard(["admin", "trainee"]),
     UserDevelopmentSheetAssociation.setTraineeAssessment
   );
+  app.post(
+    "/services/getUserDevSheetById",
+    guard(["admin", "trainer"]),
+    UserDevelopmentSheetAssociation.getById
+  );
 };
