@@ -4,14 +4,28 @@ import { CircularProgress } from "@material-ui/core";
 import { ListItemTrainee } from "./ListItemTrainee";
 import "./TraineesComponent.css";
 
-export class TraineesComponent extends React.Component<AllProps> {
+interface State {}
+
+export class TraineesComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
+
+    this.state = {};
   }
 
   componentDidMount() {
     this.props.getAllTrainees();
   }
+
+  // Klick auf mir zuweisen
+  handleAssignment = () => {
+    console.log("assign");
+  };
+
+  // Klick auf Ausfüllen
+  handleFillOut = () => {
+    console.log("fill out");
+  };
 
   render() {
     const { loading, trainees } = this.props;
@@ -21,18 +35,20 @@ export class TraineesComponent extends React.Component<AllProps> {
       <div className={"frameCenterTraineeTab"}>
         <ListItemTrainee
           isHeader={true}
-          name={"Name"}
-          username={"Kennung"}
-          firstname={"Vorname"}
-          education={"Ausbildungsberuf"}
+          department={"Abteilung"}
+          nameTrainee={"Name des zugewiesenen Auszubildenden"}
+          nameTrainer={"Name des zugewiesenen Ausbilders"}
+          onAssignmentClick={this.handleAssignment()}
+          onFilloutClick={this.handleFillOut()}
         />
         {trainees.map((trainee, index) => (
           <ListItemTrainee
             key={index}
-            name={trainee.lastname}
-            username={trainee.username}
-            firstname={trainee.firstname}
-            education={trainee.education}
+            department={""} // Abteilung des Ausbildungsbogens
+            nameTrainee={trainee.lastname + ", " + trainee.firstname}
+            nameTrainer={""} // Name des zugewiesenen Ausbilders
+            onAssignmentClick={this.handleAssignment()}
+            onFilloutClick={this.handleFillOut()}
           />
         ))}
       </div>
