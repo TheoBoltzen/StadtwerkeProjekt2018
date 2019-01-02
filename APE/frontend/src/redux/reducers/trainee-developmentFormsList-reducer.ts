@@ -3,17 +3,17 @@ import { DevelopmentFormsListTrainee } from "../../types";
 import { traineeDevFormListConstants } from "../../constants";
 
 interface ActionDevelopmentForm extends Action {
-  taineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
+  traineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
 }
 
 export interface TraineeDevelopmentFormsListReducer {
   readonly loading: boolean;
-  readonly taineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
+  readonly traineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
 }
 
 const initialState: TraineeDevelopmentFormsListReducer = {
   loading: false,
-  taineeDevelopmentFormsList: []
+  traineeDevelopmentFormsList: []
 };
 
 export const traineeDevelopmentFormsListReducer = (
@@ -29,7 +29,7 @@ export const traineeDevelopmentFormsListReducer = (
     case traineeDevFormListConstants.GETALL_SUCCESS:
       return {
         loading: false,
-        taineeDevelopmentFormsList: action.taineeDevelopmentFormsList
+        traineeDevelopmentFormsList: action.traineeDevelopmentFormsList
       };
     case traineeDevFormListConstants.GETALL_FAILURE:
       return {

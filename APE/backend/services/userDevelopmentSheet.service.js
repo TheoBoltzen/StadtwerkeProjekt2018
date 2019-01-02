@@ -69,7 +69,7 @@ async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam) {
 }
 
 async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam) {
-  return await ReadyDevSheet.findAll({
+  return await UserDevSheet.findAll({
     where: {
       TraineeUsername: devSheetParam.TraineeUsername
     }
