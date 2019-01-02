@@ -3,6 +3,8 @@ const Sequelize = require("sequelize");
 const UserDevSheet = db.userDevelopmentSheet;
 const ReadyDevSheet = db.readyDevelopmentSheet;
 const UserDevSheetAss = db.userDevelopmentSheetAssociation;
+const jwt = require("jsonwebtoken");
+const config = require("./../config.json");
 
 module.exports = {
   _create,
@@ -41,10 +43,16 @@ async function _create(devSheetParam) {
   }
 }
 
-async function setTrainer(devSheetParam) {
+async function setTrainer(devSheetParam, token) {
+  let username = null;
+
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  username = decodedToken.username;
+
   await UserDevSheet.update(
     {
-      TrainerUsername: devSheetParam.TrainerUsername
+      TrainerUsername: username
     },
     {
       where: {
@@ -52,19 +60,42 @@ async function setTrainer(devSheetParam) {
         TraineeUsername: devSheetParam.TraineeUsername
       }
     }
-  ).then(() => {});
+  )
+    .then(() => {})
+    .catch();
 }
 
 async function getAllUserDevelopmentSheets(devSheetParam) {
-  return await ReadyDevSheet.findAll();
-  // TODO Join With DevelopmentSheet (Values Add)
+  return await UserDevSheet.findAll({
+    where: {},
+    include: [
+      {
+        model: db.developmentSheet,
+        attributes: ["department", "education"],
+        required: true
+      }
+    ]
+  });
 }
 
-async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam) {
-  return await ReadyDevSheet.findAll({
+async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam, token) {
+  let username = null;
+
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  username = decodedToken.username;
+
+  return await UserDevSheet.findAll({
     where: {
-      TrainerUsername: devSheetParam.TrainerUsername
-    }
+      TrainerUsername: username
+    },
+    include: [
+      {
+        model: db.developmentSheet,
+        attributes: ["department", "education"],
+        required: true
+      }
+    ]
   });
 }
 
@@ -72,7 +103,14 @@ async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam) {
   return await UserDevSheet.findAll({
     where: {
       TraineeUsername: devSheetParam.TraineeUsername
-    }
+    },
+    include: [
+      {
+        model: db.developmentSheet,
+        attributes: ["department", "education"],
+        required: true
+      }
+    ]
   });
 }
 
@@ -92,7 +130,13 @@ async function setStatusRated() {
   ).then(() => {});
 }
 
-async function setStatusEstimated(devSheetParam) {
+async function setStatusEstimated(devSheetParam, token) {
+  let username = null;
+
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  username = decodedToken.username;
+
   await UserDevSheet.update(
     {
       status: "Eingeschätzt"
@@ -106,7 +150,13 @@ async function setStatusEstimated(devSheetParam) {
   ).then(() => {});
 }
 
-async function setDigitalAgreement(devSheetParam) {
+async function setDigitalAgreement(devSheetParam, token) {
+  let username = null;
+
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  username = decodedToken.username;
+
   await UserDevSheet.update(
     {
       status: "Abgeschlossen"
@@ -114,13 +164,19 @@ async function setDigitalAgreement(devSheetParam) {
     {
       where: {
         DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
-        TraineeUsername: devSheetParam.TraineeUsername
+        TraineeUsername: username
       }
     }
   ).then(() => {});
 }
 
-async function setDigitalDisagreement(devSheetParam) {
+async function setDigitalDisagreement(devSheetParam, token) {
+  let username = null;
+
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  username = decodedToken.username;
+
   await UserDevSheet.update(
     {
       status: "Gesprächsbedarf"
@@ -128,7 +184,7 @@ async function setDigitalDisagreement(devSheetParam) {
     {
       where: {
         DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
-        TraineeUsername: devSheetParam.TraineeUsername
+        TraineeUsername: username
       }
     }
   ).then(() => {});
