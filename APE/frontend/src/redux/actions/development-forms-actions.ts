@@ -4,6 +4,7 @@ import {
   CriteriaFetch,
   DevelopmentForm,
   DevelopmentFormCreate,
+  EmptyDevSheetFetch,
   MainCategoryFetch,
   SubCategoryFetch
 } from "../../types";
@@ -14,7 +15,8 @@ import {
   getAllCriteriaService,
   getAllMainCategoriesService,
   getAllService,
-  getAllSubCategoriesService
+  getAllSubCategoriesService,
+  getDetailDevelopmentSheetService
 } from "../../services/development-forms-services";
 import { errorAlert } from "./alert";
 
@@ -162,6 +164,32 @@ export const createDevelopmenSheet = (developmenSheet: DevelopmentFormCreate) =>
 
     createDevelopmentSheetService(developmenSheet).then(
       () => dispatch(success()),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const getDetailDevelopmentSheet = (id: string) => {
+  const request = id => {
+    return { type: developmentFormConstants.GETDETAILDEVELOPMENTSHEET_REQUEST, id };
+  };
+
+  const success = (devSheet: EmptyDevSheetFetch) => {
+    return { type: developmentFormConstants.GETDETAILDEVELOPMENTSHEET_SUCCESS, devSheet };
+  };
+
+  const failure = (error: string) => {
+    return { type: developmentFormConstants.GETDETAILDEVELOPMENTSHEET_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request(id));
+
+    getDetailDevelopmentSheetService(id).then(
+      devSheet => dispatch(success(devSheet)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));
