@@ -126,6 +126,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                 <DetailViewDevelopmentSheet
                   id={developmenFormId}
                   devSheetDetail={this.props.detailDevForm}
+                  loading={this.props.loadingDetail}
                 />
               </div>
             ) : (

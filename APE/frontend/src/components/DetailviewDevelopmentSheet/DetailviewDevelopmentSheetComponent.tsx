@@ -3,6 +3,7 @@ import { Graph } from "./graph";
 import LabelWithTextfield from "./LabelWithTextfield";
 import "./DetailviewDevelopmentSheetComponent.css";
 import { AllProps } from "./DetailViewDevelopmentSheet";
+import { CircularProgress } from "@material-ui/core";
 //import { List, ListItem } from "@material-ui/core";
 
 //------------------
@@ -11,6 +12,8 @@ import { AllProps } from "./DetailViewDevelopmentSheet";
 
 export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
   console.log("props: ", props);
+
+  const { loading } = props;
 
   const mapIntegerToString = intValue => {
     var result = "";
@@ -183,7 +186,9 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
     sollWerte = [];
   };
 
-  return (
+  return loading ? (
+    <CircularProgress />
+  ) : (
     <div className={"detailRoot"}>
       <div>
         <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>

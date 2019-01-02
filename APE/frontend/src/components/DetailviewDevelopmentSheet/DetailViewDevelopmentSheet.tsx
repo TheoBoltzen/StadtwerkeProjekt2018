@@ -5,6 +5,7 @@ interface Props {
   readonly id?: string;
   readonly close?: any;
   readonly devSheetDetail?: EmptyDevSheetFetch | null;
+  readonly loading?: boolean;
 }
 
 export type AllProps = Props;
