@@ -3,8 +3,8 @@ import { DevelopmentForm, DevelopmentFormsListTrainee } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
 import { getAll } from "../../redux/actions/development-forms-actions";
 import { connect } from "react-redux";
-import { setTraineeDevelopmentSheet } from "../../redux/actions";
-import { getTraineeDevelopmentSheetList } from "../../redux/actions/trainee-developmentforms-list-actions";
+import { setTraineeDevelopmentSheet, getTraineeDevelopmentSheetList } from "../../redux/actions";
+//import { getTraineeDevelopmentSheetList } from "../../redux/actions";
 
 export interface State {
   visibilityIndex: boolean;
@@ -16,6 +16,7 @@ interface Props {}
 
 interface ReduxStateProps {
   readonly loading: boolean;
+  readonly loadingTraineeDevSheets: boolean;
   readonly developmentForms: DevelopmentForm[];
   readonly user: any;
   readonly traineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
@@ -32,9 +33,12 @@ export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loading, developmentForms } = state.developmentFormsReducer;
   const { traineeDevelopmentFormsList } = state.traineeDevelopmentFormsListReducer; //loading fehlt
+  const loadingTraineeDevSheets = state.traineeDevelopmentFormsReducer.loading;
+
   const { user } = state.authenticationReducer;
   return {
     loading,
+    loadingTraineeDevSheets,
     user: (user as any).token ? user : JSON.parse(user as any),
     developmentForms,
     traineeDevelopmentFormsList
@@ -44,7 +48,8 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     getAllDevForms: () => dispatch(getAll()),
-    getDevFormsListTrainee: username => dispatch(getTraineeDevelopmentSheetList(username)),
+    getDevFormsListTrainee: TraineeUsername =>
+      dispatch(getTraineeDevelopmentSheetList(TraineeUsername)),
 
     setAssignment: (username, devSheetID) =>
       dispatch(setTraineeDevelopmentSheet(username, devSheetID))

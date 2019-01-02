@@ -2,14 +2,15 @@ import { traineeDevFormListConstants } from "../../constants";
 import { Dispatch } from "redux";
 import { errorAlert } from "./alert";
 import { getTraineeDevelopmentSheetsList } from "../../services";
+import { DevelopmentFormsListTrainee } from "../../types";
 
-export const getTraineeDevelopmentSheetList = (username: string) => {
-  const request = username => {
-    return { type: traineeDevFormListConstants.GETALL_REQUEST, username }; //
+export const getTraineeDevelopmentSheetList = (TraineeUsername: string) => {
+  const request = TraineeUsername => {
+    return { type: traineeDevFormListConstants.GETALL_REQUEST, TraineeUsername }; //
   };
 
-  const success = () => {
-    return { type: traineeDevFormListConstants.GETALL_SUCCESS };
+  const success = (traineeDevelopmentFormsList: DevelopmentFormsListTrainee[]) => {
+    return { type: traineeDevFormListConstants.GETALL_SUCCESS, traineeDevelopmentFormsList };
   };
 
   const failure = (error: string) => {
@@ -17,10 +18,10 @@ export const getTraineeDevelopmentSheetList = (username: string) => {
   };
 
   return (dispatch: Dispatch) => {
-    dispatch(request(username));
+    dispatch(request(TraineeUsername));
 
-    getTraineeDevelopmentSheetsList(username).then(
-      () => dispatch(success()),
+    getTraineeDevelopmentSheetsList(TraineeUsername).then(
+      developmentListTrainee => dispatch(success(developmentListTrainee)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));

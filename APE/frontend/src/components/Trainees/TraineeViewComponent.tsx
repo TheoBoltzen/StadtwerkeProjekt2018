@@ -40,10 +40,11 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
   componentDidMount() {
     this.props.getAllDevForms();
-    console.log("-----------------------" + this.props.user.username);
-    this.props.user.TraineeUsername = this.props.user.username;
-    console.log("-----------------------" + this.props.user.TraineeUsername);
-    this.props.getDevFormsListTrainee(this.props.user.TraineeUsername);
+
+    this.props.getDevFormsListTrainee(this.props.user.username);
+    //console.log("-----------------------" + this.props.user.username);
+    // this.props.user.TraineeUsername = this.props.user.username;
+    // console.log("-----------------------" + this.props.user.TraineeUsername);
   }
 
   changeVisibilityIndex = () => {
@@ -56,7 +57,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
   };
 
   getContent = () => {
-    const { developmentForms, loading, traineeDevelopmentFormsList } = this.props; //taineeDevelopmentFormsList
+    const {
+      developmentForms,
+      loading,
+      loadingTraineeDevSheets,
+      traineeDevelopmentFormsList
+    } = this.props; //taineeDevelopmentFormsList
+    console.log("++++++++++++++++++++++", traineeDevelopmentFormsList);
+    console.log("++++++++++++++++++++++", loadingTraineeDevSheets);
     const { isHidden, showFillOutDialog } = this.state;
 
     //DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
@@ -76,19 +84,23 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <Button onClick={this.openFillOutDialog}>FillOut</Button>
         </div>
         Hallo hier ist Content!
-        {traineeDevelopmentFormsList.map((devForm, index) => {
-          return (
-            <ListItem
-              key={index}
-              abteilung={devForm.status}
-              job={devForm.traineeUsername}
-              date={this.doFormatDate(devForm.createdAt)}
-              onSearchClick={this.handleSearchClick}
-              onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
-              isTrainee={true}
-            />
-          );
-        })}
+        {loadingTraineeDevSheets ? (
+          <CircularProgress />
+        ) : (
+          traineeDevelopmentFormsList.map((devForm, index) => {
+            return (
+              <ListItem
+                key={index}
+                abteilung={devForm.status}
+                job={devForm.traineeUsername}
+                date={this.doFormatDate(devForm.createdAt)}
+                onSearchClick={this.handleSearchClick}
+                onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
+                isTrainee={true}
+              />
+            );
+          })
+        )}
       </div>
     ) : (
       <div className={"switchRoot"}>
@@ -135,6 +147,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
   };
 
   render() {
+    console.log("testLoad: ", this.props);
     return <div className={"root"}>{this.getContent()}</div>;
   }
 }
