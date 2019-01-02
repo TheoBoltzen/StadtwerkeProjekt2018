@@ -2,6 +2,7 @@ import * as React from "react";
 import "../DevelopmentForms/DevelopmentForms.css";
 import Button from "@material-ui/core/es/Button/Button";
 import { ListItem } from "../DevelopmentForms/ListItem";
+import { ListItemTraineeDevs } from "./ListItemTraineeDevs";
 import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
 import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
@@ -80,25 +81,34 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
         {loadingTraineeDevSheets ? (
           <CircularProgress />
         ) : (
+          //display only the trainees developmentsheets
           <div className={"frame center"}>
-            <ListItem
+            <ListItemTraineeDevs
               isHeader={true}
-              abteilung="Abteilung"
-              job="Ausbildungsberuf"
-              date="Erstellungsdatum"
+              department="Abteilung"
+              education="Ausbildungsberuf"
+              updatedAt="Änderungsdatum"
+              status="Status"
+              trainerUsername="Ausbilder"
             />
             {traineeDevelopmentFormsList.map((devForm, index) => {
               return (
-                <ListItem
+                <ListItemTraineeDevs
                   key={index}
                   //is displayed
-                  abteilung={devForm.status}
-                  job={devForm.traineeUsername}
-                  date={this.doFormatDate(devForm.createdAt)}
-                  //
+                  department={devForm.DevelopmentSheet.department}
+                  education={devForm.DevelopmentSheet.education}
+                  updatedAt={this.doFormatDate(devForm.updatedAt)}
+                  status={devForm.status}
+                  trainerUsername={devForm.trainerUsername}
+                  /*
+
+
+                  //onSearchClick has to be updated - onAssignmeClick in trash
+
+                    */
                   onSearchClick={this.handleSearchClick}
                   onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
-                  isTrainee={true}
                 />
               );
             })}
@@ -110,6 +120,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
         {loading ? (
           <CircularProgress />
         ) : isHidden ? (
+          //display all existing developmentformsheets
           <div>
             <Button
               variant={"contained"}
