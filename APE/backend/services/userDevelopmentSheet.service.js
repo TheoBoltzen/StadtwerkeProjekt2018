@@ -66,8 +66,16 @@ async function setTrainer(devSheetParam, token) {
 }
 
 async function getAllUserDevelopmentSheets(devSheetParam) {
-  return await UserDevSheet.findAll();
-  // TODO Join With DevelopmentSheet (Values Add)
+  return await UserDevSheet.findAll({
+    where: {},
+    include: [
+      {
+        model: db.developmentSheet,
+        attributes: ["department", "education"],
+        required: true
+      }
+    ]
+  });
 }
 
 async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam, token) {
@@ -80,7 +88,14 @@ async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam, token) {
   return await UserDevSheet.findAll({
     where: {
       TrainerUsername: username
-    }
+    },
+    include: [
+      {
+        model: db.developmentSheet,
+        attributes: ["department", "education"],
+        required: true
+      }
+    ]
   });
 }
 
@@ -88,7 +103,14 @@ async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam) {
   return await UserDevSheet.findAll({
     where: {
       TraineeUsername: devSheetParam.TraineeUsername
-    }
+    },
+    include: [
+      {
+        model: db.developmentSheet,
+        attributes: ["department", "education"],
+        required: true
+      }
+    ]
   });
 }
 
