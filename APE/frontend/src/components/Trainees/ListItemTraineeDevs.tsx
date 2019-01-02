@@ -30,7 +30,6 @@ export const ListItemTraineeDevs = (props: Props) => {
     isHeader,
     onSearchClick,
     onEditClick
-    // onAssignMeClick
   } = props;
 
   return (

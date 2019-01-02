@@ -75,9 +75,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
             onClick={this.changeVisibilityIndex}>
             Finde Entwicklungsbögen
           </Button>
-          <Button onClick={this.openFillOutDialog}>FillOut</Button>
         </div>
-        Hallo hier ist Content!
         {loadingTraineeDevSheets ? (
           <CircularProgress />
         ) : (
@@ -103,12 +101,11 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                   trainerUsername={devForm.trainerUsername}
                   /*
 
-
                   //onSearchClick has to be updated - onAssignmeClick in trash
 
                     */
                   onSearchClick={this.handleSearchClick}
-                  onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
+                  onEditClick={this.openFillOutDialog}
                 />
               );
             })}
