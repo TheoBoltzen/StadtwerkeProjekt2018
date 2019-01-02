@@ -47,7 +47,7 @@ export interface DevelopmentFormCreate {
 export interface ContentDevelopmentFormCreate {
   readonly name: string;
   readonly children?: ContentDevelopmentFormCreate[];
-  readonly goalCross?: string;
+  readonly goalCross?: number;
   readonly ynAnswer?: boolean;
 }
 
