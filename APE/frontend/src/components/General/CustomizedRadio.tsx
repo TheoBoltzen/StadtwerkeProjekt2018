@@ -9,7 +9,7 @@ const styles = theme =>
     root: {
       color: "black",
       "&$checked": {
-        color: "#00a8e1"
+        color: "#00beff"
       }
     },
     checked: {}
