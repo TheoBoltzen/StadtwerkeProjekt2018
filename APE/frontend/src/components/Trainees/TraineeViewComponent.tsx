@@ -60,7 +60,6 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
       <FillOutDevelopmentSheet />
     ) : this.state.visibilityIndex ? (
       <div className={"switchRoot"}>
-        Hallo hier ist Content!
         <div className={"flexDiv"}>
           <div />
           <Button
@@ -72,6 +71,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           </Button>
           <Button onClick={this.openFillOutDialog}>FillOut</Button>
         </div>
+        Hallo hier ist Content!
       </div>
     ) : (
       <div className={"switchRoot"}>
