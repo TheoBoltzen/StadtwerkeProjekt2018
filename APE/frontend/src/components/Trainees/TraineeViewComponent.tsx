@@ -87,19 +87,29 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
         {loadingTraineeDevSheets ? (
           <CircularProgress />
         ) : (
-          traineeDevelopmentFormsList.map((devForm, index) => {
-            return (
-              <ListItem
-                key={index}
-                abteilung={devForm.status}
-                job={devForm.traineeUsername}
-                date={this.doFormatDate(devForm.createdAt)}
-                onSearchClick={this.handleSearchClick}
-                onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
-                isTrainee={true}
-              />
-            );
-          })
+          <div className={"frame center"}>
+            <ListItem
+              isHeader={true}
+              abteilung="Abteilung"
+              job="Ausbildungsberuf"
+              date="Erstellungsdatum"
+            />
+            {traineeDevelopmentFormsList.map((devForm, index) => {
+              return (
+                <ListItem
+                  key={index}
+                  //is displayed
+                  abteilung={devForm.status}
+                  job={devForm.traineeUsername}
+                  date={this.doFormatDate(devForm.createdAt)}
+                  //
+                  onSearchClick={this.handleSearchClick}
+                  onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
+                  isTrainee={true}
+                />
+              );
+            })}
+          </div>
         )}
       </div>
     ) : (
