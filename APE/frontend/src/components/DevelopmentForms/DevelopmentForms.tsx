@@ -1,7 +1,7 @@
 import { DevelopmentFormsComponent } from "./DevelopmenFormsComponent";
-import { DevelopmentForm } from "../../types";
+import { DevelopmentForm, EmptyDevSheetFetch } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
-import { getAll } from "../../redux/actions/development-forms-actions";
+import { getAll, getDetailDevelopmentSheet } from "../../redux/actions/development-forms-actions";
 import { connect } from "react-redux";
 
 export interface State {
@@ -13,26 +13,35 @@ interface Props {}
 
 interface ReduxStateProps {
   readonly loading: boolean;
+  readonly loadingDetail: boolean;
   readonly developmentForms: DevelopmentForm[];
+  readonly detailDevForm: EmptyDevSheetFetch | null;
 }
 
 interface ReduxDispatchProps {
   readonly getAllDevForms: () => void;
+  readonly getDevSheetDetails: (id) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loading, developmentForms } = state.developmentFormsReducer;
+  const { developmentFormDetail } = state.developmentFormsReducer;
+  const loadingDetail = state.developmentFormsReducer.loading;
+
   return {
     loading,
-    developmentForms
+    loadingDetail,
+    developmentForms,
+    detailDevForm: developmentFormDetail
   };
 };
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
-    getAllDevForms: () => dispatch(getAll())
+    getAllDevForms: () => dispatch(getAll()),
+    getDevSheetDetails: id => dispatch(getDetailDevelopmentSheet(id))
   };
 };
 

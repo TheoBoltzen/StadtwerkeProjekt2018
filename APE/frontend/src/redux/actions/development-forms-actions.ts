@@ -177,8 +177,11 @@ export const getDetailDevelopmentSheet = (id: string) => {
     return { type: developmentFormConstants.GETDETAILDEVELOPMENTSHEET_REQUEST, id };
   };
 
-  const success = (devSheet: EmptyDevSheetFetch) => {
-    return { type: developmentFormConstants.GETDETAILDEVELOPMENTSHEET_SUCCESS, devSheet };
+  const success = (developmentFormDetail: EmptyDevSheetFetch) => {
+    return {
+      type: developmentFormConstants.GETDETAILDEVELOPMENTSHEET_SUCCESS,
+      developmentFormDetail
+    };
   };
 
   const failure = (error: string) => {
@@ -189,7 +192,7 @@ export const getDetailDevelopmentSheet = (id: string) => {
     dispatch(request(id));
 
     getDetailDevelopmentSheetService(id).then(
-      devSheet => dispatch(success(devSheet)),
+      developmentFormDetail => dispatch(success(developmentFormDetail)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));
