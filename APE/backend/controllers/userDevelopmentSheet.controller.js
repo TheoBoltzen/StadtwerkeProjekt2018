@@ -4,14 +4,14 @@ const router = express.Router();
 
 exports.associateTrainerDevSheet = (req, res, next) => {
   userdevSheetService
-    .setTrainer(req.body)
+    .setTrainer(req.body, req.headers.authorization.split("Bearer ")[1])
     .then(() => res.json({}))
     .catch(err => next(err));
 };
 
 exports.setStatusEstimated = (req, res, next) => {
   userdevSheetService
-    .setStatusEstimated(req.body)
+    .setStatusEstimated(req.body, req.headers.authorization.split("Bearer ")[1])
     .then(() => res.json({}))
     .catch(err => next(err));
 };
@@ -39,7 +39,10 @@ exports.getAllUserDevelopmentSheetsByUserTrainee = (req, res, next) => {
 
 exports.getAllUserDevelopmentSheetsByUserTrainer = (req, res, next) => {
   userdevSheetService
-    .getAllUserDevelopmentSheetsByUserTrainer(req.body)
+    .getAllUserDevelopmentSheetsByUserTrainer(
+      req.body,
+      req.headers.authorization.split("Bearer ")[1]
+    )
     .then(devSheets => res.json(devSheets))
     .catch(err => next(err));
 };
@@ -60,7 +63,10 @@ exports.deleteUserDevelopmentSheet = (req, res, next) => {
 
 exports.setDigitalAgreement = (req, res, next) => {
   userdevSheetService
-    .setDigitalAgreement(req.body)
+    .setDigitalAgreement(
+      req.body,
+      req.headers.authorization.split("Bearer ")[1]
+    )
     .then(() => res.json({}))
     .catch(err => next(err));
 };
