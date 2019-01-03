@@ -11,26 +11,26 @@ import { CircularProgress } from "@material-ui/core";
 //------------------
 
 export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
-  console.log("props: ", props.devSheetDetail.result);
+  // console.log("props: ", props.devSheetDetail.result);
 
   const { loading } = props;
 
   const mapIntegerToString = intValue => {
     var result = "";
     switch (intValue) {
-      case "1":
+      case 1:
         result = "in vollem Maße";
         break;
-      case "2":
+      case 2:
         result = "weitgehend";
         break;
-      case "3":
+      case 3:
         result = "teilweise";
         break;
-      case "4":
+      case 4:
         result = "unzureichend";
         break;
-      case "5":
+      case 5:
         result = "nicht";
         break;
       default:
@@ -196,10 +196,13 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       </div>
       <div className="div-header">
         <div className="div-left">
-          <LabelWithTextfield name={"Abteilung"} content={jsonObj.department} />
+          <LabelWithTextfield name={"Abteilung"} content={props.devSheetDetail.result.department} />
           <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={""} />
           <LabelWithTextfield name={"Auszubildener"} content={""} />
-          <LabelWithTextfield name={"Ausbildungsberuf"} content={""} />
+          <LabelWithTextfield
+            name={"Ausbildungsberuf"}
+            content={props.devSheetDetail.result.education}
+          />
         </div>
         <div className="div-right">
           <LabelWithTextfield name={"Datum"} content={""} />
@@ -210,12 +213,14 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       </div>
 
       <div>
-        {jsonObj.content &&
-          jsonObj.content.map((kompetenzen, index_1) => (
+        {console.log("PROPS: ", props.devSheetDetail.result)}
+
+        {props.devSheetDetail.result.content &&
+          props.devSheetDetail.result.content.map((kompetenzen, index_1) => (
             <div className={"frameDetail"} key={index_1}>
-              <h3 key={index_1}>{kompetenzen.name}</h3>
-              {kompetenzen.children &&
-                kompetenzen.children.map((hauptkategorie, index_2) => (
+              <h3 key={index_1}>{kompetenzen[index_1].name}</h3>
+              {kompetenzen[index_1].children &&
+                kompetenzen[index_1].children.map((hauptkategorie, index_2) => (
                   <div className="gravity-left" key={index_2}>
                     <h4 key={index_2}>{hauptkategorie.name}</h4>
                     {hauptkategorie.children &&
@@ -234,8 +239,8 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                             soll_werte={sollWerte}
                             kriterien={kriteria}
                           />
-                          {console.log(sollWerte)}
-                          {console.log(kriteria)}
+                          {console.log("Sollwerte: ", sollWerte)}
+                          {console.log("Kriterien: ", kriteria)}
                           {clearArrays()}
                         </div>
                       ))}

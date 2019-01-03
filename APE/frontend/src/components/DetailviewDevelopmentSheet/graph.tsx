@@ -50,7 +50,7 @@ export const Graph = (props: Props) => {
             activeDot={false}
             isAnimationActive={false}
             stroke="#FFFFFF"
-            opacity="0"
+            opacity="1"
             legendType="none"
           />
           <Line
