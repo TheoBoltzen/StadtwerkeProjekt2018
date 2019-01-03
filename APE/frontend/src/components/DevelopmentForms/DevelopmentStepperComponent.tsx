@@ -291,7 +291,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
                     children: subCategory.Criteria.filter(criteria => criteria.checked).map(
                       criteria => ({
                         name: criteria.name,
-                        goalCross: criteria.value,
+                        goalCross: parseInt(criteria.value),
                         ynAnswer: false
                       })
                     )
