@@ -4,7 +4,7 @@ import { DetailviewDevelopmentSheetComponent } from "./DetailviewDevelopmentShee
 interface Props {
   readonly id?: string;
   readonly close?: any;
-  readonly devSheetDetail?: EmptyDevSheetFetch | null;
+  readonly devSheetDetail: EmptyDevSheetFetch;
   readonly loading?: boolean;
 }
 

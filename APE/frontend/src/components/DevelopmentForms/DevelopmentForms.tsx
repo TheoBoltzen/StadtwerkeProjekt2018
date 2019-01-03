@@ -15,7 +15,7 @@ interface ReduxStateProps {
   readonly loading: boolean;
   readonly loadingDetail: boolean;
   readonly developmentForms: DevelopmentForm[];
-  readonly detailDevForm: EmptyDevSheetFetch | null;
+  readonly detailDevForm: EmptyDevSheetFetch;
 }
 
 interface ReduxDispatchProps {

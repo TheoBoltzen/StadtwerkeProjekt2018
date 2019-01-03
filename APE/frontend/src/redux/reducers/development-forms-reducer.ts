@@ -10,13 +10,21 @@ interface ActionDevelopmentForm extends Action {
 export interface DevelopmentFormsReducer {
   readonly loading: boolean;
   readonly developmentForms: DevelopmentForm[];
-  readonly developmentFormDetail: EmptyDevSheetFetch | null;
+  readonly developmentFormDetail: EmptyDevSheetFetch;
 }
 
 const initialState: DevelopmentFormsReducer = {
   loading: false,
   developmentForms: [],
-  developmentFormDetail: null
+  developmentFormDetail: {
+    result: {
+      devSheetid: "",
+      department: "",
+      education: "",
+      version: 0,
+      content: []
+    }
+  }
 };
 
 export const developmentFormsReducer = (state = initialState, action: ActionDevelopmentForm) => {

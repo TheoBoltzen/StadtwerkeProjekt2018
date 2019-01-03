@@ -110,7 +110,17 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           </div>
         ) : (
           <div>
-            <DetailViewDevelopmentSheet />
+            <DetailViewDevelopmentSheet
+              devSheetDetail={{
+                result: {
+                  devSheetid: "",
+                  department: "",
+                  education: "",
+                  version: 0,
+                  content: []
+                }
+              }}
+            />
           </div>
         )}
       </div>

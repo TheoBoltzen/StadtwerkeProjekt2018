@@ -11,7 +11,7 @@ import { CircularProgress } from "@material-ui/core";
 //------------------
 
 export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
-  console.log("props: ", props);
+  console.log("props: ", props.devSheetDetail.result);
 
   const { loading } = props;
 
