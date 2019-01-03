@@ -17,7 +17,7 @@ module.exports = {
 
 async function create(devSheetParam) {
   let answer;
-  let competencesForDevSheet = [];
+
   // validate
   const version = 1;
   // Create DevSheet
@@ -81,24 +81,18 @@ async function create(devSheetParam) {
 
           // Create Relationship
 
-          await competencesForDevSheet.push({
+          let competencesForDevSheet = {
             version: version,
             goalcross: competences[l].goalCross,
             CompetenceName: competences[l].name,
             DevelopmentSheetId: identifier
-          });
+          };
+
+          await ReadyDevSheet.create(competencesForDevSheet);
         }
       }
     }
   }
-
-  await ReadyDevSheet.bulkCreate(competencesForDevSheet, {
-    returning: true
-  })
-    .then(() => {})
-    .catch(function(err) {
-      console.log(err);
-    });
 }
 
 async function update(devSheetParam) {
