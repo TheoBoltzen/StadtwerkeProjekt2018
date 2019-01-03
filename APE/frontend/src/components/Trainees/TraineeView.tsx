@@ -7,9 +7,7 @@ import { setTraineeDevelopmentSheet, getTraineeDevelopmentSheetList } from "../.
 //import { getTraineeDevelopmentSheetList } from "../../redux/actions";
 
 export interface State {
-  visibilityIndex: boolean;
-  isHidden: boolean;
-  showFillOutDialog: boolean;
+  visibility_index: string;
 }
 
 interface Props {}
