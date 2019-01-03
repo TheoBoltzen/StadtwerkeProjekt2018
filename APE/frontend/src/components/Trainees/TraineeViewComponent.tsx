@@ -35,7 +35,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
   };
 
   setAssignmentDevSheet = id => {
-    this.props.setAssignment(this.props.user.username, id);
+    this.props.setAssignment(id);
   };
 
   componentDidMount() {
