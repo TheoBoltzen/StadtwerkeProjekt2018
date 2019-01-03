@@ -16,6 +16,7 @@ module.exports = {
 };
 
 async function create(devSheetParam) {
+  let answer;
   let competencesForDevSheet = [];
   // validate
   const version = 1;
@@ -24,10 +25,10 @@ async function create(devSheetParam) {
     education: devSheetParam.education,
     department: devSheetParam.department
   };
-  await devSheet.create(body);
+  answer = await devSheet.create(body);
 
   let identifier = 1;
-  await DevelopmentSheet.findOne({
+  answer = await DevelopmentSheet.findOne({
     where: {},
     attributes: [[Sequelize.fn("max", Sequelize.col("id")), "id"]]
   }).then(function(result) {
@@ -43,7 +44,7 @@ async function create(devSheetParam) {
   for (let i = 0; i < content.length; i++) {
     let x = { name: content[i].name };
     try {
-      await compCategory.create(x);
+      answer = await compCategory.create(x);
     } catch {}
 
     // Step through MainCategory
@@ -54,7 +55,7 @@ async function create(devSheetParam) {
         CompetencyCategoryName: content[i].name
       };
       try {
-        await mainCategory.create(y);
+        answer = await mainCategory.create(y);
       } catch {}
       // Step through Subcategory
       let subcategories = maincategories[j].children;
@@ -64,7 +65,7 @@ async function create(devSheetParam) {
           MainCategoryName: maincategories[j].name
         };
         try {
-          await subCategory.create(z);
+          answer = await subCategory.create(z);
         } catch {}
         // Step through competences
         let competences = subcategories[k].children;
@@ -75,12 +76,12 @@ async function create(devSheetParam) {
             SubCategoryName: subcategories[k].name
           };
           try {
-            await competence.create(zA);
+            answer = await competence.create(zA);
           } catch {}
 
           // Create Relationship
 
-          competencesForDevSheet.push({
+          await competencesForDevSheet.push({
             version: version,
             goalcross: competences[l].goalCross,
             CompetenceName: competences[l].name,
@@ -90,7 +91,7 @@ async function create(devSheetParam) {
       }
     }
   }
-  console.log("LOG: " + competencesForDevSheet);
+
   await ReadyDevSheet.bulkCreate(competencesForDevSheet, {
     returning: true
   })
