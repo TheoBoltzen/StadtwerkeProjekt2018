@@ -9,8 +9,8 @@ interface Props {
   department: string;
   nameTrainer: string;
   isHeader?: boolean;
-  onAssignmentClick: any;
-  onFilloutClick: any;
+  onAssignmentClick?: () => void;
+  onFilloutClick?: () => void;
 }
 
 interface State {}

@@ -18,8 +18,8 @@ export class TraineesComponent extends React.Component<AllProps, State> {
   }
 
   // Klick auf mir zuweisen
-  handleAssignment = () => {
-    console.log("assign");
+  handleAssignment = (traineeUsername, devSheetId) => {
+    this.props.setDevSheetToTrainer(traineeUsername, devSheetId);
   };
 
   // Klick auf Ausfüllen
@@ -39,8 +39,6 @@ export class TraineesComponent extends React.Component<AllProps, State> {
           department={"Abteilung"}
           nameTrainee={"Name des zugewiesenen Auszubildenden"}
           nameTrainer={"Name des zugewiesenen Ausbilders"}
-          onAssignmentClick={this.handleAssignment()}
-          onFilloutClick={this.handleFillOut()}
         />
 
         {connectedDevSheets.map((devSheet, index) => (
@@ -49,7 +47,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
             nameTrainee={devSheet.TraineeUsername}
             department={devSheet.DevelopmentSheet.department}
             nameTrainer={devSheet.TrainerUsername}
-            onAssignmentClick={this.handleAssignment}
+            onAssignmentClick={() => this.handleAssignment(devSheet.TraineeUsername, devSheet.id)}
             onFilloutClick={this.handleFillOut}
           />
         ))}

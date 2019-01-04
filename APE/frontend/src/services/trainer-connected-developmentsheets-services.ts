@@ -1,11 +1,14 @@
 import { authHeader, handleResponse } from "./user-services";
 import { apiURL } from "../constants";
 
-export const setTrainerToTraineeDevelopmentSheetService = (devSheetID: string) => {
+export const setTrainerToTraineeDevelopmentSheetService = (
+  traineeUsername: string,
+  devSheetID: string
+) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
-    body: JSON.stringify({ DevelopmentSheetId: devSheetID })
+    body: JSON.stringify({ TraineeUsername: traineeUsername, DevelopmentSheetId: devSheetID })
   } as RequestInit;
 
   return fetch(`${apiURL}/services/setTrainerToUserDevSheet`, requestOptions).then(handleResponse);

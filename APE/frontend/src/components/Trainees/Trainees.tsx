@@ -1,6 +1,10 @@
 import { ConnectedDevSheetFetch, Trainee } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
-import { getAllConnectedDevSheets, getAllTrainees } from "../../redux/actions";
+import {
+  getAllConnectedDevSheets,
+  getAllTrainees,
+  setTrainerToTraineeDevelopmentSheet
+} from "../../redux/actions";
 import { connect } from "react-redux";
 import { TraineesComponent } from "./TraineesComponent";
 
@@ -15,6 +19,7 @@ interface ReduxStateProps {
 interface ReduxDispatchProps {
   readonly getAllTrainees: () => void;
   readonly getAllConnectedDevSheets: () => void;
+  readonly setDevSheetToTrainer: (traineeUsername: string, devSheetId: string) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
@@ -31,7 +36,9 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     getAllTrainees: () => dispatch(getAllTrainees()),
-    getAllConnectedDevSheets: () => dispatch(getAllConnectedDevSheets())
+    getAllConnectedDevSheets: () => dispatch(getAllConnectedDevSheets()),
+    setDevSheetToTrainer: (traineeUsername, devSheetID) =>
+      dispatch(setTrainerToTraineeDevelopmentSheet(traineeUsername, devSheetID))
   };
 };
 

@@ -63,9 +63,16 @@ export const getAllConnectedDevSheets = () => {
   };
 };
 
-export const setTrainerToTraineeDevelopmentSheet = (devSheetID: string) => {
-  const request = devSheetID => {
-    return { type: trainerDevelopmentFormConstants.SETDEVSHEET_REQUEST, devSheetID };
+export const setTrainerToTraineeDevelopmentSheet = (
+  traineeUsername: string,
+  devSheetID: string
+) => {
+  const request = (traineeUsername, devSheetID) => {
+    return {
+      type: trainerDevelopmentFormConstants.SETDEVSHEET_REQUEST,
+      traineeUsername,
+      devSheetID
+    };
   };
 
   const success = () => {
@@ -79,9 +86,9 @@ export const setTrainerToTraineeDevelopmentSheet = (devSheetID: string) => {
   };
 
   return (dispatch: Dispatch) => {
-    dispatch(request(devSheetID));
+    dispatch(request(traineeUsername, devSheetID));
 
-    setTrainerToTraineeDevelopmentSheetService(devSheetID).then(
+    setTrainerToTraineeDevelopmentSheetService(traineeUsername, devSheetID).then(
       () => {
         dispatch(success());
         dispatch(successAlert("Bogen erfolgreich zugewiesen"));
