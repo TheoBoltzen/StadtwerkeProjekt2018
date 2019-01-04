@@ -1,7 +1,7 @@
 import { authHeader, handleResponse } from "./user-services";
 import { apiURL } from "../constants";
 
-export const setTrainerToTraineeDevelopmentSheet = (devSheetID: string) => {
+export const setTrainerToTraineeDevelopmentSheetService = (devSheetID: string) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
@@ -11,7 +11,7 @@ export const setTrainerToTraineeDevelopmentSheet = (devSheetID: string) => {
   return fetch(`${apiURL}/services/setTrainerToUserDevSheet`, requestOptions).then(handleResponse);
 };
 
-export const getAllConnectedDevelopmentSheets = () => {
+export const getAllConnectedDevelopmentSheetsService = () => {
   const requestOptions = {
     method: "GET",
     headers: authHeader()
