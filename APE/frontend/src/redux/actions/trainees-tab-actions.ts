@@ -2,8 +2,11 @@ import { traineeTabConstants, trainerDevelopmentFormConstants } from "../../cons
 import { ConnectedDevSheetFetch, Trainee } from "../../types";
 import { Dispatch } from "redux";
 import { getAllTraineesService } from "../../services";
-import { errorAlert } from "./alert";
-import { getAllConnectedDevelopmentSheetsService } from "../../services/trainer-connected-developmentsheets-services";
+import { errorAlert, successAlert } from "./alert";
+import {
+  getAllConnectedDevelopmentSheetsService,
+  setTrainerToTraineeDevelopmentSheetService
+} from "../../services/trainer-connected-developmentsheets-services";
 
 export const getAllTrainees = () => {
   const request = () => {
@@ -52,6 +55,37 @@ export const getAllConnectedDevSheets = () => {
 
     getAllConnectedDevelopmentSheetsService().then(
       connectedDevSheets => dispatch(success(connectedDevSheets)),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const setTrainerToTraineeDevelopmentSheet = (devSheetID: string) => {
+  const request = devSheetID => {
+    return { type: trainerDevelopmentFormConstants.SETDEVSHEET_REQUEST, devSheetID };
+  };
+
+  const success = () => {
+    return {
+      type: trainerDevelopmentFormConstants.SETDEVSHEET_SUCCESS
+    };
+  };
+
+  const failure = (error: string) => {
+    return { type: trainerDevelopmentFormConstants.SETDEVSHEET_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request(devSheetID));
+
+    setTrainerToTraineeDevelopmentSheetService(devSheetID).then(
+      () => {
+        dispatch(success());
+        dispatch(successAlert("Bogen erfolgreich zugewiesen"));
+      },
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));

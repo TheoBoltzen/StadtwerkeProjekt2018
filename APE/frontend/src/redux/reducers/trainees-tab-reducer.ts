@@ -53,6 +53,21 @@ export const traineeTabReducer = (state = initialState, action: ActionTraineesTa
         ...state
       };
 
+    case trainerDevelopmentFormConstants.SETDEVSHEET_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case trainerDevelopmentFormConstants.SETDEVSHEET_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+    case trainerDevelopmentFormConstants.SETDEVSHEET_FAILURE:
+      return {
+        ...state
+      };
+
     default:
       return state;
   }
