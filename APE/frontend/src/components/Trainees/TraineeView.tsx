@@ -16,22 +16,19 @@ interface Props {}
 interface ReduxStateProps {
   readonly loading: boolean;
   readonly developmentForms: DevelopmentForm[];
-  readonly user: any;
 }
 
 interface ReduxDispatchProps {
   readonly getAllDevForms: () => void;
-  readonly setAssignment: (username: string, devSheetID: string) => void;
+  readonly setAssignment: (devSheetID: string) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loading, developmentForms } = state.developmentFormsReducer;
-  const { user } = state.authenticationReducer;
   return {
     loading,
-    user: (user as any).token ? user : JSON.parse(user as any),
     developmentForms
   };
 };
@@ -39,8 +36,7 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     getAllDevForms: () => dispatch(getAll()),
-    setAssignment: (username, devSheetID) =>
-      dispatch(setTraineeDevelopmentSheet(username, devSheetID))
+    setAssignment: devSheetID => dispatch(setTraineeDevelopmentSheet(devSheetID))
   };
 };
 

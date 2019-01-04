@@ -4,6 +4,8 @@ const UserDevSheetAsso = db.userDevelopmentSheetAssociation;
 const ReadyDevSheet = db.readyDevelopmentSheet;
 const UserDevSheet = db.userDevelopmentSheet;
 const UserDevSheetService = require("./userDevelopmentSheet.service");
+const jwt = require("jsonwebtoken");
+const config = require("./../config.json");
 
 module.exports = {
   associate,
@@ -12,8 +14,12 @@ module.exports = {
   getById
 };
 
-async function associate(devSheetParam) {
-  // IN: developmentSheetId + Username
+async function associate(devSheetParam, token) {
+  let username = null;
+
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  username = decodedToken.username;
 
   let ver = null;
   await ReadyDevSheet.findOne({
@@ -40,7 +46,7 @@ async function associate(devSheetParam) {
     if (associations != null && associations != {}) {
       let Data = {
         DevelopmentSheetId: associations[0].DevelopmentSheetId,
-        username: devSheetParam.username
+        username: username
       };
 
       try {
@@ -82,10 +88,10 @@ async function associate(devSheetParam) {
 }
 
 async function setTrainerAssessment(devSheetParam) {
-  let x = await ReadyDevSheet.findOne({
+  let x = await UserDevSheet.findOne({
     where: {
-      DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
-      TraineeUsername: devSheetParam.TraineeUsername
+      DevelopmentSheetId: devSheetParam[0].DevelopmentSheetId,
+      TraineeUsername: devSheetParam[0].TraineeUsername
     }
   });
 
@@ -104,11 +110,17 @@ async function setTrainerAssessment(devSheetParam) {
   }
 }
 
-async function setTraineeAssessment(devSheetParam) {
-  let x = await ReadyDevSheet.findOne({
+async function setTraineeAssessment(devSheetParam, token) {
+  let username = null;
+
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  username = decodedToken.username;
+
+  let x = await UserDevSheet.findOne({
     where: {
-      DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
-      TraineeUsername: devSheetParam.TraineeUsername
+      DevelopmentSheetId: devSheetParam[0].DevelopmentSheetId,
+      TraineeUsername: username
     }
   });
 
