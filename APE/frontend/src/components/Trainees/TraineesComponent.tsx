@@ -9,8 +9,6 @@ interface State {}
 export class TraineesComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
-
-    this.state = {};
   }
 
   componentDidMount() {
@@ -18,12 +16,18 @@ export class TraineesComponent extends React.Component<AllProps, State> {
   }
 
   // Klick auf mir zuweisen
-  handleAssignment = (traineeUsername, devSheetId) => {
-    this.props.setDevSheetToTrainer(traineeUsername, devSheetId);
+  private handleAssignment = async (traineeUsername, devSheetId) => {
+    try {
+      const { setDevSheetToTrainer, getAllConnectedDevSheets } = this.props;
+      await setDevSheetToTrainer(traineeUsername, devSheetId);
+      getAllConnectedDevSheets();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   // Klick auf Ausfüllen
-  handleFillOut = () => {
+  private handleFillOut = () => {
     console.log("fill out");
   };
 

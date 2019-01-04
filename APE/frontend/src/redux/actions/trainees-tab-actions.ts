@@ -85,10 +85,10 @@ export const setTrainerToTraineeDevelopmentSheet = (
     return { type: trainerDevelopmentFormConstants.SETDEVSHEET_FAILURE, error };
   };
 
-  return (dispatch: Dispatch) => {
-    dispatch(request(traineeUsername, devSheetID));
+  return async (dispatch: Dispatch) => {
+    await dispatch(request(traineeUsername, devSheetID));
 
-    setTrainerToTraineeDevelopmentSheetService(traineeUsername, devSheetID).then(
+    await setTrainerToTraineeDevelopmentSheetService(traineeUsername, devSheetID).then(
       () => {
         dispatch(success());
         dispatch(successAlert("Bogen erfolgreich zugewiesen"));
