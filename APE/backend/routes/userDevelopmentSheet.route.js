@@ -38,7 +38,7 @@ module.exports = app => {
     guard(["admin", "trainer"]),
     UserDevelopmentSheet.getAllUserDevelopmentSheetsByUserTrainer
   );
-  app.post(
+  app.get(
     "/services/getAllUserDevelopmentSheetsForList",
     guard(["admin", "trainer"]),
     UserDevelopmentSheet.getAllUserDevelopmentSheets
