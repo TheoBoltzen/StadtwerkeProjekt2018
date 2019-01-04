@@ -14,7 +14,6 @@ export class TraineesComponent extends React.Component<AllProps, State> {
   }
 
   componentDidMount() {
-    this.props.getAllTrainees();
     this.props.getAllConnectedDevSheets();
   }
 
@@ -29,9 +28,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
   };
 
   render() {
-    const { loading, trainees } = this.props;
-
-    console.log("debSheets: ", this.props.connectedDevSheets);
+    const { loading, connectedDevSheets } = this.props;
 
     return loading ? (
       <CircularProgress />
@@ -45,14 +42,15 @@ export class TraineesComponent extends React.Component<AllProps, State> {
           onAssignmentClick={this.handleAssignment()}
           onFilloutClick={this.handleFillOut()}
         />
-        {trainees.map((trainee, index) => (
+
+        {connectedDevSheets.map((devSheet, index) => (
           <ListItemTrainee
             key={index}
-            department={""} // Abteilung des Ausbildungsbogens
-            nameTrainee={trainee.lastname + ", " + trainee.firstname}
-            nameTrainer={""} // Name des zugewiesenen Ausbilders
-            onAssignmentClick={this.handleAssignment()}
-            onFilloutClick={this.handleFillOut()}
+            nameTrainee={devSheet.TraineeUsername}
+            department={devSheet.DevelopmentSheet.department}
+            nameTrainer={devSheet.TrainerUsername}
+            onAssignmentClick={this.handleAssignment}
+            onFilloutClick={this.handleFillOut}
           />
         ))}
       </div>

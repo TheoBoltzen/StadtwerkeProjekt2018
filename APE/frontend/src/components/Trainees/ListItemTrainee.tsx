@@ -41,7 +41,7 @@ export class ListItemTrainee extends React.Component<Props, State> {
               <td>{nameTrainee}</td>
               <td>{nameTrainer}</td>
               <td>
-                {nameTrainer === "" ? (
+                {!nameTrainer ? (
                   <Tooltip title={"Mir zuweisen"} onClick={onAssignmentClick}>
                     <IconButton>
                       <Favorite fontSize="small" />
