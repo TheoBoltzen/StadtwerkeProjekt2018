@@ -15,6 +15,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
 
   componentDidMount() {
     this.props.getAllTrainees();
+    this.props.getAllConnectedDevSheets();
   }
 
   // Klick auf mir zuweisen
@@ -29,6 +30,9 @@ export class TraineesComponent extends React.Component<AllProps, State> {
 
   render() {
     const { loading, trainees } = this.props;
+
+    console.log("debSheets: ", this.props.connectedDevSheets);
+
     return loading ? (
       <CircularProgress />
     ) : (
