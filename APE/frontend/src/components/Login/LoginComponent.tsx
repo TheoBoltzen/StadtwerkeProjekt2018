@@ -4,7 +4,7 @@ import "./LoginComponent.css";
 import { AllProps, State } from "./Login";
 import logo from "../../resources/swk.svg";
 import CustomizedInput from "../General/CustomizedInput";
-import Typography from "@material-ui/core/es/Typography/Typography";
+import Typography from "@material-ui/core/Typography/Typography";
 import TextLoop from "react-text-loop";
 import CustomizedButton from "../General/CustomizedButton";
 

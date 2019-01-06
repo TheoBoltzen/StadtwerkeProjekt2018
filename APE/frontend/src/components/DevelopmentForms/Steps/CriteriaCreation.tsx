@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
 import * as React from "react";
-import Tooltip from "@material-ui/core/es/Tooltip/Tooltip";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import { styles } from "../mUIstyles";
 import { Competence } from "./CompetenceCreation";
 import AddIcon from "@material-ui/icons/Add";
