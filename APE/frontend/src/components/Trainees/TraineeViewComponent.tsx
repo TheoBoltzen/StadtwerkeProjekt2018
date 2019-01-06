@@ -1,6 +1,6 @@
 import * as React from "react";
 import "../DevelopmentForms/DevelopmentForms.css";
-import Button from "@material-ui/core/es/Button/Button";
+import Button from "@material-ui/core/Button/Button";
 import { ListItem } from "../DevelopmentForms/ListItem";
 import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
