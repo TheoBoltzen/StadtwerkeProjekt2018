@@ -4,8 +4,8 @@ import Button from "@material-ui/core/Button/Button";
 import { ListItem } from "../DevelopmentForms/ListItem";
 import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
-import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
-import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet"; //später
+import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet";
+import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet"; //später
 //import IconButton from "@material-ui/core/es/IconButton/IconButton";
 //import ClearIcon from "@material-ui/icons/Clear";
 
@@ -110,7 +110,17 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           </div>
         ) : (
           <div>
-            <DetailviewDevelopmentSheetComponent />
+            <DetailViewDevelopmentSheet
+              devSheetDetail={{
+                result: {
+                  devSheetid: "",
+                  department: "",
+                  education: "",
+                  version: 0,
+                  content: []
+                }
+              }}
+            />
           </div>
         )}
       </div>

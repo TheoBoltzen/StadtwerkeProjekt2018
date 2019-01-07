@@ -3,11 +3,11 @@ import "./DevelopmentForms.css";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./DevelopmentForms";
 import { CircularProgress } from "@material-ui/core";
-import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 import { DevelopmentStepper } from "./DevelopmentStepper";
 import "./DevelopmentFormsComponent.css";
+import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
 import CustomizedButton from "../General/CustomizedButton";
 import Typography from "@material-ui/core/Typography/Typography";
 
@@ -22,6 +22,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
   }
 
   handleSearchClick = (event: any, id) => {
+    this.props.getDevSheetDetails(id);
     this.setState({ visibilityIndex: 1 });
     this.setState({
       developmenFormId: id
@@ -119,7 +120,11 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                     <ClearIcon />
                   </IconButton>
                 </div>
-                <DetailviewDevelopmentSheetComponent id={developmenFormId} />
+                <DetailViewDevelopmentSheet
+                  id={developmenFormId}
+                  devSheetDetail={this.props.detailDevForm}
+                  loading={this.props.loadingDetail}
+                />
               </div>
             ) : (
               <CircularProgress className={"loading-spinner"} />

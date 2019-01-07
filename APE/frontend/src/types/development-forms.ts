@@ -50,3 +50,15 @@ export interface ContentDevelopmentFormCreate {
   readonly goalCross?: number;
   readonly ynAnswer?: boolean;
 }
+
+export interface EmptyDevSheetResult {
+  readonly devSheetid: string;
+  readonly version: number;
+  readonly department: string;
+  readonly education: string;
+  readonly content: ContentDevelopmentFormCreate[];
+}
+
+export interface EmptyDevSheetFetch {
+  readonly result: EmptyDevSheetResult;
+}
