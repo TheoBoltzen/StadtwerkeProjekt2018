@@ -1,6 +1,10 @@
-import { Trainee } from "../../types";
+import { ConnectedDevSheetFetch, Trainee } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
-import { getAllTrainees } from "../../redux/actions";
+import {
+  getAllConnectedDevSheets,
+  getAllTrainees,
+  setTrainerToTraineeDevelopmentSheet
+} from "../../redux/actions";
 import { connect } from "react-redux";
 import { TraineesComponent } from "./TraineesComponent";
 
@@ -9,25 +13,32 @@ interface Props {}
 interface ReduxStateProps {
   readonly loading: boolean;
   readonly trainees: Trainee[];
+  readonly connectedDevSheets: ConnectedDevSheetFetch[];
 }
 
 interface ReduxDispatchProps {
   readonly getAllTrainees: () => void;
+  readonly getAllConnectedDevSheets: () => void;
+  readonly setDevSheetToTrainer: (traineeUsername: string, devSheetId: string) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
-  const { loading, trainees } = state.traineeTabReducer;
+  const { loading, trainees, connectedDevSheets } = state.traineeTabReducer;
   return {
     loading,
-    trainees
+    trainees,
+    connectedDevSheets
   };
 };
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
-    getAllTrainees: () => dispatch(getAllTrainees())
+    getAllTrainees: () => dispatch(getAllTrainees()),
+    getAllConnectedDevSheets: () => dispatch(getAllConnectedDevSheets()),
+    setDevSheetToTrainer: (traineeUsername, devSheetID) =>
+      dispatch(setTrainerToTraineeDevelopmentSheet(traineeUsername, devSheetID))
   };
 };
 

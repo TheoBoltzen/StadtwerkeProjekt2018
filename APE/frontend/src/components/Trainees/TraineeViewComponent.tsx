@@ -5,7 +5,7 @@ import { ListItem } from "../DevelopmentForms/ListItem";
 import { ListItemTraineeDevs } from "./ListItemTraineeDevs";
 import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
-import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
+//import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet";
 import Typography from "@material-ui/core/es/Typography/Typography"; //später
 
@@ -25,7 +25,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
   };
 
   setAssignmentDevSheet = id => {
-    this.props.setAssignment(this.props.user.username, id);
+    this.props.setAssignment(id);
   };
 
   componentDidMount() {
@@ -189,7 +189,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                   }}>
                   Zurück
                 </Button>
-                <DetailviewDevelopmentSheetComponent />
+                {/*<DetailviewDevelopmentSheetComponent />*/}
               </div>
             ) : (
               <div>

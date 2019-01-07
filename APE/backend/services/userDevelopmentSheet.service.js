@@ -144,7 +144,7 @@ async function setStatusEstimated(devSheetParam, token) {
     {
       where: {
         DevelopmentSheetId: devSheetParam.DevelopmentSheetId,
-        TraineeUsername: devSheetParam.TraineeUsername
+        TraineeUsername: username
       }
     }
   ).then(() => {});

@@ -4,35 +4,55 @@ import { CircularProgress } from "@material-ui/core";
 import { ListItemTrainee } from "./ListItemTrainee";
 import "./TraineesComponent.css";
 
-export class TraineesComponent extends React.Component<AllProps> {
+interface State {}
+
+export class TraineesComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
   }
 
   componentDidMount() {
-    this.props.getAllTrainees();
+    this.props.getAllConnectedDevSheets();
   }
 
+  // Klick auf mir zuweisen
+  private handleAssignment = async (traineeUsername, devSheetId) => {
+    try {
+      const { setDevSheetToTrainer, getAllConnectedDevSheets } = this.props;
+      await setDevSheetToTrainer(traineeUsername, devSheetId);
+      getAllConnectedDevSheets();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // Klick auf Ausfüllen
+  private handleFillOut = () => {
+    console.log("fill out");
+  };
+
   render() {
-    const { loading, trainees } = this.props;
+    const { loading, connectedDevSheets } = this.props;
+
     return loading ? (
       <CircularProgress />
     ) : (
       <div className={"frameCenterTraineeTab"}>
         <ListItemTrainee
           isHeader={true}
-          name={"Name"}
-          username={"Kennung"}
-          firstname={"Vorname"}
-          education={"Ausbildungsberuf"}
+          department={"Abteilung"}
+          nameTrainee={"Name des zugewiesenen Auszubildenden"}
+          nameTrainer={"Name des zugewiesenen Ausbilders"}
         />
-        {trainees.map((trainee, index) => (
+
+        {connectedDevSheets.map((devSheet, index) => (
           <ListItemTrainee
             key={index}
-            name={trainee.lastname}
-            username={trainee.username}
-            firstname={trainee.firstname}
-            education={trainee.education}
+            nameTrainee={devSheet.TraineeUsername}
+            department={devSheet.DevelopmentSheet.department}
+            nameTrainer={devSheet.TrainerUsername}
+            onAssignmentClick={() => this.handleAssignment(devSheet.TraineeUsername, devSheet.id)}
+            onFilloutClick={this.handleFillOut}
           />
         ))}
       </div>

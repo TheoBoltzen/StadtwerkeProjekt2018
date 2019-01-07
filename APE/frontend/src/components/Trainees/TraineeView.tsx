@@ -22,7 +22,7 @@ interface ReduxStateProps {
 
 interface ReduxDispatchProps {
   readonly getAllDevForms: () => void;
-  readonly setAssignment: (username: string, devSheetID: string) => void;
+  readonly setAssignment: (devSheetID: string) => void;
   readonly getDevFormsListTrainee: (TraineeUsername: string) => void;
 }
 
@@ -48,9 +48,7 @@ const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
     getAllDevForms: () => dispatch(getAll()),
     getDevFormsListTrainee: TraineeUsername =>
       dispatch(getTraineeDevelopmentSheetList(TraineeUsername)),
-
-    setAssignment: (username, devSheetID) =>
-      dispatch(setTraineeDevelopmentSheet(username, devSheetID))
+    setAssignment: devSheetID => dispatch(setTraineeDevelopmentSheet(devSheetID))
   };
 };
 

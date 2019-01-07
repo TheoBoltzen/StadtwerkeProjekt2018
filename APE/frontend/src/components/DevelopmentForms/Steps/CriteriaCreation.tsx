@@ -46,7 +46,7 @@ const theme = createMuiTheme({
       root: {
         color: "#1A223A !important",
         "&$checked": {
-          color: "#00a8e1 !important"
+          color: "#00beff !important"
         }
       },
       checked: {}

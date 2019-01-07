@@ -69,3 +69,13 @@ export const createDevelopmentSheetService = (developmenSheet: DevelopmentFormCr
     handleResponse
   );
 };
+
+export const getDetailDevelopmentSheetService = (id: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ id })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getEmptyDevSheet`, requestOptions).then(handleResponse);
+};

@@ -1,19 +1,30 @@
 import { Action } from "redux";
-import { DevelopmentForm } from "../../types";
+import { DevelopmentForm, EmptyDevSheetFetch } from "../../types";
 import { developmentFormConstants } from "../../constants";
 
 interface ActionDevelopmentForm extends Action {
   developmentForms: DevelopmentForm[];
+  developmentFormDetail: EmptyDevSheetFetch;
 }
 
 export interface DevelopmentFormsReducer {
   readonly loading: boolean;
   readonly developmentForms: DevelopmentForm[];
+  readonly developmentFormDetail: EmptyDevSheetFetch;
 }
 
 const initialState: DevelopmentFormsReducer = {
   loading: false,
-  developmentForms: []
+  developmentForms: [],
+  developmentFormDetail: {
+    result: {
+      devSheetid: "",
+      department: "",
+      education: "",
+      version: 0,
+      content: []
+    }
+  }
 };
 
 export const developmentFormsReducer = (state = initialState, action: ActionDevelopmentForm) => {
@@ -33,6 +44,23 @@ export const developmentFormsReducer = (state = initialState, action: ActionDeve
       return {
         ...state
       };
+
+    case developmentFormConstants.GETDETAILDEVELOPMENTSHEET_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case developmentFormConstants.GETDETAILDEVELOPMENTSHEET_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        developmentFormDetail: action.developmentFormDetail
+      };
+    case developmentFormConstants.GETDETAILDEVELOPMENTSHEET_FAILURE:
+      return {
+        ...state
+      };
+
     default:
       return state;
   }

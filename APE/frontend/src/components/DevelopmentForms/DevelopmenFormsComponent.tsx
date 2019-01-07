@@ -1,15 +1,15 @@
 import * as React from "react";
 import "./DevelopmentForms.css";
-import Button from "@material-ui/core/es/Button/Button";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./DevelopmentForms";
 import { CircularProgress } from "@material-ui/core";
-import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import IconButton from "@material-ui/core/es/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 import { DevelopmentStepper } from "./DevelopmentStepper";
-import Typography from "@material-ui/core/es/Typography/Typography";
 import "./DevelopmentFormsComponent.css";
+import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
+import CustomizedButton from "../General/CustomizedButton";
+import Typography from "@material-ui/core/es/Typography/Typography";
 
 export class DevelopmentFormsComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -22,6 +22,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
   }
 
   handleSearchClick = (event: any, id) => {
+    this.props.getDevSheetDetails(id);
     this.setState({ visibilityIndex: 1 });
     this.setState({
       developmenFormId: id
@@ -55,6 +56,8 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     const { developmentForms, loading } = this.props;
     const { developmenFormId } = this.state;
 
+    //console.log("---------devSheet:", this.props.detailDevForm);
+
     switch (visibilityIndex) {
       case 0:
         // Übersicht Bögen
@@ -64,15 +67,12 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
               <div>
                 <div className={"buttonDiv"}>
                   <div />
-                  <Button
-                    variant={"contained"}
-                    color={"primary"}
-                    className={"entwicklungsBogenButton"}
+                  <CustomizedButton
                     onClick={e => {
                       this.changeVisibilityIndex(e, 2);
-                    }}>
-                    Entwicklungsbogen erstellen
-                  </Button>
+                    }}
+                    text={"Entwicklungsbogen erstellen"}
+                  />
                 </div>
                 <div className={"frameCenter"}>
                   <ListItem
@@ -122,7 +122,11 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
                     <ClearIcon />
                   </IconButton>
                 </div>
-                <DetailviewDevelopmentSheetComponent id={developmenFormId} />
+                <DetailViewDevelopmentSheet
+                  id={developmenFormId}
+                  devSheetDetail={this.props.detailDevForm}
+                  loading={this.props.loadingDetail}
+                />
               </div>
             ) : (
               <CircularProgress className={"loading-spinner"} />

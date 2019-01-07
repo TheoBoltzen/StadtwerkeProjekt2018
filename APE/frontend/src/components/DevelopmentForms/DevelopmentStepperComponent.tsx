@@ -9,6 +9,7 @@ import SubCategoryCreation from "./Steps/SubCategoryCreation";
 import CriteriaCreation from "./Steps/CriteriaCreation";
 import { DevelopmentFormCreate } from "../../types";
 import { AllProps, State } from "./DevelopmentStepper";
+import CustomizedButton from "../General/CustomizedButton";
 
 export class DevelopmentStepperComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -291,7 +292,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
                     children: subCategory.Criteria.filter(criteria => criteria.checked).map(
                       criteria => ({
                         name: criteria.name,
-                        goalCross: criteria.value,
+                        goalCross: parseInt(criteria.value),
                         ynAnswer: false
                       })
                     )
@@ -340,12 +341,10 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
                   className={classes.backButton}>
                   Zurück
                 </Button>
-                <Button
-                  variant="contained"
-                  className={classes.primaryButton}
-                  onClick={this.handleNext}>
-                  {activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
-                </Button>
+                <CustomizedButton
+                  onClick={this.handleNext}
+                  text={activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
+                />
               </div>
             </div>
           </div>
