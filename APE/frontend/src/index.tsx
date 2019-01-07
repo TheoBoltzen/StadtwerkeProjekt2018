@@ -1,5 +1,3 @@
-import "core-js";
-import "@babel/polyfill";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { App } from "./App";
