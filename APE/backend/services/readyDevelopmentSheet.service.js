@@ -234,7 +234,7 @@ async function getemptyById(devsheetparam) {
     version: result[0].version,
     department: devresult[0].DevelopmentSheet.department,
     education: devresult[0].DevelopmentSheet.education,
-    content: []
+    content: {}
   };
 
   let competencycategories = [];
@@ -327,7 +327,7 @@ async function getemptyById(devsheetparam) {
       }
     }
   }
-  info.content.push(competencycategories);
+  info.content = competencycategories;
   return info;
 }
 async function getfullById(devsheetparam) {

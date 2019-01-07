@@ -159,6 +159,10 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
     ]
   };
 
+  //const content: any = !loading ? props.devSheetDetail.result.content[0] as any : 'test';
+
+  // console.log('oontentTest', !loading && (content as any))
+
   /*  var kriterien = [
         "freundliches und aufgeschlossenes Auftreten",
         "gepflegtes Erscheinungsbild",
@@ -185,6 +189,9 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
     kriteria = [];
     sollWerte = [];
   };
+
+  //let initialArray: any[] = [];
+  //let initialArray;
 
   return loading ? (
     <CircularProgress />
@@ -213,14 +220,12 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       </div>
 
       <div>
-        {console.log("PROPS: ", props.devSheetDetail.result)}
-
         {props.devSheetDetail.result.content &&
           props.devSheetDetail.result.content.map((kompetenzen, index_1) => (
             <div className={"frameDetail"} key={index_1}>
-              <h3 key={index_1}>{kompetenzen[index_1].name}</h3>
-              {kompetenzen[index_1].children &&
-                kompetenzen[index_1].children.map((hauptkategorie, index_2) => (
+              <h3 key={index_1}>{kompetenzen.name}</h3>
+              {kompetenzen.children &&
+                kompetenzen.children.map((hauptkategorie, index_2) => (
                   <div className="gravity-left" key={index_2}>
                     <h4 key={index_2}>{hauptkategorie.name}</h4>
                     {hauptkategorie.children &&
@@ -231,7 +236,7 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                             subkategorie.children.map((kriterium, index_4) => {
                               kriteria.push(kriterium.name);
                               sollWerte.push(mapIntegerToString(kriterium.goalCross));
-                              return;
+                              /*return;*/
                             })}
 
                           <Graph
