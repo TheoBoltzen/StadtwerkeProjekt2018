@@ -1,42 +1,62 @@
 import { TraineeViewComponent } from "./TraineeViewComponent";
-import { DevelopmentForm } from "../../types";
+import { DevelopmentForm, DevelopmentFormsListTrainee, EmptyDevSheetFetch } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
-import { getAll } from "../../redux/actions/development-forms-actions";
+import { getAll, getDetailDevelopmentSheet } from "../../redux/actions/development-forms-actions";
 import { connect } from "react-redux";
-import { setTraineeDevelopmentSheet } from "../../redux/actions";
+import { setTraineeDevelopmentSheet, getTraineeDevelopmentSheetList } from "../../redux/actions";
+//import { getTraineeDevelopmentSheetList } from "../../redux/actions";
 
 export interface State {
-  visibilityIndex: boolean;
-  isHidden: boolean;
-  showFillOutDialog: boolean;
+  visibility_index: string;
+  developmenFormId: string;
 }
 
 interface Props {}
 
 interface ReduxStateProps {
   readonly loading: boolean;
+  readonly loadingTraineeDevSheets: boolean;
+  readonly loadingDetail: boolean;
   readonly developmentForms: DevelopmentForm[];
+  readonly detailDevForm: EmptyDevSheetFetch;
+  readonly user: any;
+  readonly traineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
 }
 
 interface ReduxDispatchProps {
   readonly getAllDevForms: () => void;
   readonly setAssignment: (devSheetID: string) => void;
+  readonly getDevFormsListTrainee: (TraineeUsername: string) => void;
+  readonly getDevSheetDetails: (id) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
-  const { loading, developmentForms } = state.developmentFormsReducer;
+  const { loading, developmentForms, developmentFormDetail } = state.developmentFormsReducer;
+  const { traineeDevelopmentFormsList } = state.traineeDevelopmentFormsListReducer; //loading fehlt
+  const loadingTraineeDevSheets = state.traineeDevelopmentFormsReducer.loading;
+  const loadingDetail = state.developmentFormsReducer.loading;
+
+  const { user } = state.authenticationReducer;
   return {
     loading,
-    developmentForms
+    loadingDetail,
+    loadingTraineeDevSheets,
+    user: (user as any).token ? user : JSON.parse(user as any),
+    developmentForms,
+    traineeDevelopmentFormsList,
+    detailDevForm: developmentFormDetail
   };
 };
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     getAllDevForms: () => dispatch(getAll()),
-    setAssignment: devSheetID => dispatch(setTraineeDevelopmentSheet(devSheetID))
+    getDevFormsListTrainee: TraineeUsername =>
+      dispatch(getTraineeDevelopmentSheetList(TraineeUsername)),
+    setAssignment: devSheetID => dispatch(setTraineeDevelopmentSheet(devSheetID)),
+    getDevSheetDetails: id => dispatch(getDetailDevelopmentSheet(id))
   };
 };
 

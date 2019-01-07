@@ -1,36 +1,27 @@
 import * as React from "react";
 import "../DevelopmentForms/DevelopmentForms.css";
-import Button from "@material-ui/core/Button/Button";
 import { ListItem } from "../DevelopmentForms/ListItem";
+import { ListItemTraineeDevs } from "./ListItemTraineeDevs";
 import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
 import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet";
-import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet"; //später
-//import IconButton from "@material-ui/core/es/IconButton/IconButton";
-//import ClearIcon from "@material-ui/icons/Clear";
+import Typography from "@material-ui/core/Typography/Typography";
+import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
+import CustomizedButton from "../General/CustomizedButton";
 
 export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
 
     this.state = {
-      visibilityIndex: true,
-      isHidden: true,
-      showFillOutDialog: false
+      visibility_index: "All_Trainee_DevSheets",
+      developmenFormId: ""
     };
   }
 
-  openFillOutDialog = () => {
+  handleSearchClickTraineeDevSheet = () => {
     this.setState({
-      showFillOutDialog: !this.state.showFillOutDialog,
-      isHidden: true
-    });
-  };
-
-  handleSearchClick = () => {
-    this.setState({
-      isHidden: !this.state.isHidden,
-      showFillOutDialog: false
+      visibility_index: "Display_one_Trainee_DevSheet"
     });
   };
 
@@ -40,10 +31,19 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
   componentDidMount() {
     this.props.getAllDevForms();
+    this.props.getDevFormsListTrainee(this.props.user.username);
   }
 
-  changeVisibilityIndex = () => {
-    this.setState({ visibilityIndex: !this.state.visibilityIndex });
+  changeVisibilityIndex = (e, index) => {
+    this.setState({ visibility_index: index });
+  };
+
+  getDetailView = (e, index, id) => {
+    this.props.getDevSheetDetails(id);
+    this.setState({ visibility_index: index });
+    this.setState({
+      developmenFormId: id
+    });
   };
 
   doFormatDate = date => {
@@ -51,83 +51,197 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     return new Date(date).toLocaleDateString("de");
   };
 
-  getContent = () => {
-    const { developmentForms, loading } = this.props;
-    const { isHidden, showFillOutDialog } = this.state;
+  getContent = visibilityIndex => {
+    const {
+      developmentForms,
+      loading,
+      loadingTraineeDevSheets,
+      traineeDevelopmentFormsList
+    } = this.props;
+    const { developmenFormId } = this.state;
 
-    //DetailviewDevelopmentSheetComponent muss beim Klick die die id des Entwicklungsbogens mitgegeben werden!
-    return showFillOutDialog ? (
-      <FillOutDevelopmentSheet />
-    ) : this.state.visibilityIndex ? (
-      <div className={"switchRoot"}>
-        Hallo hier ist Content!
-        <div className={"flexDiv"}>
-          <div />
-          <Button
-            variant={"contained"}
-            color={"primary"}
-            className={"entwicklungsBogenButton"}
-            onClick={this.changeVisibilityIndex}>
-            Finde Entwicklungsbögen
-          </Button>
-          <Button onClick={this.openFillOutDialog}>FillOut</Button>
-        </div>
-      </div>
-    ) : (
-      <div className={"switchRoot"}>
-        {loading ? (
-          <CircularProgress />
-        ) : isHidden ? (
+    switch (visibilityIndex) {
+      case "All_Trainee_DevSheets":
+        // Übersicht alle zugewiesene Bögen eines Azubis
+        return (
           <div>
-            <Button
-              variant={"contained"}
-              color={"primary"}
-              className={"entwicklungsBogenButton"}
-              onClick={this.changeVisibilityIndex}>
-              Zurück
-            </Button>
-            <div className={"frame center"}>
-              <ListItem
-                isHeader={true}
-                abteilung="Abteilung"
-                job="Ausbildungsberuf"
-                date="Erstellungsdatum"
-              />
-              {developmentForms.map((devForm, index) => {
-                return (
-                  <ListItem
-                    key={index}
-                    abteilung={devForm.department}
-                    job={devForm.education}
-                    date={this.doFormatDate(devForm.createdAt)}
-                    onSearchClick={this.handleSearchClick}
-                    onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
-                    isTrainee={true}
+            {!loadingTraineeDevSheets ? (
+              <div className={"switchRoot"}>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_DevSheets");
+                    }}
+                    text={"Finde Entwicklungsbögen"}
                   />
-                );
-              })}
-            </div>
+                </div>
+                <div className={"frame center"}>
+                  <ListItemTraineeDevs
+                    isHeader={true}
+                    department="Abteilung"
+                    education="Ausbildungsberuf"
+                    updatedAt="Änderungsdatum"
+                    status="Status"
+                    trainerUsername="Ausbilder"
+                  />
+                  {traineeDevelopmentFormsList.map((devForm, index) => {
+                    return (
+                      <ListItemTraineeDevs
+                        key={index}
+                        //is displayed
+                        department={devForm.DevelopmentSheet.department}
+                        education={devForm.DevelopmentSheet.education}
+                        updatedAt={this.doFormatDate(devForm.updatedAt)}
+                        status={devForm.status}
+                        trainerUsername={devForm.trainerUsername}
+                        //TO DO
+                        onSearchClick={this.handleSearchClickTraineeDevSheet}
+                        onEditClick={e => {
+                          this.changeVisibilityIndex(e, "Fillout_DevSheet");
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <div>
+                <CircularProgress className={"loading-spinner"} />
+              </div>
+            )}
           </div>
-        ) : (
+        );
+      case "All_DevSheets":
+        // Alle Bögen in Liste anzeigen
+        return (
+          <div className={"switchRoot"}>
+            {!loading ? (
+              <div>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
+                <div className={"frame center"}>
+                  <ListItem
+                    isHeader={true}
+                    abteilung="Abteilung"
+                    job="Ausbildungsberuf"
+                    date="Erstellungsdatum"
+                  />
+                  {developmentForms.map((devForm, index) => {
+                    return (
+                      <ListItem
+                        key={index}
+                        abteilung={devForm.department}
+                        job={devForm.education}
+                        date={this.doFormatDate(devForm.createdAt)}
+                        onSearchClick={e => {
+                          this.getDetailView(e, "Display_one_Detail_DevSheet", devForm.id);
+                        }}
+                        onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
+                        isTrainee={true}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <div>
+                <CircularProgress />
+              </div>
+            )}
+          </div>
+        );
+      case "Fillout_DevSheet":
+        // Entwicklungsbogen ausfüllen
+        return (
           <div>
-            <DetailViewDevelopmentSheet
-              devSheetDetail={{
-                result: {
-                  devSheetid: "",
-                  department: "",
-                  education: "",
-                  version: 0,
-                  content: []
-                }
-              }}
-            />
+            {!loading ? (
+              <div>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
+                <FillOutDevelopmentSheet />
+              </div>
+            ) : (
+              <div>
+                <CircularProgress className={"loading-spinner"} />
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    );
+        );
+      case "Display_one_Detail_DevSheet":
+        // einen bestimmten Bogen aus allen existierenden Entwicklungsbögen
+        return (
+          <div>
+            {!loading ? (
+              <div>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
+                {/*<DetailviewDevelopmentSheetComponent />*/}
+                <DetailViewDevelopmentSheet
+                  id={developmenFormId}
+                  devSheetDetail={this.props.detailDevForm}
+                  loading={this.props.loadingDetail}
+                />
+              </div>
+            ) : (
+              <div>
+                <CircularProgress className={"loading-spinner"} />
+              </div>
+            )}
+          </div>
+        );
+      case "Display_one_Trainee_DevSheet":
+        // einen bestimmten Bogen aus allen existierenden Entwicklungsbögen
+        return (
+          <div>
+            {!loading ? (
+              <div>
+                <CustomizedButton
+                  onClick={e => {
+                    this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                  }}
+                  text={"Zurück"}
+                />
+                Detail Trainee Devsheet
+              </div>
+            ) : (
+              <div>
+                <CircularProgress className={"loading-spinner"} />
+              </div>
+            )}
+          </div>
+        );
+      default:
+        return (
+          <div>
+            <Typography variant={"h2"}>Upps hier lief was schief</Typography>
+          </div>
+        );
+    }
   };
 
   render() {
-    return <div className={"root"}>{this.getContent()}</div>;
+    return <div className={"root"}>{this.getContent(this.state.visibility_index)}</div>;
   }
 }
