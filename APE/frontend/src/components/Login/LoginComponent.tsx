@@ -2,7 +2,7 @@ import * as React from "react";
 import { CircularProgress, InputLabel, FormControl, FormHelperText } from "@material-ui/core";
 import "./LoginComponent.css";
 import { AllProps, State } from "./Login";
-import logo from "../../resources/swk.svg";
+import logo from "../../resources/swk_full.png";
 import CustomizedInput from "../General/CustomizedInput";
 import Typography from "@material-ui/core/Typography/Typography";
 import TextLoop from "react-text-loop";
@@ -48,7 +48,7 @@ export class LoginComponent extends React.Component<AllProps, State> {
     return (
       <div className={"all"}>
         <header>
-          <img className={"logo"} src={logo} />
+          <img className={"logo"} src={logo} width={"238.2"} height={"60"} />
         </header>
 
         <Typography variant={"h4"} className={"header"}>
