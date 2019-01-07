@@ -1,6 +1,6 @@
 import * as React from "react";
-import withStyles from "@material-ui/core/es/styles/withStyles";
-import InputBase from "@material-ui/core/es/InputBase/InputBase";
+import withStyles from "@material-ui/core/styles/withStyles";
+import InputBase from "@material-ui/core/InputBase/InputBase";
 import { WithStyles, createStyles } from "@material-ui/core";
 
 const styles = theme =>

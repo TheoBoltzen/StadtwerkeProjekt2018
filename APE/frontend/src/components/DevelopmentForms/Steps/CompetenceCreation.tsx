@@ -11,11 +11,11 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import InfoIcon from "@material-ui/icons/Info";
 import * as React from "react";
-import Tooltip from "@material-ui/core/es/Tooltip/Tooltip";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import { styles } from "../mUIstyles";
 import "./CompetenceCreation.css";
-import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
-import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import { MainCategory } from "./MainCategoryCreation";
 
 interface Props extends WithStyles<typeof styles> {

@@ -1,19 +1,18 @@
 import * as React from "react";
 import { WithStyles } from "@material-ui/core";
-import withStyles from "@material-ui/core/es/styles/withStyles";
-import createStyles from "@material-ui/core/es/styles/createStyles";
-import Radio from "@material-ui/core/es/Radio/Radio";
+import withStyles from "@material-ui/core/styles/withStyles";
+import createStyles from "@material-ui/core/styles/createStyles";
+import Radio from "@material-ui/core/Radio/Radio";
 
-const styles = theme =>
-  createStyles({
-    root: {
-      color: "black",
-      "&$checked": {
-        color: "#00beff"
-      }
-    },
-    checked: {}
-  });
+const styles = createStyles({
+  root: {
+    color: "black",
+    "&$checked": {
+      color: "#00beff"
+    }
+  },
+  checked: {}
+});
 
 interface Props extends WithStyles<typeof styles> {
   checked?: string;

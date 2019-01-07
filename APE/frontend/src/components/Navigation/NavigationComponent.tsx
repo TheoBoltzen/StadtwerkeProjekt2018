@@ -2,7 +2,7 @@ import * as React from "react";
 import Button from "@material-ui/core/Button";
 import { PowerSettingsNew } from "@material-ui/icons";
 import { Redirect } from "react-router";
-import logo from "../../resources/swk.svg";
+import logo from "../../resources/swk_full.png";
 import "./NavigationComponent.css";
 import { AllProps, State } from "./Navigation";
 import { Link } from "react-router-dom";
@@ -42,7 +42,7 @@ export class NavigationComponent extends React.Component<AllProps, State> {
 
     return (
       <div className={"menu"}>
-        <img className={"navLogo"} src={logo} />
+        <img className={"navLogo"} src={logo} width={"238.2"} height={"60"} />
 
         <div className={"navRight"}>
           {isAdmin && (

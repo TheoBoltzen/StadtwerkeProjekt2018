@@ -56,8 +56,6 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     const { developmentForms, loading } = this.props;
     const { developmenFormId } = this.state;
 
-    //console.log("---------devSheet:", this.props.detailDevForm);
-
     switch (visibilityIndex) {
       case 0:
         // Übersicht Bögen

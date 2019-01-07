@@ -18,8 +18,13 @@ module.exports = app => {
     ReadyDevelopmentSheet.getemptyById
   );
   app.post(
-    "/services/getFullDevSheet",
-    guard(["admin", "trainer", "trainee"]),
-    ReadyDevelopmentSheet.getfullById
+    "/services/getFullDevSheetTrainer",
+    guard(["admin", "trainer"]),
+    ReadyDevelopmentSheet.getfullByIdTrainer
+  );
+  app.post(
+    "/services/getFullDevSheetTrainee",
+    guard(["trainee"]),
+    ReadyDevelopmentSheet.getfullByIdTrainee
   );
 };
