@@ -1,15 +1,13 @@
 import * as React from "react";
 import "../DevelopmentForms/DevelopmentForms.css";
-import Button from "@material-ui/core/Button/Button";
 import { ListItem } from "../DevelopmentForms/ListItem";
 import { ListItemTraineeDevs } from "./ListItemTraineeDevs";
 import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
-//import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet";
 import Typography from "@material-ui/core/Typography/Typography";
-import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet"; //später
-import CustomizedButton from "../General/CustomizedButton"; //später
+import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
+import CustomizedButton from "../General/CustomizedButton";
 
 export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -190,15 +188,15 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loading ? (
               <div>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
-                  onClick={e => {
-                    this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}>
-                  Zurück
-                </Button>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
                 {/*<DetailviewDevelopmentSheetComponent />*/}
                 <DetailViewDevelopmentSheet
                   id={developmenFormId}
@@ -219,15 +217,12 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loading ? (
               <div>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
+                <CustomizedButton
                   onClick={e => {
                     this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}>
-                  Zurück
-                </Button>
+                  }}
+                  text={"Zurück"}
+                />
                 Detail Trainee Devsheet
               </div>
             ) : (
