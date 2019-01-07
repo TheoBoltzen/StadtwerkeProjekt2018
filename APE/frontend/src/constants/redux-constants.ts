@@ -67,6 +67,12 @@ export const traineeTabConstants = {
   GETALL_FAILURE: "TRAINESS_GETALL_FAILURE"
 };
 
+export const traineeDevFormListConstants = {
+  GETALL_REQUEST: "TRAINEES_DevFormList_GETALL_REQUEST",
+  GETALL_SUCCESS: "TRAINEES_DevFormList_GETALL_SUCCESS",
+  GETALL_FAILURE: "TRAINESS_DevFormList_GETALL_FAILURE"
+};
+
 export const trainerDevelopmentFormConstants = {
   SETDEVSHEET_REQUEST: "SETDEVSHEET_REQUEST",
   SETDEVSHEET_SUCCESS: "SETDEVSHEET_SUCCESS",
