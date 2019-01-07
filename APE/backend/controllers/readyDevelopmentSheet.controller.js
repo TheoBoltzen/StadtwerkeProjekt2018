@@ -21,9 +21,15 @@ exports.getemptyById = (req, res, next) => {
     .then(result => res.json({ result }))
     .catch(err => next(err));
 };
-exports.getfullById = (req, res, next) => {
+exports.getfullByIdTrainer = (req, res, next) => {
   readyDevSheetService
-    .getfullById(req.body)
+    .getfullByIdTrainer(req.body, req.headers.authorization.split("Bearer ")[1])
+    .then(result => res.json({ result }))
+    .catch(err => next(err));
+};
+exports.getfullByIdTrainee = (req, res, next) => {
+  readyDevSheetService
+    .getfullByIdTrainee(req.body, req.headers.authorization.split("Bearer ")[1])
     .then(result => res.json({ result }))
     .catch(err => next(err));
 };
