@@ -1,4 +1,4 @@
-export const styles = {
+export const styles = theme => ({
   root: {
     width: "90%"
   },
@@ -7,14 +7,14 @@ export const styles = {
     iconColor: "#00a8e1"
   },
   margin: {
-    margin: "16px"
+    margin: theme.spacing.unit
   },
   backButton: {
-    marginRight: "16px"
+    marginRight: theme.spacing.unit
   },
   instructions: {
-    marginTop: "16px",
-    marginBottom: "16px"
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit
   },
   primaryButton: {
     backgroundColor: "#00a8e1 !important",
@@ -25,7 +25,7 @@ export const styles = {
   },
   deleteButton: {
     button: {
-      margin: "16px"
+      margin: theme.spacing.unit
     },
     input: {
       display: "none"
@@ -38,6 +38,6 @@ export const styles = {
     }
   },
   nested: {
-    paddingLeft: "128px"
+    paddingLeft: theme.spacing.unit * 8
   }
-};
+});

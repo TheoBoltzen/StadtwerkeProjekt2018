@@ -5,18 +5,19 @@ import * as React from "react";
 import Button from "@material-ui/core/Button/Button";
 import classNames from "classnames";
 
-const styles = createStyles({
-  margin: {
-    margin: "16px"
-  },
-  root: {
-    color: "#ffffff",
-    backgroundColor: "#00beff",
-    "&:hover": {
-      backgroundColor: "#00a8e1"
+const styles = theme =>
+  createStyles({
+    margin: {
+      margin: theme.spacing.unit
+    },
+    root: {
+      color: "#ffffff",
+      backgroundColor: "#00beff",
+      "&:hover": {
+        backgroundColor: "#00a8e1"
+      }
     }
-  }
-});
+  });
 
 interface Props extends WithStyles<typeof styles> {
   onClick: any;
