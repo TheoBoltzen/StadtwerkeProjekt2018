@@ -1,20 +1,21 @@
 import * as React from "react";
 import "../DevelopmentForms/DevelopmentForms.css";
-import Button from "@material-ui/core/es/Button/Button";
 import { ListItem } from "../DevelopmentForms/ListItem";
 import { ListItemTraineeDevs } from "./ListItemTraineeDevs";
 import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
-//import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet";
-import Typography from "@material-ui/core/es/Typography/Typography"; //später
+import Typography from "@material-ui/core/Typography/Typography";
+import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
+import CustomizedButton from "../General/CustomizedButton";
 
 export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
 
     this.state = {
-      visibility_index: "All_Trainee_DevSheets"
+      visibility_index: "All_Trainee_DevSheets",
+      developmenFormId: ""
     };
   }
 
@@ -37,6 +38,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     this.setState({ visibility_index: index });
   };
 
+  getDetailView = (e, index, id) => {
+    this.props.getDevSheetDetails(id);
+    this.setState({ visibility_index: index });
+    this.setState({
+      developmenFormId: id
+    });
+  };
+
   doFormatDate = date => {
     //date format from db: 	2018-12-03T12:12:26.000Z
     return new Date(date).toLocaleDateString("de");
@@ -54,6 +63,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
       loadingTraineeDevSheets,
       traineeDevelopmentFormsList
     } = this.props;
+    const { developmenFormId } = this.state;
 
     switch (visibilityIndex) {
       case "All_Trainee_DevSheets":
@@ -62,16 +72,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loadingTraineeDevSheets ? (
               <div className={"switchRoot"}>
-                <div className={"flexDiv"}>
-                  <Button
-                    variant={"contained"}
-                    color={"primary"}
-                    className={"entwicklungsBogenButton"}
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
                     onClick={e => {
                       this.changeVisibilityIndex(e, "All_DevSheets");
-                    }}>
-                    Finde Entwicklungsbögen
-                  </Button>
+                    }}
+                    text={"Finde Entwicklungsbögen"}
+                  />
                 </div>
                 <div className={"frame center"}>
                   <ListItemTraineeDevs
@@ -115,15 +123,15 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div className={"switchRoot"}>
             {!loading ? (
               <div>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
-                  onClick={e => {
-                    this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}>
-                  Zurück
-                </Button>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
                 <div className={"frame center"}>
                   <ListItem
                     isHeader={true}
@@ -139,7 +147,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                         job={devForm.education}
                         date={this.doFormatDate(devForm.createdAt)}
                         onSearchClick={e => {
-                          this.changeVisibilityIndex(e, "Display_one_Detail_DevSheet");
+                          this.getDetailView(e, "Display_one_Detail_DevSheet", devForm.id);
                         }}
                         onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
                         isTrainee={true}
@@ -161,15 +169,15 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loading ? (
               <div>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
-                  onClick={e => {
-                    this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}>
-                  Zurück
-                </Button>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
                 <FillOutDevelopmentSheet
                   fullDevSheet={this.props.fullDevSheet}
                   loading={this.props.loadingFullDevSheet}
@@ -188,16 +196,21 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loading ? (
               <div>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
-                  onClick={e => {
-                    this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}>
-                  Zurück
-                </Button>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
                 {/*<DetailviewDevelopmentSheetComponent />*/}
+                <DetailViewDevelopmentSheet
+                  id={developmenFormId}
+                  devSheetDetail={this.props.detailDevForm}
+                  loading={this.props.loadingDetail}
+                />
               </div>
             ) : (
               <div>
@@ -212,15 +225,12 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loading ? (
               <div>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
+                <CustomizedButton
                   onClick={e => {
                     this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}>
-                  Zurück
-                </Button>
+                  }}
+                  text={"Zurück"}
+                />
                 Detail Trainee Devsheet
               </div>
             ) : (

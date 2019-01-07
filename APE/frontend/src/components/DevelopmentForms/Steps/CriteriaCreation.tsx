@@ -9,20 +9,20 @@ import {
 } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
 import * as React from "react";
-import Tooltip from "@material-ui/core/es/Tooltip/Tooltip";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import { styles } from "../mUIstyles";
 import { Competence } from "./CompetenceCreation";
 import AddIcon from "@material-ui/icons/Add";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import Collapse from "@material-ui/core/es/Collapse/Collapse";
-import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
-import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
-import withStyles from "@material-ui/core/es/styles/withStyles";
+import Collapse from "@material-ui/core/Collapse/Collapse";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import withStyles from "@material-ui/core/styles/withStyles";
 import "./MainCategoryCreation.css";
-import ListItemSecondaryAction from "@material-ui/core/es/ListItemSecondaryAction/ListItemSecondaryAction";
-import FormControl from "@material-ui/core/es/FormControl/FormControl";
-import FormControlLabel from "@material-ui/core/es/FormControlLabel/FormControlLabel";
-import RadioGroup from "@material-ui/core/es/RadioGroup/RadioGroup";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction";
+import FormControl from "@material-ui/core/FormControl/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
+import RadioGroup from "@material-ui/core/RadioGroup/RadioGroup";
 import CustomizedRadio from "../../General/CustomizedRadio";
 
 interface Props extends WithStyles<typeof styles> {

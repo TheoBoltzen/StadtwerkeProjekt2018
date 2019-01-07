@@ -3,13 +3,13 @@ import "./DevelopmentForms.css";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./DevelopmentForms";
 import { CircularProgress } from "@material-ui/core";
-import IconButton from "@material-ui/core/es/IconButton/IconButton";
+import IconButton from "@material-ui/core/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 import { DevelopmentStepper } from "./DevelopmentStepper";
 import "./DevelopmentFormsComponent.css";
 import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
 import CustomizedButton from "../General/CustomizedButton";
-import Typography from "@material-ui/core/es/Typography/Typography";
+import Typography from "@material-ui/core/Typography/Typography";
 
 export class DevelopmentFormsComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -55,8 +55,6 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
   getContent = visibilityIndex => {
     const { developmentForms, loading } = this.props;
     const { developmenFormId } = this.state;
-
-    //console.log("---------devSheet:", this.props.detailDevForm);
 
     switch (visibilityIndex) {
       case 0:

@@ -1,8 +1,8 @@
-import createStyles from "@material-ui/core/es/styles/createStyles";
+import createStyles from "@material-ui/core/styles/createStyles";
 import { WithStyles } from "@material-ui/core";
-import withStyles from "@material-ui/core/es/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 import * as React from "react";
-import Button from "@material-ui/core/es/Button/Button";
+import Button from "@material-ui/core/Button/Button";
 import classNames from "classnames";
 
 const styles = theme =>
