@@ -7,7 +7,8 @@ import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
 //import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet";
-import Typography from "@material-ui/core/es/Typography/Typography"; //später
+import Typography from "@material-ui/core/es/Typography/Typography";
+import CustomizedButton from "../General/CustomizedButton"; //später
 
 export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -57,16 +58,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loadingTraineeDevSheets ? (
               <div className={"switchRoot"}>
-                <div className={"flexDiv"}>
-                  <Button
-                    variant={"contained"}
-                    color={"primary"}
-                    className={"entwicklungsBogenButton"}
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
                     onClick={e => {
                       this.changeVisibilityIndex(e, "All_DevSheets");
-                    }}>
-                    Finde Entwicklungsbögen
-                  </Button>
+                    }}
+                    text={"Finde Entwicklungsbögen"}
+                  />
                 </div>
                 <div className={"frame center"}>
                   <ListItemTraineeDevs
@@ -110,15 +109,15 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div className={"switchRoot"}>
             {!loading ? (
               <div>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
-                  onClick={e => {
-                    this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}>
-                  Zurück
-                </Button>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
                 <div className={"frame center"}>
                   <ListItem
                     isHeader={true}
@@ -156,15 +155,15 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loading ? (
               <div>
-                <Button
-                  variant={"contained"}
-                  color={"primary"}
-                  className={"entwicklungsBogenButton"}
-                  onClick={e => {
-                    this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}>
-                  Zurück
-                </Button>
+                <div className={"buttonDiv"}>
+                  <div />
+                  <CustomizedButton
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}
+                    text={"Zurück"}
+                  />
+                </div>
                 <FillOutDevelopmentSheet />
               </div>
             ) : (
