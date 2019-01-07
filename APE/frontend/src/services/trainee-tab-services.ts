@@ -10,7 +10,7 @@ export const getAllTraineesService = () => {
   return fetch(`${apiURL}/services/getAllTrainees`, requestOptions).then(handleResponse);
 };
 
-export const getFullDevSheetAsTraineeService = (devSheetId: string, trainerUsername: string) => {
+export const getFullDevSheetAsTraineeService = (devSheetId: number, trainerUsername: string) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),

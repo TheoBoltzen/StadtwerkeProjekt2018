@@ -33,28 +33,28 @@ export const setTraineeDevelopmentSheet = (devSheetID: string) => {
   };
 };
 
-export const getFullDevSheetAsTrainee = (devSheetId: string, trainerUsername: string) => {
+export const getFullDevSheetAsTrainee = (devSheetId: number, trainerUsername: string) => {
   const request = (devSheetId, trainerUsername) => {
     return {
-      type: traineeDevelopmentFormConstants.SETDEVSHEET_REQUEST,
+      type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_REQUEST,
       devSheetId,
       trainerUsername
     };
   };
 
   const success = (devSheet: EmptyDevSheetFetch) => {
-    return { type: traineeDevelopmentFormConstants.SETDEVSHEET_SUCCESS, devSheet };
+    return { type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_SUCCESS, devSheet };
   };
 
   const failure = (error: string) => {
-    return { type: traineeDevelopmentFormConstants.SETDEVSHEET_FAILURE, error };
+    return { type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_FAILURE, error };
   };
 
   return (dispatch: Dispatch) => {
     dispatch(request(devSheetId, trainerUsername));
 
     getFullDevSheetAsTraineeService(devSheetId, trainerUsername).then(
-      () => devSheet => dispatch(success(devSheet)),
+      devSheet => dispatch(success(devSheet)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));

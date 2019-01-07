@@ -13,6 +13,10 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     };
   }
 
+  componentDidMount() {
+    console.log("testsdnfkjsdnlkfnsdlkfjn");
+  }
+
   private handleChange = event => {
     let radioValueArray = this.state.radioValue;
 
@@ -32,6 +36,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
   };
 
   render() {
+    console.log("FullDev: ", this.props.fullDevSheet);
+
     const { radioValue } = this.state;
 
     const TestObject = {
