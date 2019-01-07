@@ -7,14 +7,16 @@ import { AllProps, State } from "./TraineeView";
 import { CircularProgress } from "@material-ui/core";
 //import { DetailviewDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewDevelopmentSheetComponent";
 import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevelopmentSheet";
-import Typography from "@material-ui/core/es/Typography/Typography"; //später
+import Typography from "@material-ui/core/es/Typography/Typography";
+import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet"; //später
 
 export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
 
     this.state = {
-      visibility_index: "All_Trainee_DevSheets"
+      visibility_index: "All_Trainee_DevSheets",
+      developmenFormId: ""
     };
   }
 
@@ -37,6 +39,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     this.setState({ visibility_index: index });
   };
 
+  getDetailView = (e, index, id) => {
+    this.props.getDevSheetDetails(id);
+    this.setState({ visibility_index: index });
+    this.setState({
+      developmenFormId: id
+    });
+  };
+
   doFormatDate = date => {
     //date format from db: 	2018-12-03T12:12:26.000Z
     return new Date(date).toLocaleDateString("de");
@@ -49,6 +59,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
       loadingTraineeDevSheets,
       traineeDevelopmentFormsList
     } = this.props;
+    const { developmenFormId } = this.state;
 
     switch (visibilityIndex) {
       case "All_Trainee_DevSheets":
@@ -134,7 +145,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                         job={devForm.education}
                         date={this.doFormatDate(devForm.createdAt)}
                         onSearchClick={e => {
-                          this.changeVisibilityIndex(e, "Display_one_Detail_DevSheet");
+                          this.getDetailView(e, "Display_one_Detail_DevSheet", devForm.id);
                         }}
                         onAssignMeClick={() => this.setAssignmentDevSheet(devForm.id)}
                         isTrainee={true}
@@ -190,6 +201,11 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                   Zurück
                 </Button>
                 {/*<DetailviewDevelopmentSheetComponent />*/}
+                <DetailViewDevelopmentSheet
+                  id={developmenFormId}
+                  devSheetDetail={this.props.detailDevForm}
+                  loading={this.props.loadingDetail}
+                />
               </div>
             ) : (
               <div>
