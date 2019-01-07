@@ -49,6 +49,8 @@ export interface ContentDevelopmentFormCreate {
   readonly children?: ContentDevelopmentFormCreate[];
   readonly goalCross?: number;
   readonly ynAnswer?: boolean;
+  readonly trainerassesment?: number;
+  readonly traineeassesment?: number;
 }
 
 export interface EmptyDevSheetResult {
@@ -56,6 +58,8 @@ export interface EmptyDevSheetResult {
   readonly version: number;
   readonly department: string;
   readonly education: string;
+  readonly trainer?: string;
+  readonly trainee?: string;
   readonly content: ContentDevelopmentFormCreate[];
 }
 
