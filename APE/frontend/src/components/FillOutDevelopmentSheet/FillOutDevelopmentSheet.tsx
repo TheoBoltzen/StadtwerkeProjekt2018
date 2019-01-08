@@ -1,5 +1,5 @@
 import { FillDevelopmentSheetComponent } from "./FillOutDevelopmentSheetComponent";
-import { EmptyDevSheetFetch } from "../../types";
+import { FullDevSheetFetch } from "../../types";
 
 export interface State {
   radioValue: { name: string; value: string }[];
@@ -7,7 +7,7 @@ export interface State {
 
 interface Props {
   readonly loading: boolean;
-  readonly fullDevSheet: EmptyDevSheetFetch;
+  readonly fullDevSheet: FullDevSheetFetch;
 }
 
 export type AllProps = Props;

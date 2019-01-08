@@ -1,5 +1,10 @@
 import { TraineeViewComponent } from "./TraineeViewComponent";
-import { DevelopmentForm, DevelopmentFormsListTrainee, EmptyDevSheetFetch } from "../../types";
+import {
+  DevelopmentForm,
+  DevelopmentFormsListTrainee,
+  EmptyDevSheetFetch,
+  FullDevSheetFetch
+} from "../../types";
 import { ApplicationState } from "../../redux/reducers";
 import { getAll, getDetailDevelopmentSheet } from "../../redux/actions/development-forms-actions";
 import { connect } from "react-redux";
@@ -25,7 +30,7 @@ interface ReduxStateProps {
   readonly detailDevForm: EmptyDevSheetFetch;
   readonly user: any;
   readonly traineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
-  readonly fullDevSheet: EmptyDevSheetFetch;
+  readonly fullDevSheet: FullDevSheetFetch;
   readonly loadingFullDevSheet: boolean;
 }
 

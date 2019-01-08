@@ -1,14 +1,14 @@
 import { Action } from "redux";
 import { traineeDevelopmentFormConstants } from "../../constants";
-import { EmptyDevSheetFetch } from "../../types";
+import { FullDevSheetFetch } from "../../types";
 
 interface TraineeDevelopmentFormAction extends Action {
-  readonly devSheet: EmptyDevSheetFetch;
+  readonly devSheet: FullDevSheetFetch;
 }
 
 export interface TraineeDevelopmentFormsReducer {
   readonly loading: boolean;
-  readonly devSheet: EmptyDevSheetFetch;
+  readonly devSheet: FullDevSheetFetch;
 }
 
 const initialState: TraineeDevelopmentFormsReducer = {
@@ -19,6 +19,8 @@ const initialState: TraineeDevelopmentFormsReducer = {
       department: "",
       education: "",
       version: 0,
+      trainee: "",
+      trainer: "",
       content: []
     }
   }

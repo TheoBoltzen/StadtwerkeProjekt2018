@@ -2,7 +2,7 @@ import { traineeDevelopmentFormConstants } from "../../constants";
 import { Dispatch } from "redux";
 import { errorAlert, successAlert } from "./alert";
 import { getFullDevSheetAsTraineeService, setDevelopmentSheetService } from "../../services";
-import { EmptyDevSheetFetch } from "../../types";
+import { FullDevSheetFetch } from "../../types";
 
 export const setTraineeDevelopmentSheet = (devSheetID: string) => {
   const request = devSheetID => {
@@ -42,7 +42,7 @@ export const getFullDevSheetAsTrainee = (devSheetId: number, trainerUsername: st
     };
   };
 
-  const success = (devSheet: EmptyDevSheetFetch) => {
+  const success = (devSheet: FullDevSheetFetch) => {
     return { type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_SUCCESS, devSheet };
   };
 

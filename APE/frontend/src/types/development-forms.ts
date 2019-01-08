@@ -66,3 +66,26 @@ export interface EmptyDevSheetResult {
 export interface EmptyDevSheetFetch {
   readonly result: EmptyDevSheetResult;
 }
+
+export interface FullDevSheetFetch {
+  readonly result: FullDevSheetResult;
+}
+
+export interface FullDevSheetResult {
+  readonly devSheetid: string;
+  readonly version: number;
+  readonly department: string;
+  readonly education: string;
+  readonly trainer: string;
+  readonly trainee: string;
+  readonly content: ConentFullDevSheet[];
+}
+
+export interface ConentFullDevSheet {
+  readonly name: string;
+  readonly children: ConentFullDevSheet[];
+  readonly goalCross?: number;
+  readonly ynAnswer?: boolean;
+  readonly trainerassesment?: number;
+  readonly traineeassesment?: number;
+}
