@@ -7,7 +7,7 @@ export const authHeader = () => {
 
   if (user && user.token) {
     const token = "Bearer " + user.token;
-    return { "Content-Type": "application/json", Authorization: token };
+    return { "Content-Type": "application/json", Authorization: token, Pragma: "no-cache" };
   } else {
     return {};
   }

@@ -1,6 +1,6 @@
 import * as React from "react";
-import withStyles from "@material-ui/core/es/styles/withStyles";
-import InputBase from "@material-ui/core/es/InputBase/InputBase";
+import withStyles from "@material-ui/core/styles/withStyles";
+import InputBase from "@material-ui/core/InputBase/InputBase";
 import { WithStyles, createStyles } from "@material-ui/core";
 
 const styles = theme =>
@@ -23,7 +23,7 @@ const styles = theme =>
       transition: theme.transitions.create(["border-color", "box-shadow"]),
       fontFamily: ["Roboto"].join(","),
       "&:focus": {
-        borderColor: "#00a8e1",
+        borderColor: "#00beff",
         boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
       }
     },

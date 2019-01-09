@@ -1,11 +1,12 @@
 import { traineeDevelopmentFormConstants } from "../../constants";
 import { Dispatch } from "redux";
-import { errorAlert } from "./alert";
-import { setDevelopmentSheet } from "../../services";
+import { errorAlert, successAlert } from "./alert";
+import { getFullDevSheetAsTraineeService, setDevelopmentSheetService } from "../../services";
+import { FullDevSheetFetch } from "../../types";
 
-export const setTraineeDevelopmentSheet = (username: string, devSheetID: string) => {
-  const request = (username, devSheetID) => {
-    return { type: traineeDevelopmentFormConstants.SETDEVSHEET_REQUEST, username, devSheetID }; //
+export const setTraineeDevelopmentSheet = (devSheetID: string) => {
+  const request = devSheetID => {
+    return { type: traineeDevelopmentFormConstants.SETDEVSHEET_REQUEST, devSheetID }; //
   };
 
   const success = () => {
@@ -17,10 +18,43 @@ export const setTraineeDevelopmentSheet = (username: string, devSheetID: string)
   };
 
   return (dispatch: Dispatch) => {
-    dispatch(request(username, devSheetID));
+    dispatch(request(devSheetID));
 
-    setDevelopmentSheet(username, devSheetID).then(
-      () => dispatch(success()),
+    setDevelopmentSheetService(devSheetID).then(
+      () => {
+        dispatch(success());
+        dispatch(successAlert("Bogen erfolgreich zugewiesen"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const getFullDevSheetAsTrainee = (devSheetId: number, trainerUsername: string) => {
+  const request = (devSheetId, trainerUsername) => {
+    return {
+      type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_REQUEST,
+      devSheetId,
+      trainerUsername
+    };
+  };
+
+  const success = (devSheet: FullDevSheetFetch) => {
+    return { type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_SUCCESS, devSheet };
+  };
+
+  const failure = (error: string) => {
+    return { type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request(devSheetId, trainerUsername));
+
+    getFullDevSheetAsTraineeService(devSheetId, trainerUsername).then(
+      devSheet => dispatch(success(devSheet)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));

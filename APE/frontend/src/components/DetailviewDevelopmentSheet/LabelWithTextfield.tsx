@@ -1,19 +1,18 @@
 import * as React from "react";
 import "./LabelWithTextfield.css";
 import { TextField } from "@material-ui/core";
-import { createStyles, WithStyles } from "@material-ui/core/es";
-import withStyles from "@material-ui/core/es/styles/withStyles";
-import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
-import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
+import { createStyles, WithStyles } from "@material-ui/core";
+import withStyles from "@material-ui/core/styles/withStyles";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
-const styles = theme =>
-  createStyles({
-    margin: {
-      margin: theme.spacing.unit,
-      backgroundColor: "white",
-      width: "370px"
-    }
-  });
+const styles = createStyles({
+  margin: {
+    margin: "16px",
+    backgroundColor: "white",
+    width: "370px"
+  }
+});
 
 const theme = createMuiTheme({
   palette: {
