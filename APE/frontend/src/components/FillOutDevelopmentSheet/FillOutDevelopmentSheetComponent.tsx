@@ -139,7 +139,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
               ))}
             </div>
           ))}
-          <CustomizedButton onClick={this.setAssessmentsTrainee} text={"Zurück"} />
+          <CustomizedButton onClick={this.setAssessmentsTrainee} text={"Speichern"} />
         </div>
       </React.Fragment>
     );
