@@ -1,5 +1,5 @@
 import { Action } from "redux";
-import { trainerDevelopmentFormConstants, traineeDevelopmentFormConstants } from "../../constants";
+import { assessmentsConstants } from "../../constants";
 
 interface AssessmentsFormAction extends Action {}
 
@@ -9,17 +9,17 @@ const initialState: AssessmentsReducer = {};
 
 export const trainerAssessmentReducer = (state = initialState, action: AssessmentsFormAction) => {
   switch (action.type) {
-    case trainerDevelopmentFormConstants.SETDASSESSMENT_REQUEST:
+    case assessmentsConstants.SETDASSESSMENT_TRAINER_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case trainerDevelopmentFormConstants.SETDASSESSMENT_SUCCESS:
+    case assessmentsConstants.SETDASSESSMENT_TRAINER_SUCCESS:
       return {
         ...state,
         loading: false
       };
-    case trainerDevelopmentFormConstants.SETDASSESSMENT_FAILURE:
+    case assessmentsConstants.SETDASSESSMENT_TRAINER_FAILURE:
       return {
         ...state,
         loading: false
@@ -32,17 +32,17 @@ export const trainerAssessmentReducer = (state = initialState, action: Assessmen
 
 export const traineeAssessmentReducer = (state = initialState, action: AssessmentsFormAction) => {
   switch (action.type) {
-    case traineeDevelopmentFormConstants.SETDASSESSMENT_REQUEST:
+    case assessmentsConstants.SETDASSESSMENT_TRAINEE_REQUEST:
       return {
         ...state,
         loading: true
       };
-    case traineeDevelopmentFormConstants.SETDASSESSMENT_SUCCESS:
+    case assessmentsConstants.SETDASSESSMENT_TRAINEE_SUCCESS:
       return {
         ...state,
         loading: false
       };
-    case traineeDevelopmentFormConstants.SETDASSESSMENT_FAILURE:
+    case assessmentsConstants.SETDASSESSMENT_TRAINEE_FAILURE:
       return {
         ...state,
         loading: false

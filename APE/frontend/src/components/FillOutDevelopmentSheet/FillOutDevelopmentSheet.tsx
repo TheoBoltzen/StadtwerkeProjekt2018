@@ -1,7 +1,7 @@
 import { FillDevelopmentSheetComponent } from "./FillOutDevelopmentSheetComponent";
 import { FullDevSheetFetch, TraineesAssessments } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
-import { setTraineeAssessments } from "../../redux/actions";
+import { setTraineeAssessments } from "../../redux/actions"; //setTrainerAssessments
 import { connect } from "react-redux";
 
 export interface State {
@@ -30,11 +30,6 @@ const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
     setTraineeAssessment: traineeAssessments => dispatch(setTraineeAssessments(traineeAssessments))
   };
 };
-
-/*
-const connectedFillOutDevelopmentSheet = FillDevelopmentSheetComponent;
-export { connectedFillOutDevelopmentSheet as FillOutDevelopmentSheet };
-*/
 
 const connectedFillOutDevelopmentSheet = connect<ReduxStateProps, ReduxDispatchProps, Props>(
   mapStateToProps,

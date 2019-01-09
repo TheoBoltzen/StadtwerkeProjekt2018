@@ -88,12 +88,12 @@ async function associate(devSheetParam, token) {
 }
 
 async function setTrainerAssessment(devSheetParam) {
-  devSheetParam = devSheetParam.traineeAssessments;
+  devSheetParam = devSheetParam.trainerAssessments;
 
   for (let i = 0; i < devSheetParam.length; i++) {
     await UserDevSheetAsso.update(
       {
-        assessmentTRAINER: devSheetParam[i].assessmentTRAINER
+        assessmentTRAINER: devSheetParam[i].trainerAssessment
       },
       {
         where: {

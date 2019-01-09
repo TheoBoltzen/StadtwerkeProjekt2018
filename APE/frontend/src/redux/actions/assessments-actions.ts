@@ -1,4 +1,4 @@
-import { traineeDevelopmentFormConstants, trainerDevelopmentFormConstants } from "../../constants";
+import { assessmentsConstants } from "../../constants";
 import { Dispatch } from "redux";
 import { errorAlert, successAlert } from "./alert";
 import { setTraineeAssessmentService, setTrainerAssessmentService } from "../../services";
@@ -7,17 +7,17 @@ import { TraineesAssessments, TrainerAssessments } from "../../types";
 export const setTraineeAssessments = (traineeAssessments: TraineesAssessments[]) => {
   const request = traineeAssessments => {
     return {
-      type: traineeDevelopmentFormConstants.SETDASSESSMENT_REQUEST,
+      type: assessmentsConstants.SETDASSESSMENT_TRAINEE_REQUEST,
       traineeAssessments
     };
   };
 
   const success = () => {
-    return { type: traineeDevelopmentFormConstants.SETDASSESSMENT_SUCCESS };
+    return { type: assessmentsConstants.SETDASSESSMENT_TRAINEE_SUCCESS };
   };
 
   const failure = (error: string) => {
-    return { type: traineeDevelopmentFormConstants.SETDASSESSMENT_FAILURE, error };
+    return { type: assessmentsConstants.SETDASSESSMENT_TRAINEE_FAILURE, error };
   };
 
   return (dispatch: Dispatch) => {
@@ -39,17 +39,17 @@ export const setTraineeAssessments = (traineeAssessments: TraineesAssessments[])
 export const setTrainerAssessments = (trainerAssessments: TrainerAssessments[]) => {
   const request = trainerAssessments => {
     return {
-      type: trainerDevelopmentFormConstants.SETDASSESSMENT_REQUEST,
+      type: assessmentsConstants.SETDASSESSMENT_TRAINER_REQUEST,
       trainerAssessments
     };
   };
 
   const success = () => {
-    return { type: trainerDevelopmentFormConstants.SETDASSESSMENT_SUCCESS };
+    return { type: assessmentsConstants.SETDASSESSMENT_TRAINER_SUCCESS };
   };
 
   const failure = (error: string) => {
-    return { type: trainerDevelopmentFormConstants.SETDASSESSMENT_FAILURE, error };
+    return { type: assessmentsConstants.SETDASSESSMENT_TRAINER_FAILURE, error };
   };
 
   return (dispatch: Dispatch) => {
