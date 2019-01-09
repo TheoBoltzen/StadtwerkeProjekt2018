@@ -9,15 +9,15 @@ import {
 } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
 import * as React from "react";
-import Tooltip from "@material-ui/core/es/Tooltip/Tooltip";
+import Tooltip from "@material-ui/core/Tooltip/Tooltip";
 import { styles } from "../mUIstyles";
 import { Competence } from "./CompetenceCreation";
 import AddIcon from "@material-ui/icons/Add";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import Collapse from "@material-ui/core/es/Collapse/Collapse";
-import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
-import createMuiTheme from "@material-ui/core/es/styles/createMuiTheme";
-import withStyles from "@material-ui/core/es/styles/withStyles";
+import Collapse from "@material-ui/core/Collapse/Collapse";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import withStyles from "@material-ui/core/styles/withStyles";
 import "./MainCategoryCreation.css";
 import { SubCategory } from "./SubCategoryCreation";
 
@@ -43,7 +43,7 @@ const theme = createMuiTheme({
       root: {
         color: "#1A223A !important",
         "&$checked": {
-          color: "#00a8e1 !important"
+          color: "#00beff !important"
         }
       },
       checked: {}

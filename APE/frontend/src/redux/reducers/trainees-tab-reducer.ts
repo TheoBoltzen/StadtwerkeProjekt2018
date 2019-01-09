@@ -1,19 +1,22 @@
 import { Action } from "redux";
-import { Trainee } from "../../types";
-import { traineeTabConstants } from "../../constants";
+import { ConnectedDevSheetFetch, Trainee } from "../../types";
+import { traineeTabConstants, trainerDevelopmentFormConstants } from "../../constants";
 
 interface ActionTraineesTabReducer extends Action {
   trainees: Trainee[];
+  connectedDevSheets: ConnectedDevSheetFetch[];
 }
 
 export interface TraineesTabReducer {
   readonly loading: boolean;
   readonly trainees: Trainee[];
+  readonly connectedDevSheets: ConnectedDevSheetFetch[];
 }
 
 const initialState: TraineesTabReducer = {
   loading: false,
-  trainees: []
+  trainees: [],
+  connectedDevSheets: []
 };
 
 export const traineeTabReducer = (state = initialState, action: ActionTraineesTabReducer) => {
@@ -25,6 +28,7 @@ export const traineeTabReducer = (state = initialState, action: ActionTraineesTa
       };
     case traineeTabConstants.GETALL_SUCCESS:
       return {
+        ...state,
         loading: false,
         trainees: action.trainees
       };
@@ -32,6 +36,38 @@ export const traineeTabReducer = (state = initialState, action: ActionTraineesTa
       return {
         ...state
       };
+
+    case trainerDevelopmentFormConstants.GETALL_CONNECTEDDEVSHEETS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case trainerDevelopmentFormConstants.GETALL_CONNECTEDDEVSHEETS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        connectedDevSheets: action.connectedDevSheets
+      };
+    case trainerDevelopmentFormConstants.GETALL_CONNECTEDDEVSHEETS_FAILURE:
+      return {
+        ...state
+      };
+
+    case trainerDevelopmentFormConstants.SETDEVSHEET_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case trainerDevelopmentFormConstants.SETDEVSHEET_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+    case trainerDevelopmentFormConstants.SETDEVSHEET_FAILURE:
+      return {
+        ...state
+      };
+
     default:
       return state;
   }

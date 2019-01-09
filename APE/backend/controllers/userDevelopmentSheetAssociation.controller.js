@@ -4,7 +4,7 @@ const router = express.Router();
 
 exports.associateTraineeDevSheet = (req, res, next) => {
   userdevSheetServiceAsso
-    .associate(req.body)
+    .associate(req.body, req.headers.authorization.split("Bearer ")[1])
     .then(() => res.json({}))
     .catch(err => next(err));
 };
@@ -18,7 +18,10 @@ exports.setTrainerAssessment = (req, res, next) => {
 
 exports.setTraineeAssessment = (req, res, next) => {
   userdevSheetServiceAsso
-    .setTraineeAssessment(req.body)
+    .setTraineeAssessment(
+      req.body,
+      req.headers.authorization.split("Bearer ")[1]
+    )
     .then(() => res.json({}))
     .catch(err => next(err));
 };

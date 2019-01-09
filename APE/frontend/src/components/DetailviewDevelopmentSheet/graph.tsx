@@ -50,7 +50,7 @@ export const Graph = (props: Props) => {
             activeDot={false}
             isAnimationActive={false}
             stroke="#FFFFFF"
-            opacity="0"
+            opacity="1"
             legendType="none"
           />
           <Line
@@ -93,7 +93,7 @@ export const Graph = (props: Props) => {
             opacity="0"
             legendType="none"
           />
-          <Line dataKey="Ist" stroke="orange" strokeWidth={5} dot={{ strokeWidth: 5, r: 4 }} />
+          {/*<Line dataKey="Ist" stroke="orange" strokeWidth={5} dot={{ strokeWidth: 5, r: 4 }} />*/}
           <Line dataKey="Soll" stroke="#8884d8" strokeWidth={2} dot={{ strokeWidth: 2, r: 4 }} />
         </LineChart>
       </div>

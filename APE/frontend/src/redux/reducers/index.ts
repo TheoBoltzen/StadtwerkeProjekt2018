@@ -13,6 +13,10 @@ import {
 } from "./trainee-developmentForm-reducer";
 import { TraineesTabReducer, traineeTabReducer } from "./trainees-tab-reducer";
 import { registerUserReducer, RegisterUserReducer } from "./register-reducer";
+import {
+  TraineeDevelopmentFormsListReducer,
+  traineeDevelopmentFormsListReducer
+} from "./trainee-developmentFormsList-reducer";
 
 export interface ApplicationState {
   authenticationReducer: AuthenticationReducer;
@@ -22,6 +26,7 @@ export interface ApplicationState {
   singleDevelopmentFormReducer: SingleDevelopmentFormReducer;
   traineeDevelopmentFormsReducer: TraineeDevelopmentFormsReducer;
   traineeTabReducer: TraineesTabReducer;
+  traineeDevelopmentFormsListReducer: TraineeDevelopmentFormsListReducer;
   registerUserReducer: RegisterUserReducer;
 }
 
@@ -33,6 +38,7 @@ const rootReducer = combineReducers<ApplicationState>({
   singleDevelopmentFormReducer,
   traineeDevelopmentFormsReducer,
   traineeTabReducer,
+  traineeDevelopmentFormsListReducer,
   registerUserReducer
 });
 
