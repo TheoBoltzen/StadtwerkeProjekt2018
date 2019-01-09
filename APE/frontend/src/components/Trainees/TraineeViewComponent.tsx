@@ -192,7 +192,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                   <div />
                   <CustomizedButton
                     onClick={e => {
-                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                      this.changeVisibilityIndex(e, "All_DevSheets");
                     }}
                     text={"Zurück"}
                   />
