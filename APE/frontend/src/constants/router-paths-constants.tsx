@@ -1,6 +1,6 @@
 export const RouterPathsConstants = {
   userAdministration: "/benutzerverwaltung",
   developmentForms: "/entwicklungsboegen",
-  trainees: "/auszubildende",
+  trainees: "/zuweisungen",
   traineeDevelopmentForms: "/meine-boegen"
 };
