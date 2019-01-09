@@ -1,6 +1,5 @@
 import { authHeader, handleResponse } from "./user-services";
 import { apiURL } from "../constants";
-import { TrainerAssessments } from "../types";
 
 export const setTrainerToTraineeDevelopmentSheetService = (
   traineeUsername: string,
@@ -24,14 +23,4 @@ export const getAllConnectedDevelopmentSheetsService = () => {
   return fetch(`${apiURL}/services/getAllUserDevelopmentSheetsForList`, requestOptions).then(
     handleResponse
   );
-};
-
-export const setTrainerAssessmentService = (trainerAssessments: TrainerAssessments[]) => {
-  const requestOptions = {
-    method: "POST",
-    headers: authHeader(),
-    body: JSON.stringify({ trainerAssessments: trainerAssessments })
-  } as RequestInit;
-
-  return fetch(`${apiURL}/services/setTrainerAssessment`, requestOptions).then(handleResponse);
 };

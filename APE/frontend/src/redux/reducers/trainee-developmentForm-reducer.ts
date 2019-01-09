@@ -31,22 +31,6 @@ export const traineeDevelopmentFormsReducer = (
   action: TraineeDevelopmentFormAction
 ) => {
   switch (action.type) {
-    case traineeDevelopmentFormConstants.SETDASSESSMENT_REQUEST:
-      return {
-        ...state,
-        loading: true
-      };
-    case traineeDevelopmentFormConstants.SETDASSESSMENT_SUCCESS:
-      return {
-        ...state,
-        loading: false
-      };
-    case traineeDevelopmentFormConstants.SETDASSESSMENT_FAILURE:
-      return {
-        ...state,
-        loading: false
-      };
-
     case traineeDevelopmentFormConstants.SETDEVSHEET_REQUEST:
       return {
         ...state,
