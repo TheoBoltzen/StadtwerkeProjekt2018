@@ -3,7 +3,8 @@ import {
   DevelopmentForm,
   DevelopmentFormsListTrainee,
   EmptyDevSheetFetch,
-  FullDevSheetFetch
+  FullDevSheetFetch,
+  TraineesAssessments
 } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
 import { getAll, getDetailDevelopmentSheet } from "../../redux/actions/development-forms-actions";
@@ -11,7 +12,8 @@ import { connect } from "react-redux";
 import {
   setTraineeDevelopmentSheet,
   getTraineeDevelopmentSheetList,
-  getFullDevSheetAsTrainee
+  getFullDevSheetAsTrainee,
+  setTraineeAssessments
 } from "../../redux/actions";
 //import { getTraineeDevelopmentSheetList } from "../../redux/actions";
 
@@ -40,6 +42,10 @@ interface ReduxDispatchProps {
   readonly getDevFormsListTrainee: () => void;
   readonly getFullDevSheet: (devSheetId: number, trainerUsername: string) => void;
   readonly getDevSheetDetails: (id) => void;
+  readonly setTraineeAssessment: (
+    devSheetID: string,
+    traineeAssessments: TraineesAssessments[]
+  ) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
@@ -73,7 +79,9 @@ const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
     setAssignment: devSheetID => dispatch(setTraineeDevelopmentSheet(devSheetID)),
     getFullDevSheet: (devSheetId, trainerUsername) =>
       dispatch(getFullDevSheetAsTrainee(devSheetId, trainerUsername)),
-    getDevSheetDetails: id => dispatch(getDetailDevelopmentSheet(id))
+    getDevSheetDetails: id => dispatch(getDetailDevelopmentSheet(id)),
+    setTraineeAssessment: (devSheetID, traineeAssessments) =>
+      dispatch(setTraineeAssessments(devSheetID, traineeAssessments))
   };
 };
 
