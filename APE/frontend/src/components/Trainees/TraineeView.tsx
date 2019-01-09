@@ -17,7 +17,7 @@ import {
 
 export interface State {
   visibility_index: string;
-  developmenFormId: string;
+  developmentFormId: string;
 }
 
 interface Props {}
