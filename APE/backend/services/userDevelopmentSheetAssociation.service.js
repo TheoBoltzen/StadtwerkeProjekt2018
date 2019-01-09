@@ -49,9 +49,7 @@ async function associate(devSheetParam, token) {
         username: username
       };
 
-      try {
-        await UserDevSheetService._create(Data);
-      } catch {}
+      await UserDevSheetService._create(Data);
 
       let latest = await UserDevSheet.findOne({
         attributes: [[Sequelize.fn("max", Sequelize.col("id")), "id"]]
@@ -59,10 +57,10 @@ async function associate(devSheetParam, token) {
 
       let userdevId;
 
-      if (latest == null) {
+      if (latest == null || latest == {}) {
         userdevId = 1;
       } else {
-        userdevId = latest.id;
+        userdevId = latest.id + 1;
       }
 
       let userToDevSheet = [];
