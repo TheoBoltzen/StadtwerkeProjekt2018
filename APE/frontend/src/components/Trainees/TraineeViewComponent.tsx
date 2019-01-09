@@ -51,6 +51,11 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     return new Date(date).toLocaleDateString("de");
   };
 
+  handleFillOutClick = (e, devSheetId, trainerUsername) => {
+    this.props.getFullDevSheet(devSheetId, trainerUsername);
+    this.changeVisibilityIndex(e, "Fillout_DevSheet");
+  };
+
   getContent = visibilityIndex => {
     const {
       developmentForms,
@@ -94,11 +99,11 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                         education={devForm.DevelopmentSheet.education}
                         updatedAt={this.doFormatDate(devForm.updatedAt)}
                         status={devForm.status}
-                        trainerUsername={devForm.trainerUsername}
+                        trainerUsername={devForm.TrainerUsername}
                         //TO DO
                         onSearchClick={this.handleSearchClickTraineeDevSheet}
                         onEditClick={e => {
-                          this.changeVisibilityIndex(e, "Fillout_DevSheet");
+                          this.handleFillOutClick(e, devForm.id, devForm.TrainerUsername);
                         }}
                       />
                     );
@@ -173,7 +178,10 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     text={"Zurück"}
                   />
                 </div>
-                <FillOutDevelopmentSheet />
+                <FillOutDevelopmentSheet
+                  fullDevSheet={this.props.fullDevSheet}
+                  loading={this.props.loadingFullDevSheet}
+                />
               </div>
             ) : (
               <div>

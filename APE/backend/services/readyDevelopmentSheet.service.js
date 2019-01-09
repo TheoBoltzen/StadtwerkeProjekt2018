@@ -354,7 +354,7 @@ async function getfullByIdTrainer(devsheetparam, token) {
       TraineeUsername: devsheetparam.trainee,
       TrainerUsername: username
     },
-    attributes: ["id"],
+    attributes: ["id", "status"],
     required: true
   });
   let userasso = await db.userDevelopmentSheetAssociation.findAll({
@@ -414,6 +414,7 @@ async function getfullByIdTrainer(devsheetparam, token) {
   let content = new Array();
   let info = {
     devSheetid: result[0].DevelopmentSheetId,
+    status: userid.status,
     version: result[0].version,
     department: devresult[0].DevelopmentSheet.department,
     education: devresult[0].DevelopmentSheet.education,
@@ -538,7 +539,7 @@ async function getfullByIdTrainee(devsheetparam, token) {
       TraineeUsername: username,
       TrainerUsername: devsheetparam.trainer
     },
-    attributes: ["id"],
+    attributes: ["id", "status"],
     required: true
   });
   console.log("############################ID:", userid.id);
@@ -598,6 +599,7 @@ async function getfullByIdTrainee(devsheetparam, token) {
   let content = new Array();
   let info = {
     devSheetid: result[0].DevelopmentSheetId,
+    status: userid.status,
     version: result[0].version,
     department: devresult[0].DevelopmentSheet.department,
     education: devresult[0].DevelopmentSheet.education,
