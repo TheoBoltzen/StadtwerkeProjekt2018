@@ -2,6 +2,9 @@ import { ApplicationState } from "../../redux/reducers";
 import { createUser } from "../../redux/actions";
 import { connect } from "react-redux";
 import { AddUserModalComponent } from "./AddUserModalComponent";
+import { WithStyles } from "@material-ui/core";
+import { styles } from "../UserAdministration/AddUserModalComponent";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 export interface State {
   readonly username: string;
@@ -11,7 +14,7 @@ export interface State {
   readonly lastname: string;
 }
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   readonly closeDialog: () => void;
 }
 
@@ -45,9 +48,11 @@ const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   };
 };
 
-const connectedAddUserModal = connect<ReduxStateProps, ReduxDispatchProps, Props>(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddUserModalComponent);
+const connectedAddUserModal = withStyles(styles)(
+  connect<ReduxStateProps, ReduxDispatchProps, Props>(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddUserModalComponent)
+);
 
 export { connectedAddUserModal as AddUserModal };

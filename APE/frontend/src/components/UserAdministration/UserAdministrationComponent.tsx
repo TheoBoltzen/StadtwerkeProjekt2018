@@ -1,9 +1,10 @@
 import * as React from "react";
 import "./UserAdministrationComponent.css";
-import { Button, CircularProgress, Dialog } from "@material-ui/core";
+import { CircularProgress, Dialog } from "@material-ui/core";
 import { ListItem } from "./ListItem";
 import { AllProps, State } from "./UserAdministration";
 import { AddUserModal } from "./AddUserModal";
+import CustomizedButton from "../General/CustomizedButton";
 
 export class UserAdministrationComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -47,13 +48,7 @@ export class UserAdministrationComponent extends React.Component<AllProps, State
 
         <div className={"add-user-button-container"}>
           <div />
-          <Button
-            variant={"contained"}
-            color={"primary"}
-            className={"add-user-button"}
-            onClick={this.openAddUserModal}>
-            Benutzer anlegen
-          </Button>
+          <CustomizedButton onClick={this.openAddUserModal} text={"Benutzer anlegen"} />
         </div>
 
         <div className={"frame center"}>
