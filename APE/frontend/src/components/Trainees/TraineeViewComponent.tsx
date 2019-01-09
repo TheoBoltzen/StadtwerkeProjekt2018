@@ -31,7 +31,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
   componentDidMount() {
     this.props.getAllDevForms();
-    this.props.getDevFormsListTrainee(this.props.user.username);
+    this.props.getDevFormsListTrainee();
   }
 
   changeVisibilityIndex = (e, index) => {
