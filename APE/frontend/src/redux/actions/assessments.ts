@@ -4,16 +4,12 @@ import { errorAlert, successAlert } from "./alert";
 import { setTraineeAssessmentService } from "../../services";
 import { TraineesAssessments } from "../../types";
 
-export const setTraineeAssessments = (
-  devSheetID: string,
-  traineeAssessments: TraineesAssessments[]
-) => {
-  const request = (devSheetID, traineeAssessments) => {
+export const setTraineeAssessments = (traineeAssessments: TraineesAssessments[]) => {
+  const request = traineeAssessments => {
     return {
       type: traineeDevelopmentFormConstants.SETDASSESSMENT_REQUEST,
-      devSheetID,
       traineeAssessments
-    }; //
+    };
   };
 
   const success = () => {
@@ -25,9 +21,9 @@ export const setTraineeAssessments = (
   };
 
   return (dispatch: Dispatch) => {
-    dispatch(request(devSheetID, traineeAssessments));
+    dispatch(request(traineeAssessments));
 
-    setTraineeAssessmentService(devSheetID, traineeAssessments).then(
+    setTraineeAssessmentService(traineeAssessments).then(
       () => {
         dispatch(success());
         dispatch(successAlert("Werte erfolgreich zugewiesen"));

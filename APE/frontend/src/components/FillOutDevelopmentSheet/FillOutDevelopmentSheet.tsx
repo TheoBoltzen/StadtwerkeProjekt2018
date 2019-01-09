@@ -1,8 +1,11 @@
 import { FillDevelopmentSheetComponent } from "./FillOutDevelopmentSheetComponent";
-import { FullDevSheetFetch } from "../../types";
+import { FullDevSheetFetch, TraineesAssessments } from "../../types";
+import { ApplicationState } from "../../redux/reducers";
+import { setTraineeAssessments } from "../../redux/actions";
+import { connect } from "react-redux";
 
 export interface State {
-  radioValue: { name: string; value: string }[];
+  radioValue: { name: string; value: string; id: number }[];
 }
 
 interface Props {
@@ -10,7 +13,32 @@ interface Props {
   readonly fullDevSheet: FullDevSheetFetch;
 }
 
-export type AllProps = Props;
+interface ReduxStateProps {}
 
+interface ReduxDispatchProps {
+  readonly setTraineeAssessment: (traineeAssessments: TraineesAssessments[]) => void;
+}
+
+export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
+
+const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
+  return {
+    setTraineeAssessment: traineeAssessments => dispatch(setTraineeAssessments(traineeAssessments))
+  };
+};
+
+/*
 const connectedFillOutDevelopmentSheet = FillDevelopmentSheetComponent;
+export { connectedFillOutDevelopmentSheet as FillOutDevelopmentSheet };
+*/
+
+const connectedFillOutDevelopmentSheet = connect<ReduxStateProps, ReduxDispatchProps, Props>(
+  mapStateToProps,
+  mapDispatchToProps
+)(FillDevelopmentSheetComponent);
+
 export { connectedFillOutDevelopmentSheet as FillOutDevelopmentSheet };

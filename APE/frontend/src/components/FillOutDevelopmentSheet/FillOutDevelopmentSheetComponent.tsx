@@ -4,6 +4,7 @@ import { AllProps, State } from "./FillOutDevelopmentSheet";
 import "./FillOutDevelopmentSheetComponent.css";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 import CustomizedRadio from "../General/CustomizedRadio";
+import CustomizedButton from "../General/CustomizedButton";
 
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -13,7 +14,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     };
   }
 
-  private handleChange = event => {
+  private handleChange = (event, id) => {
     let radioValueArray = this.state.radioValue;
 
     if (radioValueArray.find(r => r.name === event.target.name)) {
@@ -22,7 +23,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     } else {
       radioValueArray = [
         ...radioValueArray,
-        { name: event.target.name, value: event.target.value }
+        { name: event.target.name, value: event.target.value, id: id }
       ];
     }
 
@@ -31,8 +32,24 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     });
   };
 
+  private setAssessmentsTrainee = () => {
+    let arr = [] as any;
+
+    this.state.radioValue.map(r => {
+      const assessementObj = {
+        id: r.id,
+        traineeAssessment: r.value.toString()
+      };
+
+      arr.push(assessementObj);
+    });
+
+    this.props.setTraineeAssessment(arr);
+  };
+
   render() {
     console.log("FullDev: ", this.props.fullDevSheet.result);
+    console.log("state: ", this.state);
 
     const { radioValue } = this.state;
     const { fullDevSheet, loading } = this.props;
@@ -76,9 +93,10 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                         <div className={"criteria-container"} key={criteria.name}>
                           <legend className={"criteria-text"}>{criteria.name}</legend>
                           <FormControl component={"fieldset"}>
+                            {console.log("id: ", criteria.id.toString())}
                             <RadioGroup
                               name={criteria.name}
-                              onChange={this.handleChange}
+                              onChange={event => this.handleChange(event, criteria.id)}
                               value={
                                 radioValue.find(r => r.name === criteria.name)
                                   ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
@@ -121,6 +139,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
               ))}
             </div>
           ))}
+          <CustomizedButton onClick={this.setAssessmentsTrainee} text={"Zurück"} />
         </div>
       </React.Fragment>
     );

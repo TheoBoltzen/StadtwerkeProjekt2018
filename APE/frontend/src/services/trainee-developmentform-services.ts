@@ -12,14 +12,11 @@ export const setDevelopmentSheetService = (devSheetID: string) => {
   return fetch(`${apiURL}/services/setTraineeToUserDevSheet`, requestOptions).then(handleResponse);
 };
 
-export const setTraineeAssessmentService = (
-  devSheetID: string,
-  traineeAssessments: TraineesAssessments[]
-) => {
+export const setTraineeAssessmentService = (traineeAssessments: TraineesAssessments[]) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
-    body: JSON.stringify({ DevelopmentSheetId: devSheetID, traineeAssessments: traineeAssessments })
+    body: JSON.stringify({ traineeAssessments: traineeAssessments })
   } as RequestInit;
 
   return fetch(`${apiURL}/services/setTraineeAssessment`, requestOptions).then(handleResponse);

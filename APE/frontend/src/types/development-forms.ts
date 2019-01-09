@@ -84,6 +84,7 @@ export interface FullDevSheetResult {
 export interface ConentFullDevSheet {
   readonly name: string;
   readonly children: ConentFullDevSheet[];
+  readonly id: number;
   readonly goalCross?: number;
   readonly ynAnswer?: boolean;
   readonly trainerassesment?: number;
