@@ -75,6 +75,7 @@ export interface FullDevSheetResult {
   readonly devSheetid: string;
   readonly version: number;
   readonly department: string;
+  readonly status: string;
   readonly education: string;
   readonly trainer: string;
   readonly trainee: string;

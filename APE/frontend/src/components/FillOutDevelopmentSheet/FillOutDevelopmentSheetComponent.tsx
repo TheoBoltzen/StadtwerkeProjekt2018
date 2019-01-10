@@ -57,7 +57,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     console.log("state: ", this.state);
 
     const { radioValue } = this.state;
-    const { fullDevSheet, loading } = this.props;
+    const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
 
     return loading ? (
       <CircularProgress />
@@ -152,8 +152,24 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
               ))}
             </div>
           ))}
-          <CustomizedButton onClick={this.setAssessmentsTrainee} text={"Speichern"} />
-          <CustomizedButton onClick={this.setEstimationTrainee} text={"Einschätzung abgeben"} />
+          {loadingSave ? (
+            <CircularProgress />
+          ) : (
+            <CustomizedButton
+              onClick={this.setAssessmentsTrainee}
+              text={"Speichern"}
+              disabled={fullDevSheet.result.status !== "Zugewiesen"}
+            />
+          )}
+          {loadingStatus ? (
+            <CircularProgress />
+          ) : (
+            <CustomizedButton
+              onClick={this.setEstimationTrainee}
+              text={"Einschätzung abgeben"}
+              disabled={fullDevSheet.result.status !== "Zugewiesen"}
+            />
+          )}
         </div>
       </React.Fragment>
     );

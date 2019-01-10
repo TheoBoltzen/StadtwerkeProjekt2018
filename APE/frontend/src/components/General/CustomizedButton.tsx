@@ -22,13 +22,15 @@ const styles = theme =>
 interface Props extends WithStyles<typeof styles> {
   onClick: any;
   text: string;
+  disabled?: boolean;
 }
 
 export const CustomizedButton = (props: Props) => {
-  const { classes, onClick, text } = props;
+  const { classes, onClick, text, disabled = false } = props;
 
   return (
     <Button
+      disabled={disabled}
       variant={"contained"}
       className={classNames(classes.margin, classes.root)}
       onClick={onClick}>
