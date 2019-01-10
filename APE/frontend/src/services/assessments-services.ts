@@ -29,5 +29,5 @@ export const setTraineeStatusEstimatedService = (devSheetID: string) => {
     body: JSON.stringify({ DevelopmentSheetId: devSheetID })
   } as RequestInit;
 
-  return fetch(`${apiURL}/services/setTraineeAssessment`, requestOptions).then(handleResponse);
+  return fetch(`${apiURL}/services/setStatusEstimated`, requestOptions).then(handleResponse);
 };

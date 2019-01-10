@@ -32,6 +32,11 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     });
   };
 
+  private setEstimationTrainee = () => {
+    const { setTraineeEstimation, fullDevSheet } = this.props;
+    setTraineeEstimation(fullDevSheet.result.devSheetid);
+  };
+
   private setAssessmentsTrainee = () => {
     let arr = [] as any;
 
@@ -148,6 +153,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
             </div>
           ))}
           <CustomizedButton onClick={this.setAssessmentsTrainee} text={"Speichern"} />
+          <CustomizedButton onClick={this.setEstimationTrainee} text={"Einschätzung abgeben"} />
         </div>
       </React.Fragment>
     );
