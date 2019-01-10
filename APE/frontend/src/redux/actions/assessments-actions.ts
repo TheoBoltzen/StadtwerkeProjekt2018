@@ -1,7 +1,11 @@
 import { assessmentsConstants } from "../../constants";
 import { Dispatch } from "redux";
 import { errorAlert, successAlert } from "./alert";
-import { setTraineeAssessmentService, setTrainerAssessmentService } from "../../services";
+import {
+  setTraineeAssessmentService,
+  setTraineeStatusEstimatedService,
+  setTrainerAssessmentService
+} from "../../services";
 import { TraineesAssessments, TrainerAssessments } from "../../types";
 
 export const setTraineeAssessments = (traineeAssessments: TraineesAssessments[]) => {
@@ -59,6 +63,38 @@ export const setTrainerAssessments = (trainerAssessments: TrainerAssessments[]) 
       () => {
         dispatch(success());
         dispatch(successAlert("Werte erfolgreich zugewiesen"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const setTraineeStatusEstimated = (devSheetID: string) => {
+  const request = devSheetID => {
+    return {
+      type: assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_REQUEST,
+      devSheetID
+    };
+  };
+
+  const success = () => {
+    return { type: assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_SUCCESS };
+  };
+
+  const failure = (error: string) => {
+    return { type: assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_FAILURE, error };
+  };
+
+  return (dispatch: Dispatch) => {
+    dispatch(request(devSheetID));
+
+    setTraineeStatusEstimatedService(devSheetID).then(
+      () => {
+        dispatch(success());
+        dispatch(successAlert("Bogen wurde erfolgreich abgegeben"));
       },
       error => {
         dispatch(failure(error.toString()));

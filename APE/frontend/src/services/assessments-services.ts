@@ -21,3 +21,13 @@ export const setTraineeAssessmentService = (traineeAssessments: TraineesAssessme
 
   return fetch(`${apiURL}/services/setTraineeAssessment`, requestOptions).then(handleResponse);
 };
+
+export const setTraineeStatusEstimatedService = (devSheetID: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ DevelopmentSheetId: devSheetID })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/setTraineeAssessment`, requestOptions).then(handleResponse);
+};

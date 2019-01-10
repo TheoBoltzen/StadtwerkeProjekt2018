@@ -3,9 +3,15 @@ import { assessmentsConstants } from "../../constants";
 
 interface AssessmentsFormAction extends Action {}
 
-export interface AssessmentsReducer {}
+export interface AssessmentsReducer {
+  loading: boolean;
+  loadingStatusEstimated: boolean;
+}
 
-const initialState: AssessmentsReducer = {};
+const initialState: AssessmentsReducer = {
+  loading: false,
+  loadingStatusEstimated: false
+};
 
 export const trainerAssessmentReducer = (state = initialState, action: AssessmentsFormAction) => {
   switch (action.type) {
@@ -23,6 +29,22 @@ export const trainerAssessmentReducer = (state = initialState, action: Assessmen
       return {
         ...state,
         loading: false
+      };
+
+    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_REQUEST:
+      return {
+        ...state,
+        loadingStatusEstimated: true
+      };
+    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_SUCCESS:
+      return {
+        ...state,
+        loadingStatusEstimated: false
+      };
+    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_FAILURE:
+      return {
+        ...state,
+        loadingStatusEstimated: false
       };
 
     default:
