@@ -72,7 +72,7 @@ export class NavigationComponent extends React.Component<AllProps, State> {
               <Button
                 aria-haspopup={false}
                 variant={pathname === RouterPathsConstants.trainees ? "outlined" : "text"}>
-                Auszubildende
+                Zuweisungen
               </Button>
             </Link>
           )}

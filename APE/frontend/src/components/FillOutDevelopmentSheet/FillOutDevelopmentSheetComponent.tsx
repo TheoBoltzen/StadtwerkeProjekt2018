@@ -107,27 +107,27 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                               row={true}>
                               <FormControlLabel
                                 value={"1"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 1} />}
                                 label={""}
                               />
                               <FormControlLabel
                                 value={"2"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 2} />}
                                 label={""}
                               />
                               <FormControlLabel
                                 value={"3"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 3} />}
                                 label={""}
                               />
                               <FormControlLabel
                                 value={"4"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 4} />}
                                 label={""}
                               />
                               <FormControlLabel
                                 value={"5"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 5} />}
                                 label={""}
                               />
                             </RadioGroup>
