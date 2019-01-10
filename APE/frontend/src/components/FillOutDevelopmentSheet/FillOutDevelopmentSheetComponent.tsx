@@ -38,7 +38,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     this.state.radioValue.map(r => {
       const assessementObj = {
         id: r.id,
-        traineeAssessment: r.value.toString()
+        traineeAssessment: r.value.toString() === "" ? null : r.value.toString()
       };
 
       arr.push(assessementObj);
@@ -102,7 +102,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                                       .value
                                   : criteria.traineeassessment
                                   ? criteria.traineeassessment.toString()
-                                  : "3"
+                                  : ""
                               }
                               row={true}>
                               <FormControlLabel
@@ -128,6 +128,13 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                               <FormControlLabel
                                 value={"5"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 5} />}
+                                label={""}
+                              />
+                              <FormControlLabel
+                                value={""}
+                                control={
+                                  <CustomizedRadio isGoalCross={criteria.goalCross === null} />
+                                }
                                 label={""}
                               />
                             </RadioGroup>
