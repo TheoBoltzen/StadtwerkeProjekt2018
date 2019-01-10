@@ -24,13 +24,13 @@ export const setTraineeAssessments = (traineeAssessments: TraineesAssessments[])
     return { type: assessmentsConstants.SETDASSESSMENT_TRAINEE_FAILURE, error };
   };
 
-  return (dispatch: Dispatch) => {
-    dispatch(request(traineeAssessments));
+  return async (dispatch: Dispatch) => {
+    await dispatch(request(traineeAssessments));
 
-    setTraineeAssessmentService(traineeAssessments).then(
+    await setTraineeAssessmentService(traineeAssessments).then(
       () => {
         dispatch(success());
-        dispatch(successAlert("Werte erfolgreich zugewiesen"));
+        dispatch(successAlert("Einschätzung erfolgreich gespeichert"));
       },
       error => {
         dispatch(failure(error.toString()));
@@ -88,10 +88,10 @@ export const setTraineeStatusEstimated = (devSheetID: string) => {
     return { type: assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_FAILURE, error };
   };
 
-  return (dispatch: Dispatch) => {
-    dispatch(request(devSheetID));
+  return async (dispatch: Dispatch) => {
+    await dispatch(request(devSheetID));
 
-    setTraineeStatusEstimatedService(devSheetID).then(
+    await setTraineeStatusEstimatedService(devSheetID).then(
       () => {
         dispatch(success());
         dispatch(successAlert("Bogen wurde erfolgreich abgegeben"));

@@ -32,12 +32,14 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     });
   };
 
-  private setEstimationTrainee = () => {
-    const { setTraineeEstimation, fullDevSheet } = this.props;
-    setTraineeEstimation(fullDevSheet.result.devSheetid);
+  private setEstimationTrainee = async () => {
+    const { setTraineeEstimation, fullDevSheet, goBack } = this.props;
+    await setTraineeEstimation(fullDevSheet.result.devSheetid);
+    goBack();
   };
 
-  private setAssessmentsTrainee = () => {
+  private setAssessmentsTrainee = async () => {
+    const { goBack, setTraineeAssessment } = this.props;
     let arr = [] as any;
 
     this.state.radioValue.map(r => {
@@ -49,7 +51,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
       arr.push(assessementObj);
     });
 
-    this.props.setTraineeAssessment(arr);
+    await setTraineeAssessment(arr);
+    goBack();
   };
 
   render() {

@@ -31,22 +31,6 @@ export const trainerAssessmentReducer = (state = initialState, action: Assessmen
         loading: false
       };
 
-    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_REQUEST:
-      return {
-        ...state,
-        loadingStatusEstimated: true
-      };
-    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_SUCCESS:
-      return {
-        ...state,
-        loadingStatusEstimated: false
-      };
-    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_FAILURE:
-      return {
-        ...state,
-        loadingStatusEstimated: false
-      };
-
     default:
       return state;
   }
@@ -68,6 +52,22 @@ export const traineeAssessmentReducer = (state = initialState, action: Assessmen
       return {
         ...state,
         loading: false
+      };
+
+    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_REQUEST:
+      return {
+        ...state,
+        loadingStatusEstimated: true
+      };
+    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_SUCCESS:
+      return {
+        ...state,
+        loadingStatusEstimated: false
+      };
+    case assessmentsConstants.SETSTATUSESTIMATED_TRAINEE_FAILURE:
+      return {
+        ...state,
+        loadingStatusEstimated: false
       };
 
     default:

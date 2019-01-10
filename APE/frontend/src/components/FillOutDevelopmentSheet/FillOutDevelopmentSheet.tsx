@@ -11,6 +11,7 @@ export interface State {
 interface Props {
   readonly loading: boolean;
   readonly fullDevSheet: FullDevSheetFetch;
+  readonly goBack: () => void;
 }
 
 interface ReduxStateProps {

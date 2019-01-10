@@ -29,6 +29,8 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
   }
 
   changeVisibilityIndex = (e, index) => {
+    this.props.getAllDevForms();
+    this.props.getDevFormsListTrainee();
     this.setState({ visibility_index: index });
   };
 
@@ -189,6 +191,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                 <FillOutDevelopmentSheet
                   fullDevSheet={this.props.fullDevSheet}
                   loading={this.props.loadingFullDevSheet}
+                  goBack={() => this.changeVisibilityIndex("", "All_Trainee_DevSheets")}
                 />
               </div>
             ) : (
