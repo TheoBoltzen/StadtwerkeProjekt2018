@@ -87,6 +87,6 @@ export interface ConentFullDevSheet {
   readonly id: number;
   readonly goalCross?: number;
   readonly ynAnswer?: boolean;
-  readonly trainerassesment?: number;
-  readonly traineeassesment?: number;
+  readonly trainerassessment?: number;
+  readonly traineeassessment?: number;
 }

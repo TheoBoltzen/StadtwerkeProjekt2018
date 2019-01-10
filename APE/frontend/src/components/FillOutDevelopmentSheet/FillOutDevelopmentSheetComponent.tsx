@@ -93,7 +93,6 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                         <div className={"criteria-container"} key={criteria.name}>
                           <legend className={"criteria-text"}>{criteria.name}</legend>
                           <FormControl component={"fieldset"}>
-                            {console.log("id: ", criteria.id.toString())}
                             <RadioGroup
                               name={criteria.name}
                               onChange={event => this.handleChange(event, criteria.id)}
@@ -101,6 +100,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                                 radioValue.find(r => r.name === criteria.name)
                                   ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
                                       .value
+                                  : criteria.traineeassessment
+                                  ? criteria.traineeassessment.toString()
                                   : "3"
                               }
                               row={true}>
