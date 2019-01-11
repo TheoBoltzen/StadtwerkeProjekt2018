@@ -27,8 +27,9 @@ export class TraineesComponent extends React.Component<AllProps, State> {
   };
 
   // Klick auf Ausfüllen
-  private handleFillOut = () => {
+  private handleFillOut = (devSheetID, traineeUsername) => {
     console.log("fill out");
+    this.props.getFullDevSheet(devSheetID, traineeUsername);
   };
 
   render() {
@@ -56,7 +57,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
             nameTrainer={devSheet.TrainerUsername}
             status={devSheet.status}
             onAssignmentClick={() => this.handleAssignment(devSheet.TraineeUsername, devSheet.id)}
-            onFilloutClick={this.handleFillOut}
+            onFilloutClick={() => this.handleFillOut(devSheet.id, devSheet.TraineeUsername)}
           />
         ))}
       </div>
