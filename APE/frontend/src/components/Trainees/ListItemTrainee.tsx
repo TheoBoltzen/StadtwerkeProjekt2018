@@ -8,6 +8,7 @@ interface Props {
   nameTrainee: string;
   department: string;
   nameTrainer: string;
+  status: string;
   isHeader?: boolean;
   onAssignmentClick?: () => void;
   onFilloutClick?: () => void;
@@ -27,6 +28,7 @@ export class ListItemTrainee extends React.Component<Props, State> {
       department,
       nameTrainee,
       nameTrainer,
+      status,
       isHeader = false,
       onAssignmentClick,
       onFilloutClick
@@ -40,6 +42,7 @@ export class ListItemTrainee extends React.Component<Props, State> {
               <td>{department}</td>
               <td>{nameTrainee}</td>
               <td>{nameTrainer}</td>
+              <td>{status}</td>
               <td>
                 {!nameTrainer ? (
                   <Tooltip title={"Mir zuweisen"} onClick={onAssignmentClick}>
