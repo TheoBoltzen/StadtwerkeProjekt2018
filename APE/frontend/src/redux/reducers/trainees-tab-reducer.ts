@@ -1,20 +1,36 @@
 import { Action } from "redux";
-import { ConnectedDevSheetFetch, Trainee } from "../../types";
+import { ConnectedDevSheetFetch, FullDevSheetFetch, Trainee } from "../../types";
 import { traineeTabConstants, trainerDevelopmentFormConstants } from "../../constants";
 
 interface ActionTraineesTabReducer extends Action {
   trainees: Trainee[];
   connectedDevSheets: ConnectedDevSheetFetch[];
+  devSheet: FullDevSheetFetch;
 }
 
 export interface TraineesTabReducer {
   readonly loading: boolean;
+  readonly loadingFullDevSheet: boolean;
   readonly trainees: Trainee[];
+  readonly devSheet: FullDevSheetFetch;
   readonly connectedDevSheets: ConnectedDevSheetFetch[];
 }
 
 const initialState: TraineesTabReducer = {
   loading: false,
+  loadingFullDevSheet: false,
+  devSheet: {
+    result: {
+      devSheetid: "",
+      department: "",
+      education: "",
+      status: "",
+      version: 0,
+      trainee: "",
+      trainer: "",
+      content: []
+    }
+  },
   trainees: [],
   connectedDevSheets: []
 };
@@ -66,6 +82,23 @@ export const traineeTabReducer = (state = initialState, action: ActionTraineesTa
     case trainerDevelopmentFormConstants.SETDEVSHEET_FAILURE:
       return {
         ...state
+      };
+
+    case trainerDevelopmentFormConstants.GETFULLDEVSHEET_REQUEST:
+      return {
+        ...state,
+        loadingFullDevSheet: true
+      };
+    case trainerDevelopmentFormConstants.GETFULLDEVSHEET_SUCCESS:
+      return {
+        ...state,
+        loadingFullDevSheet: false,
+        devSheet: action.devSheet
+      };
+    case trainerDevelopmentFormConstants.GETFULLDEVSHEET_FAILURE:
+      return {
+        ...state,
+        loadingFullDevSheet: false
       };
 
     default:
