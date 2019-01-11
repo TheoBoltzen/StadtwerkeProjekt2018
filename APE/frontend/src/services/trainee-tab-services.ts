@@ -19,3 +19,13 @@ export const getFullDevSheetAsTraineeService = (devSheetId: number, trainerUsern
 
   return fetch(`${apiURL}/services/getfullDevSheetTrainee`, requestOptions).then(handleResponse);
 };
+
+export const getFullDevSheetAsTrainerService = (devSheetId: number, traineeUsername: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ id: devSheetId, trainee: traineeUsername })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getfullDevSheetTrainer`, requestOptions).then(handleResponse);
+};
