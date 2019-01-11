@@ -99,10 +99,14 @@ async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam, token) {
   });
 }
 
-async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam) {
+async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam, token) {
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  let username = decodedToken.username;
+
   return await UserDevSheet.findAll({
     where: {
-      TraineeUsername: devSheetParam.TraineeUsername
+      TraineeUsername: username
     },
     include: [
       {

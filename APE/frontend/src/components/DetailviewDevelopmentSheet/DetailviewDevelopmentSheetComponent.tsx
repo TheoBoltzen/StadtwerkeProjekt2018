@@ -4,11 +4,6 @@ import LabelWithTextfield from "./LabelWithTextfield";
 import "./DetailviewDevelopmentSheetComponent.css";
 import { AllProps } from "./DetailViewDevelopmentSheet";
 import { CircularProgress } from "@material-ui/core";
-//import { List, ListItem } from "@material-ui/core";
-
-//------------------
-
-//------------------
 
 export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
   // console.log("props: ", props.devSheetDetail.result);
@@ -158,29 +153,7 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       }
     ]
   };
-
-  //const content: any = !loading ? props.devSheetDetail.result.content[0] as any : 'test';
-
-  // console.log('oontentTest', !loading && (content as any))
-
-  /*  var kriterien = [
-        "freundliches und aufgeschlossenes Auftreten",
-        "gepflegtes Erscheinungsbild",
-        "geht auf Kundenwünsche ein",
-        "zeigt sich kooperativ",
-        "reagiert freundlich",
-        "zeigt Hilfsbereitschaft"
-      ];*/
-
   const ist_werte = ["teilweise", "teilweise", "teilweise", "teilweise", "teilweise", "teilweise"];
-  /*  var soll_werte = [
-        "weitgehend",
-        "weitgehend",
-        "weitgehend",
-        "weitgehend",
-        "weitgehend",
-        "weitgehend"
-      ];*/
 
   let kriteria: string[] = [];
   let sollWerte: string[] = [];
@@ -189,9 +162,6 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
     kriteria = [];
     sollWerte = [];
   };
-
-  //let initialArray: any[] = [];
-  //let initialArray;
 
   return loading ? (
     <CircularProgress />

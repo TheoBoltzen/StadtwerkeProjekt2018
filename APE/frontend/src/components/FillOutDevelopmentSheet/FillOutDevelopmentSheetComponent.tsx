@@ -4,6 +4,7 @@ import { AllProps, State } from "./FillOutDevelopmentSheet";
 import "./FillOutDevelopmentSheetComponent.css";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 import CustomizedRadio from "../General/CustomizedRadio";
+import CustomizedButton from "../General/CustomizedButton";
 
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -13,7 +14,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     };
   }
 
-  private handleChange = event => {
+  private handleChange = (event, id) => {
     let radioValueArray = this.state.radioValue;
 
     if (radioValueArray.find(r => r.name === event.target.name)) {
@@ -22,7 +23,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     } else {
       radioValueArray = [
         ...radioValueArray,
-        { name: event.target.name, value: event.target.value }
+        { name: event.target.name, value: event.target.value, id: id }
       ];
     }
 
@@ -31,11 +32,35 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     });
   };
 
+  private setEstimationTrainee = async () => {
+    const { setTraineeEstimation, fullDevSheet, goBack } = this.props;
+    await setTraineeEstimation(fullDevSheet.result.devSheetid);
+    goBack();
+  };
+
+  private setAssessmentsTrainee = async () => {
+    const { goBack, setTraineeAssessment } = this.props;
+    let arr = [] as any;
+
+    this.state.radioValue.map(r => {
+      const assessementObj = {
+        id: r.id,
+        traineeAssessment: r.value.toString() === "" ? null : r.value.toString()
+      };
+
+      arr.push(assessementObj);
+    });
+
+    await setTraineeAssessment(arr);
+    goBack();
+  };
+
   render() {
     console.log("FullDev: ", this.props.fullDevSheet.result);
+    console.log("state: ", this.state);
 
     const { radioValue } = this.state;
-    const { fullDevSheet, loading } = this.props;
+    const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
 
     return loading ? (
       <CircularProgress />
@@ -78,37 +103,46 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                           <FormControl component={"fieldset"}>
                             <RadioGroup
                               name={criteria.name}
-                              onChange={this.handleChange}
+                              onChange={event => this.handleChange(event, criteria.id)}
                               value={
                                 radioValue.find(r => r.name === criteria.name)
                                   ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
                                       .value
-                                  : "3"
+                                  : criteria.traineeassessment
+                                  ? criteria.traineeassessment.toString()
+                                  : ""
                               }
                               row={true}>
                               <FormControlLabel
                                 value={"1"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 1} />}
                                 label={""}
                               />
                               <FormControlLabel
                                 value={"2"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 2} />}
                                 label={""}
                               />
                               <FormControlLabel
                                 value={"3"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 3} />}
                                 label={""}
                               />
                               <FormControlLabel
                                 value={"4"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 4} />}
                                 label={""}
                               />
                               <FormControlLabel
                                 value={"5"}
-                                control={<CustomizedRadio />}
+                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 5} />}
+                                label={""}
+                              />
+                              <FormControlLabel
+                                value={""}
+                                control={
+                                  <CustomizedRadio isGoalCross={criteria.goalCross === null} />
+                                }
                                 label={""}
                               />
                             </RadioGroup>
@@ -121,6 +155,24 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
               ))}
             </div>
           ))}
+          {loadingSave ? (
+            <CircularProgress />
+          ) : (
+            <CustomizedButton
+              onClick={this.setAssessmentsTrainee}
+              text={"Speichern"}
+              disabled={fullDevSheet.result.status !== "Zugewiesen"}
+            />
+          )}
+          {loadingStatus ? (
+            <CircularProgress />
+          ) : (
+            <CustomizedButton
+              onClick={this.setEstimationTrainee}
+              text={"Einschätzung abgeben"}
+              disabled={fullDevSheet.result.status !== "Zugewiesen"}
+            />
+          )}
         </div>
       </React.Fragment>
     );
