@@ -2,10 +2,10 @@ import * as React from "react";
 import { Graph } from "./graph";
 import LabelWithTextfield from "./LabelWithTextfield";
 import "./DetailviewDevelopmentSheetComponent.css";
-import { AllProps } from "./DetailViewDevelopmentSheet";
+import { AllProps } from "./DetailViewAssessmentDevelopmentSheet";
 import { CircularProgress } from "@material-ui/core";
 
-export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
+export const DetailviewAssessmentDevelopmentSheetComponent = (props: AllProps) => {
   // console.log("props: ", props.devSheetDetail.result);
 
   const { loading } = props;
@@ -153,14 +153,15 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       }
     ]
   };
-  const ist_werte = ["teilweise", "teilweise", "teilweise", "teilweise", "teilweise", "teilweise"];
 
   let kriteria: string[] = [];
   let sollWerte: string[] = [];
+  let istWerte: string[] = [];
 
   const clearArrays = () => {
     kriteria = [];
     sollWerte = [];
+    istWerte = [];
   };
 
   return loading ? (
@@ -173,12 +174,15 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       </div>
       <div className="div-header">
         <div className="div-left">
-          <LabelWithTextfield name={"Abteilung"} content={props.devSheetDetail.result.department} />
+          <LabelWithTextfield
+            name={"Abteilung"}
+            content={props.fullDevSheetDetail.result.department}
+          />
           <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={""} />
           <LabelWithTextfield name={"Auszubildener"} content={""} />
           <LabelWithTextfield
             name={"Ausbildungsberuf"}
-            content={props.devSheetDetail.result.education}
+            content={props.fullDevSheetDetail.result.education}
           />
         </div>
         <div className="div-right">
@@ -190,8 +194,8 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       </div>
 
       <div>
-        {props.devSheetDetail.result.content &&
-          props.devSheetDetail.result.content.map((kompetenzen, index_1) => (
+        {props.fullDevSheetDetail.result.content &&
+          props.fullDevSheetDetail.result.content.map((kompetenzen, index_1) => (
             <div className={"frameDetail"} key={index_1}>
               <h3 key={index_1}>{kompetenzen.name}</h3>
               {kompetenzen.children &&
@@ -206,17 +210,19 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                             subkategorie.children.map((kriterium, index_4) => {
                               kriteria.push(kriterium.name);
                               sollWerte.push(mapIntegerToString(kriterium.goalCross));
+                              istWerte.push(mapIntegerToString(kriterium.traineeassessment));
                               /*return;*/
                             })}
 
                           <Graph
-                            ist_werte={ist_werte}
+                            ist_werte={istWerte}
                             soll_werte={sollWerte}
                             kriterien={kriteria}
-                            isOutfilledDevSheet={false}
+                            isOutfilledDevSheet={true}
                           />
                           {console.log("Sollwerte: ", sollWerte)}
                           {console.log("Kriterien: ", kriteria)}
+                          {console.log("Istwerte: ", istWerte)}
                           {clearArrays()}
                         </div>
                       ))}

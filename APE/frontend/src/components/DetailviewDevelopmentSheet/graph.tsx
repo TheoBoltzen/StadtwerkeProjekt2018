@@ -16,10 +16,11 @@ interface Props {
   ist_werte: string[];
   soll_werte: string[];
   kriterien: string[];
+  isOutfilledDevSheet: boolean;
 }
 
 export const Graph = (props: Props) => {
-  const { ist_werte, soll_werte, kriterien } = props;
+  const { ist_werte, soll_werte, kriterien, isOutfilledDevSheet } = props;
 
   const SimpleLineChart = () => {
     //<Tooltip/>, <Text width={1000}/>  window.innerWidth
@@ -94,6 +95,11 @@ export const Graph = (props: Props) => {
             legendType="none"
           />
           {/*<Line dataKey="Ist" stroke="orange" strokeWidth={5} dot={{ strokeWidth: 5, r: 4 }} />*/}
+          {isOutfilledDevSheet ? (
+            <Line dataKey="Ist" stroke="orange" strokeWidth={5} dot={{ strokeWidth: 5, r: 4 }} />
+          ) : (
+            console.log("EmptydevSheet")
+          )}
           <Line dataKey="Soll" stroke="#8884d8" strokeWidth={2} dot={{ strokeWidth: 2, r: 4 }} />
         </LineChart>
       </div>

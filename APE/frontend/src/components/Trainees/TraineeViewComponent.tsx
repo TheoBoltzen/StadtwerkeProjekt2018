@@ -8,6 +8,7 @@ import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevel
 import Typography from "@material-ui/core/Typography/Typography";
 import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
 import CustomizedButton from "../General/CustomizedButton";
+import { DetailviewAssessmentDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewAssessmentDevelopmentSheetComponent";
 
 export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -244,9 +245,9 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     text={"Zurück"}
                   />
                 </div>
-                <DetailViewDevelopmentSheet
+                <DetailviewAssessmentDevelopmentSheetComponent
                   id={developmentFormId}
-                  devSheetDetail={this.props.fullDevSheet}
+                  fullDevSheetDetail={this.props.fullDevSheet}
                   loading={this.props.loadingDetail}
                 />
               </div>
