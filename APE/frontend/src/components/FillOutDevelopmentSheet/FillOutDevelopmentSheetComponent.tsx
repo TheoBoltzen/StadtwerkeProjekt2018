@@ -11,6 +11,9 @@ import "./FillOutDevelopmentSheetComponent.css";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 import CustomizedRadio from "../General/CustomizedRadio";
 import CustomizedButton from "../General/CustomizedButton";
+import Button from "@material-ui/core/Button";
+import { Tooltip } from "@material-ui/core";
+import CustomizedButtonRed from "../General/CustomizedButtonRed";
 
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -68,14 +71,37 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     const { radioValue } = this.state;
     const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
 
+    const legend = "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht";
+
     return loading ? (
       <CircularProgress />
     ) : (
       <React.Fragment>
         <div className={"fillOutRoot"}>
-          <Typography variant={"h4"}>
-            Entwicklungsbogen für Auszubildende der Stadtwerke Kiel
-          </Typography>
+          <div className={"fillOutHeader"}>
+            <Typography variant={"h4"}>
+              Entwicklungsbogen für Auszubildende der Stadtwerke Kiel
+            </Typography>
+          </div>
+
+          <div className={"buttonDivFillOut"}>
+            <div />
+            <div>
+              <Tooltip title={legend}>
+                <Button>Legende</Button>
+              </Tooltip>
+              {loadingStatus ? (
+                <CircularProgress />
+              ) : (
+                <CustomizedButtonRed
+                  onClick={this.setEstimationTrainee}
+                  text={"Abgeben"}
+                  disabled={fullDevSheet.result.status !== "Zugewiesen"}
+                />
+              )}
+            </div>
+          </div>
+
           <div className="div-headerFill" id="frameFill">
             <div className="div-leftFill">
               <LabelWithTextfield name={"Abteilung"} content={fullDevSheet.result.department} />
@@ -164,24 +190,20 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
               ))}
             </div>
           ))}
-          {loadingSave ? (
-            <CircularProgress />
-          ) : (
-            <CustomizedButton
-              onClick={this.setAssessmentsTrainee}
-              text={"Speichern"}
-              disabled={fullDevSheet.result.status !== "Zugewiesen"}
-            />
-          )}
-          {loadingStatus ? (
-            <CircularProgress />
-          ) : (
-            <CustomizedButton
-              onClick={this.setEstimationTrainee}
-              text={"Einschätzung abgeben"}
-              disabled={fullDevSheet.result.status !== "Zugewiesen"}
-            />
-          )}
+          <div className={"buttonDivFillOut"}>
+            <div />
+            <div className={"buttonMargin"}>
+              {loadingSave ? (
+                <CircularProgress />
+              ) : (
+                <CustomizedButton
+                  onClick={this.setAssessmentsTrainee}
+                  text={"Speichern"}
+                  disabled={fullDevSheet.result.status !== "Zugewiesen"}
+                />
+              )}
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );

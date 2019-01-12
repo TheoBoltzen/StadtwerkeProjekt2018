@@ -33,7 +33,7 @@
 #frameFill {
   border-radius: 13px;
   background-color: #efeff5;
-  margin: 30px;
+  margin: 10px 30px 30px 30px;
   padding: 20px;
   width: 60%;
 }
@@ -48,4 +48,19 @@
   align-items: center;
   align-content: space-between;
   justify-content: center;
+}
+
+.fillOutHeader {
+  margin-bottom: 30px;
+}
+
+.buttonDivFillOut {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 63.5%;
+}
+
+.buttonMargin {
+  margin-bottom: 50px;
 }
