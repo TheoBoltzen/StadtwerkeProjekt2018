@@ -130,7 +130,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                 <div className={"gravity-leftFill"} key={mainCategory.name}>
                   <h4>{mainCategory.name}</h4>
                   {mainCategory.children.map(subCategory => (
-                    <div className={"gravity-leftFill"} key={subCategory.name}>
+                    <div className={"gravity-leftFill"} id={"border"} key={subCategory.name}>
                       <h5>{subCategory.name}</h5>
                       {subCategory.children.map(criteria => (
                         <div className={"criteria-container"} key={criteria.name}>

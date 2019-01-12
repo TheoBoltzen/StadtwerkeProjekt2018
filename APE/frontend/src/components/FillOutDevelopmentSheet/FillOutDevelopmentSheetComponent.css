@@ -64,3 +64,7 @@
 .buttonMargin {
   margin-bottom: 50px;
 }
+
+#border {
+  border-top: 1px solid;
+}
