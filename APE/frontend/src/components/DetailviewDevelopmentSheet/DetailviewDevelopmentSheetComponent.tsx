@@ -203,7 +203,7 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                     <h4 key={index_2}>{hauptkategorie.name}</h4>
                     {hauptkategorie.children &&
                       hauptkategorie.children.map((subkategorie, index_3) => (
-                        <div className="gravity-left" key={index_3}>
+                        <div className="gravity-left" id={"border"} key={index_3}>
                           <h5 key={index_3}>{subkategorie.name}</h5>
                           {subkategorie.children &&
                             subkategorie.children.map((kriterium, index_4) => {
