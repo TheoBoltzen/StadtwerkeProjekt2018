@@ -14,12 +14,18 @@ import CustomizedButton from "../General/CustomizedButton";
 import Button from "@material-ui/core/Button";
 import { Tooltip } from "@material-ui/core";
 import CustomizedButtonRed from "../General/CustomizedButtonRed";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
 
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
   constructor(props) {
     super(props);
     this.state = {
-      radioValue: []
+      radioValue: [],
+      open: false
     };
   }
 
@@ -39,6 +45,14 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     this.setState({
       radioValue: radioValueArray
     });
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   private setEstimationTrainee = async () => {
@@ -94,13 +108,38 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                 <CircularProgress />
               ) : (
                 <CustomizedButtonRed
-                  onClick={this.setEstimationTrainee}
+                  //onClick={this.setEstimationTrainee}
+                  onClick={this.handleClickOpen}
                   text={"Abgeben"}
                   disabled={fullDevSheet.result.status !== "Zugewiesen"}
                 />
               )}
             </div>
           </div>
+
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">
+              {"Soll der Entwicklungsbogen wirklich abgegeben werden?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen und dein
+                Ausbilder wird sich mit dir für die Evaluation in Verbindung setzen.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Nein
+              </Button>
+              <Button onClick={this.setEstimationTrainee} color="primary" autoFocus>
+                Ja
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           <div className="div-headerFill" id="frameFill">
             <div className="div-leftFill">
