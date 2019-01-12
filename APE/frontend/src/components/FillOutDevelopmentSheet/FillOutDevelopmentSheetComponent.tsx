@@ -1,5 +1,11 @@
 import * as React from "react";
-import { CircularProgress, FormControl, FormControlLabel, RadioGroup } from "@material-ui/core";
+import {
+  CircularProgress,
+  FormControl,
+  FormControlLabel,
+  RadioGroup,
+  Typography
+} from "@material-ui/core";
 import { AllProps, State } from "./FillOutDevelopmentSheet";
 import "./FillOutDevelopmentSheetComponent.css";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
@@ -67,6 +73,9 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     ) : (
       <React.Fragment>
         <div className={"fillOutRoot"}>
+          <Typography variant={"h4"}>
+            Entwicklungsbogen für Auszubildende der Stadtwerke Kiel
+          </Typography>
           <div className="div-headerFill" id="frameFill">
             <div className="div-leftFill">
               <LabelWithTextfield name={"Abteilung"} content={fullDevSheet.result.department} />
