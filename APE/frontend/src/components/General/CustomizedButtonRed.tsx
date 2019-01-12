@@ -12,9 +12,9 @@ const styles = theme =>
     },
     root: {
       color: "#ffffff",
-      backgroundColor: "#00beff",
+      backgroundColor: "#d32f2e",
       "&:hover": {
-        backgroundColor: "#00a8e1"
+        backgroundColor: "#992221"
       }
     }
   });

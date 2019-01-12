@@ -8,6 +8,8 @@ import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevel
 import Typography from "@material-ui/core/Typography/Typography";
 import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
 import CustomizedButton from "../General/CustomizedButton";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import ClearIcon from "@material-ui/icons/Clear";
 
 export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -15,15 +17,9 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
     this.state = {
       visibility_index: "All_Trainee_DevSheets",
-      developmenFormId: ""
+      developmentFormId: ""
     };
   }
-
-  handleSearchClickTraineeDevSheet = () => {
-    this.setState({
-      visibility_index: "Display_one_Trainee_DevSheet"
-    });
-  };
 
   setAssignmentDevSheet = id => {
     this.props.setAssignment(id);
@@ -31,10 +27,12 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
   componentDidMount() {
     this.props.getAllDevForms();
-    this.props.getDevFormsListTrainee(this.props.user.username);
+    this.props.getDevFormsListTrainee();
   }
 
   changeVisibilityIndex = (e, index) => {
+    this.props.getAllDevForms();
+    this.props.getDevFormsListTrainee();
     this.setState({ visibility_index: index });
   };
 
@@ -42,7 +40,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     this.props.getDevSheetDetails(id);
     this.setState({ visibility_index: index });
     this.setState({
-      developmenFormId: id
+      developmentFormId: id
     });
   };
 
@@ -56,6 +54,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     this.changeVisibilityIndex(e, "Fillout_DevSheet");
   };
 
+  handleSearchClickTraineeDevSheet = (e, devSheetId, trainerUsername) => {
+    this.props.getFullDevSheet(devSheetId, trainerUsername);
+    this.changeVisibilityIndex(e, "Display_one_Trainee_DevSheet");
+    this.setState({
+      developmentFormId: devSheetId
+    });
+  };
+
   getContent = visibilityIndex => {
     const {
       developmentForms,
@@ -63,7 +69,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
       loadingTraineeDevSheets,
       traineeDevelopmentFormsList
     } = this.props;
-    const { developmenFormId } = this.state;
+    const { developmentFormId } = this.state;
 
     switch (visibilityIndex) {
       case "All_Trainee_DevSheets":
@@ -101,7 +107,13 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                         status={devForm.status}
                         trainerUsername={devForm.TrainerUsername}
                         //TO DO
-                        onSearchClick={this.handleSearchClickTraineeDevSheet}
+                        onSearchClick={e => {
+                          this.handleSearchClickTraineeDevSheet(
+                            e,
+                            devForm.id,
+                            devForm.TrainerUsername
+                          );
+                        }}
                         onEditClick={e => {
                           this.handleFillOutClick(e, devForm.id, devForm.TrainerUsername);
                         }}
@@ -171,16 +183,19 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
               <div>
                 <div className={"buttonDiv"}>
                   <div />
-                  <CustomizedButton
+                  <IconButton
+                    color={"primary"}
+                    className={"crossButton"}
                     onClick={e => {
                       this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                    }}
-                    text={"Zurück"}
-                  />
+                    }}>
+                    <ClearIcon />
+                  </IconButton>
                 </div>
                 <FillOutDevelopmentSheet
                   fullDevSheet={this.props.fullDevSheet}
                   loading={this.props.loadingFullDevSheet}
+                  goBack={() => this.changeVisibilityIndex("", "All_Trainee_DevSheets")}
                 />
               </div>
             ) : (
@@ -198,16 +213,17 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
               <div>
                 <div className={"buttonDiv"}>
                   <div />
-                  <CustomizedButton
+                  <IconButton
+                    color={"primary"}
+                    className={"crossButton"}
                     onClick={e => {
-                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                    }}
-                    text={"Zurück"}
-                  />
+                      this.changeVisibilityIndex(e, "All_DevSheets");
+                    }}>
+                    <ClearIcon />
+                  </IconButton>
                 </div>
-                {/*<DetailviewDevelopmentSheetComponent />*/}
                 <DetailViewDevelopmentSheet
-                  id={developmenFormId}
+                  id={developmentFormId}
                   devSheetDetail={this.props.detailDevForm}
                   loading={this.props.loadingDetail}
                 />
@@ -225,13 +241,22 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
           <div>
             {!loading ? (
               <div>
-                <CustomizedButton
-                  onClick={e => {
-                    this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                  }}
-                  text={"Zurück"}
+                <div className={"buttonDiv"}>
+                  <div />
+                  <IconButton
+                    color={"primary"}
+                    className={"crossButton"}
+                    onClick={e => {
+                      this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
+                    }}>
+                    <ClearIcon />
+                  </IconButton>
+                </div>
+                <DetailViewDevelopmentSheet
+                  id={developmentFormId}
+                  devSheetDetail={this.props.fullDevSheet}
+                  loading={this.props.loadingDetail}
                 />
-                Detail Trainee Devsheet
               </div>
             ) : (
               <div>

@@ -52,9 +52,8 @@ export const ListItemTraineeDevs = (props: Props) => {
                       <SearchIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
-
-                  <Tooltip title={"Bearbeiten"} onClick={onEditClick}>
-                    <IconButton>
+                  <Tooltip title={"Ausfüllen"} onClick={onEditClick}>
+                    <IconButton disabled={status === "Eingeschätzt"}>
                       <EditIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>

@@ -75,6 +75,7 @@ export interface FullDevSheetResult {
   readonly devSheetid: string;
   readonly version: number;
   readonly department: string;
+  readonly status: string;
   readonly education: string;
   readonly trainer: string;
   readonly trainee: string;
@@ -84,8 +85,9 @@ export interface FullDevSheetResult {
 export interface ConentFullDevSheet {
   readonly name: string;
   readonly children: ConentFullDevSheet[];
+  readonly id: number;
   readonly goalCross?: number;
   readonly ynAnswer?: boolean;
-  readonly trainerassesment?: number;
-  readonly traineeassesment?: number;
+  readonly trainerassessment?: number;
+  readonly traineeassessment?: number;
 }

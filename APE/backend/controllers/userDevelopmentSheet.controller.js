@@ -32,7 +32,10 @@ exports.getAllUserDevelopmentSheets = (req, res, next) => {
 
 exports.getAllUserDevelopmentSheetsByUserTrainee = (req, res, next) => {
   userdevSheetService
-    .getAllUserDevelopmentSheetsByUserTrainee(req.body)
+    .getAllUserDevelopmentSheetsByUserTrainee(
+      req.body,
+      req.headers.authorization.split("Bearer ")[1]
+    )
     .then(devSheets => res.json(devSheets))
     .catch(err => next(err));
 };

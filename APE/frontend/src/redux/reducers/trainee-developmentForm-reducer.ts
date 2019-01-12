@@ -18,6 +18,7 @@ const initialState: TraineeDevelopmentFormsReducer = {
       devSheetid: "",
       department: "",
       education: "",
+      status: "",
       version: 0,
       trainee: "",
       trainer: "",

@@ -4,9 +4,9 @@ import { errorAlert } from "./alert";
 import { getTraineeDevelopmentSheetsList } from "../../services";
 import { DevelopmentFormsListTrainee } from "../../types";
 
-export const getTraineeDevelopmentSheetList = (TraineeUsername: string) => {
-  const request = TraineeUsername => {
-    return { type: traineeDevFormListConstants.GETALL_REQUEST, TraineeUsername }; //
+export const getTraineeDevelopmentSheetList = () => {
+  const request = () => {
+    return { type: traineeDevFormListConstants.GETALL_REQUEST }; //
   };
 
   const success = (traineeDevelopmentFormsList: DevelopmentFormsListTrainee[]) => {
@@ -18,9 +18,9 @@ export const getTraineeDevelopmentSheetList = (TraineeUsername: string) => {
   };
 
   return (dispatch: Dispatch) => {
-    dispatch(request(TraineeUsername));
+    dispatch(request());
 
-    getTraineeDevelopmentSheetsList(TraineeUsername).then(
+    getTraineeDevelopmentSheetsList().then(
       developmentListTrainee => dispatch(success(developmentListTrainee)),
       error => {
         dispatch(failure(error.toString()));

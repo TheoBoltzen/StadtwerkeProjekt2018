@@ -17,7 +17,7 @@ import {
 
 export interface State {
   visibility_index: string;
-  developmenFormId: string;
+  developmentFormId: string;
 }
 
 interface Props {}
@@ -37,7 +37,7 @@ interface ReduxStateProps {
 interface ReduxDispatchProps {
   readonly getAllDevForms: () => void;
   readonly setAssignment: (devSheetID: string) => void;
-  readonly getDevFormsListTrainee: (TraineeUsername: string) => void;
+  readonly getDevFormsListTrainee: () => void;
   readonly getFullDevSheet: (devSheetId: number, trainerUsername: string) => void;
   readonly getDevSheetDetails: (id) => void;
 }
@@ -69,8 +69,7 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     getAllDevForms: () => dispatch(getAll()),
-    getDevFormsListTrainee: TraineeUsername =>
-      dispatch(getTraineeDevelopmentSheetList(TraineeUsername)),
+    getDevFormsListTrainee: () => dispatch(getTraineeDevelopmentSheetList()),
     setAssignment: devSheetID => dispatch(setTraineeDevelopmentSheet(devSheetID)),
     getFullDevSheet: (devSheetId, trainerUsername) =>
       dispatch(getFullDevSheetAsTrainee(devSheetId, trainerUsername)),

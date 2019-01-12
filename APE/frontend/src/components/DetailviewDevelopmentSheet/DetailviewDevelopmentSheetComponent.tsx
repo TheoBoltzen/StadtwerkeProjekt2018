@@ -4,11 +4,7 @@ import LabelWithTextfield from "./LabelWithTextfield";
 import "./DetailviewDevelopmentSheetComponent.css";
 import { AllProps } from "./DetailViewDevelopmentSheet";
 import { CircularProgress } from "@material-ui/core";
-//import { List, ListItem } from "@material-ui/core";
-
-//------------------
-
-//------------------
+import Typography from "@material-ui/core/Typography";
 
 export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
   // console.log("props: ", props.devSheetDetail.result);
@@ -158,29 +154,7 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       }
     ]
   };
-
-  //const content: any = !loading ? props.devSheetDetail.result.content[0] as any : 'test';
-
-  // console.log('oontentTest', !loading && (content as any))
-
-  /*  var kriterien = [
-        "freundliches und aufgeschlossenes Auftreten",
-        "gepflegtes Erscheinungsbild",
-        "geht auf Kundenwünsche ein",
-        "zeigt sich kooperativ",
-        "reagiert freundlich",
-        "zeigt Hilfsbereitschaft"
-      ];*/
-
   const ist_werte = ["teilweise", "teilweise", "teilweise", "teilweise", "teilweise", "teilweise"];
-  /*  var soll_werte = [
-        "weitgehend",
-        "weitgehend",
-        "weitgehend",
-        "weitgehend",
-        "weitgehend",
-        "weitgehend"
-      ];*/
 
   let kriteria: string[] = [];
   let sollWerte: string[] = [];
@@ -190,16 +164,15 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
     sollWerte = [];
   };
 
-  //let initialArray: any[] = [];
-  //let initialArray;
-
   return loading ? (
     <CircularProgress />
   ) : (
     <div className={"detailRoot"}>
       <div>
-        <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
-        <h4>Version {jsonObj.version}</h4>
+        <Typography variant={"h4"}>
+          Entwicklungsbogen für Auszubildende der Stadtwerke Kiel
+        </Typography>
+        <Typography variant={"h5"}>Version {jsonObj.version}</Typography>
       </div>
       <div className="div-header">
         <div className="div-left">
@@ -230,7 +203,7 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                     <h4 key={index_2}>{hauptkategorie.name}</h4>
                     {hauptkategorie.children &&
                       hauptkategorie.children.map((subkategorie, index_3) => (
-                        <div className="gravity-left" key={index_3}>
+                        <div className="gravity-left" id={"border"} key={index_3}>
                           <h5 key={index_3}>{subkategorie.name}</h5>
                           {subkategorie.children &&
                             subkategorie.children.map((kriterium, index_4) => {
