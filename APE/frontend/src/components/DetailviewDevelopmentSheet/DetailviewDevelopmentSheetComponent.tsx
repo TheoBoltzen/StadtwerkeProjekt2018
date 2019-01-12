@@ -4,6 +4,7 @@ import LabelWithTextfield from "./LabelWithTextfield";
 import "./DetailviewDevelopmentSheetComponent.css";
 import { AllProps } from "./DetailViewDevelopmentSheet";
 import { CircularProgress } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
   // console.log("props: ", props.devSheetDetail.result);
@@ -168,8 +169,10 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
   ) : (
     <div className={"detailRoot"}>
       <div>
-        <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
-        <h4>Version {jsonObj.version}</h4>
+        <Typography variant={"h4"}>
+          Entwicklungsbogen für Auszubildende der Stadtwerke Kiel
+        </Typography>
+        <Typography variant={"h5"}>Version {jsonObj.version}</Typography>
       </div>
       <div className="div-header">
         <div className="div-left">

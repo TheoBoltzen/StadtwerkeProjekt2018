@@ -116,34 +116,34 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                               <FormControlLabel
                                 value={"1"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 1} />}
-                                label={""}
+                                label={"1"}
                               />
                               <FormControlLabel
                                 value={"2"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 2} />}
-                                label={""}
+                                label={"2"}
                               />
                               <FormControlLabel
                                 value={"3"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 3} />}
-                                label={""}
+                                label={"3"}
                               />
                               <FormControlLabel
                                 value={"4"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 4} />}
-                                label={""}
+                                label={"4"}
                               />
                               <FormControlLabel
                                 value={"5"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 5} />}
-                                label={""}
+                                label={"5"}
                               />
                               <FormControlLabel
                                 value={""}
                                 control={
                                   <CustomizedRadio isGoalCross={criteria.goalCross === null} />
                                 }
-                                label={""}
+                                label={"keine Angabe"}
                               />
                             </RadioGroup>
                           </FormControl>
