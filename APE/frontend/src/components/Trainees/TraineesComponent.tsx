@@ -4,6 +4,8 @@ import { CircularProgress, Typography } from "@material-ui/core";
 import { ListItemTrainee } from "./ListItemTrainee";
 import "./TraineesComponent.css";
 import { FillOutDevelopmentSheetTrainer } from "../FillOutDevelopmentSheetTrainer/FillOutDevelopmentSheetTrainer";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import ClearIcon from "@material-ui/icons/Clear";
 
 export class TraineesComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -79,11 +81,24 @@ export class TraineesComponent extends React.Component<AllProps, State> {
         );
       case "fill-out":
         return (
-          <FillOutDevelopmentSheetTrainer
-            loading={loadingFullDevSheet}
-            fullDevSheet={fullDevSheet}
-            goBack={() => this.changeVisiblityIndex("connected-dev-sheets")}
-          />
+          <div>
+            <div className={"buttonDiv"}>
+              <div />
+              <IconButton
+                color={"primary"}
+                className={"crossButton"}
+                onClick={() => {
+                  this.changeVisiblityIndex("connected-dev-sheets");
+                }}>
+                <ClearIcon />
+              </IconButton>
+            </div>
+            <FillOutDevelopmentSheetTrainer
+              loading={loadingFullDevSheet}
+              fullDevSheet={fullDevSheet}
+              goBack={() => this.changeVisiblityIndex("connected-dev-sheets")}
+            />
+          </div>
         );
       default:
         return (
