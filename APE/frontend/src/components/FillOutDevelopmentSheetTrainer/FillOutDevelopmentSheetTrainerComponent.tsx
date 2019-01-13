@@ -19,6 +19,7 @@ import CustomizedButton from "../General/CustomizedButton";
 import { AllProps, State } from "./FillOutDevelopmentSheetTrainer";
 import "./FillOutDevelopmentSheetTrainerComponent.css";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
+import { DevSheetStatusConstants } from "../../constants";
 
 export class FillOutDevelopmentSheetTrainerComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -79,9 +80,6 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
   };
 
   render() {
-    console.log("FullDev: ", this.props.fullDevSheet.result);
-    console.log("state: ", this.state);
-
     const { radioValue } = this.state;
     const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
 
@@ -110,7 +108,10 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
                 <CustomizedButtonRed
                   onClick={this.handleClickOpen}
                   text={"Abgeben"}
-                  disabled={fullDevSheet.result.status !== "Zugewiesen"}
+                  disabled={
+                    fullDevSheet.result.status === DevSheetStatusConstants.completed ||
+                    fullDevSheet.result.status === DevSheetStatusConstants.rated
+                  }
                 />
               )}
             </div>
@@ -271,7 +272,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
                 <CustomizedButton
                   onClick={this.setAssessmentsTrainer}
                   text={"Speichern"}
-                  disabled={fullDevSheet.result.status !== "Zugewiesen"}
+                  disabled={fullDevSheet.result.status === DevSheetStatusConstants.completed}
                 />
               )}
             </div>
