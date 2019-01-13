@@ -31,3 +31,13 @@ export const setTraineeStatusEstimatedService = (devSheetID: string) => {
 
   return fetch(`${apiURL}/services/setStatusEstimated`, requestOptions).then(handleResponse);
 };
+
+export const setTrainerStatusRatedService = (devSheetID: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ DevelopmentSheetId: devSheetID })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/setStatusRated`, requestOptions).then(handleResponse);
+};
