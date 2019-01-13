@@ -9,3 +9,23 @@ export const getAllTraineesService = () => {
 
   return fetch(`${apiURL}/services/getAllTrainees`, requestOptions).then(handleResponse);
 };
+
+export const getFullDevSheetAsTraineeService = (devSheetId: number, trainerUsername: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ id: devSheetId, trainer: trainerUsername })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getfullDevSheetTrainee`, requestOptions).then(handleResponse);
+};
+
+export const getFullDevSheetAsTrainerService = (devSheetId: number, traineeUsername: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ id: devSheetId, trainee: traineeUsername })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/getfullDevSheetTrainer`, requestOptions).then(handleResponse);
+};

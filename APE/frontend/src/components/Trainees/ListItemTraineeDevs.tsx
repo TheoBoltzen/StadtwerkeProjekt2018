@@ -3,6 +3,7 @@ import "../DevelopmentForms/ListItem.css";
 import EditIcon from "@material-ui/icons/Edit";
 import SearchIcon from "@material-ui/icons/Search";
 import { IconButton, Tooltip } from "@material-ui/core";
+import { DevSheetStatusConstants } from "../../constants";
 
 interface Props {
   department: string;
@@ -32,6 +33,8 @@ export const ListItemTraineeDevs = (props: Props) => {
     onEditClick
   } = props;
 
+  console.log("trainer: ", trainerUsername);
+
   return (
     <div className={isHeader ? "headerRow" : "item"}>
       <table>
@@ -52,9 +55,13 @@ export const ListItemTraineeDevs = (props: Props) => {
                       <SearchIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
-
-                  <Tooltip title={"Bearbeiten"} onClick={onEditClick}>
-                    <IconButton>
+                  <Tooltip title={"Ausfüllen"} onClick={onEditClick}>
+                    <IconButton
+                      disabled={
+                        status === DevSheetStatusConstants.estimated ||
+                        (status === DevSheetStatusConstants.assigned && !trainerUsername) ||
+                        status === DevSheetStatusConstants.completed
+                      }>
                       <EditIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>

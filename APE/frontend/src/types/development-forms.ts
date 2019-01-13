@@ -49,6 +49,8 @@ export interface ContentDevelopmentFormCreate {
   readonly children?: ContentDevelopmentFormCreate[];
   readonly goalCross?: number;
   readonly ynAnswer?: boolean;
+  readonly trainerassesment?: number;
+  readonly traineeassesment?: number;
 }
 
 export interface EmptyDevSheetResult {
@@ -56,9 +58,36 @@ export interface EmptyDevSheetResult {
   readonly version: number;
   readonly department: string;
   readonly education: string;
+  readonly trainer?: string;
+  readonly trainee?: string;
   readonly content: ContentDevelopmentFormCreate[];
 }
 
 export interface EmptyDevSheetFetch {
   readonly result: EmptyDevSheetResult;
+}
+
+export interface FullDevSheetFetch {
+  readonly result: FullDevSheetResult;
+}
+
+export interface FullDevSheetResult {
+  readonly devSheetid: string;
+  readonly version: number;
+  readonly department: string;
+  readonly status: string;
+  readonly education: string;
+  readonly trainer: string;
+  readonly trainee: string;
+  readonly content: ConentFullDevSheet[];
+}
+
+export interface ConentFullDevSheet {
+  readonly name: string;
+  readonly children: ConentFullDevSheet[];
+  readonly id: number;
+  readonly goalCross?: number;
+  readonly ynAnswer?: boolean;
+  readonly trainerassessment?: number;
+  readonly traineeassessment?: number;
 }

@@ -362,7 +362,8 @@ async function getfullByIdTrainer(devsheetparam, token) {
     attributes: [
       "ReadyDevelopmentSheetId",
       "assessmentTRAINER",
-      "assessmentTRAINEE"
+      "assessmentTRAINEE",
+      "id"
     ],
     required: true
   });
@@ -501,6 +502,7 @@ async function getfullByIdTrainer(devsheetparam, token) {
               competencycategories[i].children[m].children[s].name
           ) {
             let competences = {
+              id: userasso[j].id,
               name: result[j].Competence.name,
               goalCross: result[j].goalcross,
               ynAnswer: result[j].Competence.ynAnswer,
@@ -548,7 +550,8 @@ async function getfullByIdTrainee(devsheetparam, token) {
     attributes: [
       "ReadyDevelopmentSheetId",
       "assessmentTRAINER",
-      "assessmentTRAINEE"
+      "assessmentTRAINEE",
+      "id"
     ],
     required: true
   });
@@ -686,6 +689,7 @@ async function getfullByIdTrainee(devsheetparam, token) {
               competencycategories[i].children[m].children[s].name
           ) {
             let competences = {
+              id: userasso[j].id,
               name: result[j].Competence.name,
               goalCross: result[j].goalcross,
               ynAnswer: result[j].Competence.ynAnswer,

@@ -49,9 +49,7 @@ async function associate(devSheetParam, token) {
         username: username
       };
 
-      try {
-        await UserDevSheetService._create(Data);
-      } catch {}
+      await UserDevSheetService._create(Data);
 
       let latest = await UserDevSheet.findOne({
         attributes: [[Sequelize.fn("max", Sequelize.col("id")), "id"]]
@@ -59,10 +57,10 @@ async function associate(devSheetParam, token) {
 
       let userdevId;
 
-      if (latest == null) {
+      if (latest == null || latest == {}) {
         userdevId = 1;
       } else {
-        userdevId = latest.id;
+        userdevId = latest.id + 1;
       }
 
       let userToDevSheet = [];
@@ -88,22 +86,16 @@ async function associate(devSheetParam, token) {
 }
 
 async function setTrainerAssessment(devSheetParam) {
-  let x = await UserDevSheet.findOne({
-    where: {
-      DevelopmentSheetId: devSheetParam[0].DevelopmentSheetId,
-      TraineeUsername: devSheetParam[0].TraineeUsername
-    }
-  });
+  devSheetParam = devSheetParam.trainerAssessments;
 
   for (let i = 0; i < devSheetParam.length; i++) {
     await UserDevSheetAsso.update(
       {
-        assessmentTRAINER: devSheetParam[i].assessmentTRAINER
+        assessmentTRAINER: devSheetParam[i].trainerAssessment
       },
       {
         where: {
-          ReadyDevelopmentSheetId: devSheetParam[i].ReadyDevelopmentSheetId,
-          UserDevelopmentSheetId: x.id
+          id: devSheetParam[i].id
         }
       }
     ).then(() => {});
@@ -111,28 +103,16 @@ async function setTrainerAssessment(devSheetParam) {
 }
 
 async function setTraineeAssessment(devSheetParam, token) {
-  let username = null;
-
-  const _token = token;
-  const decodedToken = jwt.verify(_token, config.secret);
-  username = decodedToken.username;
-
-  let x = await UserDevSheet.findOne({
-    where: {
-      DevelopmentSheetId: devSheetParam[0].DevelopmentSheetId,
-      TraineeUsername: username
-    }
-  });
+  devSheetParam = devSheetParam.traineeAssessments;
 
   for (let i = 0; i < devSheetParam.length; i++) {
     await UserDevSheetAsso.update(
       {
-        assessmentTRAINEE: devSheetParam[i].assessmentTRAINEE
+        assessmentTRAINEE: devSheetParam[i].traineeAssessment
       },
       {
         where: {
-          ReadyDevelopmentSheetId: devSheetParam[i].ReadyDevelopmentSheetId,
-          UserDevelopmentSheetId: x.id
+          id: devSheetParam[i].id
         }
       }
     ).then(() => {});

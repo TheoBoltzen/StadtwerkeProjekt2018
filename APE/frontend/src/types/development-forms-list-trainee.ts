@@ -4,8 +4,8 @@ export interface DevelopmentFormsListTrainee {
   readonly createdAt: string;
   readonly updatedAt: string;
   readonly developmentSheetId: number;
-  readonly traineeUsername: string;
-  readonly trainerUsername: string;
+  readonly TraineeUsername: string;
+  readonly TrainerUsername: string;
   readonly DevelopmentSheet: DevelopmentSheet;
 }
 
