@@ -2,11 +2,10 @@ import * as React from "react";
 import { Graph } from "./graph";
 import LabelWithTextfield from "./LabelWithTextfield";
 import "./DetailviewDevelopmentSheetComponent.css";
-import { AllProps } from "./DetailViewDevelopmentSheet";
+import { AllProps } from "./DetailViewAssessmentDevelopmentSheet";
 import { CircularProgress } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
 
-export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
+export const DetailviewAssessmentDevelopmentSheetComponent = (props: AllProps) => {
   // console.log("props: ", props.devSheetDetail.result);
 
   const { loading } = props;
@@ -154,14 +153,17 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       }
     ]
   };
-  //const ist_werte = ["teilweise", "teilweise", "teilweise", "teilweise", "teilweise", "teilweise"];
 
   let kriteria: string[] = [];
   let sollWerte: string[] = [];
+  let istWerte_trainee: string[] = [];
+  let istWerte_trainer: string[] = [];
 
   const clearArrays = () => {
     kriteria = [];
     sollWerte = [];
+    istWerte_trainee = [];
+    istWerte_trainer = [];
   };
 
   return loading ? (
@@ -169,19 +171,20 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
   ) : (
     <div className={"detailRoot"}>
       <div>
-        <Typography variant={"h4"}>
-          Entwicklungsbogen für Auszubildende der Stadtwerke Kiel
-        </Typography>
-        <Typography variant={"h5"}>Version {jsonObj.version}</Typography>
+        <h2>Entwicklungsbogen für Auszubildende der Stadtwerke Kiel</h2>
+        <h4>Version {jsonObj.version}</h4>
       </div>
       <div className="div-header">
         <div className="div-left">
-          <LabelWithTextfield name={"Abteilung"} content={props.devSheetDetail.result.department} />
+          <LabelWithTextfield
+            name={"Abteilung"}
+            content={props.fullDevSheetDetail.result.department}
+          />
           <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={""} />
           <LabelWithTextfield name={"Auszubildener"} content={""} />
           <LabelWithTextfield
             name={"Ausbildungsberuf"}
-            content={props.devSheetDetail.result.education}
+            content={props.fullDevSheetDetail.result.education}
           />
         </div>
         <div className="div-right">
@@ -193,8 +196,8 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       </div>
 
       <div>
-        {props.devSheetDetail.result.content &&
-          props.devSheetDetail.result.content.map((kompetenzen, index_1) => (
+        {props.fullDevSheetDetail.result.content &&
+          props.fullDevSheetDetail.result.content.map((kompetenzen, index_1) => (
             <div className={"frameDetail"} key={index_1}>
               <h3 key={index_1}>{kompetenzen.name}</h3>
               {kompetenzen.children &&
@@ -203,22 +206,32 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                     <h4 key={index_2}>{hauptkategorie.name}</h4>
                     {hauptkategorie.children &&
                       hauptkategorie.children.map((subkategorie, index_3) => (
-                        <div className="gravity-left" id={"border"} key={index_3}>
+                        <div className="gravity-left" key={index_3}>
                           <h5 key={index_3}>{subkategorie.name}</h5>
                           {subkategorie.children &&
                             subkategorie.children.map((kriterium, index_4) => {
                               kriteria.push(kriterium.name);
                               sollWerte.push(mapIntegerToString(kriterium.goalCross));
+                              istWerte_trainee.push(
+                                mapIntegerToString(kriterium.traineeassessment)
+                              );
+                              istWerte_trainer.push(
+                                mapIntegerToString(kriterium.trainerassessment)
+                              );
                               /*return;*/
                             })}
 
                           <Graph
+                            ist_werte_trainee={istWerte_trainee}
+                            ist_werte_trainer={istWerte_trainer}
                             soll_werte={sollWerte}
                             kriterien={kriteria}
-                            isOutfilledDevSheet={false}
+                            isOutfilledDevSheet={true}
                           />
                           {console.log("Sollwerte: ", sollWerte)}
                           {console.log("Kriterien: ", kriteria)}
+                          {console.log("Istwerte_Trainee: ", istWerte_trainee)}
+                          {console.log("Istwerte_Trainer: ", istWerte_trainer)}
                           {clearArrays()}
                         </div>
                       ))}

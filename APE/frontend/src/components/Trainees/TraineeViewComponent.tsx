@@ -8,6 +8,7 @@ import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevel
 import Typography from "@material-ui/core/Typography/Typography";
 import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
 import CustomizedButton from "../General/CustomizedButton";
+import { DetailviewAssessmentDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewAssessmentDevelopmentSheetComponent";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 
@@ -252,9 +253,9 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     <ClearIcon />
                   </IconButton>
                 </div>
-                <DetailViewDevelopmentSheet
+                <DetailviewAssessmentDevelopmentSheetComponent
                   id={developmentFormId}
-                  devSheetDetail={this.props.fullDevSheet}
+                  fullDevSheetDetail={this.props.fullDevSheet}
                   loading={this.props.loadingDetail}
                 />
               </div>
