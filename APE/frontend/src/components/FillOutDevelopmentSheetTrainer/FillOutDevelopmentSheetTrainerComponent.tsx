@@ -14,13 +14,13 @@ import {
   Typography
 } from "@material-ui/core";
 import CustomizedButtonRed from "../General/CustomizedButtonRed";
-import { LabelWithTextfield } from "../DetailviewDevelopmentSheet/LabelWithTextfield";
-import { CustomizedRadio } from "../General/CustomizedRadio";
+import CustomizedRadio from "../General/CustomizedRadio";
 import CustomizedButton from "../General/CustomizedButton";
 import { AllProps, State } from "./FillOutDevelopmentSheetTrainer";
 import "./FillOutDevelopmentSheetTrainerComponent.css";
+import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 
-export class FillDevelopmentSheetTrainerComponent extends React.Component<AllProps, State> {
+export class FillOutDevelopmentSheetTrainerComponent extends React.Component<AllProps, State> {
   constructor(props) {
     super(props);
     this.state = {

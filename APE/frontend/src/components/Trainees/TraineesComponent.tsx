@@ -3,6 +3,7 @@ import { AllProps, State } from "./Trainees";
 import { CircularProgress, Typography } from "@material-ui/core";
 import { ListItemTrainee } from "./ListItemTrainee";
 import "./TraineesComponent.css";
+import { FillOutDevelopmentSheetTrainer } from "../FillOutDevelopmentSheetTrainer/FillOutDevelopmentSheetTrainer";
 
 export class TraineesComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -40,7 +41,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
 
   private renderContent = () => {
     const { visibilityIndex } = this.state;
-    const { connectedDevSheets } = this.props;
+    const { connectedDevSheets, loadingFullDevSheet, fullDevSheet } = this.props;
 
     switch (visibilityIndex) {
       case "connected-dev-sheets":
@@ -70,7 +71,13 @@ export class TraineesComponent extends React.Component<AllProps, State> {
           </div>
         );
       case "fill-out":
-        return <div>Test</div>;
+        return (
+          <FillOutDevelopmentSheetTrainer
+            loading={loadingFullDevSheet}
+            fullDevSheet={fullDevSheet}
+            goBack={() => console.log("back")}
+          />
+        );
       default:
         return (
           <div>

@@ -1,8 +1,8 @@
 import { FullDevSheetFetch, TrainerAssessments } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
 import { connect } from "react-redux";
-import { FillDevelopmentSheetTrainerComponent } from "./FillOutDevelopmentSheetTrainerComponent";
-import { setTrainerAssessments } from "../../redux/actions";
+import { FillOutDevelopmentSheetTrainerComponent } from "./FillOutDevelopmentSheetTrainerComponent";
+import { setTrainerAssessments, setTrainerStatusRated } from "../../redux/actions";
 
 export interface State {
   radioValue: { name: string; value: string; id: number }[];
@@ -28,7 +28,7 @@ interface ReduxDispatchProps {
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
-  const { loadingStatusEstimated, loading } = state.trainerAssessmentReducer; //TODO: change reducer
+  const { loadingStatusEstimated, loading } = state.trainerAssessmentReducer;
   return {
     loadingSave: loading,
     loadingStatus: loadingStatusEstimated
@@ -38,13 +38,13 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     setTrainerAssessment: traineeAssessments => dispatch(setTrainerAssessments(traineeAssessments)),
-    setTrainerEstimation: devSheetID => dispatch(setTrainerStatusEstimated(devSheetID))
+    setTrainerEstimation: devSheetID => dispatch(setTrainerStatusRated(devSheetID))
   };
 };
 
 const connectedFillOutDevelopmentSheet = connect<ReduxStateProps, ReduxDispatchProps, Props>(
   mapStateToProps,
   mapDispatchToProps
-)(FillDevelopmentSheetTrainerComponent);
+)(FillOutDevelopmentSheetTrainerComponent);
 
 export { connectedFillOutDevelopmentSheet as FillOutDevelopmentSheetTrainer };
