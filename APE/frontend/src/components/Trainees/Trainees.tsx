@@ -9,6 +9,10 @@ import {
 import { connect } from "react-redux";
 import { TraineesComponent } from "./TraineesComponent";
 
+export interface State {
+  readonly visibilityIndex: string;
+}
+
 interface Props {}
 
 interface ReduxStateProps {
