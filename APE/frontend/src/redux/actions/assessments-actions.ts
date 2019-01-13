@@ -62,7 +62,7 @@ export const setTrainerAssessments = (trainerAssessments: TrainerAssessments[]) 
     setTrainerAssessmentService(trainerAssessments).then(
       () => {
         dispatch(success());
-        dispatch(successAlert("Werte erfolgreich zugewiesen"));
+        dispatch(successAlert("Bewertung wurde erfolgreich abgegeben"));
       },
       error => {
         dispatch(failure(error.toString()));
