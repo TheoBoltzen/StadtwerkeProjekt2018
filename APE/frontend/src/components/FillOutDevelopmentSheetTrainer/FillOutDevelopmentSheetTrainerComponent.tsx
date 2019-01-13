@@ -127,8 +127,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen und dein
-                Ausbilder wird sich mit dir für die Evaluation in Verbindung setzen.
+                Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen.
               </DialogContentText>
             </DialogContent>
             <DialogActions>

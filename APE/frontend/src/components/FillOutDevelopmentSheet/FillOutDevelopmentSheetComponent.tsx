@@ -79,9 +79,6 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
   };
 
   render() {
-    console.log("FullDev: ", this.props.fullDevSheet.result);
-    console.log("state: ", this.state);
-
     const { radioValue } = this.state;
     const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
 
