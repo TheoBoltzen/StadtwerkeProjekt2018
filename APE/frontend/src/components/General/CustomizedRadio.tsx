@@ -17,6 +17,18 @@ const styles = createStyles({
       color: "#43a047"
     }
   },
+  red: {
+    color: "black",
+    "&$checked": {
+      color: "#d32f2e"
+    }
+  },
+  blue: {
+    color: "#00beff",
+    "&$checked": {
+      color: "##00beff"
+    }
+  },
   checked: {}
 });
 
@@ -26,10 +38,12 @@ interface Props extends WithStyles<typeof styles> {
   value?: string;
   name?: string;
   isGoalCross?: boolean;
+  isTrainer?: boolean;
+  isTrainee?: boolean;
 }
 
 export const CustomizedRadio = (props: Props) => {
-  const { classes, checked, onChange, value, name, isGoalCross } = props;
+  const { classes, checked, onChange, value, name, isGoalCross, isTrainer, isTrainee } = props;
 
   return (
     <Radio
@@ -40,6 +54,13 @@ export const CustomizedRadio = (props: Props) => {
       classes={
         isGoalCross
           ? { root: classes.green, checked: classes.checked }
+          : isTrainee
+          ? { root: classes.blue, checked: classes.checked }
+          : isTrainer
+          ? {
+              root: classes.red,
+              checked: classes.checked
+            }
           : {
               root: classes.root,
               checked: classes.checked

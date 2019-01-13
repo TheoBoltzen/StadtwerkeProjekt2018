@@ -68,7 +68,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
     this.state.radioValue.map(r => {
       const assessementObj = {
         id: r.id,
-        traineeAssessment: r.value.toString() === "" ? null : r.value.toString()
+        trainerAssessment: r.value.toString() === "" ? null : r.value.toString()
       };
 
       arr.push(assessementObj);
@@ -181,40 +181,74 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
                                 radioValue.find(r => r.name === criteria.name)
                                   ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
                                       .value
-                                  : criteria.traineeassessment
-                                  ? criteria.traineeassessment.toString()
+                                  : criteria.trainerassessment
+                                  ? criteria.trainerassessment.toString()
                                   : ""
                               }
                               row={true}>
                               <FormControlLabel
                                 value={"1"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 1} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 1}
+                                    isTrainee={criteria.traineeassessment === 1}
+                                    isTrainer={true}
+                                  />
+                                }
                                 label={"1"}
                               />
                               <FormControlLabel
                                 value={"2"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 2} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 2}
+                                    isTrainee={criteria.traineeassessment === 2}
+                                    isTrainer={true}
+                                  />
+                                }
                                 label={"2"}
                               />
                               <FormControlLabel
                                 value={"3"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 3} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 3}
+                                    isTrainee={criteria.traineeassessment === 3}
+                                    isTrainer={true}
+                                  />
+                                }
                                 label={"3"}
                               />
                               <FormControlLabel
                                 value={"4"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 4} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 4}
+                                    isTrainee={criteria.traineeassessment === 4}
+                                    isTrainer={true}
+                                  />
+                                }
                                 label={"4"}
                               />
                               <FormControlLabel
                                 value={"5"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 5} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 5}
+                                    isTrainee={criteria.traineeassessment === 5}
+                                    isTrainer={true}
+                                  />
+                                }
                                 label={"5"}
                               />
                               <FormControlLabel
                                 value={""}
                                 control={
-                                  <CustomizedRadio isGoalCross={criteria.goalCross === null} />
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === null}
+                                    isTrainee={criteria.traineeassessment === null}
+                                    isTrainer={true}
+                                  />
                                 }
                                 label={"keine Angabe"}
                               />
