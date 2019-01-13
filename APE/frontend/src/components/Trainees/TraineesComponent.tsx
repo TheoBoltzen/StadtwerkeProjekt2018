@@ -41,6 +41,10 @@ export class TraineesComponent extends React.Component<AllProps, State> {
     });
   };
 
+  private handleSearch = () => {
+    console.log("searchClick");
+  };
+
   private renderContent = () => {
     const { visibilityIndex } = this.state;
     const { connectedDevSheets, loadingFullDevSheet, fullDevSheet } = this.props;
@@ -68,6 +72,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
                   this.handleAssignment(devSheet.TraineeUsername, devSheet.id)
                 }
                 onFilloutClick={() => this.handleFillOut(devSheet.id, devSheet.TraineeUsername)}
+                onSearchClick={() => this.handleSearch()}
               />
             ))}
           </div>

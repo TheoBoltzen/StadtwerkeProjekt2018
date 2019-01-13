@@ -4,6 +4,7 @@ import { IconButton, Tooltip } from "@material-ui/core";
 import { Favorite } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
 import { DevSheetStatusConstants } from "../../constants";
+import SearchIcon from "@material-ui/icons/Search";
 
 interface Props {
   nameTrainee: string;
@@ -13,6 +14,7 @@ interface Props {
   isHeader?: boolean;
   onAssignmentClick?: () => void;
   onFilloutClick?: () => void;
+  onSearchClick?: () => void;
 }
 
 interface State {}
@@ -32,7 +34,8 @@ export class ListItemTrainee extends React.Component<Props, State> {
       status,
       isHeader = false,
       onAssignmentClick,
-      onFilloutClick
+      onFilloutClick,
+      onSearchClick
     } = this.props;
 
     return (
@@ -45,6 +48,14 @@ export class ListItemTrainee extends React.Component<Props, State> {
               <td>{nameTrainer}</td>
               <td>{status}</td>
               <td>
+                {!isHeader && (
+                  <Tooltip title={"Detailansicht"} onClick={onSearchClick}>
+                    <IconButton>
+                      <SearchIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                )}
+
                 {!nameTrainer ? (
                   <Tooltip title={"Mir zuweisen"} onClick={onAssignmentClick}>
                     <IconButton>
