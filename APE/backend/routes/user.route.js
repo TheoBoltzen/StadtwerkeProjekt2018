@@ -3,7 +3,7 @@ const guard = require("../_helpers/guard.js");
 
 module.exports = app => {
   app.post("/services/authenticate", Users.authenticate);
-  app.post("/services/register", Users.register);
+  app.post("/services/register", guard(["admin"]), Users.register);
   app.get("/services/getAllUser", guard(["admin"]), Users.getAll);
   app.get(
     "/services/getAllTrainees",

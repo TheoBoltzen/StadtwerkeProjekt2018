@@ -75,16 +75,18 @@ async function create(userParam) {
   if (await User.findOne({ where: { username: userParam.username } })) {
     throw 'Username "' + userParam.username + '" is already taken';
   } else {
-    const newUser = User.build({
+    const newUser = await User.build({
       username: userParam.username,
       hash: await bcrypt.hashSync(userParam.password, 10),
       firstname: userParam.firstname,
       lastname: userParam.lastname,
       role: userParam.role,
+      job: userParam.profession,
+      hiredOn: userParam.hiredOn,
       tryLogin: 0
     });
     // save user in db
-    newUser.save().then(() => {});
+    await newUser.save().then(() => {});
   }
 }
 

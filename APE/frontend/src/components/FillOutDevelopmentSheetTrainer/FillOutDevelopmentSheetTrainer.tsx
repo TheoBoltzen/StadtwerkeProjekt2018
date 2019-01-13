@@ -1,8 +1,8 @@
-import { FillDevelopmentSheetComponent } from "./FillOutDevelopmentSheetComponent";
-import { FullDevSheetFetch, TraineesAssessments } from "../../types";
+import { FullDevSheetFetch, TrainerAssessments } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
-import { setTraineeAssessments, setTraineeStatusEstimated } from "../../redux/actions"; //setTrainerAssessments
 import { connect } from "react-redux";
+import { FillOutDevelopmentSheetTrainerComponent } from "./FillOutDevelopmentSheetTrainerComponent";
+import { setTrainerAssessments, setTrainerStatusRated } from "../../redux/actions";
 
 export interface State {
   radioValue: { name: string; value: string; id: number }[];
@@ -21,14 +21,14 @@ interface ReduxStateProps {
 }
 
 interface ReduxDispatchProps {
-  readonly setTraineeAssessment: (traineeAssessments: TraineesAssessments[]) => void;
-  readonly setTraineeEstimation: (devSheetID: string) => void;
+  readonly setTrainerAssessment: (traineeAssessments: TrainerAssessments[]) => void;
+  readonly setTrainerEstimation: (devSheetID: string, traineeUsername: string) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
-  const { loadingStatusEstimated, loading } = state.traineeAssessmentReducer;
+  const { loadingStatusEstimated, loading } = state.trainerAssessmentReducer;
   return {
     loadingSave: loading,
     loadingStatus: loadingStatusEstimated
@@ -37,14 +37,15 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
-    setTraineeAssessment: traineeAssessments => dispatch(setTraineeAssessments(traineeAssessments)),
-    setTraineeEstimation: devSheetID => dispatch(setTraineeStatusEstimated(devSheetID))
+    setTrainerAssessment: traineeAssessments => dispatch(setTrainerAssessments(traineeAssessments)),
+    setTrainerEstimation: (devSheetID, traineeUsername) =>
+      dispatch(setTrainerStatusRated(devSheetID, traineeUsername))
   };
 };
 
 const connectedFillOutDevelopmentSheet = connect<ReduxStateProps, ReduxDispatchProps, Props>(
   mapStateToProps,
   mapDispatchToProps
-)(FillDevelopmentSheetComponent);
+)(FillOutDevelopmentSheetTrainerComponent);
 
-export { connectedFillOutDevelopmentSheet as FillOutDevelopmentSheet };
+export { connectedFillOutDevelopmentSheet as FillOutDevelopmentSheetTrainer };

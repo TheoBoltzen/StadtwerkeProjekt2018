@@ -13,13 +13,21 @@ const data = [
 
 //http://recharts.org/en-US/api/XAxis#minTickGap
 interface Props {
-  ist_werte: string[];
+  ist_werte_trainee?: string[];
+  ist_werte_trainer?: string[];
   soll_werte: string[];
   kriterien: string[];
+  isOutfilledDevSheet: boolean;
 }
 
 export const Graph = (props: Props) => {
-  const { ist_werte, soll_werte, kriterien } = props;
+  const {
+    ist_werte_trainee,
+    ist_werte_trainer,
+    soll_werte,
+    kriterien,
+    isOutfilledDevSheet
+  } = props;
 
   const SimpleLineChart = () => {
     //<Tooltip/>, <Text width={1000}/>  window.innerWidth
@@ -33,7 +41,7 @@ export const Graph = (props: Props) => {
           layout="vertical"
           width={x_width}
           height={300}
-          data={createData(kriterien, ist_werte, soll_werte)}>
+          data={createData(kriterien, ist_werte_trainee, ist_werte_trainer, soll_werte)}>
           <Legend verticalAlign="top" height={36} />
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
@@ -93,17 +101,45 @@ export const Graph = (props: Props) => {
             opacity="0"
             legendType="none"
           />
-          {/*<Line dataKey="Ist" stroke="orange" strokeWidth={5} dot={{ strokeWidth: 5, r: 4 }} />*/}
+          {isOutfilledDevSheet ? (
+            <Line
+              dataKey="Ist_Trainee"
+              stroke="red"
+              strokeWidth={4}
+              dot={{ strokeWidth: 2, r: 6 }}
+            />
+          ) : (
+            console.log("EmptydevSheet_IstWerte_Trainee")
+          )}
+          {isOutfilledDevSheet ? (
+            <Line
+              dataKey="Ist_Trainer"
+              stroke="green"
+              strokeWidth={3}
+              dot={{ strokeWidth: 2, r: 5 }}
+            />
+          ) : (
+            console.log("EmptydevSheet_IstWerte_Trainer")
+          )}
           <Line dataKey="Soll" stroke="#8884d8" strokeWidth={2} dot={{ strokeWidth: 2, r: 4 }} />
         </LineChart>
       </div>
     );
   };
 
-  function createData(kriterien, ist_werte, soll_werte) {
+  function createData(kriterien, ist_werte_trainee, ist_werte_trainer, soll_werte) {
     var data = [{}];
     for (var i = 0; i < kriterien.length; i++) {
-      data.push({ name: kriterien[i], Ist: ist_werte[i], Soll: soll_werte[i] });
+      if (isOutfilledDevSheet) {
+        data.push({
+          name: kriterien[i],
+          Ist_Trainee: ist_werte_trainee[i],
+          Ist_Trainer: ist_werte_trainer[i],
+          Soll: soll_werte[i]
+        });
+      } else {
+        data.push({ name: kriterien[i], Soll: soll_werte[i] });
+      }
     }
     data.push({
       name: "",
