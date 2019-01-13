@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 export interface State {
   radioValue: { name: string; value: string; id: number }[];
+  open: boolean;
 }
 
 interface Props {

@@ -7,6 +7,7 @@ import "./NavigationComponent.css";
 import { AllProps, State } from "./Navigation";
 import { Link } from "react-router-dom";
 import { RoleConstants, RouterPathsConstants } from "../../constants";
+import { Tooltip } from "@material-ui/core";
 
 export class NavigationComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -26,6 +27,7 @@ export class NavigationComponent extends React.Component<AllProps, State> {
 
   render() {
     const { redirect } = this.state;
+    const logoutToolTip = "Logout";
     const {
       history: {
         location: { pathname }
@@ -77,9 +79,11 @@ export class NavigationComponent extends React.Component<AllProps, State> {
             </Link>
           )}
 
-          <Button className={"logout"} aria-haspopup={true} onClick={this.handleLogout}>
-            <PowerSettingsNew nativeColor={"#d32f2e"} />
-          </Button>
+          <Tooltip title={logoutToolTip}>
+            <Button className={"logout"} aria-haspopup={true} onClick={this.handleLogout}>
+              <PowerSettingsNew nativeColor={"#d32f2e"} />
+            </Button>
+          </Tooltip>
         </div>
       </div>
     );
