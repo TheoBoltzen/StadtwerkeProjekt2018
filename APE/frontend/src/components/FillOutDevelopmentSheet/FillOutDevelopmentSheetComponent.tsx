@@ -62,6 +62,12 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     goBack();
   };
 
+  private setCompletionTrainee = async () => {
+    const { fullDevSheet, goBack, setTraineeCompletion } = this.props;
+    await setTraineeCompletion(fullDevSheet.result.devSheetid);
+    goBack();
+  };
+
   private setAssessmentsTrainee = async () => {
     const { goBack, setTraineeAssessment } = this.props;
     let arr = [] as any;
@@ -86,6 +92,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     const legend = "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht";
 
     const isRated = fullDevSheet.result.status === DevSheetStatusConstants.rated;
+    const isAssigned = fullDevSheet.result.status === DevSheetStatusConstants.assigned;
 
     return loading ? (
       <CircularProgress />
@@ -108,10 +115,9 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                 <CircularProgress />
               ) : (
                 <CustomizedButtonRed
-                  //onClick={this.setEstimationTrainee}
                   onClick={this.handleClickOpen}
-                  text={"Abgeben"}
-                  disabled={fullDevSheet.result.status !== "Zugewiesen"}
+                  text={isRated ? "Unterschreiben" : "Abgeben"}
+                  disabled={!isRated && !isAssigned}
                 />
               )}
             </div>
@@ -123,19 +129,25 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description">
             <DialogTitle id="alert-dialog-title">
-              {"Soll der Entwicklungsbogen wirklich abgegeben werden?"}
+              {isRated
+                ? "Soll der Entwicklungsbogen wirklich unterschrieben werden?"
+                : "Soll der Entwicklungsbogen wirklich abgegeben werden?"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen und dein
-                Ausbilder wird sich mit dir für die Evaluation in Verbindung setzen.
+                {isRated
+                  ? "Durch das Setzen deiner digitalen Unterschrift, nimmst du die angezeigten Werte zur Kentniss und bist mit diesen Einverstanden."
+                  : "Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen und dein Ausbilder wird sich mit dir für die Evaluation in Verbindung setzen."}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">
                 Nein
               </Button>
-              <Button onClick={this.setEstimationTrainee} color="primary" autoFocus>
+              <Button
+                onClick={isRated ? this.setCompletionTrainee : this.setEstimationTrainee}
+                color="primary"
+                autoFocus>
                 Ja
               </Button>
             </DialogActions>
@@ -175,10 +187,6 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                         <div className={"criteria-container"} key={criteria.name}>
                           <legend className={"criteria-text"}>{criteria.name}</legend>
                           <FormControl component={"fieldset"}>
-                            {console.log(
-                              "isRated: ",
-                              fullDevSheet.result.status === DevSheetStatusConstants.rated
-                            )}
                             <RadioGroup
                               name={criteria.name}
                               onChange={event => this.handleChange(event, criteria.id)}
@@ -284,7 +292,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                 <CustomizedButton
                   onClick={this.setAssessmentsTrainee}
                   text={"Speichern"}
-                  disabled={fullDevSheet.result.status !== "Zugewiesen"}
+                  disabled={!isAssigned}
                 />
               )}
             </div>
