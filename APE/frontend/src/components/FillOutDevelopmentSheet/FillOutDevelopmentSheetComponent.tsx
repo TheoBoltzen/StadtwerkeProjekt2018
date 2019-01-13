@@ -1,16 +1,31 @@
 import * as React from "react";
-import { CircularProgress, FormControl, FormControlLabel, RadioGroup } from "@material-ui/core";
+import {
+  CircularProgress,
+  FormControl,
+  FormControlLabel,
+  RadioGroup,
+  Typography
+} from "@material-ui/core";
 import { AllProps, State } from "./FillOutDevelopmentSheet";
 import "./FillOutDevelopmentSheetComponent.css";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 import CustomizedRadio from "../General/CustomizedRadio";
 import CustomizedButton from "../General/CustomizedButton";
+import Button from "@material-ui/core/Button";
+import { Tooltip } from "@material-ui/core";
+import CustomizedButtonRed from "../General/CustomizedButtonRed";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
 
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
   constructor(props) {
     super(props);
     this.state = {
-      radioValue: []
+      radioValue: [],
+      open: false
     };
   }
 
@@ -30,6 +45,14 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     this.setState({
       radioValue: radioValueArray
     });
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   private setEstimationTrainee = async () => {
@@ -62,11 +85,62 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     const { radioValue } = this.state;
     const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
 
+    const legend = "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht";
+
     return loading ? (
       <CircularProgress />
     ) : (
       <React.Fragment>
         <div className={"fillOutRoot"}>
+          <div className={"fillOutHeader"}>
+            <Typography variant={"h4"}>
+              Entwicklungsbogen für Auszubildende der Stadtwerke Kiel
+            </Typography>
+          </div>
+
+          <div className={"buttonDivFillOut"}>
+            <div />
+            <div>
+              <Tooltip title={legend}>
+                <Button>Legende</Button>
+              </Tooltip>
+              {loadingStatus ? (
+                <CircularProgress />
+              ) : (
+                <CustomizedButtonRed
+                  //onClick={this.setEstimationTrainee}
+                  onClick={this.handleClickOpen}
+                  text={"Abgeben"}
+                  disabled={fullDevSheet.result.status !== "Zugewiesen"}
+                />
+              )}
+            </div>
+          </div>
+
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">
+              {"Soll der Entwicklungsbogen wirklich abgegeben werden?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen und dein
+                Ausbilder wird sich mit dir für die Evaluation in Verbindung setzen.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Nein
+              </Button>
+              <Button onClick={this.setEstimationTrainee} color="primary" autoFocus>
+                Ja
+              </Button>
+            </DialogActions>
+          </Dialog>
+
           <div className="div-headerFill" id="frameFill">
             <div className="div-leftFill">
               <LabelWithTextfield name={"Abteilung"} content={fullDevSheet.result.department} />
@@ -95,7 +169,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                 <div className={"gravity-leftFill"} key={mainCategory.name}>
                   <h4>{mainCategory.name}</h4>
                   {mainCategory.children.map(subCategory => (
-                    <div className={"gravity-leftFill"} key={subCategory.name}>
+                    <div className={"gravity-leftFill"} id={"border"} key={subCategory.name}>
                       <h5>{subCategory.name}</h5>
                       {subCategory.children.map(criteria => (
                         <div className={"criteria-container"} key={criteria.name}>
@@ -116,34 +190,34 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                               <FormControlLabel
                                 value={"1"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 1} />}
-                                label={""}
+                                label={"1"}
                               />
                               <FormControlLabel
                                 value={"2"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 2} />}
-                                label={""}
+                                label={"2"}
                               />
                               <FormControlLabel
                                 value={"3"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 3} />}
-                                label={""}
+                                label={"3"}
                               />
                               <FormControlLabel
                                 value={"4"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 4} />}
-                                label={""}
+                                label={"4"}
                               />
                               <FormControlLabel
                                 value={"5"}
                                 control={<CustomizedRadio isGoalCross={criteria.goalCross === 5} />}
-                                label={""}
+                                label={"5"}
                               />
                               <FormControlLabel
                                 value={""}
                                 control={
                                   <CustomizedRadio isGoalCross={criteria.goalCross === null} />
                                 }
-                                label={""}
+                                label={"keine Angabe"}
                               />
                             </RadioGroup>
                           </FormControl>
@@ -155,24 +229,20 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
               ))}
             </div>
           ))}
-          {loadingSave ? (
-            <CircularProgress />
-          ) : (
-            <CustomizedButton
-              onClick={this.setAssessmentsTrainee}
-              text={"Speichern"}
-              disabled={fullDevSheet.result.status !== "Zugewiesen"}
-            />
-          )}
-          {loadingStatus ? (
-            <CircularProgress />
-          ) : (
-            <CustomizedButton
-              onClick={this.setEstimationTrainee}
-              text={"Einschätzung abgeben"}
-              disabled={fullDevSheet.result.status !== "Zugewiesen"}
-            />
-          )}
+          <div className={"buttonDivFillOut"}>
+            <div />
+            <div className={"buttonMargin"}>
+              {loadingSave ? (
+                <CircularProgress />
+              ) : (
+                <CustomizedButton
+                  onClick={this.setAssessmentsTrainee}
+                  text={"Speichern"}
+                  disabled={fullDevSheet.result.status !== "Zugewiesen"}
+                />
+              )}
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );

@@ -8,6 +8,8 @@ import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevel
 import Typography from "@material-ui/core/Typography/Typography";
 import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
 import CustomizedButton from "../General/CustomizedButton";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import ClearIcon from "@material-ui/icons/Clear";
 
 export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -181,12 +183,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
               <div>
                 <div className={"buttonDiv"}>
                   <div />
-                  <CustomizedButton
+                  <IconButton
+                    color={"primary"}
+                    className={"crossButton"}
                     onClick={e => {
                       this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                    }}
-                    text={"Zurück"}
-                  />
+                    }}>
+                    <ClearIcon />
+                  </IconButton>
                 </div>
                 <FillOutDevelopmentSheet
                   fullDevSheet={this.props.fullDevSheet}
@@ -209,12 +213,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
               <div>
                 <div className={"buttonDiv"}>
                   <div />
-                  <CustomizedButton
+                  <IconButton
+                    color={"primary"}
+                    className={"crossButton"}
                     onClick={e => {
                       this.changeVisibilityIndex(e, "All_DevSheets");
-                    }}
-                    text={"Zurück"}
-                  />
+                    }}>
+                    <ClearIcon />
+                  </IconButton>
                 </div>
                 <DetailViewDevelopmentSheet
                   id={developmentFormId}
@@ -237,12 +243,14 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
               <div>
                 <div className={"buttonDiv"}>
                   <div />
-                  <CustomizedButton
+                  <IconButton
+                    color={"primary"}
+                    className={"crossButton"}
                     onClick={e => {
                       this.changeVisibilityIndex(e, "All_Trainee_DevSheets");
-                    }}
-                    text={"Zurück"}
-                  />
+                    }}>
+                    <ClearIcon />
+                  </IconButton>
                 </div>
                 <DetailViewDevelopmentSheet
                   id={developmentFormId}
