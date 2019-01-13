@@ -31,12 +31,14 @@ export class TraineesComponent extends React.Component<AllProps, State> {
 
   // Klick auf Ausfüllen
   private handleFillOut = (devSheetID, traineeUsername) => {
-    console.log("fill out");
-    this.setState({
-      visibilityIndex: "fill-out"
-    });
-
     this.props.getFullDevSheet(devSheetID, traineeUsername);
+    this.changeVisiblityIndex("fill-out");
+  };
+
+  private changeVisiblityIndex = visiblityIndex => {
+    this.setState({
+      visibilityIndex: visiblityIndex
+    });
   };
 
   private renderContent = () => {
@@ -75,7 +77,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
           <FillOutDevelopmentSheetTrainer
             loading={loadingFullDevSheet}
             fullDevSheet={fullDevSheet}
-            goBack={() => console.log("back")}
+            goBack={() => this.changeVisiblityIndex("connected-dev-sheets")}
           />
         );
       default:
@@ -89,8 +91,6 @@ export class TraineesComponent extends React.Component<AllProps, State> {
 
   render() {
     const { loading } = this.props;
-
-    console.log("Props: ", this.props);
 
     return loading ? <CircularProgress /> : this.renderContent();
   }

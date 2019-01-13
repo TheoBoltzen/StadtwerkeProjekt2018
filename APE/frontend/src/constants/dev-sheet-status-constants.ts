@@ -1,6 +1,6 @@
 export const DevSheetStatusConstants = {
   assigned: "Zugewiesen",
   estimated: "Eingeschätzt",
-  rated: "Bewertet",
+  rated: "Überarbeitet",
   completed: "Abgeschlossen"
 };
