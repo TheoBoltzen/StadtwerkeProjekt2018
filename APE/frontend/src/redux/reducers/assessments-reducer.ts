@@ -86,6 +86,22 @@ export const traineeAssessmentReducer = (state = initialState, action: Assessmen
         loadingStatusEstimated: false
       };
 
+    case assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_REQUEST:
+      return {
+        ...state,
+        loadingStatusEstimated: true
+      };
+    case assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_SUCCESS:
+      return {
+        ...state,
+        loadingStatusEstimated: false
+      };
+    case assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_FAILURE:
+      return {
+        ...state,
+        loadingStatusEstimated: false
+      };
+
     default:
       return state;
   }

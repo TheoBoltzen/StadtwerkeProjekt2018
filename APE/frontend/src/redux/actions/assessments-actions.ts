@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 import { errorAlert, successAlert } from "./alert";
 import {
   setTraineeAssessmentService,
+  setTraineeStatusCompletedService,
   setTraineeStatusEstimatedService,
   setTrainerAssessmentService,
   setTrainerStatusRatedService
@@ -129,6 +130,38 @@ export const setTraineeStatusEstimated = (devSheetID: string) => {
       () => {
         dispatch(success());
         dispatch(successAlert("Bogen wurde erfolgreich abgegeben"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const setTraineeStatusCompleted = (devSheetID: string) => {
+  const request = devSheetID => {
+    return {
+      type: assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_REQUEST,
+      devSheetID
+    };
+  };
+
+  const success = () => {
+    return { type: assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_SUCCESS };
+  };
+
+  const failure = (error: string) => {
+    return { type: assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_FAILURE, error };
+  };
+
+  return async (dispatch: Dispatch) => {
+    await dispatch(request(devSheetID));
+
+    await setTraineeStatusCompletedService(devSheetID).then(
+      () => {
+        dispatch(success());
+        dispatch(successAlert("Bogen wurde erfolgreich unterschrieben"));
       },
       error => {
         dispatch(failure(error.toString()));
