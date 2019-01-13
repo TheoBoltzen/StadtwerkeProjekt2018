@@ -22,7 +22,7 @@ interface ReduxStateProps {
 
 interface ReduxDispatchProps {
   readonly setTrainerAssessment: (traineeAssessments: TrainerAssessments[]) => void;
-  readonly setTrainerEstimation: (devSheetID: string) => void;
+  readonly setTrainerEstimation: (devSheetID: string, traineeUsername: string) => void;
 }
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
@@ -38,7 +38,8 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     setTrainerAssessment: traineeAssessments => dispatch(setTrainerAssessments(traineeAssessments)),
-    setTrainerEstimation: devSheetID => dispatch(setTrainerStatusRated(devSheetID))
+    setTrainerEstimation: (devSheetID, traineeUsername) =>
+      dispatch(setTrainerStatusRated(devSheetID, traineeUsername))
   };
 };
 

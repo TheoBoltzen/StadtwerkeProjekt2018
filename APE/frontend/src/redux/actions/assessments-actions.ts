@@ -73,11 +73,12 @@ export const setTrainerAssessments = (trainerAssessments: TrainerAssessments[]) 
   };
 };
 
-export const setTrainerStatusRated = (devSheetID: string) => {
+export const setTrainerStatusRated = (devSheetID: string, traineeUsername: string) => {
   const request = devSheetID => {
     return {
       type: assessmentsConstants.SETSTATUSRATED_TRAINER_REQUEST,
-      devSheetID
+      devSheetID,
+      traineeUsername
     };
   };
 
@@ -92,7 +93,7 @@ export const setTrainerStatusRated = (devSheetID: string) => {
   return async (dispatch: Dispatch) => {
     await dispatch(request(devSheetID));
 
-    await setTrainerStatusRatedService(devSheetID).then(
+    await setTrainerStatusRatedService(devSheetID, traineeUsername).then(
       () => {
         dispatch(success());
         dispatch(successAlert("Bogen wurde erfolgreich bewertet"));

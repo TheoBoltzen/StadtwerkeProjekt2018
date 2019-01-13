@@ -58,7 +58,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
 
   private setEstimationTrainer = async () => {
     const { setTrainerEstimation, fullDevSheet, goBack } = this.props;
-    await setTrainerEstimation(fullDevSheet.result.devSheetid);
+    await setTrainerEstimation(fullDevSheet.result.devSheetid, fullDevSheet.result.trainee);
     goBack();
   };
 
