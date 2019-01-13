@@ -22,8 +22,9 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     };
   }
 
-  setAssignmentDevSheet = id => {
-    this.props.setAssignment(id);
+  setAssignmentDevSheet = async id => {
+    await this.props.setAssignment(id);
+    this.changeVisibilityIndex("", "All_Trainee_DevSheets");
   };
 
   componentDidMount() {
@@ -39,7 +40,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
   getDetailView = (e, index, id) => {
     this.props.getDevSheetDetails(id);
-    this.setState({ visibility_index: index });
+    this.changeVisibilityIndex(e, index);
     this.setState({
       developmentFormId: id
     });
