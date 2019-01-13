@@ -156,12 +156,14 @@ export const DetailviewAssessmentDevelopmentSheetComponent = (props: AllProps) =
 
   let kriteria: string[] = [];
   let sollWerte: string[] = [];
-  let istWerte: string[] = [];
+  let istWerte_trainee: string[] = [];
+  let istWerte_trainer: string[] = [];
 
   const clearArrays = () => {
     kriteria = [];
     sollWerte = [];
-    istWerte = [];
+    istWerte_trainee = [];
+    istWerte_trainer = [];
   };
 
   return loading ? (
@@ -210,19 +212,26 @@ export const DetailviewAssessmentDevelopmentSheetComponent = (props: AllProps) =
                             subkategorie.children.map((kriterium, index_4) => {
                               kriteria.push(kriterium.name);
                               sollWerte.push(mapIntegerToString(kriterium.goalCross));
-                              istWerte.push(mapIntegerToString(kriterium.traineeassessment));
+                              istWerte_trainee.push(
+                                mapIntegerToString(kriterium.traineeassessment)
+                              );
+                              istWerte_trainer.push(
+                                mapIntegerToString(kriterium.trainerassessment)
+                              );
                               /*return;*/
                             })}
 
                           <Graph
-                            ist_werte={istWerte}
+                            ist_werte_trainee={istWerte_trainee}
+                            ist_werte_trainer={istWerte_trainer}
                             soll_werte={sollWerte}
                             kriterien={kriteria}
                             isOutfilledDevSheet={true}
                           />
                           {console.log("Sollwerte: ", sollWerte)}
                           {console.log("Kriterien: ", kriteria)}
-                          {console.log("Istwerte: ", istWerte)}
+                          {console.log("Istwerte_Trainee: ", istWerte_trainee)}
+                          {console.log("Istwerte_Trainer: ", istWerte_trainer)}
                           {clearArrays()}
                         </div>
                       ))}

@@ -153,7 +153,7 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
       }
     ]
   };
-  const ist_werte = ["teilweise", "teilweise", "teilweise", "teilweise", "teilweise", "teilweise"];
+  //const ist_werte = ["teilweise", "teilweise", "teilweise", "teilweise", "teilweise", "teilweise"];
 
   let kriteria: string[] = [];
   let sollWerte: string[] = [];
@@ -210,7 +210,6 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                             })}
 
                           <Graph
-                            ist_werte={ist_werte}
                             soll_werte={sollWerte}
                             kriterien={kriteria}
                             isOutfilledDevSheet={false}
