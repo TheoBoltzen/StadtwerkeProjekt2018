@@ -58,12 +58,13 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
 
   private setEstimationTrainer = async () => {
     const { setTrainerEstimation, fullDevSheet, goBack } = this.props;
+    await this.setAssessmentsTrainer();
     await setTrainerEstimation(fullDevSheet.result.devSheetid, fullDevSheet.result.trainee);
     goBack();
   };
 
   private setAssessmentsTrainer = async () => {
-    const { goBack, setTrainerAssessment } = this.props;
+    const { setTrainerAssessment } = this.props;
     let arr = [] as any;
 
     this.state.radioValue.map(r => {
@@ -76,6 +77,11 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
     });
 
     await setTrainerAssessment(arr);
+  };
+
+  private setAssessmentsTrainerSave = async () => {
+    const { goBack } = this.props;
+    await this.setAssessmentsTrainer();
     goBack();
   };
 
@@ -269,7 +275,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
                 <CircularProgress />
               ) : (
                 <CustomizedButton
-                  onClick={this.setAssessmentsTrainer}
+                  onClick={this.setAssessmentsTrainerSave}
                   text={"Speichern"}
                   disabled={
                     fullDevSheet.result.status === DevSheetStatusConstants.completed ||
