@@ -272,7 +272,10 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
                 <CustomizedButton
                   onClick={this.setAssessmentsTrainer}
                   text={"Speichern"}
-                  disabled={fullDevSheet.result.status === DevSheetStatusConstants.completed}
+                  disabled={
+                    fullDevSheet.result.status === DevSheetStatusConstants.completed ||
+                    fullDevSheet.result.status === DevSheetStatusConstants.rated
+                  }
                 />
               )}
             </div>
