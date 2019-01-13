@@ -3,6 +3,7 @@ import "./ListItemTrainee.css";
 import { IconButton, Tooltip } from "@material-ui/core";
 import { Favorite } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
+import { DevSheetStatusConstants } from "../../constants";
 
 interface Props {
   nameTrainee: string;
@@ -53,7 +54,11 @@ export class ListItemTrainee extends React.Component<Props, State> {
                 ) : (
                   !isHeader && (
                     <Tooltip title={"ausfüllen"} onClick={onFilloutClick}>
-                      <IconButton>
+                      <IconButton
+                        disabled={
+                          status === DevSheetStatusConstants.rated ||
+                          status === DevSheetStatusConstants.completed
+                        }>
                         <EditIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
