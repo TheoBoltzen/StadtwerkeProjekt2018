@@ -19,6 +19,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
+import { DevSheetStatusConstants } from "../../constants";
 
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
   constructor(props) {
@@ -83,6 +84,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
 
     const legend = "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht";
+
+    const isRated = fullDevSheet.result.status === DevSheetStatusConstants.rated;
 
     return loading ? (
       <CircularProgress />
@@ -172,11 +175,19 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                         <div className={"criteria-container"} key={criteria.name}>
                           <legend className={"criteria-text"}>{criteria.name}</legend>
                           <FormControl component={"fieldset"}>
+                            {console.log(
+                              "isRated: ",
+                              fullDevSheet.result.status === DevSheetStatusConstants.rated
+                            )}
                             <RadioGroup
                               name={criteria.name}
                               onChange={event => this.handleChange(event, criteria.id)}
                               value={
-                                radioValue.find(r => r.name === criteria.name)
+                                isRated
+                                  ? criteria.trainerassessment
+                                    ? criteria.trainerassessment.toString()
+                                    : ""
+                                  : radioValue.find(r => r.name === criteria.name)
                                   ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
                                       .value
                                   : criteria.traineeassessment
@@ -186,33 +197,71 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                               row={true}>
                               <FormControlLabel
                                 value={"1"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 1} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 1}
+                                    isTrainer={criteria.trainerassessment === 1}
+                                    isTrainee={isRated && criteria.traineeassessment === 1}
+                                  />
+                                }
                                 label={"1"}
                               />
                               <FormControlLabel
                                 value={"2"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 2} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 2}
+                                    isTrainer={criteria.trainerassessment === 2}
+                                    isTrainee={isRated && criteria.traineeassessment === 2}
+                                  />
+                                }
                                 label={"2"}
                               />
                               <FormControlLabel
                                 value={"3"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 3} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 3}
+                                    isTrainer={criteria.trainerassessment === 3}
+                                    isTrainee={isRated && criteria.traineeassessment === 3}
+                                  />
+                                }
                                 label={"3"}
                               />
                               <FormControlLabel
                                 value={"4"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 4} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 4}
+                                    isTrainer={criteria.trainerassessment === 4}
+                                    isTrainee={isRated && criteria.traineeassessment === 4}
+                                  />
+                                }
                                 label={"4"}
                               />
                               <FormControlLabel
                                 value={"5"}
-                                control={<CustomizedRadio isGoalCross={criteria.goalCross === 5} />}
+                                control={
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === 5}
+                                    isTrainer={criteria.trainerassessment === 5}
+                                    isTrainee={isRated && criteria.traineeassessment === 5}
+                                  />
+                                }
                                 label={"5"}
                               />
                               <FormControlLabel
                                 value={""}
                                 control={
-                                  <CustomizedRadio isGoalCross={criteria.goalCross === null} />
+                                  <CustomizedRadio
+                                    isGoalCross={criteria.goalCross === null}
+                                    isTrainer={isRated && criteria.trainerassessment === null}
+                                    isTrainee={
+                                      fullDevSheet.result.status ===
+                                        DevSheetStatusConstants.rated &&
+                                      criteria.traineeassessment === null
+                                    }
+                                  />
                                 }
                                 label={"keine Angabe"}
                               />
