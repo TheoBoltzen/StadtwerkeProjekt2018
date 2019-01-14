@@ -1,33 +1,27 @@
 import * as React from "react";
 import {
+  Button,
   CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   FormControl,
   FormControlLabel,
   RadioGroup,
+  Tooltip,
   Typography
 } from "@material-ui/core";
-import { AllProps, State } from "./FillOutDevelopmentSheet";
-import "./FillOutDevelopmentSheetComponent.css";
-import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
+import CustomizedButtonRed from "../General/CustomizedButtonRed";
 import CustomizedRadio from "../General/CustomizedRadio";
 import CustomizedButton from "../General/CustomizedButton";
-import Button from "@material-ui/core/Button";
-import { Tooltip } from "@material-ui/core";
-import CustomizedButtonRed from "../General/CustomizedButtonRed";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
+import { AllProps, State } from "./FillOutDevelopmentSheetTrainer";
+import "./FillOutDevelopmentSheetTrainerComponent.css";
+import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 import { DevSheetStatusConstants } from "../../constants";
 
-export const styles = theme => ({
-  customWidth: {
-    maxWidth: 340
-  }
-});
-
-export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
+export class FillOutDevelopmentSheetTrainerComponent extends React.Component<AllProps, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,51 +56,40 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     this.setState({ open: false });
   };
 
-  private setEstimationTrainee = async () => {
-    const { setTraineeEstimation, fullDevSheet, goBack } = this.props;
-    await this.setAssessmentsTrainee();
-    await setTraineeEstimation(fullDevSheet.result.devSheetid);
+  private setEstimationTrainer = async () => {
+    const { setTrainerEstimation, fullDevSheet, goBack } = this.props;
+    await this.setAssessmentsTrainer();
+    await setTrainerEstimation(fullDevSheet.result.devSheetid, fullDevSheet.result.trainee);
     goBack();
   };
 
-  private setCompletionTrainee = async () => {
-    const { fullDevSheet, goBack, setTraineeCompletion } = this.props;
-    await setTraineeCompletion(fullDevSheet.result.devSheetid);
-    goBack();
-  };
-
-  private setAssessmentsTrainee = async () => {
-    const { setTraineeAssessment } = this.props;
+  private setAssessmentsTrainer = async () => {
+    const { setTrainerAssessment } = this.props;
     let arr = [] as any;
 
     this.state.radioValue.map(r => {
       const assessementObj = {
         id: r.id,
-        traineeAssessment: r.value.toString() === "" ? null : r.value.toString()
+        trainerAssessment: r.value.toString() === "" ? null : r.value.toString()
       };
 
       arr.push(assessementObj);
     });
 
-    await setTraineeAssessment(arr);
+    await setTrainerAssessment(arr);
   };
 
-  private setAssessmentsTraineeSave = async () => {
+  private setAssessmentsTrainerSave = async () => {
     const { goBack } = this.props;
-    await this.setAssessmentsTrainee();
+    await this.setAssessmentsTrainer();
     goBack();
   };
 
   render() {
     const { radioValue } = this.state;
-    const { fullDevSheet, loading, loadingSave, loadingStatus, classes } = this.props;
+    const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
 
-    const legend =
-      "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht, " +
-      "grün = Zielwert, blau = Auswahl ";
-
-    const isRated = fullDevSheet.result.status === DevSheetStatusConstants.rated;
-    const isAssigned = fullDevSheet.result.status === DevSheetStatusConstants.assigned;
+    const legend = "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht";
 
     return loading ? (
       <CircularProgress />
@@ -122,7 +105,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
           <div className={"buttonDivFillOut"}>
             <div />
             <div>
-              <Tooltip title={legend} classes={{ tooltip: classes.customWidth }}>
+              <Tooltip title={legend}>
                 <Button>Legende</Button>
               </Tooltip>
               {loadingStatus ? (
@@ -130,8 +113,11 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
               ) : (
                 <CustomizedButtonRed
                   onClick={this.handleClickOpen}
-                  text={isRated ? "Unterschreiben" : "Abgeben"}
-                  disabled={!isRated && !isAssigned}
+                  text={"Abgeben"}
+                  disabled={
+                    fullDevSheet.result.status === DevSheetStatusConstants.completed ||
+                    fullDevSheet.result.status === DevSheetStatusConstants.rated
+                  }
                 />
               )}
             </div>
@@ -143,25 +129,18 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description">
             <DialogTitle id="alert-dialog-title">
-              {isRated
-                ? "Soll der Entwicklungsbogen wirklich unterschrieben werden?"
-                : "Soll der Entwicklungsbogen wirklich abgegeben werden?"}
+              {"Soll der Entwicklungsbogen wirklich abgegeben werden?"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                {isRated
-                  ? "Durch das Setzen deiner digitalen Unterschrift, nimmst du die angezeigten Werte zur Kentniss und bist mit diesen Einverstanden."
-                  : "Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen und dein Ausbilder wird sich mit dir für die Evaluation in Verbindung setzen."}
+                Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen.
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">
                 Nein
               </Button>
-              <Button
-                onClick={isRated ? this.setCompletionTrainee : this.setEstimationTrainee}
-                color="primary"
-                autoFocus>
+              <Button onClick={this.setEstimationTrainer} color="primary" autoFocus>
                 Ja
               </Button>
             </DialogActions>
@@ -205,15 +184,11 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                               name={criteria.name}
                               onChange={event => this.handleChange(event, criteria.id)}
                               value={
-                                isRated
-                                  ? criteria.trainerassessment
-                                    ? criteria.trainerassessment.toString()
-                                    : ""
-                                  : radioValue.find(r => r.name === criteria.name)
+                                radioValue.find(r => r.name === criteria.name)
                                   ? radioValue[radioValue.findIndex(r => r.name === criteria.name)]
                                       .value
-                                  : criteria.traineeassessment
-                                  ? criteria.traineeassessment.toString()
+                                  : criteria.trainerassessment
+                                  ? criteria.trainerassessment.toString()
                                   : ""
                               }
                               row={true}>
@@ -222,8 +197,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                                 control={
                                   <CustomizedRadio
                                     isGoalCross={criteria.goalCross === 1}
-                                    isTrainer={criteria.trainerassessment === 1}
-                                    isTrainee={isRated && criteria.traineeassessment === 1}
+                                    isTrainee={criteria.traineeassessment === 1}
+                                    isTrainer={true}
                                   />
                                 }
                                 label={"1"}
@@ -233,8 +208,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                                 control={
                                   <CustomizedRadio
                                     isGoalCross={criteria.goalCross === 2}
-                                    isTrainer={criteria.trainerassessment === 2}
-                                    isTrainee={isRated && criteria.traineeassessment === 2}
+                                    isTrainee={criteria.traineeassessment === 2}
+                                    isTrainer={true}
                                   />
                                 }
                                 label={"2"}
@@ -244,8 +219,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                                 control={
                                   <CustomizedRadio
                                     isGoalCross={criteria.goalCross === 3}
-                                    isTrainer={criteria.trainerassessment === 3}
-                                    isTrainee={isRated && criteria.traineeassessment === 3}
+                                    isTrainee={criteria.traineeassessment === 3}
+                                    isTrainer={true}
                                   />
                                 }
                                 label={"3"}
@@ -255,8 +230,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                                 control={
                                   <CustomizedRadio
                                     isGoalCross={criteria.goalCross === 4}
-                                    isTrainer={criteria.trainerassessment === 4}
-                                    isTrainee={isRated && criteria.traineeassessment === 4}
+                                    isTrainee={criteria.traineeassessment === 4}
+                                    isTrainer={true}
                                   />
                                 }
                                 label={"4"}
@@ -266,8 +241,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                                 control={
                                   <CustomizedRadio
                                     isGoalCross={criteria.goalCross === 5}
-                                    isTrainer={criteria.trainerassessment === 5}
-                                    isTrainee={isRated && criteria.traineeassessment === 5}
+                                    isTrainee={criteria.traineeassessment === 5}
+                                    isTrainer={true}
                                   />
                                 }
                                 label={"5"}
@@ -277,12 +252,8 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                                 control={
                                   <CustomizedRadio
                                     isGoalCross={criteria.goalCross === null}
-                                    isTrainer={isRated && criteria.trainerassessment === null}
-                                    isTrainee={
-                                      fullDevSheet.result.status ===
-                                        DevSheetStatusConstants.rated &&
-                                      criteria.traineeassessment === null
-                                    }
+                                    isTrainee={criteria.traineeassessment === null}
+                                    isTrainer={true}
                                   />
                                 }
                                 label={"keine Angabe"}
@@ -304,9 +275,12 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                 <CircularProgress />
               ) : (
                 <CustomizedButton
-                  onClick={this.setAssessmentsTraineeSave}
+                  onClick={this.setAssessmentsTrainerSave}
                   text={"Speichern"}
-                  disabled={!isAssigned}
+                  disabled={
+                    fullDevSheet.result.status === DevSheetStatusConstants.completed ||
+                    fullDevSheet.result.status === DevSheetStatusConstants.rated
+                  }
                 />
               )}
             </div>

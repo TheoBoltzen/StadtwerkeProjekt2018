@@ -73,6 +73,24 @@ export const getAllService = () => {
 //   return fetch(`${apiURL}/users/${id}`, requestOptions).then(handleResponse);
 // };
 
+export const createUserService = (
+  username: string,
+  password: string,
+  firstname: string,
+  lastname: string,
+  role: string,
+  hiredOn: string,
+  profession: string
+) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ username, password, firstname, lastname, role, hiredOn, profession })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/register`, requestOptions).then(handleResponse);
+};
+
 export const handleResponse = (response: Response) => {
   return response.text().then((text: string) => {
     const data = text && JSON.parse(text);

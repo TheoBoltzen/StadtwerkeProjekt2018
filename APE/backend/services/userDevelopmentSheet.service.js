@@ -120,7 +120,7 @@ async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam, token) {
 
 async function getUserDevelopmentSheet(devSheetParam) {}
 
-async function setStatusRated() {
+async function setStatusRated(devSheetParam) {
   await UserDevSheet.update(
     {
       status: "Überarbeitet"

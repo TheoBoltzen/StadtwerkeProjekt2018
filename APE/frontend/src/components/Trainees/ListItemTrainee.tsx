@@ -3,14 +3,18 @@ import "./ListItemTrainee.css";
 import { IconButton, Tooltip } from "@material-ui/core";
 import { Favorite } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
+import { DevSheetStatusConstants } from "../../constants";
+import SearchIcon from "@material-ui/icons/Search";
 
 interface Props {
   nameTrainee: string;
   department: string;
   nameTrainer: string;
+  status: string;
   isHeader?: boolean;
   onAssignmentClick?: () => void;
   onFilloutClick?: () => void;
+  onSearchClick?: () => void;
 }
 
 interface State {}
@@ -27,9 +31,11 @@ export class ListItemTrainee extends React.Component<Props, State> {
       department,
       nameTrainee,
       nameTrainer,
+      status,
       isHeader = false,
       onAssignmentClick,
-      onFilloutClick
+      onFilloutClick,
+      onSearchClick
     } = this.props;
 
     return (
@@ -40,7 +46,16 @@ export class ListItemTrainee extends React.Component<Props, State> {
               <td>{department}</td>
               <td>{nameTrainee}</td>
               <td>{nameTrainer}</td>
+              <td>{status}</td>
               <td>
+                {!isHeader && (
+                  <Tooltip title={"Detailansicht"} onClick={onSearchClick}>
+                    <IconButton>
+                      <SearchIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                )}
+
                 {!nameTrainer ? (
                   <Tooltip title={"Mir zuweisen"} onClick={onAssignmentClick}>
                     <IconButton>
@@ -50,7 +65,11 @@ export class ListItemTrainee extends React.Component<Props, State> {
                 ) : (
                   !isHeader && (
                     <Tooltip title={"ausfüllen"} onClick={onFilloutClick}>
-                      <IconButton>
+                      <IconButton
+                        disabled={
+                          status === DevSheetStatusConstants.rated ||
+                          status === DevSheetStatusConstants.completed
+                        }>
                         <EditIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>

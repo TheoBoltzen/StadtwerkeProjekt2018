@@ -1,12 +1,17 @@
-import { ConnectedDevSheetFetch, Trainee } from "../../types";
+import { ConnectedDevSheetFetch, FullDevSheetFetch, Trainee } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
 import {
   getAllConnectedDevSheets,
   getAllTrainees,
+  getFullDevSheetAsTrainer,
   setTrainerToTraineeDevelopmentSheet
 } from "../../redux/actions";
 import { connect } from "react-redux";
 import { TraineesComponent } from "./TraineesComponent";
+
+export interface State {
+  readonly visibilityIndex: string;
+}
 
 interface Props {}
 
@@ -14,9 +19,12 @@ interface ReduxStateProps {
   readonly loading: boolean;
   readonly trainees: Trainee[];
   readonly connectedDevSheets: ConnectedDevSheetFetch[];
+  readonly loadingFullDevSheet: boolean;
+  readonly fullDevSheet: FullDevSheetFetch;
 }
 
 interface ReduxDispatchProps {
+  readonly getFullDevSheet: (devSheetID: number, traineeUsername: string) => void;
   readonly getAllTrainees: () => void;
   readonly getAllConnectedDevSheets: () => void;
   readonly setDevSheetToTrainer: (traineeUsername: string, devSheetId: string) => void;
@@ -25,16 +33,26 @@ interface ReduxDispatchProps {
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
-  const { loading, trainees, connectedDevSheets } = state.traineeTabReducer;
+  const {
+    loading,
+    trainees,
+    connectedDevSheets,
+    devSheet,
+    loadingFullDevSheet
+  } = state.traineeTabReducer;
   return {
     loading,
     trainees,
-    connectedDevSheets
+    connectedDevSheets,
+    fullDevSheet: devSheet,
+    loadingFullDevSheet
   };
 };
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
+    getFullDevSheet: (devSheetID, traineeUsername) =>
+      dispatch(getFullDevSheetAsTrainer(devSheetID, traineeUsername)),
     getAllTrainees: () => dispatch(getAllTrainees()),
     getAllConnectedDevSheets: () => dispatch(getAllConnectedDevSheets()),
     setDevSheetToTrainer: (traineeUsername, devSheetID) =>
