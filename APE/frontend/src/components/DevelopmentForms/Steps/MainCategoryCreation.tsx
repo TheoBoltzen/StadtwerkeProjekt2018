@@ -81,6 +81,7 @@ class MainCategoryCreation extends React.Component<Props> {
     if (this.props.developmentForm[index].open) {
       this.props.developmentForm[index].open = false;
     } else {
+      this.props.developmentForm.map(c => (c.open = false));
       this.props.developmentForm[index].open = true;
     }
     this.forceUpdate();
