@@ -16,7 +16,7 @@ import CustomizedRadio from "../General/CustomizedRadio";
 import "./AddUserModalComponent.css";
 import CustomizedButton from "../General/CustomizedButton";
 import Dialog from "@material-ui/core/Dialog";
-import Typography from "@material-ui/core/es/Typography";
+import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
