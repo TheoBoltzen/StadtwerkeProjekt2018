@@ -71,7 +71,7 @@ async function getAllUserDevelopmentSheets(devSheetParam) {
     include: [
       {
         model: db.developmentSheet,
-        attributes: ["department", "education"],
+        attributes: ["id", "department", "education"],
         required: true
       }
     ]
@@ -92,7 +92,7 @@ async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam, token) {
     include: [
       {
         model: db.developmentSheet,
-        attributes: ["department", "education"],
+        attributes: ["id", "department", "education"],
         required: true
       }
     ]
@@ -111,7 +111,7 @@ async function getAllUserDevelopmentSheetsByUserTrainee(devSheetParam, token) {
     include: [
       {
         model: db.developmentSheet,
-        attributes: ["department", "education"],
+        attributes: ["id", "department", "education"],
         required: true
       }
     ]
