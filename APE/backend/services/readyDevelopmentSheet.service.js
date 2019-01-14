@@ -555,6 +555,8 @@ async function getfullByIdTrainee(devsheetparam, token) {
     attributes: ["id", "status"],
     required: true
   });
+  console.log("##############");
+  console.log("id:", devsheetparam.id);
   console.log("############################ID:", userid.id);
   let userasso = await db.userDevelopmentSheetAssociation.findAll({
     where: { UserDevelopmentSheetId: userid.id },
