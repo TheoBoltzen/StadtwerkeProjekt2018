@@ -6,6 +6,7 @@ import "./TraineesComponent.css";
 import { FillOutDevelopmentSheetTrainer } from "../FillOutDevelopmentSheetTrainer/FillOutDevelopmentSheetTrainer";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
+import { DetailviewAssessmentDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewAssessmentDevelopmentSheetComponent";
 
 export class TraineesComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -43,8 +44,9 @@ export class TraineesComponent extends React.Component<AllProps, State> {
     });
   };
 
-  private handleSearch = () => {
-    console.log("searchClick");
+  private handleSearch = (devSheetID, traineeUsername) => {
+    this.props.getFullDevSheet(devSheetID, traineeUsername);
+    this.changeVisiblityIndex("detail-view");
   };
 
   private renderContent = () => {
@@ -74,7 +76,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
                   this.handleAssignment(devSheet.TraineeUsername, devSheet.id)
                 }
                 onFilloutClick={() => this.handleFillOut(devSheet.id, devSheet.TraineeUsername)}
-                onSearchClick={() => this.handleSearch()}
+                onSearchClick={() => this.handleSearch(devSheet.id, devSheet.TraineeUsername)}
               />
             ))}
           </div>
@@ -99,6 +101,14 @@ export class TraineesComponent extends React.Component<AllProps, State> {
               goBack={() => this.changeVisiblityIndex("connected-dev-sheets")}
             />
           </div>
+        );
+      case "detail-view":
+        return (
+          <DetailviewAssessmentDevelopmentSheetComponent
+            fullDevSheetDetail={fullDevSheet}
+            loading={loadingFullDevSheet}
+            id={fullDevSheet.result.devSheetid}
+          />
         );
       default:
         return (

@@ -91,7 +91,7 @@ async function create(devSheetParam) {
             DevelopmentSheetId: identifier
           };
 
-          await ReadyDevSheet.create(competencesForDevSheet);
+          ReadyDevSheet.create(competencesForDevSheet);
         }
       }
     }
