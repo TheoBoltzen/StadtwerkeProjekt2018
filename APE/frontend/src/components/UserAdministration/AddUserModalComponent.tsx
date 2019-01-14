@@ -170,14 +170,13 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
               </div>
               <div>
                 <FormControl className={"rightDiv"}>
-                  <InputLabel shrink htmlFor="bootstrap-input">
-                    <Typography variant={"subtitle1"}>Einstellungsdatum</Typography>
-                  </InputLabel>
                   <TextField
                     name={"hiredOn"}
                     value={hiredOn}
                     type={"date"}
                     InputLabelProps={{ shrink: true }}
+                    label={"Einstellungsdatum"}
+                    fullWidth={true}
                   />
                 </FormControl>
               </div>
