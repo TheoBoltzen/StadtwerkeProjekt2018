@@ -112,12 +112,16 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                         onSearchClick={e => {
                           this.handleSearchClickTraineeDevSheet(
                             e,
-                            devForm.id,
+                            devForm.DevelopmentSheetId,
                             devForm.TrainerUsername
                           );
                         }}
                         onEditClick={e => {
-                          this.handleFillOutClick(e, devForm.id, devForm.TrainerUsername);
+                          this.handleFillOutClick(
+                            e,
+                            devForm.DevelopmentSheetId,
+                            devForm.TrainerUsername
+                          );
                         }}
                       />
                     );

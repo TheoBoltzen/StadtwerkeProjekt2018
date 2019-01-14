@@ -3,7 +3,7 @@ export interface DevelopmentFormsListTrainee {
   readonly status: string;
   readonly createdAt: string;
   readonly updatedAt: string;
-  readonly developmentSheetId: number;
+  readonly DevelopmentSheetId: number;
   readonly TraineeUsername: string;
   readonly TrainerUsername: string;
   readonly DevelopmentSheet: DevelopmentSheet;
