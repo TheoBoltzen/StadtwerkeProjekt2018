@@ -23,7 +23,7 @@ import { DevSheetStatusConstants } from "../../constants";
 
 export const styles = theme => ({
   customWidth: {
-    maxWidth: 500
+    maxWidth: 340
   }
 });
 
@@ -101,7 +101,9 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     const { radioValue } = this.state;
     const { fullDevSheet, loading, loadingSave, loadingStatus, classes } = this.props;
 
-    const legend = "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht";
+    const legend =
+      "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht, " +
+      "grün = Zielwert, blau = Auswahl ";
 
     const isRated = fullDevSheet.result.status === DevSheetStatusConstants.rated;
     const isAssigned = fullDevSheet.result.status === DevSheetStatusConstants.assigned;
