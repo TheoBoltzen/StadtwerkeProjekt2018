@@ -73,10 +73,14 @@ export class TraineesComponent extends React.Component<AllProps, State> {
                 nameTrainer={devSheet.TrainerUsername}
                 status={devSheet.status}
                 onAssignmentClick={() =>
-                  this.handleAssignment(devSheet.TraineeUsername, devSheet.id)
+                  this.handleAssignment(devSheet.TraineeUsername, devSheet.DevelopmentSheetId)
                 }
-                onFilloutClick={() => this.handleFillOut(devSheet.id, devSheet.TraineeUsername)}
-                onSearchClick={() => this.handleSearch(devSheet.id, devSheet.TraineeUsername)}
+                onFilloutClick={() =>
+                  this.handleFillOut(devSheet.DevelopmentSheetId, devSheet.TraineeUsername)
+                }
+                onSearchClick={() =>
+                  this.handleSearch(devSheet.DevelopmentSheetId, devSheet.TraineeUsername)
+                }
               />
             ))}
           </div>
