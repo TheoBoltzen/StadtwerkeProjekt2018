@@ -336,6 +336,14 @@ async function getemptyById(devsheetparam) {
 async function getfullByIdTrainer(devsheetparam, token) {
   var decodedToken = jwt.verify(token, config.secret);
   let username = decodedToken.username;
+  let role = decodedToken.role;
+  let user;
+
+  if (role == "admin") {
+    user = devsheetparam.trainer;
+  } else {
+    user = username;
+  }
   console.log("hier", decodedToken.username);
   let identifier;
 
@@ -352,11 +360,14 @@ async function getfullByIdTrainer(devsheetparam, token) {
     where: {
       DevelopmentSheetId: devsheetparam.id,
       TraineeUsername: devsheetparam.trainee,
-      TrainerUsername: username
+      TrainerUsername: user
     },
     attributes: ["id", "status"],
     required: true
   });
+  console.log("trainername:", user);
+  console.log("userdevsheetid", userid.id);
+
   let userasso = await db.userDevelopmentSheetAssociation.findAll({
     where: { UserDevelopmentSheetId: userid.id },
     attributes: [
@@ -419,7 +430,7 @@ async function getfullByIdTrainer(devsheetparam, token) {
     version: result[0].version,
     department: devresult[0].DevelopmentSheet.department,
     education: devresult[0].DevelopmentSheet.education,
-    trainer: username,
+    trainer: user,
     trainee: devsheetparam.trainee,
     content: {}
   };
