@@ -104,11 +104,24 @@ export class TraineesComponent extends React.Component<AllProps, State> {
         );
       case "detail-view":
         return (
-          <DetailviewAssessmentDevelopmentSheetComponent
-            fullDevSheetDetail={fullDevSheet}
-            loading={loadingFullDevSheet}
-            id={fullDevSheet.result.devSheetid}
-          />
+          <div>
+            <div className={"buttonDiv"}>
+              <div />
+              <IconButton
+                color={"primary"}
+                className={"crossButton"}
+                onClick={() => {
+                  this.changeVisiblityIndex("connected-dev-sheets");
+                }}>
+                <ClearIcon />
+              </IconButton>
+            </div>
+            <DetailviewAssessmentDevelopmentSheetComponent
+              fullDevSheetDetail={fullDevSheet}
+              loading={loadingFullDevSheet}
+              id={fullDevSheet.result.devSheetid}
+            />
+          </div>
         );
       default:
         return (
