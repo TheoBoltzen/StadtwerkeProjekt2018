@@ -7,13 +7,16 @@ import {
   setTraineeStatusEstimated
 } from "../../redux/actions"; //setTrainerAssessments
 import { connect } from "react-redux";
+import { WithStyles } from "@material-ui/core";
+import { styles } from "./FillOutDevelopmentSheetComponent";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 export interface State {
   radioValue: { name: string; value: string; id: number }[];
   open: boolean;
 }
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   readonly loading: boolean;
   readonly fullDevSheet: FullDevSheetFetch;
   readonly goBack: () => void;
@@ -48,9 +51,11 @@ const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   };
 };
 
-const connectedFillOutDevelopmentSheet = connect<ReduxStateProps, ReduxDispatchProps, Props>(
-  mapStateToProps,
-  mapDispatchToProps
-)(FillDevelopmentSheetComponent);
+const connectedFillOutDevelopmentSheet = withStyles(styles)(
+  connect<ReduxStateProps, ReduxDispatchProps, Props>(
+    mapStateToProps,
+    mapDispatchToProps
+  )(FillDevelopmentSheetComponent)
+);
 
 export { connectedFillOutDevelopmentSheet as FillOutDevelopmentSheet };

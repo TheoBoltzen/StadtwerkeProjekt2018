@@ -21,6 +21,12 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import { DevSheetStatusConstants } from "../../constants";
 
+export const styles = theme => ({
+  customWidth: {
+    maxWidth: 500
+  }
+});
+
 export class FillDevelopmentSheetComponent extends React.Component<AllProps, State> {
   constructor(props) {
     super(props);
@@ -93,7 +99,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
 
   render() {
     const { radioValue } = this.state;
-    const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
+    const { fullDevSheet, loading, loadingSave, loadingStatus, classes } = this.props;
 
     const legend = "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht";
 
@@ -114,7 +120,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
           <div className={"buttonDivFillOut"}>
             <div />
             <div>
-              <Tooltip title={legend}>
+              <Tooltip title={legend} classes={{ tooltip: classes.customWidth }}>
                 <Button>Legende</Button>
               </Tooltip>
               {loadingStatus ? (
