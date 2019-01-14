@@ -8,6 +8,7 @@ import { FillOutDevelopmentSheet } from "../FillOutDevelopmentSheet/FillOutDevel
 import Typography from "@material-ui/core/Typography/Typography";
 import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
 import CustomizedButton from "../General/CustomizedButton";
+import { DetailviewAssessmentDevelopmentSheetComponent } from "../DetailviewDevelopmentSheet/DetailviewAssessmentDevelopmentSheetComponent";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
 
@@ -21,8 +22,9 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     };
   }
 
-  setAssignmentDevSheet = id => {
-    this.props.setAssignment(id);
+  setAssignmentDevSheet = async id => {
+    await this.props.setAssignment(id);
+    this.changeVisibilityIndex("", "All_Trainee_DevSheets");
   };
 
   componentDidMount() {
@@ -38,7 +40,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
 
   getDetailView = (e, index, id) => {
     this.props.getDevSheetDetails(id);
-    this.setState({ visibility_index: index });
+    this.changeVisibilityIndex(e, index);
     this.setState({
       developmentFormId: id
     });
@@ -252,9 +254,9 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     <ClearIcon />
                   </IconButton>
                 </div>
-                <DetailViewDevelopmentSheet
+                <DetailviewAssessmentDevelopmentSheetComponent
                   id={developmentFormId}
-                  devSheetDetail={this.props.fullDevSheet}
+                  fullDevSheetDetail={this.props.fullDevSheet}
                   loading={this.props.loadingDetail}
                 />
               </div>

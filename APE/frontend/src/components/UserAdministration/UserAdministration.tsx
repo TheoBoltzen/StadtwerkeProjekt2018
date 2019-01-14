@@ -4,6 +4,10 @@ import { UserAdministrationComponent } from "./UserAdministrationComponent";
 import { User } from "../../types";
 import { getAll } from "../../redux/actions";
 
+export interface State {
+  readonly isAddUserModalOpen: boolean;
+}
+
 interface Props {}
 
 interface ReduxStateProps {

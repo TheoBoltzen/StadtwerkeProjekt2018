@@ -1,43 +1,76 @@
 import * as React from "react";
 import "./UserAdministrationComponent.css";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Dialog } from "@material-ui/core";
 import { ListItem } from "./ListItem";
-import { AllProps } from "./UserAdministration";
+import { AllProps, State } from "./UserAdministration";
+import { AddUserModal } from "./AddUserModal";
+import CustomizedButton from "../General/CustomizedButton";
 
-export class UserAdministrationComponent extends React.Component<AllProps, {}> {
+export class UserAdministrationComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
+
+    this.state = {
+      isAddUserModalOpen: false
+    };
   }
 
   componentDidMount() {
     this.props.getAllUsers();
   }
 
+  componentDidUpdate(nextProps: AllProps, nextState: State) {
+    if (
+      nextState.isAddUserModalOpen &&
+      nextState.isAddUserModalOpen !== this.state.isAddUserModalOpen
+    ) {
+      this.props.getAllUsers();
+    }
+  }
+
+  private openAddUserModal = () => {
+    this.setState({
+      isAddUserModalOpen: !this.state.isAddUserModalOpen
+    });
+  };
+
   render() {
+    const { isAddUserModalOpen } = this.state;
     const { users, loading } = this.props;
 
     return loading ? (
       <CircularProgress />
     ) : (
-      <div className={"frame center"}>
-        <ListItem
-          isHeader={true}
-          username={"Kennung"}
-          name={"Name"}
-          firstname={"Vorname"}
-          job={"Tätigkeit"}
-        />
-        {users.map((user, index) => {
-          return (
-            <ListItem
-              key={index}
-              username={user.username}
-              name={user.lastname}
-              firstname={user.firstname}
-              job={user.job}
-            />
-          );
-        })}
+      <div className={"root-user-administration"}>
+        <Dialog open={isAddUserModalOpen} onClose={this.openAddUserModal}>
+          <AddUserModal closeDialog={this.openAddUserModal} />
+        </Dialog>
+
+        <div className={"add-user-button-container"}>
+          <div />
+          <CustomizedButton onClick={this.openAddUserModal} text={"Benutzer anlegen"} />
+        </div>
+
+        <div className={"frame center"}>
+          <ListItem
+            isHeader={true}
+            username={"Kennung"}
+            name={"Name"}
+            firstname={"Vorname"}
+            job={"Tätigkeit"}
+          />
+          {users.map((user, index) => {
+            return (
+              <ListItem
+                key={index}
+                username={user.username}
+                name={user.lastname}
+                firstname={user.firstname}
+                job={user.job}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }

@@ -94,6 +94,7 @@ class CriteriaCreation extends React.Component<Props> {
     if (this.props.developmentForm[index].open) {
       this.props.developmentForm[index].open = false;
     } else {
+      this.props.developmentForm.map(c => (c.open = false));
       this.props.developmentForm[index].open = true;
     }
     this.forceUpdate();
@@ -103,6 +104,7 @@ class CriteriaCreation extends React.Component<Props> {
     if (this.props.developmentForm[index].MainCategories[index2].open) {
       this.props.developmentForm[index].MainCategories[index2].open = false;
     } else {
+      this.props.developmentForm[index].MainCategories.map(m => (m.open = false));
       this.props.developmentForm[index].MainCategories[index2].open = true;
     }
     this.forceUpdate();
@@ -112,6 +114,9 @@ class CriteriaCreation extends React.Component<Props> {
     if (this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open) {
       this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open = false;
     } else {
+      this.props.developmentForm[index].MainCategories[index2].SubCategories.map(
+        s => (s.open = false)
+      );
       this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open = true;
     }
     this.forceUpdate();

@@ -31,3 +31,23 @@ export const setTraineeStatusEstimatedService = (devSheetID: string) => {
 
   return fetch(`${apiURL}/services/setStatusEstimated`, requestOptions).then(handleResponse);
 };
+
+export const setTrainerStatusRatedService = (devSheetID: string, traineeUsername: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ DevelopmentSheetId: devSheetID, TraineeUsername: traineeUsername })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/setStatusRated`, requestOptions).then(handleResponse);
+};
+
+export const setTraineeStatusCompletedService = (devSheetID: string) => {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(),
+    body: JSON.stringify({ DevelopmentSheetId: devSheetID })
+  } as RequestInit;
+
+  return fetch(`${apiURL}/services/setDigitalAgreement`, requestOptions).then(handleResponse);
+};

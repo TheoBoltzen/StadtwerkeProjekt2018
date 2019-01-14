@@ -17,10 +17,10 @@ export const setTraineeDevelopmentSheet = (devSheetID: string) => {
     return { type: traineeDevelopmentFormConstants.SETDEVSHEET_FAILURE, error };
   };
 
-  return (dispatch: Dispatch) => {
-    dispatch(request(devSheetID));
+  return async (dispatch: Dispatch) => {
+    await dispatch(request(devSheetID));
 
-    setDevelopmentSheetService(devSheetID).then(
+    await setDevelopmentSheetService(devSheetID).then(
       () => {
         dispatch(success());
         dispatch(successAlert("Bogen erfolgreich zugewiesen"));

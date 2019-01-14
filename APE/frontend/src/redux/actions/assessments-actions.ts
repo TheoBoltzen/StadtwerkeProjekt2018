@@ -3,8 +3,10 @@ import { Dispatch } from "redux";
 import { errorAlert, successAlert } from "./alert";
 import {
   setTraineeAssessmentService,
+  setTraineeStatusCompletedService,
   setTraineeStatusEstimatedService,
-  setTrainerAssessmentService
+  setTrainerAssessmentService,
+  setTrainerStatusRatedService
 } from "../../services";
 import { TraineesAssessments, TrainerAssessments } from "../../types";
 
@@ -62,7 +64,40 @@ export const setTrainerAssessments = (trainerAssessments: TrainerAssessments[]) 
     setTrainerAssessmentService(trainerAssessments).then(
       () => {
         dispatch(success());
-        dispatch(successAlert("Werte erfolgreich zugewiesen"));
+        dispatch(successAlert("Bewertung wurde erfolgreich abgegeben"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const setTrainerStatusRated = (devSheetID: string, traineeUsername: string) => {
+  const request = devSheetID => {
+    return {
+      type: assessmentsConstants.SETSTATUSRATED_TRAINER_REQUEST,
+      devSheetID,
+      traineeUsername
+    };
+  };
+
+  const success = () => {
+    return { type: assessmentsConstants.SETSTATUSRATED_TRAINER_SUCCESS };
+  };
+
+  const failure = (error: string) => {
+    return { type: assessmentsConstants.SETSTATUSRATED_TRAINER_FAILURE, error };
+  };
+
+  return async (dispatch: Dispatch) => {
+    await dispatch(request(devSheetID));
+
+    await setTrainerStatusRatedService(devSheetID, traineeUsername).then(
+      () => {
+        dispatch(success());
+        dispatch(successAlert("Bogen wurde erfolgreich bewertet"));
       },
       error => {
         dispatch(failure(error.toString()));
@@ -95,6 +130,38 @@ export const setTraineeStatusEstimated = (devSheetID: string) => {
       () => {
         dispatch(success());
         dispatch(successAlert("Bogen wurde erfolgreich abgegeben"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const setTraineeStatusCompleted = (devSheetID: string) => {
+  const request = devSheetID => {
+    return {
+      type: assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_REQUEST,
+      devSheetID
+    };
+  };
+
+  const success = () => {
+    return { type: assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_SUCCESS };
+  };
+
+  const failure = (error: string) => {
+    return { type: assessmentsConstants.SETSTATUSCOMPLETED_TRAINEE_FAILURE, error };
+  };
+
+  return async (dispatch: Dispatch) => {
+    await dispatch(request(devSheetID));
+
+    await setTraineeStatusCompletedService(devSheetID).then(
+      () => {
+        dispatch(success());
+        dispatch(successAlert("Bogen wurde erfolgreich unterschrieben"));
       },
       error => {
         dispatch(failure(error.toString()));

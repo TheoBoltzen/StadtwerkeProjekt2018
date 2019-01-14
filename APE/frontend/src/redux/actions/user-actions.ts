@@ -1,7 +1,13 @@
 import { RoleConstants, RouterPathsConstants, userConstants } from "../../constants";
-import { getAllService, getRoleService, loginService, logoutService } from "../../services";
+import {
+  createUserService,
+  getAllService,
+  getRoleService,
+  loginService,
+  logoutService
+} from "../../services";
 import { history } from "../../helpers";
-import { errorAlert } from "./alert";
+import { errorAlert, successAlert } from "./alert";
 import { Dispatch } from "redux";
 import { User } from "../../types";
 
@@ -118,6 +124,60 @@ export const getAll = () => {
 
     getAllService().then(
       users => dispatch(success(users)),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(errorAlert(error.toString()));
+      }
+    );
+  };
+};
+
+export const createUser = (
+  username: string,
+  password: string,
+  firstname: string,
+  lastname: string,
+  role: string,
+  hiredOn: string,
+  profession: string
+) => {
+  const request = (username, password, firstname, lastname, role, hiredOn, profession) => {
+    return {
+      type: userConstants.CREATE_REQUEST,
+      username,
+      password,
+      firstname,
+      lastname,
+      role,
+      hiredOn,
+      profession
+    };
+  };
+
+  const success = () => {
+    return { type: userConstants.CREATE_SUCCESS };
+  };
+
+  const failure = (error: string) => {
+    return { type: userConstants.CREATE_FAILURE, error };
+  };
+
+  return async (dispatch: Dispatch) => {
+    await dispatch(request(username, password, firstname, lastname, role, hiredOn, profession));
+
+    await createUserService(
+      username,
+      password,
+      firstname,
+      lastname,
+      role,
+      hiredOn,
+      profession
+    ).then(
+      () => {
+        dispatch(success());
+        dispatch(successAlert("Benutzer erfolgreich erstellt"));
+      },
       error => {
         dispatch(failure(error.toString()));
         dispatch(errorAlert(error.toString()));
