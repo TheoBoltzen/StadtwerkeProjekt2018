@@ -5,6 +5,7 @@ const ReadyDevSheet = db.readyDevelopmentSheet;
 const UserDevSheetAss = db.userDevelopmentSheetAssociation;
 const jwt = require("jsonwebtoken");
 const config = require("./../config.json");
+const Op = Sequelize.Op;
 
 module.exports = {
   _create,
@@ -65,17 +66,37 @@ async function setTrainer(devSheetParam, token) {
     .catch();
 }
 
-async function getAllUserDevelopmentSheets(devSheetParam) {
-  return await UserDevSheet.findAll({
-    where: {},
-    include: [
-      {
-        model: db.developmentSheet,
-        attributes: ["id", "department", "education"],
-        required: true
-      }
-    ]
-  });
+async function getAllUserDevelopmentSheets(devSheetParam, token) {
+  const _token = token;
+  const decodedToken = jwt.verify(_token, config.secret);
+  const role = decodedToken.role;
+  const username = decodedToken.username;
+
+  if (role == "admin") {
+    return await UserDevSheet.findAll({
+      where: {},
+      include: [
+        {
+          model: db.developmentSheet,
+          attributes: ["id", "department", "education"],
+          required: true
+        }
+      ]
+    });
+  } else {
+    return await UserDevSheet.findAll({
+      where: {
+        [Op.or]: [{ TrainerUsername: null }, { TrainerUsername: username }]
+      },
+      include: [
+        {
+          model: db.developmentSheet,
+          attributes: ["id", "department", "education"],
+          required: true
+        }
+      ]
+    });
+  }
 }
 
 async function getAllUserDevelopmentSheetsByUserTrainer(devSheetParam, token) {

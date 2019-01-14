@@ -25,7 +25,10 @@ exports.setStatusRated = (req, res, next) => {
 
 exports.getAllUserDevelopmentSheets = (req, res, next) => {
   userdevSheetService
-    .getAllUserDevelopmentSheets(req.body)
+    .getAllUserDevelopmentSheets(
+      req.body,
+      req.headers.authorization.split("Bearer ")[1]
+    )
     .then(devSheets => res.json(devSheets))
     .catch(err => next(err));
 };
