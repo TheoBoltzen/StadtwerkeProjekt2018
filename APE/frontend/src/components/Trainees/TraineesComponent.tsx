@@ -33,8 +33,8 @@ export class TraineesComponent extends React.Component<AllProps, State> {
   };
 
   // Klick auf Ausfüllen
-  private handleFillOut = (devSheetID, traineeUsername) => {
-    this.props.getFullDevSheet(devSheetID, traineeUsername);
+  private handleFillOut = (devSheetID, traineeUsername, trainerUsername) => {
+    this.props.getFullDevSheet(devSheetID, traineeUsername, trainerUsername);
     this.changeVisiblityIndex("fill-out");
   };
 
@@ -44,8 +44,8 @@ export class TraineesComponent extends React.Component<AllProps, State> {
     });
   };
 
-  private handleSearch = (devSheetID, traineeUsername) => {
-    this.props.getFullDevSheet(devSheetID, traineeUsername);
+  private handleSearch = (devSheetID, traineeUsername, trainerUsername) => {
+    this.props.getFullDevSheet(devSheetID, traineeUsername, trainerUsername);
     this.changeVisiblityIndex("detail-view");
   };
 
@@ -76,10 +76,18 @@ export class TraineesComponent extends React.Component<AllProps, State> {
                   this.handleAssignment(devSheet.TraineeUsername, devSheet.DevelopmentSheetId)
                 }
                 onFilloutClick={() =>
-                  this.handleFillOut(devSheet.DevelopmentSheetId, devSheet.TraineeUsername)
+                  this.handleFillOut(
+                    devSheet.DevelopmentSheetId,
+                    devSheet.TraineeUsername,
+                    devSheet.TrainerUsername
+                  )
                 }
                 onSearchClick={() =>
-                  this.handleSearch(devSheet.DevelopmentSheetId, devSheet.TraineeUsername)
+                  this.handleSearch(
+                    devSheet.DevelopmentSheetId,
+                    devSheet.TraineeUsername,
+                    devSheet.TrainerUsername
+                  )
                 }
               />
             ))}
