@@ -7,7 +7,8 @@ import {
   FormControlLabel,
   FormLabel,
   InputLabel,
-  RadioGroup
+  RadioGroup,
+  TextField
 } from "@material-ui/core";
 import { AllProps, State } from "./AddUserModal";
 import CustomizedInput from "../General/CustomizedInput";
@@ -172,7 +173,12 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
                   <InputLabel shrink htmlFor="bootstrap-input">
                     <Typography variant={"subtitle1"}>Einstellungsdatum</Typography>
                   </InputLabel>
-                  <CustomizedInput name={"hiredOn"} value={hiredOn} />
+                  <TextField
+                    name={"hiredOn"}
+                    value={hiredOn}
+                    type={"date"}
+                    InputLabelProps={{ shrink: true }}
+                  />
                 </FormControl>
               </div>
             </div>
