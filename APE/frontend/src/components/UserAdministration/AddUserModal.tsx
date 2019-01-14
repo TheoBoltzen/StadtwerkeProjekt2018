@@ -12,6 +12,8 @@ export interface State {
   readonly password: string;
   readonly firstname: string;
   readonly lastname: string;
+  readonly hiredOn: string;
+  readonly profession: string;
 }
 
 interface Props extends WithStyles<typeof styles> {
@@ -28,7 +30,9 @@ interface ReduxDispatchProps {
     password: string,
     firstname: string,
     lastname: string,
-    role: string
+    role: string,
+    hiredOn: string,
+    profession: string
   ) => void;
 }
 
@@ -43,8 +47,8 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
-    createUser: (username, password, firstname, lastname, role) =>
-      dispatch(createUser(username, password, firstname, lastname, role))
+    createUser: (username, password, firstname, lastname, role, hiredOn, profession) =>
+      dispatch(createUser(username, password, firstname, lastname, role, hiredOn, profession))
   };
 };
 

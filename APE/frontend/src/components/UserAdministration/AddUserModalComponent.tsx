@@ -59,16 +59,18 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
       username: "",
       password: "",
       role: "trainer",
-      lastname: ""
+      lastname: "",
+      hiredOn: "",
+      profession: ""
     };
   }
 
   private handleSubmit = async () => {
     try {
-      const { firstname, username, password, lastname, role } = this.state;
+      const { firstname, username, password, lastname, role, hiredOn, profession } = this.state;
       const { createUser, closeDialog } = this.props;
-      if (firstname && username && password && lastname && role) {
-        await createUser(username, password, firstname, lastname, role);
+      if (firstname && username && password && lastname && role && hiredOn && profession) {
+        await createUser(username, password, firstname, lastname, role, hiredOn, profession);
         closeDialog();
       }
     } catch (e) {
@@ -84,7 +86,7 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
   };
 
   render() {
-    const { firstname, username, password, lastname, role } = this.state;
+    const { firstname, username, password, lastname, role, hiredOn, profession } = this.state;
     const { loading, closeDialog, classes } = this.props;
     return (
       <Dialog fullWidth={true} maxWidth={"sm"} open={true} onClose={closeDialog}>
@@ -162,7 +164,7 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
                   <InputLabel shrink htmlFor="bootstrap-input">
                     <Typography variant={"subtitle1"}>Tätigkeit</Typography>
                   </InputLabel>
-                  <CustomizedInput name={"profession"} value={""} />
+                  <CustomizedInput name={"profession"} value={profession} />
                 </FormControl>
               </div>
               <div>
@@ -170,7 +172,7 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
                   <InputLabel shrink htmlFor="bootstrap-input">
                     <Typography variant={"subtitle1"}>Einstellungsdatum</Typography>
                   </InputLabel>
-                  <CustomizedInput name={"profession"} value={""} />
+                  <CustomizedInput name={"hiredOn"} value={hiredOn} />
                 </FormControl>
               </div>
             </div>

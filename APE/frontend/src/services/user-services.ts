@@ -78,12 +78,14 @@ export const createUserService = (
   password: string,
   firstname: string,
   lastname: string,
-  role: string
+  role: string,
+  hiredOn: string,
+  profession: string
 ) => {
   const requestOptions = {
     method: "POST",
     headers: authHeader(),
-    body: JSON.stringify({ username, password, firstname, lastname, role })
+    body: JSON.stringify({ username, password, firstname, lastname, role, hiredOn, profession })
   } as RequestInit;
 
   return fetch(`${apiURL}/services/register`, requestOptions).then(handleResponse);

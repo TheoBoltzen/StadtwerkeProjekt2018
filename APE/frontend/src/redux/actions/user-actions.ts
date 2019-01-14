@@ -137,10 +137,21 @@ export const createUser = (
   password: string,
   firstname: string,
   lastname: string,
-  role: string
+  role: string,
+  hiredOn: string,
+  profession: string
 ) => {
-  const request = () => {
-    return { type: userConstants.CREATE_REQUEST };
+  const request = (username, password, firstname, lastname, role, hiredOn, profession) => {
+    return {
+      type: userConstants.CREATE_REQUEST,
+      username,
+      password,
+      firstname,
+      lastname,
+      role,
+      hiredOn,
+      profession
+    };
   };
 
   const success = () => {
@@ -152,9 +163,17 @@ export const createUser = (
   };
 
   return async (dispatch: Dispatch) => {
-    await dispatch(request());
+    await dispatch(request(username, password, firstname, lastname, role, hiredOn, profession));
 
-    await createUserService(username, password, firstname, lastname, role).then(
+    await createUserService(
+      username,
+      password,
+      firstname,
+      lastname,
+      role,
+      hiredOn,
+      profession
+    ).then(
       () => {
         dispatch(success());
         dispatch(successAlert("Benutzer erfolgreich erstellt"));
