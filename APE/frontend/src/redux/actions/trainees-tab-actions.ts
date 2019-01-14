@@ -101,12 +101,17 @@ export const setTrainerToTraineeDevelopmentSheet = (
   };
 };
 
-export const getFullDevSheetAsTrainer = (devSheetId: number, traineeUsername: string) => {
-  const request = (devSheetId, traineeUsername) => {
+export const getFullDevSheetAsTrainer = (
+  devSheetId: number,
+  traineeUsername: string,
+  trainerUsername: string
+) => {
+  const request = (devSheetId, traineeUsername, trainerUsername) => {
     return {
       type: trainerDevelopmentFormConstants.GETFULLDEVSHEET_REQUEST,
       devSheetId,
-      traineeUsername
+      traineeUsername,
+      trainerUsername
     };
   };
 
@@ -119,9 +124,9 @@ export const getFullDevSheetAsTrainer = (devSheetId: number, traineeUsername: st
   };
 
   return (dispatch: Dispatch) => {
-    dispatch(request(devSheetId, traineeUsername));
+    dispatch(request(devSheetId, traineeUsername, trainerUsername));
 
-    getFullDevSheetAsTrainerService(devSheetId, traineeUsername).then(
+    getFullDevSheetAsTrainerService(devSheetId, traineeUsername, trainerUsername).then(
       devSheet => dispatch(success(devSheet)),
       error => {
         dispatch(failure(error.toString()));

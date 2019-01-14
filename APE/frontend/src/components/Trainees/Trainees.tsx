@@ -24,7 +24,11 @@ interface ReduxStateProps {
 }
 
 interface ReduxDispatchProps {
-  readonly getFullDevSheet: (devSheetID: number, traineeUsername: string) => void;
+  readonly getFullDevSheet: (
+    devSheetID: number,
+    traineeUsername: string,
+    trainerUsername: string
+  ) => void;
   readonly getAllTrainees: () => void;
   readonly getAllConnectedDevSheets: () => void;
   readonly setDevSheetToTrainer: (traineeUsername: string, devSheetId: string) => void;
@@ -51,8 +55,8 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
-    getFullDevSheet: (devSheetID, traineeUsername) =>
-      dispatch(getFullDevSheetAsTrainer(devSheetID, traineeUsername)),
+    getFullDevSheet: (devSheetID, traineeUsername, trainerUsername) =>
+      dispatch(getFullDevSheetAsTrainer(devSheetID, traineeUsername, trainerUsername)),
     getAllTrainees: () => dispatch(getAllTrainees()),
     getAllConnectedDevSheets: () => dispatch(getAllConnectedDevSheets()),
     setDevSheetToTrainer: (traineeUsername, devSheetID) =>
