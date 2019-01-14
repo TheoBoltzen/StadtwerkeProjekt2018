@@ -104,9 +104,9 @@ export const Graph = (props: Props) => {
           {isOutfilledDevSheet ? (
             <Line
               dataKey="Ist_Trainee"
-              stroke="red"
-              strokeWidth={4}
-              dot={{ strokeWidth: 2, r: 6 }}
+              stroke="#00beff"
+              strokeWidth={6}
+              dot={{ strokeWidth: 6, r: 6 }}
             />
           ) : (
             console.log("EmptydevSheet_IstWerte_Trainee")
@@ -114,14 +114,14 @@ export const Graph = (props: Props) => {
           {isOutfilledDevSheet ? (
             <Line
               dataKey="Ist_Trainer"
-              stroke="green"
-              strokeWidth={3}
-              dot={{ strokeWidth: 2, r: 5 }}
+              stroke="#992221"
+              strokeWidth={4}
+              dot={{ strokeWidth: 4, r: 4 }}
             />
           ) : (
             console.log("EmptydevSheet_IstWerte_Trainer")
           )}
-          <Line dataKey="Soll" stroke="#8884d8" strokeWidth={2} dot={{ strokeWidth: 2, r: 4 }} />
+          <Line dataKey="Soll" stroke="#43a047" strokeWidth={2} dot={{ strokeWidth: 2, r: 2 }} />
         </LineChart>
       </div>
     );
