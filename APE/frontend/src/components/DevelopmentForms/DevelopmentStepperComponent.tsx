@@ -341,7 +341,17 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
 
     const isFilled = !profession || !department;
     const competenceIsChecked = activeStep === 1 && !developmentForm.find(c => c.checked);
-    // const mainCategoryIsChecked = (activeStep === 2) && !developmentForm. forEach(c => c.MainCategories.find(m => m.checked))
+
+    // const onlyCheckedOnes = developmentForm.filter(c => c.checked)
+    // const justBoolean = onlyCheckedOnes.map(c => (!!c.MainCategories.find(m => m.checked)))
+    // const mainCategoriesIsChecked = activeStep === 2 && !justBoolean.every(m => m)
+
+    const mainCategoriesIsChecked =
+      activeStep === 2 &&
+      !developmentForm
+        .filter(c => c.checked)
+        .map(c => !!c.MainCategories.find(m => m.checked))
+        .every(m => m);
 
     return (
       <div className={"stepperRoot"}>
@@ -368,7 +378,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
                   Zurück
                 </Button>
                 <CustomizedButton
-                  disabled={isFilled || competenceIsChecked}
+                  disabled={isFilled || competenceIsChecked || mainCategoriesIsChecked}
                   onClick={this.handleNext}
                   text={activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
                 />
