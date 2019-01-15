@@ -21,6 +21,12 @@ import "./FillOutDevelopmentSheetTrainerComponent.css";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 import { DevSheetStatusConstants } from "../../constants";
 
+export const styles = theme => ({
+  customWidth: {
+    maxWidth: 340
+  }
+});
+
 export class FillOutDevelopmentSheetTrainerComponent extends React.Component<AllProps, State> {
   constructor(props) {
     super(props);
@@ -87,9 +93,11 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
 
   render() {
     const { radioValue } = this.state;
-    const { fullDevSheet, loading, loadingSave, loadingStatus } = this.props;
+    const { fullDevSheet, loading, loadingSave, loadingStatus, classes } = this.props;
 
-    const legend = "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht";
+    const legend =
+      "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht, " +
+      "grün = Zielwert, blau = Einschätzung Auszubildender, rot = Einschätzung Ausbilder ";
 
     return loading ? (
       <CircularProgress />
@@ -105,7 +113,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
           <div className={"buttonDivFillOut"}>
             <div />
             <div>
-              <Tooltip title={legend}>
+              <Tooltip title={legend} classes={{ tooltip: classes.customWidth }}>
                 <Button>Legende</Button>
               </Tooltip>
               {loadingStatus ? (
@@ -113,7 +121,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
               ) : (
                 <CustomizedButtonRed
                   onClick={this.handleClickOpen}
-                  text={"Abgeben"}
+                  text={"Fertigstellen"}
                   disabled={
                     fullDevSheet.result.status === DevSheetStatusConstants.completed ||
                     fullDevSheet.result.status === DevSheetStatusConstants.rated
@@ -129,11 +137,12 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description">
             <DialogTitle id="alert-dialog-title">
-              {"Soll der Entwicklungsbogen wirklich abgegeben werden?"}
+              {"Soll der Entwicklungsbogen wirklich fertiggestellt werden?"}
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen.
+                Durch das Fertigstellen dieses Entwicklungsbogens, kannst du keine Änderungen mehr
+                vornehmen.
               </DialogContentText>
             </DialogContent>
             <DialogActions>
