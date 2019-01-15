@@ -19,7 +19,8 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
       activeStep: 0,
       department: "",
       profession: "",
-      developmentForm: []
+      developmentForm: [],
+      checkedMainCategory: false
     };
   }
 
@@ -141,6 +142,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
       developmentForm[index].MainCategories[index2].checked = true;
     }
     this.forceUpdate();
+    this.setState({ checkedMainCategory: this.findCheckedMainCategory() });
   };
 
   addCompetence = () => {
@@ -334,6 +336,19 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     }));
   };
 
+  findCheckedMainCategory = () => {
+    let MainCategoryIsCheckedReturn = false;
+    for (let i = 0, length = this.state.developmentForm.length; i < length; i++) {
+      const mainCategoryIsChecked = this.state.developmentForm[i].MainCategories.find(
+        m => m.checked
+      );
+      if (mainCategoryIsChecked) {
+        MainCategoryIsCheckedReturn = true;
+      }
+    }
+    return MainCategoryIsCheckedReturn;
+  };
+
   render() {
     const { classes } = this.props;
     const steps = getSteps();
@@ -341,8 +356,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
 
     const isFilled = !profession || !department;
     const competenceIsChecked = activeStep === 1 && !developmentForm.find(c => c.checked);
-    // const mainCategoryIsChecked = (activeStep === 2) && !developmentForm. forEach(c => c.MainCategories.find(m => m.checked))
-
+    const mainCategoryIsChecked = activeStep === 2 && !this.state.checkedMainCategory;
     return (
       <div className={"stepperRoot"}>
         <div className={classes.root}>
@@ -368,7 +382,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
                   Zurück
                 </Button>
                 <CustomizedButton
-                  disabled={isFilled || competenceIsChecked}
+                  disabled={isFilled || competenceIsChecked || mainCategoryIsChecked}
                   onClick={this.handleNext}
                   text={activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
                 />

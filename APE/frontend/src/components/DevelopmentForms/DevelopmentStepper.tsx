@@ -24,6 +24,7 @@ export interface State {
   department: string;
   profession: string;
   developmentForm: Competence[];
+  checkedMainCategory: boolean;
 }
 
 interface ReduxStateProps {
