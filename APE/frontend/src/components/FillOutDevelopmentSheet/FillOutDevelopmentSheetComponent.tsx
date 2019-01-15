@@ -103,7 +103,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
 
     const legend =
       "1 = in vollem Maße, 2 = weitgehend, 3 = teilweise, 4 = unzureichend, 5 = nicht, " +
-      "grün = Zielwert, blau = Auswahl ";
+      "grün = Zielwert, blau = Einschätzung Auszubildender, rot = Einschätzung Ausbilder ";
 
     const isRated = fullDevSheet.result.status === DevSheetStatusConstants.rated;
     const isAssigned = fullDevSheet.result.status === DevSheetStatusConstants.assigned;
@@ -150,7 +150,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 {isRated
-                  ? "Durch das Setzen deiner digitalen Unterschrift, nimmst du die angezeigten Werte zur Kentniss und bist mit diesen Einverstanden."
+                  ? "Durch das Setzen deiner digitalen Unterschrift nimmst du die angezeigten Werte zur Kentniss und bist mit diesen Einverstanden."
                   : "Durch das Abgeben dieses Bogens, kannst du keine Änderungen mehr vornehmen und dein Ausbilder wird sich mit dir für die Evaluation in Verbindung setzen."}
               </DialogContentText>
             </DialogContent>
