@@ -123,6 +123,26 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.setState({ [name]: value } as State);
   };
 
+  handleToggleCompetences = (event: any, index) => {
+    const { developmentForm } = this.state;
+    if (developmentForm[index].checked) {
+      developmentForm[index].checked = false;
+    } else {
+      developmentForm[index].checked = true;
+    }
+    this.forceUpdate();
+  };
+
+  handleToggleMainCategories = (event: any, index, index2) => {
+    const { developmentForm } = this.state;
+    if (developmentForm[index].MainCategories[index2].checked) {
+      developmentForm[index].MainCategories[index2].checked = false;
+    } else {
+      developmentForm[index].MainCategories[index2].checked = true;
+    }
+    this.forceUpdate();
+  };
+
   addCompetence = () => {
     const developmentForm = this.state.developmentForm;
     developmentForm.push({
@@ -188,6 +208,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
           <CircularProgress />
         ) : (
           <CompetenceCreation
+            handleToggle={this.handleToggleCompetences}
             developmentForm={this.state.developmentForm}
             onClickAddButton={this.addCompetence}
             classes={this.props.classes}
@@ -199,6 +220,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
           <CircularProgress />
         ) : (
           <MainCategoryCreation
+            handleToggle={this.handleToggleMainCategories}
             classes={this.props.classes}
             onClickAddButton={this.addMainCategory}
             developmentForm={this.state.developmentForm}
@@ -315,7 +337,11 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
   render() {
     const { classes } = this.props;
     const steps = getSteps();
-    const { activeStep } = this.state;
+    const { activeStep, profession, department, developmentForm } = this.state;
+
+    const isFilled = !profession || !department;
+    const competenceIsChecked = activeStep === 1 && !developmentForm.find(c => c.checked);
+    // const mainCategoryIsChecked = (activeStep === 2) && !developmentForm. forEach(c => c.MainCategories.find(m => m.checked))
 
     return (
       <div className={"stepperRoot"}>
@@ -342,6 +368,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
                   Zurück
                 </Button>
                 <CustomizedButton
+                  disabled={isFilled || competenceIsChecked}
                   onClick={this.handleNext}
                   text={activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
                 />

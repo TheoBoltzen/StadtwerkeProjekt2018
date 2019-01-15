@@ -24,6 +24,7 @@ interface Props extends WithStyles<typeof styles> {
   onClickAddButton: () => void;
   classes: any;
   name: string;
+  handleToggle: (e, index) => void;
 }
 
 export interface Competence {
@@ -61,16 +62,6 @@ class CompetenceCreation extends React.Component<Props> {
     this.forceUpdate();
   };
 
-  handleToggle = (event: any, index) => {
-    if (this.props.developmentForm[index].checked) {
-      this.props.developmentForm[index].checked = false;
-    } else {
-      this.props.developmentForm[index].checked = true;
-    }
-    this.forceUpdate();
-    console.log("Props: ", this.props);
-  };
-
   description =
     "Neue Kompetenzkategorien können über das Plus-Symbol erstellt werden. Doppelklick auf eine" +
     " Kompetenzkategorie ermöglicht es diese Kategorie umzubennen.";
@@ -97,7 +88,7 @@ class CompetenceCreation extends React.Component<Props> {
                     className={classes.checkBox}
                     checked={competence.checked}
                     onClick={e => {
-                      this.handleToggle(e, index);
+                      this.props.handleToggle(e, index);
                     }}
                   />
                 </MuiThemeProvider>

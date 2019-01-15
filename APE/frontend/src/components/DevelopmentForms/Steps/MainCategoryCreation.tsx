@@ -27,6 +27,7 @@ interface Props extends WithStyles<typeof styles> {
   onClickAddButton: (index) => void;
   classes: any;
   name: string;
+  handleToggle: (e, index, index2) => void;
 }
 
 export interface MainCategory {
@@ -65,15 +66,6 @@ class MainCategoryCreation extends React.Component<Props> {
     this.props.developmentForm[index].MainCategories[index2].name = target.value;
 
     // forceUpdate() eher hacky, aber Ansatz über this.setState(this.state) zum rerendern funktioniert nicht.
-    this.forceUpdate();
-  };
-
-  handleToggle = (event: any, index, index2) => {
-    if (this.props.developmentForm[index].MainCategories[index2].checked) {
-      this.props.developmentForm[index].MainCategories[index2].checked = false;
-    } else {
-      this.props.developmentForm[index].MainCategories[index2].checked = true;
-    }
     this.forceUpdate();
   };
 
@@ -142,7 +134,7 @@ class MainCategoryCreation extends React.Component<Props> {
                                 <Checkbox
                                   checked={mainCategories.checked}
                                   onClick={e => {
-                                    this.handleToggle(e, index, index2);
+                                    this.props.handleToggle(e, index, index2);
                                   }}
                                 />
                               </MuiThemeProvider>
