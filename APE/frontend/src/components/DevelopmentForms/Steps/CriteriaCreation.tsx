@@ -31,6 +31,7 @@ interface Props extends WithStyles<typeof styles> {
   onClickAddButton: (index, index2, index3) => void;
   classes: any;
   name: string;
+  handleToggle: (e, index, index2, index3, index4) => void;
 }
 
 export interface Criteria {
@@ -70,23 +71,6 @@ class CriteriaCreation extends React.Component<Props> {
     ].name = target.value;
 
     // forceUpdate() eher hacky, aber Ansatz über this.setState(this.state) zum rerendern funktioniert nicht.
-    this.forceUpdate();
-  };
-
-  handleToggle = (event: any, index, index2, index3, index4) => {
-    if (
-      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
-        index4
-      ].checked
-    ) {
-      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
-        index4
-      ].checked = false;
-    } else {
-      this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
-        index4
-      ].checked = true;
-    }
     this.forceUpdate();
   };
 
@@ -234,7 +218,7 @@ class CriteriaCreation extends React.Component<Props> {
                                                     <Checkbox
                                                       checked={criteria.checked}
                                                       onClick={e => {
-                                                        this.handleToggle(
+                                                        this.props.handleToggle(
                                                           e,
                                                           index,
                                                           index2,

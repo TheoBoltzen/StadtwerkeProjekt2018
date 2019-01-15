@@ -143,6 +143,33 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.forceUpdate();
   };
 
+  handleToggleSubCategories = (event: any, index, index2, index3) => {
+    const { developmentForm } = this.state;
+    if (developmentForm[index].MainCategories[index2].SubCategories[index3].checked) {
+      developmentForm[index].MainCategories[index2].SubCategories[index3].checked = false;
+    } else {
+      developmentForm[index].MainCategories[index2].SubCategories[index3].checked = true;
+    }
+    this.forceUpdate();
+  };
+
+  handleToggleCriteria = (event: any, index, index2, index3, index4) => {
+    const { developmentForm } = this.state;
+
+    if (
+      developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[index4].checked
+    ) {
+      developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+        index4
+      ].checked = false;
+    } else {
+      developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+        index4
+      ].checked = true;
+    }
+    this.forceUpdate();
+  };
+
   addCompetence = () => {
     const developmentForm = this.state.developmentForm;
     developmentForm.push({
@@ -232,6 +259,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
           <CircularProgress />
         ) : (
           <SubCategoryCreation
+            handleToggle={this.handleToggleSubCategories}
             classes={this.props.classes}
             onClickAddButton={this.addSubCategory}
             developmentForm={this.state.developmentForm}
@@ -243,6 +271,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
           <CircularProgress />
         ) : (
           <CriteriaCreation
+            handleToggle={this.handleToggleCriteria}
             classes={this.props.classes}
             onClickAddButton={this.addCriteria}
             developmentForm={this.state.developmentForm}
