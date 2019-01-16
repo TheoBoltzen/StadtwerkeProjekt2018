@@ -17,6 +17,7 @@ table {
 
 td {
   width: 15%;
+  height: 44px !important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
