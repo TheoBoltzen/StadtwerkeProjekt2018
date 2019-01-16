@@ -3,6 +3,7 @@ import { DevelopmentForm, EmptyDevSheetFetch } from "../../types";
 import { ApplicationState } from "../../redux/reducers";
 import { getAll, getDetailDevelopmentSheet } from "../../redux/actions/development-forms-actions";
 import { connect } from "react-redux";
+import { getRole } from "../../redux/actions";
 
 export interface State {
   visibilityIndex: number;
@@ -16,9 +17,11 @@ interface ReduxStateProps {
   readonly loadingDetail: boolean;
   readonly developmentForms: DevelopmentForm[];
   readonly detailDevForm: EmptyDevSheetFetch;
+  role: string;
 }
 
 interface ReduxDispatchProps {
+  getRole: (token: string) => void;
   readonly getAllDevForms: () => void;
   readonly getDevSheetDetails: (id) => void;
 }
@@ -26,6 +29,8 @@ interface ReduxDispatchProps {
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
+  const { role } = state.userReducer;
+
   const { loading, developmentForms } = state.developmentFormsReducer;
   const { developmentFormDetail } = state.developmentFormsReducer;
   const loadingDetail = state.developmentFormsReducer.loading;
@@ -34,12 +39,14 @@ const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
     loading,
     loadingDetail,
     developmentForms,
-    detailDevForm: developmentFormDetail
+    detailDevForm: developmentFormDetail,
+    role
   };
 };
 
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
+    getRole: token => dispatch(getRole(token)),
     getAllDevForms: () => dispatch(getAll()),
     getDevSheetDetails: id => dispatch(getDetailDevelopmentSheet(id))
   };

@@ -10,6 +10,7 @@ import "./DevelopmentFormsComponent.css";
 import { DetailViewDevelopmentSheet } from "../DetailviewDevelopmentSheet/DetailViewDevelopmentSheet";
 import CustomizedButton from "../General/CustomizedButton";
 import Typography from "@material-ui/core/Typography/Typography";
+import { RoleConstants } from "../../constants";
 
 export class DevelopmentFormsComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
@@ -53,8 +54,10 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
   };
 
   getContent = visibilityIndex => {
-    const { developmentForms, loading } = this.props;
+    const { developmentForms, loading, role } = this.props;
     const { developmenFormId } = this.state;
+
+    const isAdmin = role === RoleConstants.admin;
 
     switch (visibilityIndex) {
       case 0:
@@ -63,15 +66,18 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
           <div>
             {!loading ? (
               <div>
-                <div className={"buttonDiv"}>
-                  <div />
-                  <CustomizedButton
-                    onClick={e => {
-                      this.changeVisibilityIndex(e, 2);
-                    }}
-                    text={"Entwicklungsbogen erstellen"}
-                  />
-                </div>
+                {isAdmin && (
+                  <div className={"buttonDiv"}>
+                    <div />
+
+                    <CustomizedButton
+                      onClick={e => {
+                        this.changeVisibilityIndex(e, 2);
+                      }}
+                      text={"Entwicklungsbogen erstellen"}
+                    />
+                  </div>
+                )}
                 <div className={"frameCenter"}>
                   <ListItem
                     isHeader={true}
