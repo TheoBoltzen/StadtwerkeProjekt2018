@@ -103,7 +103,7 @@ export const Graph = (props: Props) => {
           />
           {isOutfilledDevSheet ? (
             <Line
-              dataKey="Ist_Trainee"
+              dataKey="Auszubildender"
               stroke="#00beff"
               strokeWidth={6}
               dot={{ strokeWidth: 6, r: 6 }}
@@ -113,7 +113,7 @@ export const Graph = (props: Props) => {
           )}
           {isOutfilledDevSheet ? (
             <Line
-              dataKey="Ist_Trainer"
+              dataKey="Ausbilder"
               stroke="#992221"
               strokeWidth={4}
               dot={{ strokeWidth: 4, r: 4 }}
@@ -133,8 +133,8 @@ export const Graph = (props: Props) => {
       if (isOutfilledDevSheet) {
         data.push({
           name: kriterien[i],
-          Ist_Trainee: ist_werte_trainee[i],
-          Ist_Trainer: ist_werte_trainer[i],
+          Auszubildender: ist_werte_trainee[i],
+          Ausbilder: ist_werte_trainer[i],
           Soll: soll_werte[i]
         });
       } else {
