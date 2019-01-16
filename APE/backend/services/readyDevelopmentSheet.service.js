@@ -338,8 +338,8 @@ async function getfullByIdTrainer(devsheetparam, token) {
   let username = decodedToken.username;
   let role = decodedToken.role;
   let user;
-
-  if (role == "admin") {
+  console.log("username", devsheetparam.trainer);
+  if (role == "admin" || devsheetparam.trainer == null) {
     user = devsheetparam.trainer;
   } else {
     user = username;
