@@ -66,7 +66,6 @@ export const DetailviewAssessmentDevelopmentSheetComponent = (props: AllProps) =
             content={props.fullDevSheetDetail.result.education}
           />
           <LabelWithTextfield name={"Einstellungsdatum"} content={""} />
-          <LabelWithTextfield name={"Erstellungsdatum"} content={""} />
         </div>
       </div>
 

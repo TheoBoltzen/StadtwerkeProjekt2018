@@ -182,7 +182,6 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
                 content={fullDevSheet.result.education}
               />
               <LabelWithTextfield name={"Einstellungsdatum"} content={""} />
-              <LabelWithTextfield name={"Erstellungsdatum"} content={""} />
             </div>
           </div>
 

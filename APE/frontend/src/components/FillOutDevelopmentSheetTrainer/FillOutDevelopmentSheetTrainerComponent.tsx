@@ -157,7 +157,6 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
 
           <div className="div-headerFill" id="frameFill">
             <div className="div-leftFill">
-              <LabelWithTextfield name={"Abteilung"} content={fullDevSheet.result.department} />
               <LabelWithTextfield
                 name={"Ausbildungsbeauftragter"}
                 content={fullDevSheet.result.trainer}
@@ -165,12 +164,12 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
               <LabelWithTextfield name={"Auszubildener"} content={fullDevSheet.result.trainee} />
             </div>
             <div className="div-rightFill">
+              <LabelWithTextfield name={"Abteilung"} content={fullDevSheet.result.department} />
               <LabelWithTextfield
                 name={"Ausbildungsberuf"}
                 content={fullDevSheet.result.education}
               />
               <LabelWithTextfield name={"Einstellungsdatum"} content={""} />
-              <LabelWithTextfield name={"Erstellungsdatum"} content={""} />
             </div>
           </div>
 
