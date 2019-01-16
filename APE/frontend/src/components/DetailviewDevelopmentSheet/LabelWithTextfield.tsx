@@ -26,14 +26,21 @@ const theme = createMuiTheme({
 interface Props extends WithStyles<typeof styles> {
   name?: string;
   content?: string;
+  disabled?: boolean;
 }
 
 export const LabelWithTextfield = (props: Props) => {
-  const { name, content, classes } = props;
+  const { name, content, classes, disabled = false } = props;
 
   return (
     <MuiThemeProvider theme={theme}>
-      <TextField className={classes.margin} label={name} variant={"outlined"} value={content} />
+      <TextField
+        className={classes.margin}
+        label={name}
+        variant={"outlined"}
+        value={content}
+        disabled={disabled}
+      />
     </MuiThemeProvider>
   );
 };

@@ -169,7 +169,6 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
 
           <div className="div-headerFill" id="frameFill">
             <div className="div-leftFill">
-              <LabelWithTextfield name={"Abteilung"} content={fullDevSheet.result.department} />
               <LabelWithTextfield
                 name={"Ausbildungsbeauftragter"}
                 content={fullDevSheet.result.trainer}
@@ -177,11 +176,11 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
               <LabelWithTextfield name={"Auszubildener"} content={fullDevSheet.result.trainee} />
             </div>
             <div className="div-rightFill">
+              <LabelWithTextfield name={"Abteilung"} content={fullDevSheet.result.department} />
               <LabelWithTextfield
                 name={"Ausbildungsberuf"}
                 content={fullDevSheet.result.education}
               />
-              <LabelWithTextfield name={"Einstellungsdatum"} content={""} />
             </div>
           </div>
 

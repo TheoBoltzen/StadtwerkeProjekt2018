@@ -279,7 +279,6 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
   };
 
   render() {
-    console.log("PROPS: ", this.props);
     return <div className={"root"}>{this.getContent(this.state.visibility_index)}</div>;
   }
 }

@@ -169,7 +169,6 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
                 name={"Ausbildungsberuf"}
                 content={fullDevSheet.result.education}
               />
-              <LabelWithTextfield name={"Einstellungsdatum"} content={""} />
             </div>
           </div>
 
