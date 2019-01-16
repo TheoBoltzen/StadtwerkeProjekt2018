@@ -58,7 +58,6 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
 
     switch (visibilityIndex) {
       case 0:
-        // Übersicht Bögen
         return (
           <div>
             {!loading ? (

@@ -59,16 +59,14 @@ export const DetailviewAssessmentDevelopmentSheetComponent = (props: AllProps) =
           />
           <LabelWithTextfield name={"Ausbildungsbeauftragter"} content={""} />
           <LabelWithTextfield name={"Auszubildener"} content={""} />
+        </div>
+        <div className="div-right">
           <LabelWithTextfield
             name={"Ausbildungsberuf"}
             content={props.fullDevSheetDetail.result.education}
           />
-        </div>
-        <div className="div-right">
-          <LabelWithTextfield name={"Datum"} content={""} />
-          <LabelWithTextfield name={"Ausbildungszeitraum"} content={""} />
-          <LabelWithTextfield name={"Ausbildungsjahr"} content={""} />
-          <LabelWithTextfield name={"Abwesenheitstage"} content={""} />
+          <LabelWithTextfield name={"Einstellungsdatum"} content={""} />
+          <LabelWithTextfield name={"Erstellungsdatum"} content={""} />
         </div>
       </div>
 

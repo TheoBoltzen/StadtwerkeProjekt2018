@@ -163,16 +163,14 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
                 content={fullDevSheet.result.trainer}
               />
               <LabelWithTextfield name={"Auszubildener"} content={fullDevSheet.result.trainee} />
+            </div>
+            <div className="div-rightFill">
               <LabelWithTextfield
                 name={"Ausbildungsberuf"}
                 content={fullDevSheet.result.education}
               />
-            </div>
-            <div className="div-rightFill">
-              <LabelWithTextfield name={"Datum"} content={""} />
-              <LabelWithTextfield name={"Ausbildungszeitraum"} content={""} />
-              <LabelWithTextfield name={"Ausbildungsjahr"} content={""} />
-              <LabelWithTextfield name={"Abwesenheitstage"} content={""} />
+              <LabelWithTextfield name={"Einstellungsdatum"} content={""} />
+              <LabelWithTextfield name={"Erstellungsdatum"} content={""} />
             </div>
           </div>
 

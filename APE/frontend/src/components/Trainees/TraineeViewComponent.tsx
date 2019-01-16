@@ -94,7 +94,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     isHeader={true}
                     department="Abteilung"
                     education="Ausbildungsberuf"
-                    updatedAt="Änderungsdatum"
+                    createdAt="Erstellungsdatum"
                     status="Status"
                     trainerUsername="Ausbilder"
                   />
@@ -102,13 +102,11 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
                     return (
                       <ListItemTraineeDevs
                         key={index}
-                        //is displayed
                         department={devForm.DevelopmentSheet.department}
                         education={devForm.DevelopmentSheet.education}
-                        updatedAt={this.doFormatDate(devForm.updatedAt)}
+                        createdAt={this.doFormatDate(devForm.createdAt)}
                         status={devForm.status}
                         trainerUsername={devForm.TrainerUsername}
-                        //TO DO
                         onSearchClick={e => {
                           this.handleSearchClickTraineeDevSheet(
                             e,

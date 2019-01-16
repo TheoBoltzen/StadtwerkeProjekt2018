@@ -8,8 +8,8 @@ import { DevSheetStatusConstants } from "../../constants";
 interface Props {
   department: string;
   education: string;
-  createdAt?: string;
-  updatedAt: string;
+  createdAt: string;
+  updatedAt?: string;
   status: string;
   trainerUsername: string;
 
@@ -24,7 +24,7 @@ export const ListItemTraineeDevs = (props: Props) => {
     department,
     education,
     // createdAt,
-    updatedAt,
+    createdAt,
     status,
     trainerUsername,
 
@@ -42,7 +42,7 @@ export const ListItemTraineeDevs = (props: Props) => {
           <tr>
             <td>{department}</td>
             <td>{education}</td>
-            <td>{updatedAt}</td>
+            <td>{createdAt}</td>
             <td>{status}</td>
             <td>{trainerUsername}</td>
             <td>
