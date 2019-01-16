@@ -58,8 +58,8 @@ export class TraineesComponent extends React.Component<AllProps, State> {
             <ListItemTrainee
               isHeader={true}
               department={"Abteilung"}
-              nameTrainee={"Kennung des zugewiesenen Auszubildenden"}
-              nameTrainer={"Kennung des zugewiesenen Ausbilders"}
+              nameTrainee={"Kennung Auszubildender"}
+              nameTrainer={"Kennung Ausbilder"}
               status={"Status"}
             />
 

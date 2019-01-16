@@ -54,11 +54,11 @@ export const DetailviewAssessmentDevelopmentSheetComponent = (props: AllProps) =
       <div className="div-header">
         <div className="div-left">
           <LabelWithTextfield
-            name={"Ausbildungsbeauftragter"}
+            name={"Kennung Ausbilder"}
             content={props.fullDevSheetDetail.result.trainer}
           />
           <LabelWithTextfield
-            name={"Auszubildener"}
+            name={"Kennung Auszubildender"}
             content={props.fullDevSheetDetail.result.trainee}
           />
         </div>
