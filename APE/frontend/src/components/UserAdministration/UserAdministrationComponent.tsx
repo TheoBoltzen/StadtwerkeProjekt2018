@@ -58,6 +58,7 @@ export class UserAdministrationComponent extends React.Component<AllProps, State
             name={"Name"}
             firstname={"Vorname"}
             job={"Tätigkeit"}
+            role={"Rolle"}
           />
           {users.map((user, index) => {
             return (
@@ -67,6 +68,7 @@ export class UserAdministrationComponent extends React.Component<AllProps, State
                 name={user.lastname}
                 firstname={user.firstname}
                 job={user.job}
+                role={user.role}
               />
             );
           })}

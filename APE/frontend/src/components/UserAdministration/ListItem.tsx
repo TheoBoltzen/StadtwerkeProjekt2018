@@ -7,10 +7,11 @@ interface Props {
   firstname: string;
   job: string;
   isHeader?: boolean;
+  role: string;
 }
 
 export const ListItem = (props: Props) => {
-  const { username, name, firstname, job, isHeader = false } = props;
+  const { username, name, firstname, job, isHeader = false, role } = props;
 
   return (
     <div className={isHeader ? "headerRow" : "item"}>
@@ -21,6 +22,7 @@ export const ListItem = (props: Props) => {
             <td>{name}</td>
             <td>{firstname}</td>
             <td>{job}</td>
+            <td>{role}</td>
           </tr>
         </tbody>
       </table>
