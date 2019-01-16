@@ -89,8 +89,6 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                             kriterien={kriteria}
                             isOutfilledDevSheet={false}
                           />
-                          {console.log("Sollwerte: ", sollWerte)}
-                          {console.log("Kriterien: ", kriteria)}
                           {clearArrays()}
                         </div>
                       ))}

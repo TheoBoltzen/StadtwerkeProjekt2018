@@ -123,11 +123,58 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.setState({ [name]: value } as State);
   };
 
+  handleToggleCompetences = (event: any, index) => {
+    const { developmentForm } = this.state;
+    if (developmentForm[index].checked) {
+      developmentForm[index].checked = false;
+    } else {
+      developmentForm[index].checked = true;
+    }
+    this.forceUpdate();
+  };
+
+  handleToggleMainCategories = (event: any, index, index2) => {
+    const { developmentForm } = this.state;
+    if (developmentForm[index].MainCategories[index2].checked) {
+      developmentForm[index].MainCategories[index2].checked = false;
+    } else {
+      developmentForm[index].MainCategories[index2].checked = true;
+    }
+    this.forceUpdate();
+  };
+
+  handleToggleSubCategories = (event: any, index, index2, index3) => {
+    const { developmentForm } = this.state;
+    if (developmentForm[index].MainCategories[index2].SubCategories[index3].checked) {
+      developmentForm[index].MainCategories[index2].SubCategories[index3].checked = false;
+    } else {
+      developmentForm[index].MainCategories[index2].SubCategories[index3].checked = true;
+    }
+    this.forceUpdate();
+  };
+
+  handleToggleCriteria = (event: any, index, index2, index3, index4) => {
+    const { developmentForm } = this.state;
+
+    if (
+      developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[index4].checked
+    ) {
+      developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+        index4
+      ].checked = false;
+    } else {
+      developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
+        index4
+      ].checked = true;
+    }
+    this.forceUpdate();
+  };
+
   addCompetence = () => {
     const developmentForm = this.state.developmentForm;
     developmentForm.push({
       name: "Kompetenzkategorie",
-      checked: false,
+      checked: true,
       open: true,
       MainCategories: [],
       imported: false
@@ -139,7 +186,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories.push({
       name: "Hauptkategorie",
-      checked: false,
+      checked: true,
       SubCategories: [],
       open: true,
       imported: false
@@ -151,7 +198,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories[index2].SubCategories.push({
       name: "Unterkategorie",
-      checked: false,
+      checked: true,
       open: true,
       Criteria: [],
       imported: false
@@ -163,7 +210,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria.push({
       name: "Kriterium",
-      checked: false,
+      checked: true,
       value: "3",
       imported: false
     });
@@ -188,6 +235,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
           <CircularProgress />
         ) : (
           <CompetenceCreation
+            handleToggle={this.handleToggleCompetences}
             developmentForm={this.state.developmentForm}
             onClickAddButton={this.addCompetence}
             classes={this.props.classes}
@@ -199,6 +247,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
           <CircularProgress />
         ) : (
           <MainCategoryCreation
+            handleToggle={this.handleToggleMainCategories}
             classes={this.props.classes}
             onClickAddButton={this.addMainCategory}
             developmentForm={this.state.developmentForm}
@@ -210,6 +259,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
           <CircularProgress />
         ) : (
           <SubCategoryCreation
+            handleToggle={this.handleToggleSubCategories}
             classes={this.props.classes}
             onClickAddButton={this.addSubCategory}
             developmentForm={this.state.developmentForm}
@@ -221,6 +271,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
           <CircularProgress />
         ) : (
           <CriteriaCreation
+            handleToggle={this.handleToggleCriteria}
             classes={this.props.classes}
             onClickAddButton={this.addCriteria}
             developmentForm={this.state.developmentForm}
@@ -315,7 +366,16 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
   render() {
     const { classes } = this.props;
     const steps = getSteps();
-    const { activeStep } = this.state;
+    const { activeStep, profession, department, developmentForm } = this.state;
+
+    const isFilled = !profession || !department;
+    const competenceIsChecked = activeStep === 1 && !developmentForm.find(c => c.checked);
+
+    const filterCheckedCompetences = developmentForm.filter(c => c.checked);
+
+    const mainCategoriesIsChecked =
+      activeStep === 2 &&
+      !filterCheckedCompetences.map(c => !!c.MainCategories.find(m => m.checked)).every(m => m);
 
     return (
       <div className={"stepperRoot"}>
@@ -342,6 +402,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
                   Zurück
                 </Button>
                 <CustomizedButton
+                  disabled={isFilled || competenceIsChecked || mainCategoriesIsChecked}
                   onClick={this.handleNext}
                   text={activeStep === steps.length - 1 ? "Fertig" : "Weiter"}
                 />

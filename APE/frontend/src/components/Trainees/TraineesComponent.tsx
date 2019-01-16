@@ -27,9 +27,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
       const { setDevSheetToTrainer, getAllConnectedDevSheets } = this.props;
       await setDevSheetToTrainer(traineeUsername, devSheetId);
       getAllConnectedDevSheets();
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   // Klick auf Ausfüllen
