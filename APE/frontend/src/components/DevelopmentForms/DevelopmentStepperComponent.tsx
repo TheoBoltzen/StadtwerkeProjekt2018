@@ -174,7 +174,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const developmentForm = this.state.developmentForm;
     developmentForm.push({
       name: "Kompetenzkategorie",
-      checked: false,
+      checked: true,
       open: true,
       MainCategories: [],
       imported: false
@@ -186,7 +186,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories.push({
       name: "Hauptkategorie",
-      checked: false,
+      checked: true,
       SubCategories: [],
       open: true,
       imported: false
@@ -198,7 +198,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories[index2].SubCategories.push({
       name: "Unterkategorie",
-      checked: false,
+      checked: true,
       open: true,
       Criteria: [],
       imported: false
@@ -210,7 +210,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria.push({
       name: "Kriterium",
-      checked: false,
+      checked: true,
       value: "3",
       imported: false
     });
