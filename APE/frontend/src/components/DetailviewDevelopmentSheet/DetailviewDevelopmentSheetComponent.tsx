@@ -7,8 +7,6 @@ import { CircularProgress } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
-  // console.log("props: ", props.devSheetDetail.result);
-
   const { loading } = props;
 
   const mapIntegerToString = intValue => {
@@ -217,8 +215,6 @@ export const DetailviewDevelopmentSheetComponent = (props: AllProps) => {
                             kriterien={kriteria}
                             isOutfilledDevSheet={false}
                           />
-                          {console.log("Sollwerte: ", sollWerte)}
-                          {console.log("Kriterien: ", kriteria)}
                           {clearArrays()}
                         </div>
                       ))}

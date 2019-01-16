@@ -68,7 +68,6 @@ class CompetenceCreation extends React.Component<Props> {
       this.props.developmentForm[index].checked = true;
     }
     this.forceUpdate();
-    console.log("Props: ", this.props);
   };
 
   description =

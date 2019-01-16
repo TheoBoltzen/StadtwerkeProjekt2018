@@ -49,9 +49,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     return new Date(date).toLocaleDateString("de");
   };
 
-  onEditClick = (event: any, index) => {
-    console.log("EditClick ", index);
-  };
+  onEditClick = (event: any, index) => {};
 
   getContent = visibilityIndex => {
     const { developmentForms, loading, role } = this.props;
