@@ -37,6 +37,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
   };
 
   private changeVisiblityIndex = visiblityIndex => {
+    this.props.getAllConnectedDevSheets();
     this.setState({
       visibilityIndex: visiblityIndex
     });
