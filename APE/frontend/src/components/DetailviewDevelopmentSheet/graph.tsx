@@ -2,15 +2,6 @@ import * as React from "react";
 import "./graph.css";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 
-/*
-const data = [
-    {name: 'Kritierium 1', Wert: "teilweise"},
-    {name: 'Kritierium 2', Wert: "weitgehend"},
-    {name: 'Kritierium 3', Wert: "teilweise"},
-    {name: '', a: "in vollem Maße", b: "weitgehend", c:"teilweise", d:"unzureichend", e:"nicht"},
-];
-*/
-
 //http://recharts.org/en-US/api/XAxis#minTickGap
 interface Props {
   ist_werte_trainee?: string[];
@@ -34,7 +25,7 @@ export const Graph = (props: Props) => {
     //          margin={{ top: 20, right: window.innerWidth / 3, left: 10, bottom: 5 }}>
     //margin={{ right: window.innerWidth / 3}}
     //                payload={[{ value: 'Istwerte', type: 'line', id: 'ID01' }, { value: 'Sollwerte', type: 'line', id: 'ID01' }]}
-    var x_width = window.innerWidth / 2;
+    var x_width = window.innerWidth / 1.5; //2 and 3
     return (
       <div id="div-graph-font">
         <LineChart
@@ -49,7 +40,7 @@ export const Graph = (props: Props) => {
             ticks={["in vollem Maße", "weitgehend", "teilweise", "unzureichend", "nicht"]}
             type="category"
           />
-          <YAxis dataKey="name" type="category" width={x_width / 3} />
+          <YAxis dataKey="name" type="category" width={x_width / 2} />
 
           <Line
             dataKey="a"
@@ -103,8 +94,8 @@ export const Graph = (props: Props) => {
           />
           {isOutfilledDevSheet ? (
             <Line
-              dataKey="Auszubildender"
-              stroke="#00beff"
+              dataKey="Ausbilder"
+              stroke="#992221"
               strokeWidth={6}
               dot={{ strokeWidth: 6, r: 6 }}
             />
@@ -113,8 +104,8 @@ export const Graph = (props: Props) => {
           )}
           {isOutfilledDevSheet ? (
             <Line
-              dataKey="Ausbilder"
-              stroke="#992221"
+              dataKey="Auszubildender"
+              stroke="#00beff"
               strokeWidth={4}
               dot={{ strokeWidth: 4, r: 4 }}
             />
