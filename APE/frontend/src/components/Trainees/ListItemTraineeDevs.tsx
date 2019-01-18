@@ -23,7 +23,6 @@ export const ListItemTraineeDevs = (props: Props) => {
   const {
     department,
     education,
-    // createdAt,
     createdAt,
     status,
     trainerUsername,
@@ -32,8 +31,6 @@ export const ListItemTraineeDevs = (props: Props) => {
     onSearchClick,
     onEditClick
   } = props;
-
-  console.log("trainer: ", trainerUsername);
 
   return (
     <div className={isHeader ? "headerRow" : "item"}>

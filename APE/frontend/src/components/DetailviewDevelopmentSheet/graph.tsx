@@ -92,25 +92,21 @@ export const Graph = (props: Props) => {
             opacity="0"
             legendType="none"
           />
-          {isOutfilledDevSheet ? (
+          {isOutfilledDevSheet && (
             <Line
               dataKey="Ausbilder"
               stroke="#992221"
               strokeWidth={6}
               dot={{ strokeWidth: 6, r: 6 }}
             />
-          ) : (
-            console.log("EmptydevSheet_IstWerte_Trainee")
           )}
-          {isOutfilledDevSheet ? (
+          {isOutfilledDevSheet && (
             <Line
               dataKey="Auszubildender"
               stroke="#00beff"
               strokeWidth={4}
               dot={{ strokeWidth: 4, r: 4 }}
             />
-          ) : (
-            console.log("EmptydevSheet_IstWerte_Trainer")
           )}
           <Line dataKey="Soll" stroke="#43a047" strokeWidth={2} dot={{ strokeWidth: 2, r: 2 }} />
         </LineChart>
