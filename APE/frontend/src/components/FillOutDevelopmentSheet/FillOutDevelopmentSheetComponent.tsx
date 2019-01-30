@@ -21,6 +21,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import { DevSheetStatusConstants } from "../../constants";
 
+/** MUI Style declaration **/
 export const styles = theme => ({
   customWidth: {
     maxWidth: 340
@@ -36,9 +37,11 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     };
   }
 
+  //Change function for radio buttons
   private handleChange = (event, id) => {
     let radioValueArray = this.state.radioValue;
 
+    //Check if radio name already in the state array and change the value or put it in the state
     if (radioValueArray.find(r => r.name === event.target.name)) {
       radioValueArray[radioValueArray.findIndex(r => r.name === event.target.name)].value =
         event.target.value;
@@ -54,14 +57,17 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     });
   };
 
+  //Function to open dialog window
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
+  //Function to close dialog window
   handleClose = () => {
     this.setState({ open: false });
   };
 
+  //Save the estimation - async to wait for completion before going back
   private setEstimationTrainee = async () => {
     const { setTraineeEstimation, fullDevSheet, goBack } = this.props;
     await this.setAssessmentsTrainee();
@@ -69,12 +75,14 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     goBack();
   };
 
+  //Change status to Abgeschlossen
   private setCompletionTrainee = async () => {
     const { fullDevSheet, goBack, setTraineeCompletion } = this.props;
     await setTraineeCompletion(fullDevSheet.result.devSheetid);
     goBack();
   };
 
+  //Build array from values and save development sheet
   private setAssessmentsTrainee = async () => {
     const { setTraineeAssessment } = this.props;
     let arr = [] as any;
@@ -91,6 +99,7 @@ export class FillDevelopmentSheetComponent extends React.Component<AllProps, Sta
     await setTraineeAssessment(arr);
   };
 
+  //Change status to Eingeschätzt
   private setAssessmentsTraineeSave = async () => {
     const { goBack } = this.props;
     await this.setAssessmentsTrainee();

@@ -11,6 +11,7 @@ import { WithStyles } from "@material-ui/core";
 import { styles } from "./FillOutDevelopmentSheetComponent";
 import withStyles from "@material-ui/core/styles/withStyles";
 
+/** Interface and type declaration **/
 export interface State {
   radioValue: { name: string; value: string; id: number }[];
   open: boolean;
@@ -35,6 +36,7 @@ interface ReduxDispatchProps {
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
+/** Connecting Redux **/
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loadingStatusEstimated, loading } = state.traineeAssessmentReducer;
   return {
@@ -58,4 +60,5 @@ const connectedFillOutDevelopmentSheet = withStyles(styles)(
   )(FillDevelopmentSheetComponent)
 );
 
+/** Export component **/
 export { connectedFillOutDevelopmentSheet as FillOutDevelopmentSheet };

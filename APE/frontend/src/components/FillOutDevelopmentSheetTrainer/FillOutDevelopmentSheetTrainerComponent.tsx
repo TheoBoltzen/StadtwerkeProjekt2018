@@ -21,6 +21,7 @@ import "./FillOutDevelopmentSheetTrainerComponent.css";
 import LabelWithTextfield from "../DetailviewDevelopmentSheet/LabelWithTextfield";
 import { DevSheetStatusConstants } from "../../constants";
 
+/** MUI Style declaration **/
 export const styles = theme => ({
   customWidth: {
     maxWidth: 340
@@ -36,9 +37,11 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
     };
   }
 
+  //Change function for radio buttons
   private handleChange = (event, id) => {
     let radioValueArray = this.state.radioValue;
 
+    //Check if radio name already in the state array and change the value or put it in the state
     if (radioValueArray.find(r => r.name === event.target.name)) {
       radioValueArray[radioValueArray.findIndex(r => r.name === event.target.name)].value =
         event.target.value;
@@ -54,14 +57,18 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
     });
   };
 
+  //Function to open dialog window
   handleClickOpen = () => {
     this.setState({ open: true });
   };
+
+  //Function to close dialog window
 
   handleClose = () => {
     this.setState({ open: false });
   };
 
+  //Save the estimation - async to wait for completion before going back
   private setEstimationTrainer = async () => {
     const { setTrainerEstimation, fullDevSheet, goBack } = this.props;
     await this.setAssessmentsTrainer();
@@ -69,6 +76,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
     goBack();
   };
 
+  //Build array from values and save development sheet
   private setAssessmentsTrainer = async () => {
     const { setTrainerAssessment } = this.props;
     let arr = [] as any;
@@ -85,6 +93,7 @@ export class FillOutDevelopmentSheetTrainerComponent extends React.Component<All
     await setTrainerAssessment(arr);
   };
 
+  //Change status to überarbeitet
   private setAssessmentsTrainerSave = async () => {
     const { goBack } = this.props;
     await this.setAssessmentsTrainer();
