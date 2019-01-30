@@ -16,6 +16,7 @@ export class LoginComponent extends React.Component<AllProps, State> {
     //Logout
     logout();
 
+    //Set initial state
     this.state = {
       email: "",
       passwort: "",
@@ -29,6 +30,7 @@ export class LoginComponent extends React.Component<AllProps, State> {
     const noEmail = submitted && !email;
     const noPassword = submitted && !passwort;
 
+    //Change function for input fields
     const handleChange = (event: any) => {
       const target = event.currentTarget;
       const value = target.value;
@@ -36,11 +38,15 @@ export class LoginComponent extends React.Component<AllProps, State> {
       this.setState({ [name]: value } as State);
     };
 
+    //Submit function
     const handleSubmit = () => {
       const { email, passwort } = this.state;
       const { login } = this.props;
       this.setState({ submitted: true });
+
+      //Submitting is only allowed when all input fields are filled out
       if (email && passwort) {
+        //Login function
         login(email, passwort);
       }
     };

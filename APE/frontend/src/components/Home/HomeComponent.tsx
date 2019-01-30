@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { getRole } from "../../redux/actions";
 import { User } from "../../types";
 
+/** Interface and type declaration **/
 interface Props {}
 
 interface State {
@@ -31,6 +32,7 @@ interface ReduxDispatchProps {
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
 class Home extends React.Component<AllProps, State> {
+  //Timer declaration for Autologout
   public idleTimer: any;
 
   constructor(props: AllProps) {
@@ -43,9 +45,12 @@ class Home extends React.Component<AllProps, State> {
 
     this.idleTimer = null;
 
+    //Get role from user token
     this.props.getRole(this.props.user.token);
   }
+
   componentWillReceiveProps(nextProps: AllProps) {
+    //Rerender if role changed
     if (nextProps.role !== this.props.role) {
       this.setState({ rerender: !this.state.rerender });
     }
@@ -55,6 +60,7 @@ class Home extends React.Component<AllProps, State> {
     const { redirect, rerender } = this.state;
     const { role } = this.props;
 
+    //Check which role is active
     const isAdmin = role === RoleConstants.admin;
     const isTrainer = role === RoleConstants.trainer;
     const isTrainee = role === RoleConstants.trainee;
@@ -66,7 +72,7 @@ class Home extends React.Component<AllProps, State> {
         }}
         element={document}
         onIdle={this._onIdle}
-        timeout={90000000}>
+        timeout={900000}>
         {redirect && <Redirect to={"/login"} />}
 
         <Navigation />
@@ -102,11 +108,13 @@ class Home extends React.Component<AllProps, State> {
     );
   }
 
+  //Redirect if time is passed
   private _onIdle = () => {
     this.setState({ redirect: true });
   };
 }
 
+/** Connecting Redux **/
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     getRole: token => dispatch(getRole(token))
@@ -129,4 +137,5 @@ const connectedHome = withRouter(
   )(Home)
 );
 
+/** Export component **/
 export { connectedHome as Home };

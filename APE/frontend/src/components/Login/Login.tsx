@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { LoginComponent } from "./LoginComponent";
 import { ApplicationState } from "../../redux/reducers";
 
+/** Interface and type declaration **/
 interface Props {}
 
 interface ReduxStateProps {
@@ -21,6 +22,7 @@ export interface State {
 }
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
+/** Connecting Redux **/
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loggingIn } = state.authenticationReducer;
   return {
@@ -40,4 +42,5 @@ const connectedLogin = connect<ReduxStateProps, ReduxDispatchProps, Props>(
   mapDispatchToProps
 )(LoginComponent);
 
+/** Export component **/
 export { connectedLogin as Login };
