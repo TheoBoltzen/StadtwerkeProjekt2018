@@ -19,6 +19,7 @@ import {
 } from "../../redux/actions/development-forms-actions";
 import { DevelopmentStepperComponent } from "./DevelopmentStepperComponent";
 
+/** Interface and type declaration **/
 export interface State {
   activeStep: number;
   department: string;
@@ -49,6 +50,7 @@ export interface Props extends WithStyles<typeof styles> {
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps & Props;
 
+/** Connecting Redux **/
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const {
     loading,
@@ -86,4 +88,5 @@ const connectedDevelopmentStepper = withStyles(styles)(
   )(DevelopmentStepperComponent)
 );
 
+/** Export component **/
 export { connectedDevelopmentStepper as DevelopmentStepper };

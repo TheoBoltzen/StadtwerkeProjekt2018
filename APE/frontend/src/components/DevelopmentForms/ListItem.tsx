@@ -4,6 +4,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { IconButton, Tooltip } from "@material-ui/core";
 import { Favorite } from "@material-ui/icons";
 
+/** Interface and type declaration **/
 interface Props {
   abteilung: string;
   job: string;
