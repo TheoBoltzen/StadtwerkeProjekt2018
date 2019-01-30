@@ -13,15 +13,21 @@ export class NavigationComponent extends React.Component<AllProps, State> {
   constructor(props) {
     super(props);
 
+    //Set initial state
     this.state = {
       redirect: false
     };
 
+    //Get role from token
     this.props.getRole(this.props.user.token);
   }
 
+  //Logout function
   handleLogout = () => {
+    //Display alert message
     this.props.successAlert("Erfolgreich abgemeldet");
+
+    //Should redirect
     this.setState({ redirect: true });
   };
 
@@ -35,9 +41,11 @@ export class NavigationComponent extends React.Component<AllProps, State> {
       role
     } = this.props;
 
+    //Check which role is active
     const isAdmin = role === RoleConstants.admin;
     const isTrainer = role === RoleConstants.trainer;
 
+    //Redirect when state is set
     if (redirect) {
       return <Redirect to={"/login"} />;
     }

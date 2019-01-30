@@ -4,6 +4,7 @@ import { RouteComponentProps, withRouter } from "react-router";
 import { User } from "../../types";
 import { getRole, successAlert } from "../../redux/actions";
 
+/** Interface and type declaration **/
 export interface State {
   redirect: boolean;
 }
@@ -22,6 +23,7 @@ interface ReduxDispatchProps {
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps & RouteComponentProps;
 
+/** Connecting Redux **/
 const mapDispatchToProps = (dispatch): ReduxDispatchProps => {
   return {
     getRole: token => dispatch(getRole(token)),
@@ -44,4 +46,6 @@ const connectedNavigation = withRouter(
     mapDispatchToProps
   )(NavigationComponent)
 );
+
+/** Export component **/
 export { connectedNavigation as Navigation };
