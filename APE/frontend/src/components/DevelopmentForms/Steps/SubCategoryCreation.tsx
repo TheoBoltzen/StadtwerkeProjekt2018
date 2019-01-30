@@ -38,6 +38,7 @@ export interface SubCategory {
   imported: boolean;
 }
 
+/** MUI theme creation **/
 const theme = createMuiTheme({
   overrides: {
     MuiCheckbox: {
@@ -61,15 +62,15 @@ class SubCategoryCreation extends React.Component<Props> {
     };
   }
 
+  //Function for handling a rename of a sub category
   handleRename = (event: any, index, index2, index3) => {
     const target = event.currentTarget;
     this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].name =
       target.value;
-
-    // forceUpdate() eher hacky, aber Ansatz über this.setState(this.state) zum rerendern funktioniert nicht.
     this.forceUpdate();
   };
 
+  //Function to open or close a competence category
   handleCompetenceClick = (event: any, index) => {
     if (this.props.developmentForm[index].open) {
       this.props.developmentForm[index].open = false;
@@ -80,6 +81,7 @@ class SubCategoryCreation extends React.Component<Props> {
     this.forceUpdate();
   };
 
+  //Function to open or close a main category
   handleMainCategoryClick = (event: any, index, index2) => {
     if (this.props.developmentForm[index].MainCategories[index2].open) {
       this.props.developmentForm[index].MainCategories[index2].open = false;
@@ -98,7 +100,6 @@ class SubCategoryCreation extends React.Component<Props> {
   render() {
     const { developmentForm, classes, onClickAddButton } = this.props;
 
-    //TODO für jeden erstellten Kompetenzblock einen farbigen Hintergrund erstellen, um Zugehörigkeit der Unterkategorien zu erkennen
     return (
       <div className={"step3"}>
         <div className={"taskDescription"}>

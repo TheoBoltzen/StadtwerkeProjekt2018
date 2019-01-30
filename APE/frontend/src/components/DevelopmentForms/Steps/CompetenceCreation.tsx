@@ -35,6 +35,7 @@ export interface Competence {
   imported: boolean;
 }
 
+/** MUI theme creation **/
 const theme = createMuiTheme({
   overrides: {
     MuiCheckbox: {
@@ -54,11 +55,10 @@ class CompetenceCreation extends React.Component<Props> {
     super(props);
   }
 
+  //Function for handling a rename of a competence category
   handleRename = (event: any, id) => {
     const target = event.currentTarget;
     this.props.developmentForm[id].name = target.value;
-
-    // forceUpdate() eher hacky, aber Ansatz über this.setState(this.state) zum rerendern funktioniert nicht.
     this.forceUpdate();
   };
 

@@ -38,6 +38,7 @@ export interface MainCategory {
   imported: boolean;
 }
 
+/** MUI theme creation **/
 const theme = createMuiTheme({
   overrides: {
     MuiCheckbox: {
@@ -61,14 +62,14 @@ class MainCategoryCreation extends React.Component<Props> {
     };
   }
 
+  //Function for handling a rename of a main category
   handleRename = (event: any, index, index2) => {
     const target = event.currentTarget;
     this.props.developmentForm[index].MainCategories[index2].name = target.value;
-
-    // forceUpdate() eher hacky, aber Ansatz über this.setState(this.state) zum rerendern funktioniert nicht.
     this.forceUpdate();
   };
 
+  //Function to open or close a category
   handleClick = (event: any, index) => {
     if (this.props.developmentForm[index].open) {
       this.props.developmentForm[index].open = false;

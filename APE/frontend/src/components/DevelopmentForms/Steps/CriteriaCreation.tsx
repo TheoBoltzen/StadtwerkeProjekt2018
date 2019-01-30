@@ -41,6 +41,7 @@ export interface Criteria {
   imported: boolean;
 }
 
+/** MUI theme creation **/
 const theme = createMuiTheme({
   overrides: {
     MuiCheckbox: {
@@ -64,16 +65,16 @@ class CriteriaCreation extends React.Component<Props> {
     };
   }
 
+  //Function for handling a rename of a criteria
   handleRename = (event: any, index, index2, index3, index4) => {
     const target = event.currentTarget;
     this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
       index4
     ].name = target.value;
-
-    // forceUpdate() eher hacky, aber Ansatz über this.setState(this.state) zum rerendern funktioniert nicht.
     this.forceUpdate();
   };
 
+  //Function to open or close a competence category
   handleCompetenceClick = (event: any, index) => {
     if (this.props.developmentForm[index].open) {
       this.props.developmentForm[index].open = false;
@@ -84,6 +85,7 @@ class CriteriaCreation extends React.Component<Props> {
     this.forceUpdate();
   };
 
+  //Function to open or close a main category
   handleMainCategoryClick = (event: any, index, index2) => {
     if (this.props.developmentForm[index].MainCategories[index2].open) {
       this.props.developmentForm[index].MainCategories[index2].open = false;
@@ -94,6 +96,7 @@ class CriteriaCreation extends React.Component<Props> {
     this.forceUpdate();
   };
 
+  //Function to open or close a sub category
   handleSubCategoryClick = (event: any, index, index2, index3) => {
     if (this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open) {
       this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].open = false;
@@ -106,6 +109,7 @@ class CriteriaCreation extends React.Component<Props> {
     this.forceUpdate();
   };
 
+  //Function to change a criteria's value based on the corresponding radio button click
   handleRadioClick = (event: any, index, index2, index3, index4, value) => {
     this.props.developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria[
       index4
@@ -113,7 +117,6 @@ class CriteriaCreation extends React.Component<Props> {
     this.forceUpdate();
   };
 
-  //TODO Tooltip anpassen
   description =
     "Durch einen Klick auf ein Plus-Symbol, wird zu der darüber liegenden Unterkategorie " +
     "ein Kriterium erstellt. Durch die rechts davon liegenden Auswahlfelder kann  " +
