@@ -9,6 +9,7 @@ import { store } from "./helpers/store";
 import { Router } from "react-router";
 import { history } from "./helpers";
 
+//App component is wrapped inside Redux Provider and Router
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

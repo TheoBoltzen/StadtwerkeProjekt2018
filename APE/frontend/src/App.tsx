@@ -25,6 +25,8 @@ class App extends React.Component<Props, State> {
     super(props);
 
     const { dispatch } = this.props;
+
+    //History ist used to know where the User was before
     history.listen((location, action) => {
       dispatch(saveAlert());
     });
@@ -35,9 +37,11 @@ class App extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
+    //Show notification if a new message appears
     if (nextProps.alert.message) {
       this.setState({ snackbarIsOpen: true });
 
+      //Timeout is used to clear the message
       setTimeout(() => {
         this.props.dispatch(clearAlert());
       }, 6000);
