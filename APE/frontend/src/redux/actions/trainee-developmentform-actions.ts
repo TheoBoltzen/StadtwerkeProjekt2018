@@ -4,15 +4,19 @@ import { errorAlert, successAlert } from "./alert";
 import { getFullDevSheetAsTraineeService, setDevelopmentSheetService } from "../../services";
 import { FullDevSheetFetch } from "../../types";
 
+//Action to assign trainee to DevelopmenSheet
 export const setTraineeDevelopmentSheet = (devSheetID: string) => {
+  //Request with DevelopmentSheet ID
   const request = devSheetID => {
     return { type: traineeDevelopmentFormConstants.SETDEVSHEET_REQUEST, devSheetID }; //
   };
 
+  //Success without any returning values
   const success = () => {
     return { type: traineeDevelopmentFormConstants.SETDEVSHEET_SUCCESS };
   };
 
+  //Failure should return an error
   const failure = (error: string) => {
     return { type: traineeDevelopmentFormConstants.SETDEVSHEET_FAILURE, error };
   };
@@ -20,6 +24,7 @@ export const setTraineeDevelopmentSheet = (devSheetID: string) => {
   return async (dispatch: Dispatch) => {
     await dispatch(request(devSheetID));
 
+    //Call Service function
     await setDevelopmentSheetService(devSheetID).then(
       () => {
         dispatch(success());
@@ -34,6 +39,7 @@ export const setTraineeDevelopmentSheet = (devSheetID: string) => {
 };
 
 export const getFullDevSheetAsTrainee = (devSheetId: number, trainerUsername: string) => {
+  //Request with DevelopmentSheet ID and the Username of Trainer
   const request = (devSheetId, trainerUsername) => {
     return {
       type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_REQUEST,
@@ -42,10 +48,12 @@ export const getFullDevSheetAsTrainee = (devSheetId: number, trainerUsername: st
     };
   };
 
+  //Success should return an DevelopmentSheet with any details
   const success = (devSheet: FullDevSheetFetch) => {
     return { type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_SUCCESS, devSheet };
   };
 
+  //Failure should return an error
   const failure = (error: string) => {
     return { type: traineeDevelopmentFormConstants.GETFULLDEVSHEET_FAILURE, error };
   };
@@ -53,6 +61,7 @@ export const getFullDevSheetAsTrainee = (devSheetId: number, trainerUsername: st
   return (dispatch: Dispatch) => {
     dispatch(request(devSheetId, trainerUsername));
 
+    //Call Service function
     getFullDevSheetAsTraineeService(devSheetId, trainerUsername).then(
       devSheet => dispatch(success(devSheet)),
       error => {
