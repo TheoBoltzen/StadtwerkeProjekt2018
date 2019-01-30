@@ -10,16 +10,19 @@ export class UserAdministrationComponent extends React.Component<AllProps, State
   constructor(props: AllProps) {
     super(props);
 
+    //Set initial state
     this.state = {
       isAddUserModalOpen: false
     };
   }
 
   componentDidMount() {
+    //Fetch all users when component renders
     this.props.getAllUsers();
   }
 
   componentDidUpdate(nextProps: AllProps, nextState: State) {
+    //Fetch users again when dialog was closed
     if (
       nextState.isAddUserModalOpen &&
       nextState.isAddUserModalOpen !== this.state.isAddUserModalOpen
@@ -28,6 +31,7 @@ export class UserAdministrationComponent extends React.Component<AllProps, State
     }
   }
 
+  //Opens Dialog
   private openAddUserModal = () => {
     this.setState({
       isAddUserModalOpen: !this.state.isAddUserModalOpen

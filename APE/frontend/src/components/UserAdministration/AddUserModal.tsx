@@ -6,6 +6,7 @@ import { WithStyles } from "@material-ui/core";
 import { styles } from "../UserAdministration/AddUserModalComponent";
 import withStyles from "@material-ui/core/styles/withStyles";
 
+/** Interface and type declaration **/
 export interface State {
   readonly username: string;
   readonly role: string;
@@ -38,6 +39,7 @@ interface ReduxDispatchProps {
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
+/** Connecting Redux **/
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loading } = state.registerUserReducer;
   return {
@@ -59,4 +61,5 @@ const connectedAddUserModal = withStyles(styles)(
   )(AddUserModalComponent)
 );
 
+/** Export component **/
 export { connectedAddUserModal as AddUserModal };

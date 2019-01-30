@@ -1,6 +1,7 @@
 import * as React from "react";
 import "./ListItem.css";
 
+/** Interface declaration **/
 interface Props {
   name: string;
   username: string;

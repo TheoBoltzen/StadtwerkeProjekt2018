@@ -22,6 +22,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import createStyles from "@material-ui/core/styles/createStyles";
 
+/** MUI styles **/
 export const styles = theme =>
   createStyles({
     root: {
@@ -55,6 +56,7 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
 
+    //Set initial state
     this.state = {
       firstname: "",
       username: "",
@@ -66,12 +68,17 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
     };
   }
 
+  //submit function - async wait for completion
   private handleSubmit = async () => {
     try {
       const { firstname, username, password, lastname, role, hiredOn, profession } = this.state;
       const { createUser, closeDialog } = this.props;
+
+      //Submit is only allowed if form is filled out
       if (firstname && username && password && lastname && role && hiredOn && profession) {
         await createUser(username, password, firstname, lastname, role, hiredOn, profession);
+
+        //Closing dialg after createUser function is complete
         closeDialog();
       }
     } catch (e) {
@@ -79,6 +86,7 @@ export class AddUserModalComponent extends React.Component<AllProps, State> {
     }
   };
 
+  //Change function for input fields
   private handleInputChange = event => {
     const target = event.target;
     const value = target.value;

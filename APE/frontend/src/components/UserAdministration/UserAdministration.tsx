@@ -4,6 +4,7 @@ import { UserAdministrationComponent } from "./UserAdministrationComponent";
 import { User } from "../../types";
 import { getAll } from "../../redux/actions";
 
+/** Interface and type declaration **/
 export interface State {
   readonly isAddUserModalOpen: boolean;
 }
@@ -21,6 +22,7 @@ interface ReduxDispatchProps {
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
+/** Connecting Redux **/
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loading, users } = state.userReducer;
   return {
@@ -40,4 +42,5 @@ const connectedUserAdministration = connect<ReduxStateProps, ReduxDispatchProps,
   mapDispatchToProps
 )(UserAdministrationComponent);
 
+/** Export component **/
 export { connectedUserAdministration as UserAdministration };
