@@ -116,6 +116,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     }
   }
 
+  //Handles change for input fields
   handleChange = (event: any) => {
     const target = event.currentTarget;
     const value = target.value;
@@ -123,6 +124,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.setState({ [name]: value } as State);
   };
 
+  //Checks or unchecks checkboxes for competence categories on click
   handleToggleCompetences = (event: any, index) => {
     const { developmentForm } = this.state;
     if (developmentForm[index].checked) {
@@ -133,6 +135,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.forceUpdate();
   };
 
+  //Checks or unchecks checkboxes for main categories on click
   handleToggleMainCategories = (event: any, index, index2) => {
     const { developmentForm } = this.state;
     if (developmentForm[index].MainCategories[index2].checked) {
@@ -143,6 +146,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.forceUpdate();
   };
 
+  //Checks or unchecks checkboxes for sub categories on click
   handleToggleSubCategories = (event: any, index, index2, index3) => {
     const { developmentForm } = this.state;
     if (developmentForm[index].MainCategories[index2].SubCategories[index3].checked) {
@@ -153,6 +157,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.forceUpdate();
   };
 
+  //Checks or unchecks checkboxes for criteria on click
   handleToggleCriteria = (event: any, index, index2, index3, index4) => {
     const { developmentForm } = this.state;
 
@@ -170,6 +175,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.forceUpdate();
   };
 
+  //Adds a competence category to the state
   addCompetence = () => {
     const developmentForm = this.state.developmentForm;
     developmentForm.push({
@@ -182,6 +188,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.setState({ developmentForm });
   };
 
+  //Adds a main category to the state
   addMainCategory = index => {
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories.push({
@@ -194,6 +201,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.setState({ developmentForm });
   };
 
+  //Adds a sub category to the state
   addSubCategory = (index, index2) => {
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories[index2].SubCategories.push({
@@ -206,6 +214,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.setState({ developmentForm });
   };
 
+  //Adds a criteria to the state
   addCriteria = (index, index2, index3) => {
     const developmentForm = this.state.developmentForm;
     developmentForm[index].MainCategories[index2].SubCategories[index3].Criteria.push({
@@ -217,6 +226,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     this.setState({ developmentForm });
   };
 
+  //Gets stepper content for the corresponding index
   getStepContent = stepIndex => {
     const { loading } = this.props;
     switch (stepIndex) {
@@ -283,6 +293,7 @@ export class DevelopmentStepperComponent extends React.Component<AllProps, State
     }
   };
 
+  //Loads data from db
   handleNext = () => {
     const { activeStep, developmentForm } = this.state;
     const {
