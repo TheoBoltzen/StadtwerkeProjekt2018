@@ -22,6 +22,7 @@ export class DevelopmentFormsComponent extends React.Component<AllProps, State> 
     };
   }
 
+  //Changes the view to the detailView of corresponding id
   handleSearchClick = (event: any, id) => {
     this.props.getDevSheetDetails(id);
     this.setState({ visibilityIndex: 1 });
