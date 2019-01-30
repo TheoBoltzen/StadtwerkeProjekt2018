@@ -2,18 +2,21 @@ import { userConstants } from "../../constants";
 import { Action } from "redux";
 import { User } from "../../types";
 
+/** Interface declaration of action **/
 interface ActionUser extends Action {
   role: string;
   users: User[];
   error: string;
 }
 
+/** Interface declaration of state **/
 export interface UserReducer {
   readonly loading: boolean;
   readonly role: string;
   readonly users: User[];
 }
 
+//Set initial state
 const initialState: UserReducer = {
   loading: false,
   role: "",

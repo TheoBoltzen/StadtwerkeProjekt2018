@@ -2,12 +2,14 @@ import { Action } from "redux";
 import { ConnectedDevSheetFetch, FullDevSheetFetch, Trainee } from "../../types";
 import { traineeTabConstants, trainerDevelopmentFormConstants } from "../../constants";
 
+/** Interface declaration of action **/
 interface ActionTraineesTabReducer extends Action {
   trainees: Trainee[];
   connectedDevSheets: ConnectedDevSheetFetch[];
   devSheet: FullDevSheetFetch;
 }
 
+/** Interface declaration of state **/
 export interface TraineesTabReducer {
   readonly loading: boolean;
   readonly loadingFullDevSheet: boolean;
@@ -16,6 +18,7 @@ export interface TraineesTabReducer {
   readonly connectedDevSheets: ConnectedDevSheetFetch[];
 }
 
+//Set initial state
 const initialState: TraineesTabReducer = {
   loading: false,
   loadingFullDevSheet: false,
