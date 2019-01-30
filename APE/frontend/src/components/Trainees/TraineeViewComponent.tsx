@@ -16,18 +16,21 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
 
+    //Set initial state
     this.state = {
       visibility_index: "All_Trainee_DevSheets",
       developmentFormId: ""
     };
   }
 
+  //Assign DevelopmentSheet to trainee
   setAssignmentDevSheet = async id => {
     await this.props.setAssignment(id);
     this.changeVisibilityIndex("", "All_Trainee_DevSheets");
   };
 
   componentDidMount() {
+    //Load all develeopment Sheets when component renders
     this.props.getAllDevForms();
     this.props.getDevFormsListTrainee();
   }
@@ -38,6 +41,7 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     this.setState({ visibility_index: index });
   };
 
+  //Load full development sheet
   getDetailView = (e, index, id) => {
     this.props.getDevSheetDetails(id);
     this.changeVisibilityIndex(e, index);
@@ -51,12 +55,15 @@ export class TraineeViewComponent extends React.Component<AllProps, State> {
     return new Date(date).toLocaleDateString("de");
   };
 
+  //Click on fill out button
   handleFillOutClick = (e, devSheetId, trainerUsername) => {
     this.props.getFullDevSheet(devSheetId, trainerUsername);
     this.changeVisibilityIndex(e, "Fillout_DevSheet");
   };
 
+  //Click on search button
   handleSearchClickTraineeDevSheet = (e, devSheetId, trainerUsername) => {
+    //Load full developmentSheet
     this.props.getFullDevSheet(devSheetId, trainerUsername);
     this.changeVisibilityIndex(e, "Display_one_Trainee_DevSheet");
     this.setState({

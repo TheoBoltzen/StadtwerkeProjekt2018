@@ -21,7 +21,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
     this.props.getAllConnectedDevSheets();
   }
 
-  // Klick auf mir zuweisen
+  //Click on assignment button
   private handleAssignment = async (traineeUsername, devSheetId) => {
     try {
       const { setDevSheetToTrainer, getAllConnectedDevSheets } = this.props;
@@ -30,7 +30,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
     } catch (e) {}
   };
 
-  // Klick auf Ausfüllen
+  //Click on fill Out button
   private handleFillOut = (devSheetID, traineeUsername, trainerUsername) => {
     this.props.getFullDevSheet(devSheetID, traineeUsername, trainerUsername);
     this.changeVisiblityIndex("fill-out");
@@ -43,6 +43,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
     });
   };
 
+  //Click on search button
   private handleSearch = (devSheetID, traineeUsername, trainerUsername) => {
     this.props.getFullDevSheet(devSheetID, traineeUsername, trainerUsername);
     this.changeVisiblityIndex("detail-view");
@@ -52,6 +53,7 @@ export class TraineesComponent extends React.Component<AllProps, State> {
     const { visibilityIndex } = this.state;
     const { connectedDevSheets, loadingFullDevSheet, fullDevSheet } = this.props;
 
+    //Which content should render
     switch (visibilityIndex) {
       case "connected-dev-sheets":
         return (

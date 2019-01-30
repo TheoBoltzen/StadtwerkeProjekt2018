@@ -5,6 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { IconButton, Tooltip } from "@material-ui/core";
 import { DevSheetStatusConstants } from "../../constants";
 
+/** Interface declaration **/
 interface Props {
   department: string;
   education: string;

@@ -13,8 +13,8 @@ import {
   getTraineeDevelopmentSheetList,
   getFullDevSheetAsTrainee
 } from "../../redux/actions";
-//import { getTraineeDevelopmentSheetList } from "../../redux/actions";
 
+/** Interface and type declaration **/
 export interface State {
   visibility_index: string;
   developmentFormId: string;
@@ -44,6 +44,7 @@ interface ReduxDispatchProps {
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
+/** Connecting Redux **/
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const { loading, developmentForms, developmentFormDetail } = state.developmentFormsReducer;
   const { traineeDevelopmentFormsList } = state.traineeDevelopmentFormsListReducer; //loading fehlt
@@ -82,4 +83,5 @@ const connectedDevelopmentForm = connect<ReduxStateProps, ReduxDispatchProps, Pr
   mapDispatchToProps
 )(TraineeViewComponent);
 
+/** Export component **/
 export { connectedDevelopmentForm as TraineeView };

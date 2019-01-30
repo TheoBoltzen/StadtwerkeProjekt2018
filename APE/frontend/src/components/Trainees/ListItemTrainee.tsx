@@ -6,6 +6,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import { DevSheetStatusConstants } from "../../constants";
 import SearchIcon from "@material-ui/icons/Search";
 
+/** Interface declaration **/
 interface Props {
   nameTrainee: string;
   department: string;

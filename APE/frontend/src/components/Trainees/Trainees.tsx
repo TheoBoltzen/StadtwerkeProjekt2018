@@ -9,6 +9,7 @@ import {
 import { connect } from "react-redux";
 import { TraineesComponent } from "./TraineesComponent";
 
+/** Interface and type declaration **/
 export interface State {
   readonly visibilityIndex: string;
 }
@@ -36,6 +37,7 @@ interface ReduxDispatchProps {
 
 export type AllProps = Props & ReduxStateProps & ReduxDispatchProps;
 
+/** Connecting Redux **/
 const mapStateToProps = (state: ApplicationState): ReduxStateProps => {
   const {
     loading,
@@ -69,4 +71,5 @@ const connectedTrainees = connect<ReduxStateProps, ReduxDispatchProps, Props>(
   mapDispatchToProps
 )(TraineesComponent);
 
+/** Export component **/
 export { connectedTrainees as Trainees };
