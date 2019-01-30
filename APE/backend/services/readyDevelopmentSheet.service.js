@@ -174,6 +174,8 @@ async function update(devSheetParam) {
       console.log(err);
     });
 }
+// returns a complete Developmentsheet with goalcross but without any userparams
+//the upper part saves the data from the db and the lower part sorts it
 async function getemptyById(devsheetparam) {
   let identifier;
 
@@ -333,6 +335,8 @@ async function getemptyById(devsheetparam) {
   info.content = competencycategories;
   return info;
 }
+//returns a full developmentsheet with all available information, if a trainer is logged in
+//the upper part saves the data from the db and the lower part sorts it
 async function getfullByIdTrainer(devsheetparam, token) {
   var decodedToken = jwt.verify(token, config.secret);
   let username = decodedToken.username;
@@ -531,6 +535,8 @@ async function getfullByIdTrainer(devsheetparam, token) {
   info.content = competencycategories;
   return info;
 }
+//returns a full developmentsheet with all available information, if a trainee is logged in
+//the upper part saves the data from the db and the lower part sorts it
 async function getfullByIdTrainee(devsheetparam, token) {
   var decodedToken = jwt.verify(token, config.secret);
   let username = decodedToken.username;
