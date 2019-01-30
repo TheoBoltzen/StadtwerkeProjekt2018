@@ -2,6 +2,7 @@ import { Action } from "redux";
 import { CompetenceFetch, CriteriaFetch, MainCategoryFetch, SubCategoryFetch } from "../../types";
 import { developmentFormConstants } from "../../constants";
 
+/** Interface declaration of action **/
 interface ActionSingleDevelopmentForm extends Action {
   competences: CompetenceFetch[];
   mainCategories: MainCategoryFetch[];
@@ -10,6 +11,7 @@ interface ActionSingleDevelopmentForm extends Action {
   error: string;
 }
 
+/** Interface declaration of state **/
 export interface SingleDevelopmentFormReducer {
   readonly loading: boolean;
   readonly competences: CompetenceFetch[];
@@ -19,6 +21,7 @@ export interface SingleDevelopmentFormReducer {
   readonly error: string;
 }
 
+//Set initial state
 const initialState: SingleDevelopmentFormReducer = {
   loading: false,
   competences: [],

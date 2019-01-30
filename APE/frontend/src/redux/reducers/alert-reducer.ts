@@ -1,10 +1,12 @@
 import { alertConstants } from "../../constants";
 import { Action } from "redux";
 
+/** Interface declaration of action **/
 interface ActionAlert extends Action {
   message: string;
 }
 
+/** Interface declaration of state **/
 export interface AlertReducer {
   readonly type?: string;
   readonly message?: string;

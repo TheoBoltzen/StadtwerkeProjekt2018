@@ -23,6 +23,7 @@ import {
   traineeAssessmentReducer
 } from "./assessments-reducer";
 
+/** Combining all interfaces of all reducers to get the ApplicationState interface **/
 export interface ApplicationState {
   authenticationReducer: AuthenticationReducer;
   alertReducer: AlertReducer;
@@ -37,6 +38,7 @@ export interface ApplicationState {
   traineeAssessmentReducer: AssessmentsReducer;
 }
 
+/** Combining all reducers to a rootReducer **/
 const rootReducer = combineReducers<ApplicationState>({
   alertReducer,
   userReducer,
@@ -51,4 +53,5 @@ const rootReducer = combineReducers<ApplicationState>({
   traineeAssessmentReducer
 });
 
+/** Export rootReducer **/
 export default rootReducer;

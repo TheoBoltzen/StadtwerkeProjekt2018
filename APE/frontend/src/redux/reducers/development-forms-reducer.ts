@@ -2,17 +2,20 @@ import { Action } from "redux";
 import { DevelopmentForm, EmptyDevSheetFetch } from "../../types";
 import { developmentFormConstants } from "../../constants";
 
+/** Interface declaration of action **/
 interface ActionDevelopmentForm extends Action {
   developmentForms: DevelopmentForm[];
   developmentFormDetail: EmptyDevSheetFetch;
 }
 
+/** Interface declaration of state **/
 export interface DevelopmentFormsReducer {
   readonly loading: boolean;
   readonly developmentForms: DevelopmentForm[];
   readonly developmentFormDetail: EmptyDevSheetFetch;
 }
 
+//Set initial state
 const initialState: DevelopmentFormsReducer = {
   loading: false,
   developmentForms: [],
