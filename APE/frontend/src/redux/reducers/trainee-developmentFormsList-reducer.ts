@@ -2,15 +2,18 @@ import { Action } from "redux";
 import { DevelopmentFormsListTrainee } from "../../types";
 import { traineeDevFormListConstants } from "../../constants";
 
+/** Interface declaration of action **/
 interface ActionDevelopmentForm extends Action {
   traineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
 }
 
+/** Interface declaration of state **/
 export interface TraineeDevelopmentFormsListReducer {
   readonly loading: boolean;
   readonly traineeDevelopmentFormsList: DevelopmentFormsListTrainee[];
 }
 
+//Set initial state
 const initialState: TraineeDevelopmentFormsListReducer = {
   loading: false,
   traineeDevelopmentFormsList: []

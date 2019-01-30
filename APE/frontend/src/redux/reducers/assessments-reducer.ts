@@ -1,13 +1,16 @@
 import { Action } from "redux";
 import { assessmentsConstants } from "../../constants";
 
+/** Interface declaration of action **/
 interface AssessmentsFormAction extends Action {}
 
+/** Interface declaration of state **/
 export interface AssessmentsReducer {
   loading: boolean;
   loadingStatusEstimated: boolean;
 }
 
+//Set initial state
 const initialState: AssessmentsReducer = {
   loading: false,
   loadingStatusEstimated: false

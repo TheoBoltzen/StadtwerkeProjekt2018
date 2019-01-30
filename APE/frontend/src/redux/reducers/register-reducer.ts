@@ -1,12 +1,15 @@
 import { Action } from "redux";
 import { userConstants } from "../../constants";
 
+/** Interface declaration of action **/
 interface ActionRegisterUser extends Action {}
 
+/** Interface declaration of state **/
 export interface RegisterUserReducer {
   readonly loading: boolean;
 }
 
+//Set initial state
 const initialState: RegisterUserReducer = {
   loading: false
 };

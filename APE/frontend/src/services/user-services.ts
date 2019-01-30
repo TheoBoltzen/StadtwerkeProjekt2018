@@ -1,6 +1,7 @@
 import { apiURL } from "../constants";
 import { User } from "../types";
 
+/** Header function with token **/
 export const authHeader = () => {
   //returns header with jwt token
   let user = JSON.parse(localStorage.getItem("user") as any); //TODO: Remove any
@@ -50,6 +51,7 @@ export const getRoleService = (token: string) => {
 };
 
 export const logoutService = () => {
+  //Delete user item in localStorage
   localStorage.removeItem("user");
 };
 
@@ -61,17 +63,6 @@ export const getAllService = () => {
 
   return fetch(`${apiURL}/services/getAllUser`, requestOptions).then(handleResponse);
 };
-
-// export const getByIdService = (id: any) => {
-//   //TODO: Remove any
-//   const requestOptions: any = {
-//     //TODO: Remove any
-//     method: "GET",
-//     headers: authHeader()
-//   };
-//
-//   return fetch(`${apiURL}/users/${id}`, requestOptions).then(handleResponse);
-// };
 
 export const createUserService = (
   username: string,
@@ -91,17 +82,21 @@ export const createUserService = (
   return fetch(`${apiURL}/services/register`, requestOptions).then(handleResponse);
 };
 
+/** Function to handle incoming data from backend **/
 export const handleResponse = (response: Response) => {
   return response.text().then((text: string) => {
+    //Parse data to object
     const data = text && JSON.parse(text);
 
     if (!response.ok) {
+      //Check if user is unauthorized
       if (response.status === 401) {
         //auto logout
         logoutService();
         location.reload(true);
       }
 
+      //Fetch error
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }
