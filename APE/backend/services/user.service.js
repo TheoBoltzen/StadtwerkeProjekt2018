@@ -49,6 +49,8 @@ async function getAll() {
 async function getById(id) {
   return await User.findById(id).select("-hash");
 }
+//if you try to log in with a username and false pw three times, yourr account will be blocked for 2 minutes
+//therefor the trylogin variable
 async function tryLogin(userParam, res) {
   console.log(userParam.username + "   " + userParam.password);
   let user = await User.findOne({ where: { username: userParam.username } });
