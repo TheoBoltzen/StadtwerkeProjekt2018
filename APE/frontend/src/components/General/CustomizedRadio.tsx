@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import createStyles from "@material-ui/core/styles/createStyles";
 import Radio from "@material-ui/core/Radio/Radio";
 
+/** MUI Style declaration **/
 const styles = createStyles({
   root: {
     color: "black",
@@ -32,6 +33,7 @@ const styles = createStyles({
   checked: {}
 });
 
+/** Interface declaration **/
 interface Props extends WithStyles<typeof styles> {
   checked?: string;
   onChange?: any;
@@ -70,4 +72,5 @@ export const CustomizedRadio = (props: Props) => {
   );
 };
 
+/** Export component **/
 export default withStyles(styles)(CustomizedRadio);

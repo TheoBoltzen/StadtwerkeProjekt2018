@@ -3,6 +3,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import InputBase from "@material-ui/core/InputBase/InputBase";
 import { WithStyles, createStyles } from "@material-ui/core";
 
+/** MUI Style declaration **/
 const styles = theme =>
   createStyles({
     container: {
@@ -32,6 +33,7 @@ const styles = theme =>
     }
   });
 
+/** Interface declaration **/
 interface Props extends WithStyles<typeof styles> {
   name?: string;
   value?: string;
@@ -58,4 +60,5 @@ export const CustomizedInputs = (props: Props) => {
   );
 };
 
+/** Export component **/
 export default withStyles(styles)(CustomizedInputs);

@@ -5,6 +5,7 @@ import * as React from "react";
 import Button from "@material-ui/core/Button/Button";
 import classNames from "classnames";
 
+/** MUI Style declaration **/
 const styles = theme =>
   createStyles({
     margin: {
@@ -19,6 +20,7 @@ const styles = theme =>
     }
   });
 
+/** Interface declaration **/
 interface Props extends WithStyles<typeof styles> {
   onClick: any;
   text: string;
@@ -39,4 +41,5 @@ export const CustomizedButton = (props: Props) => {
   );
 };
 
+/** Export component **/
 export default withStyles(styles)(CustomizedButton);
