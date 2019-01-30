@@ -1,5 +1,6 @@
 import { alertConstants } from "../../constants";
 
+//Alert actions
 export const successAlert = (msg: string) => {
   return { type: alertConstants.SUCCESS, message: msg };
 };
